@@ -20,8 +20,8 @@ public class Main {
         }
 
         SpoonAPI spoon = new Launcher();
-        spoon.addInputResource(args[0]);
         try {
+            spoon.addInputResource(args[0]);
             spoon.buildModel();
         } catch(spoon.compiler.ModelBuildingException e) {
             System.err.println("Failed to build spoon model. Possible causes:\n" +
@@ -29,7 +29,7 @@ public class Main {
             return;
         } catch(spoon.SpoonException e) {
             System.err.println("Failed to build spoon model. Possible causes:\n" +
-                    " * There are no files in the given folder path.");
+                    " * The given path does not exist.");
             return;
         }
 
