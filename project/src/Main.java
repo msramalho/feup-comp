@@ -26,6 +26,10 @@ public class Main {
             System.err.println("Failed to build spoon model. Possible causes:\n" +
                     " * File makes include of non existent classes. Use the parent folder as program argument to fix.");
             return;
+        } catch(spoon.SpoonException e) {
+            System.err.println("Failed to build spoon model. Possible causes:\n" +
+                    " * There are no files in the given folder path.");
+            return;
         }
 
         //Simple metrics just to test
@@ -58,8 +62,8 @@ public class Main {
         System.out.println(
                 "Found " + numMethods + " classe(s);\n" +
                 "Found " + numClasses + " method(s);\n" +
-                "Found " + numIfs + " conditional(s);\n" +
-                "Found " + numCycles + " cycle(s) (e.g. while or for);"
+                "Found " + numIfs + " IF conditional(s);\n" +
+                "Found " + numCycles + " cycle(s) (e.g. while, for or foreach);"
         );
     }
 }
