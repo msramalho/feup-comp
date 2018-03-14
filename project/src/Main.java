@@ -1,6 +1,7 @@
 import spoon.Launcher;
 import spoon.SpoonAPI;
 import spoon.reflect.declaration.CtElement;
+import spoon.support.reflect.code.CtForEachImpl;
 import spoon.support.reflect.declaration.CtClassImpl;
 import spoon.support.reflect.declaration.CtMethodImpl;
 import spoon.support.reflect.code.CtIfImpl;
@@ -52,7 +53,7 @@ public class Main {
                 ++numMethods;
             } else if (element.getClass().equals(CtIfImpl.class)) {
                 ++numIfs;
-            } else if (element.getClass().equals(CtForImpl.class) || element.getClass().equals(CtWhileImpl.class)) {
+            } else if (element.getClass().equals(CtForImpl.class) || element.getClass().equals(CtForEachImpl.class) || element.getClass().equals(CtWhileImpl.class)) {
                 ++numCycles;
             }
         }
