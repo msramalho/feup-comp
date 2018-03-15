@@ -11,6 +11,7 @@
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../spoon-core-6.1.0-jar-with-dependencies.jar!/" />
+          <root url="jar://$MODULE_DIR$/../gson-2.8.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
