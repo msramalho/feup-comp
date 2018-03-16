@@ -1,0 +1,9 @@
+{  
+    "fix":{
+        "countFor":true,
+        "countForeach":false
+    },
+    "output":{  
+        "path":"outFolder/out/"
+    }
+}
