@@ -8,10 +8,13 @@ import spoon.support.reflect.code.CtIfImpl;
 import spoon.support.reflect.code.CtForImpl;
 import spoon.support.reflect.code.CtWhileImpl;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+
+        new Configuration();
 
         // Check if only the name of the file is being passed
         if (args.length > 1) {
