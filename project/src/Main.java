@@ -8,7 +8,6 @@ import spoon.support.reflect.code.CtIfImpl;
 import spoon.support.reflect.code.CtForImpl;
 import spoon.support.reflect.code.CtWhileImpl;
 
-import java.io.IOException;
 import java.util.List;
 
 public class Main {
