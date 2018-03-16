@@ -12,18 +12,18 @@ public class Configuration {
     /**
      * File containing the chosen User settings to be used
      */
-    private final String userSettings = "src\\UserSettings.json";
+    private final String userSettingsFile = "src\\UserSettings.json";
 
     /**
      * Tool used to interpret json files
      */
     private Gson gson;
 
-    Configuration() {
+    public Configuration() {
         gson = new Gson();
 
-        Type listType = new TypeToken<List<String>>() {}.getType();
-        List<String> test = gson.fromJson(settingsFileContent(), listType);
+        UserSettings userSettings =  gson.fromJson(settingsFileContent(), UserSettings.class);
+        System.out.println(userSettings.fix.countFor + " " + userSettings.fix.countForeach + " " +  userSettings.output.path);
     }
 
     /**
@@ -33,7 +33,7 @@ public class Configuration {
      */
     private String settingsFileContent() {
         try {
-            byte[] encoded = Files.readAllBytes(Paths.get(userSettings));
+            byte[] encoded = Files.readAllBytes(Paths.get(userSettingsFile));
             return new String(encoded, Charset.defaultCharset());
         } catch (java.io.IOException e) {
             System.err.println("Failed to read configuration's file.");
