@@ -25,11 +25,11 @@ public class Main {
         try {
             spoon.addInputResource(args[0]);
             spoon.buildModel();
-        } catch(spoon.compiler.ModelBuildingException e) {
+        } catch (spoon.compiler.ModelBuildingException e) {
             System.err.println("Failed to build spoon model. Possible causes:\n" +
                     " * File makes include of non existent classes. Use the parent folder as program argument to fix.");
             return;
-        } catch(spoon.SpoonException e) {
+        } catch (spoon.SpoonException e) {
             System.err.println("Failed to build spoon model. Possible causes:\n" +
                     " * The given path does not exist.");
             return;
@@ -44,10 +44,10 @@ public class Main {
         // Null filter -> Gets all the model elements -> can obviously be optimized
         List<CtElement> modelElements = spoon.getModel().getElements(null);
 
-        for (CtElement element: modelElements) {
+        for (CtElement element : modelElements) {
 
             // Printing the elements being parsed and to better understand the correspondent classes -> COMMENT FOR CLEAN OUTPUT
-            System.out.println(element.getClass().toString() + " --- " +  element.toString());
+            System.out.println(element.getClass().toString() + " --- " + element.toString());
 
             if (element.getClass().equals(CtClassImpl.class)) {
                 ++numClasses;
@@ -61,12 +61,12 @@ public class Main {
         }
 
         // Display of analyzed metrics
-        System.out.println("Analysis result of the files available at path '" + args[0] +"':");
+        System.out.println("Analysis result of the files available at path '" + args[0] + "':");
         System.out.println(
                 "Found " + numMethods + " classe(s);\n" +
-                "Found " + numClasses + " method(s);\n" +
-                "Found " + numIfs + " IF conditional(s);\n" +
-                "Found " + numCycles + " cycle(s) (e.g. while, for or foreach);"
+                        "Found " + numClasses + " method(s);\n" +
+                        "Found " + numIfs + " IF conditional(s);\n" +
+                        "Found " + numCycles + " cycle(s) (e.g. while, for or foreach);"
         );
     }
 }

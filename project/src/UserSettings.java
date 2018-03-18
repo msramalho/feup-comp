@@ -5,18 +5,21 @@ public class UserSettings {
 
         public Boolean countForeach;
 
-        Static() {}
+        Static() {
+        }
     }
 
     public class Output {
         public String path;
 
-        Output() {}
+        Output() {
+        }
     }
 
     Static fix;
 
     Output output;
 
-    UserSettings() {}
+    UserSettings() {
+    }
 }

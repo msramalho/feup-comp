@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Configuration {
-
     /**
      * File containing the chosen User settings to be used
      */
@@ -19,8 +18,8 @@ public class Configuration {
     public Configuration() {
         gson = new Gson();
 
-        UserSettings userSettings =  gson.fromJson(settingsFileContent(), UserSettings.class);
-        System.out.println(userSettings.fix.countFor + " " + userSettings.fix.countForeach + " " +  userSettings.output.path);
+        UserSettings userSettings = gson.fromJson(settingsFileContent(), UserSettings.class);
+        System.out.println(userSettings.fix.countFor + " " + userSettings.fix.countForeach + " " + userSettings.output.path);
     }
 
     /**
