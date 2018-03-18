@@ -8,7 +8,8 @@ public class Configuration {
     /**
      * File containing the chosen User settings to be used
      */
-    private final String userSettingsFile = "src\\UserSettings.json";
+    private static final String DEFAULT_USER_SETTINGS_FILE = "project\\src\\UserSettings.json";
+    private String userSettingsFile;
 
     /**
      * Tool used to interpret json files
@@ -16,7 +17,12 @@ public class Configuration {
     private Gson gson;
 
     public Configuration() {
+        this(DEFAULT_USER_SETTINGS_FILE);
+    }
+
+    public Configuration(String userSettingsFile) {
         gson = new Gson();
+        this.userSettingsFile = userSettingsFile;
 
         UserSettings userSettings = gson.fromJson(settingsFileContent(), UserSettings.class);
         System.out.println(userSettings.fix.countFor + " " + userSettings.fix.countForeach + " " + userSettings.output.path);
