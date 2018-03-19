@@ -11,6 +11,7 @@ public class UserSettings {
 
     public class Output {
         public String path;
+        public String format;
 
         Output() {
         }

@@ -4,6 +4,7 @@
 		"countForeach": false
 	},
 	"output": {
-		"path": "outFolder/out/"
+		"path": "outFolder/out/",
+		"format": "json"
 	}
 }
