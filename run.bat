@@ -17,7 +17,7 @@ IF "%2"=="" (
 
 
 :: compile source code into bin/
-javac -cp .;gson-2.8.2.jar;./bin/;spoon-core-6.1.0-jar-with-dependencies.jar -d bin project/src/main/*.java project/src/worker/*.java
+javac -cp .;gson-2.8.2.jar;./bin/;spoon-core-6.1.0-jar-with-dependencies.jar -d bin project/src/main/*.java project/src/worker/*.java project/src/util/*.java
 echo "Source code compiled"
 
 :: run Main filename settings
