@@ -1,3 +1,5 @@
+package main;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -23,8 +25,15 @@ public class Configuration {
         }
     }
 
+    public class Global{
+        public int numberOfThreads = 16;
+        public Global() {
+        }
+    }
+
     Static fix = new Static();
     Output output = new Output();
+    Global global = new Global();
 
     Configuration() {
     }

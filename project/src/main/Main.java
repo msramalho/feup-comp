@@ -1,3 +1,5 @@
+package main;
+
 import spoon.Launcher;
 import spoon.SpoonAPI;
 import spoon.reflect.declaration.CtElement;
@@ -9,9 +11,12 @@ import spoon.support.reflect.code.CtForImpl;
 import spoon.support.reflect.code.CtWhileImpl;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Main {
     public static void main(String[] args) {
+
         // Check if command line arguments are in a valid format
         if (args.length < 1 || args.length > 2) {
             System.err.println("Incorrect arguments, usage: <filename|foldername> [<userSettings.json>]");
@@ -27,6 +32,7 @@ public class Main {
         }
 
         System.out.println(configuration);
+        ExecutorService threadPool = Executors.newFixedThreadPool(configuration.global.numberOfThreads);
 
 
         SpoonAPI spoon = new Launcher();
