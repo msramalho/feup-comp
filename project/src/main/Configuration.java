@@ -13,30 +13,33 @@ public class Configuration {
         public Boolean countFor = false;
         public Boolean countForeach = false;
 
-        Static() {
-        }
+        Static() { }
     }
+
+    public class Dynamic {
+
+        public Dynamic() { }
+    }
+
 
     public class Output {
         public String path = "out/";
         public String format = "json";
 
-        Output() {
-        }
+        Output() { }
     }
 
-    public class Global{
+    public class Global {
         public int numberOfThreads = 16;
-        public Global() {
-        }
+
+        public Global() { }
     }
 
     Static fix = new Static();
     Output output = new Output();
     Global global = new Global();
 
-    Configuration() {
-    }
+    Configuration() { }
 
     /**
      * Read a configurations file into an object of Configuration
