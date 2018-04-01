@@ -38,6 +38,7 @@ public class Configuration {
     Static fix = new Static();
     Output output = new Output();
     Global global = new Global();
+    Dynamic dynamic = new Dynamic();
 
     Configuration() { }
 
