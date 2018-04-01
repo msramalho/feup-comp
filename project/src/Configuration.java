@@ -1,45 +1,64 @@
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Configuration {
-    /**
-     * File containing the chosen User settings to be used
-     */
-    private static final String DEFAULT_USER_SETTINGS_FILE = "project\\src\\UserSettings.json";
-    private String userSettingsFile;
 
-    /**
-     * Tool used to interpret json files
-     */
-    private Gson gson;
+    public class Static {
+        public Boolean countFor = false;
+        public Boolean countForeach = false;
 
-    public Configuration() {
-        this(DEFAULT_USER_SETTINGS_FILE);
+        Static() {
+        }
     }
 
-    public Configuration(String userSettingsFile) {
-        gson = new Gson();
-        this.userSettingsFile = userSettingsFile;
+    public class Output {
+        public String path = "out/";
+        public String format = "json";
 
-        UserSettings userSettings = gson.fromJson(settingsFileContent(), UserSettings.class);
-        System.out.println(userSettings.fix.countFor + " " + userSettings.fix.countForeach + " " + userSettings.output.path);
+        Output() {
+        }
+    }
+
+    Static fix = new Static();
+    Output output = new Output();
+
+    Configuration() {
+    }
+
+    /**
+     * Read a configurations file into an object of Configuration
+     *
+     * @param filename the name of the json file containing the configurations
+     * @return Configuration read from the file
+     */
+    public static Configuration loadConfiguration(String filename) {
+        Gson gson = new Gson();
+        return gson.fromJson(settingsFileContent(filename), Configuration.class);
     }
 
     /**
      * Gets the content of the user settings file
      *
+     * @param filename the name of the file to read
      * @return string containing the file content
      */
-    private String settingsFileContent() {
+    private static String settingsFileContent(String filename) {
         try {
-            byte[] encoded = Files.readAllBytes(Paths.get(userSettingsFile));
+            byte[] encoded = Files.readAllBytes(Paths.get(filename));
             return new String(encoded, Charset.defaultCharset());
         } catch (java.io.IOException e) {
             System.err.println("Failed to read configuration's file.");
             return null;
         }
+    }
+
+    @Override
+    public String toString() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(this);
     }
 }

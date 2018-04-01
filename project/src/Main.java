@@ -12,8 +12,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-
-
         // Check if command line arguments are in a valid format
         if (args.length < 1 || args.length > 2) {
             System.err.println("Incorrect arguments, usage: <filename|foldername> [<userSettings.json>]");
@@ -23,10 +21,13 @@ public class Main {
         //Load the configurations from the default path or from user specified path
         Configuration configuration;
         if (args.length == 2) {
-            configuration = new Configuration(args[1]);
+            configuration = Configuration.loadConfiguration(args[1]);
         } else {
             configuration = new Configuration();
         }
+
+        System.out.println(configuration);
+
 
         SpoonAPI spoon = new Launcher();
         try {
