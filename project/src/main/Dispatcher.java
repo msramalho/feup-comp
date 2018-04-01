@@ -2,25 +2,23 @@ package main;
 
 import spoon.Launcher;
 import spoon.SpoonAPI;
-import spoon.reflect.CtModel;
-import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtModule;
-import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.factory.ModuleFactory;
-import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.reflect.code.CtForEachImpl;
 import spoon.support.reflect.code.CtForImpl;
 import spoon.support.reflect.code.CtIfImpl;
 import spoon.support.reflect.code.CtWhileImpl;
 import spoon.support.reflect.declaration.CtClassImpl;
 import spoon.support.reflect.declaration.CtMethodImpl;
+import worker.Result;
+import worker.WorkerFactory;
 import util.Logger;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Dispatcher {
     String spoonTarget;
@@ -28,6 +26,7 @@ public class Dispatcher {
     Logger logger;
     ExecutorService threadPool;
     SpoonAPI spoon;
+    ArrayList<Future<Result>> results = new ArrayList<>();
 
     public Dispatcher(String args[]) {
         // save the SPOON target Folder
@@ -39,6 +38,8 @@ public class Dispatcher {
         // create a new logger
         // TODO: maybe allow configuration to specify a log file where we should output the logs, code is commented in Logger
         logger = new Logger(this);
+
+        logger.print(configuration.toString());
 
         // initialize the threadpool according to the configuration
         threadPool = Executors.newFixedThreadPool(configuration.global.numberOfThreads);
@@ -64,6 +65,10 @@ public class Dispatcher {
      * Code that performs high level task delegation from the spoon model
      */
     public void run() {
+        // get a list of the features
+        final ArrayList<WorkerFactory> activeDynamicWorkerFactories = configuration.getActiveDynamicFeatures();
+
+
         //TODO: #help I can only get the spoon.getModel().getElements() to work for files and not folders as the spoonTarget#help
 
         //Simple metrics just to test
@@ -76,8 +81,15 @@ public class Dispatcher {
         List<CtElement> modelElements = spoon.getModel().getElements(null);
 
         for (CtElement element : modelElements) {
+            // if there is a Worker for this thread than add it to thre results list
+            for (WorkerFactory factory : activeDynamicWorkerFactories) //TODO: is there anyway to use a HashMap here, for speed?
+                if (factory.matches(element))
+                    results.add(threadPool.submit(factory.getWorker(element)));
+
+
+
             // Printing the elements being parsed and to better understand the correspondent classes -> COMMENT FOR CLEAN OUTPUT
-            logger.print(element.getClass().toString() + " --- " + element.toString());
+            // logger.print(element.getClass().toString() + " --- " + element.toString());
 
             if (element.getClass().equals(CtClassImpl.class)) {
                 ++numClasses;
@@ -98,6 +110,21 @@ public class Dispatcher {
                         "Found " + numIfs + " IF conditional(s);\n" +
                         "Found " + numCycles + " cycle(s) (e.g. while, for or foreach);"
         );
+
+        parseResults();
+    }
+
+    public void parseResults(){
+        for (Future<Result> futureResult: results) {
+            if (futureResult.isDone()) {
+                try {
+                    Result r = futureResult.get();
+                    logger.print(r.toString());
+                } catch (InterruptedException | ExecutionException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 

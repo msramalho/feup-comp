@@ -2,12 +2,20 @@ package main;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.SerializedName;
+import worker.WorkerFactory;
+import util.Logger;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class Configuration {
+    public transient static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    public transient Logger logger = new Logger(this);
 
     public class Static {
         public Boolean countFor = false;
@@ -35,6 +43,8 @@ public class Configuration {
         public Global() { }
     }
 
+
+    @SerializedName("static")
     Static fix = new Static();
     Output output = new Output();
     Global global = new Global();
@@ -49,9 +59,30 @@ public class Configuration {
      * @return Configuration read from the file
      */
     public static Configuration loadConfiguration(String filename) {
-        Gson gson = new Gson();
         return gson.fromJson(settingsFileContent(filename), Configuration.class);
     }
+
+
+    /**
+     * Read the properties of this.dynamic and, for each true property, add a new WorkerFactory(name, worker, filter) to the result
+     *
+     * @return a lisf of features to analyze, along with the respective Worker to create (which has the spoon filter)
+     */
+    public ArrayList<WorkerFactory> getActiveDynamicFeatures() {
+        ArrayList<WorkerFactory> workerFactories = new ArrayList<>();
+        for (Field f : Dynamic.class.getDeclaredFields()) {
+            try {
+                if (f.get(dynamic) != null && (Boolean) f.get(dynamic)) // the user wants this feature
+                    workerFactories.add(new WorkerFactory(f.getName(), this));
+
+            } catch (IllegalAccessException | ClassNotFoundException | NoSuchMethodException | InstantiationException | InvocationTargetException e) {
+                logger.print(String.format("Unable to find the worker matching %s. Should be: %s", f.getName(), WorkerFactory.getWorkerName(f.getName())));
+                e.printStackTrace();
+            }
+        }
+        return workerFactories;
+    }
+
 
     /**
      * Gets the content of the user settings file
@@ -71,7 +102,6 @@ public class Configuration {
 
     @Override
     public String toString() {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.toJson(this);
     }
 }
