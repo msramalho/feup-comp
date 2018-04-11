@@ -68,9 +68,6 @@ public class Dispatcher {
         // get a list of the features
         final ArrayList<WorkerFactory> activeDynamicWorkerFactories = configuration.getActiveDynamicFeatures();
 
-
-        //TODO: #help I can only get the spoon.getModel().getElements() to work for files and not folders as the spoonTarget#help
-
         //Simple metrics just to test
         Integer numClasses = 0;
         Integer numMethods = 0;

@@ -25,7 +25,7 @@ public class Configuration {
     }
 
     public class Dynamic {
-        public boolean innerLoops = false;
+        public Boolean innerLoops = false;
 
         public Dynamic() { }
     }
@@ -67,13 +67,14 @@ public class Configuration {
     /**
      * Read the properties of this.dynamic and, for each true property, add a new WorkerFactory(name, worker, filter) to the result
      *
-     * @return a lisf of features to analyze, along with the respective Worker to create (which has the spoon filter)
+     * @return a list of features to analyze, along with the respective Worker to create (which has the spoon filter)
      */
     public ArrayList<WorkerFactory> getActiveDynamicFeatures() {
         ArrayList<WorkerFactory> workerFactories = new ArrayList<>();
         for (Field f : Dynamic.class.getDeclaredFields()) {
             try {
-                if (f.get(dynamic) != null && (Boolean) f.get(dynamic)) // the user wants this feature
+                Object dynamicField = f.get(dynamic);
+                if (dynamicField != null && (dynamicField instanceof Boolean) && ((Boolean) dynamicField).booleanValue()) // the user wants this feature
                     workerFactories.add(new WorkerFactory(f.getName(), this));
 
             } catch (IllegalAccessException | ClassNotFoundException | NoSuchMethodException | InstantiationException | InvocationTargetException e) {
