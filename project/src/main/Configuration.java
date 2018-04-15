@@ -25,7 +25,8 @@ public class Configuration {
     }
 
     public class Dynamic {
-        public Boolean innerLoops = false;
+        public boolean innerLoops = false;
+        public boolean classInheritance = false;
 
         public Dynamic() { }
     }
