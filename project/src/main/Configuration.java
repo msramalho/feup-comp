@@ -28,7 +28,7 @@ public class Configuration {
         public boolean innerLoops = false;
         public boolean classInheritance = false;
 
-        public Dynamic() { }
+        Dynamic() { }
     }
 
 

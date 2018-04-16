@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class Dispatcher {
+public class Dispatcher implements Runnable {
     String spoonTarget;
     Configuration configuration;
     Logger logger;
@@ -64,6 +64,7 @@ public class Dispatcher {
     /**
      * Code that performs high level task delegation from the spoon model
      */
+    @Override
     public void run() {
         // get a list of the features
         final ArrayList<WorkerFactory> activeDynamicWorkerFactories = configuration.getActiveDynamicFeatures();
@@ -88,6 +89,7 @@ public class Dispatcher {
             // Printing the elements being parsed and to better understand the correspondent classes -> COMMENT FOR CLEAN OUTPUT
             // logger.print(element.getClass().toString() + " --- " + element.toString());
 
+            // Get static statistics
             if (element.getClass().equals(CtClassImpl.class)) {
                 ++numClasses;
             } else if (element.getClass().equals(CtMethodImpl.class)) {

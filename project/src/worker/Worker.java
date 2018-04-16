@@ -9,6 +9,12 @@ import java.util.concurrent.Callable;
 
 /**
  * Class from which the Workers should inherit
+ *
+ * TODO
+ * -> Todos os Workers devem ter uma interface comum que reporta resultados dinâmicos e estáticos do nó respetivo,
+ * returna num Future de classe resultados.
+ * -> Workers da classe devem poder lançar novos workers, e só retornar quando os workers filho retornam,
+ * reportanto a soma dos resutlados deles.
  */
 public abstract class Worker implements Callable {
     Configuration configuration;
