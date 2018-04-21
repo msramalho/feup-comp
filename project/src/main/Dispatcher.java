@@ -13,6 +13,8 @@ import worker.Result;
 import worker.WorkerFactory;
 import util.Logger;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -29,6 +31,9 @@ public class Dispatcher implements Runnable {
     ArrayList<Future<Result>> results = new ArrayList<>();
 
     public Dispatcher(String args[]) {
+        if (! Files.exists(Paths.get(args[0])) )
+            throw new InexistentFileException();
+
         // save the SPOON target Folder
         spoonTarget = args[0];
 
