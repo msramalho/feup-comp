@@ -90,7 +90,6 @@ public class Dispatcher implements Runnable {
                     results.add(threadPool.submit(factory.getWorker(element)));
 
 
-
             // Printing the elements being parsed and to better understand the correspondent classes -> COMMENT FOR CLEAN OUTPUT
             // logger.print(element.getClass().toString() + " --- " + element.toString());
 

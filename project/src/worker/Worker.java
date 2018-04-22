@@ -4,6 +4,7 @@ import main.Configuration;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.Filter;
 import util.Logger;
+import util.Report;
 
 import java.util.concurrent.Callable;
 
@@ -16,7 +17,7 @@ import java.util.concurrent.Callable;
  * -> Workers da classe devem poder lançar novos workers, e só retornar quando os workers filho retornam,
  * reportanto a soma dos resutlados deles.d
  */
-public abstract class Worker implements Callable {
+public abstract class Worker<C extends Report> implements Callable<C> { // running call on ExecutorService returns Future<C>
     // TODO why not extend CtVisitor? or CtAbstractVisitor, or CtScanner
     // TODO  additionally, all interfaces compatible with CtVisitor would be pretty useful
     Configuration configuration; // TODO reassess why this is needed here
@@ -24,6 +25,7 @@ public abstract class Worker implements Callable {
     Logger logger;
     CtElement element;
 
+    // TODO should receive pointer to global ThreadPoolExecutor, to be able to spawn new Worker threads
     public Worker(Configuration configuration, CtElement element) {
         this.configuration = configuration;
         this.element = element;
