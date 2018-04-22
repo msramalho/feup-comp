@@ -17,7 +17,9 @@ import java.util.concurrent.Callable;
  * reportanto a soma dos resutlados deles.d
  */
 public abstract class Worker implements Callable {
-    Configuration configuration;
+    // TODO why not extend CtVisitor? or CtAbstractVisitor, or CtScanner
+    // TODO  additionally, all interfaces compatible with CtVisitor would be pretty useful
+    Configuration configuration; // TODO reassess why this is needed here
     Filter filter; // the filter that, upon true, should trigger this worker
     Logger logger;
     CtElement element;
@@ -30,7 +32,7 @@ public abstract class Worker implements Callable {
     }
 
     /**
-     * method called by constructor to set the filter variable, without which Workers do not work
+     * Template method for setting the filter variable, should be called in constructor
      */
     protected abstract void setFilter();
 
@@ -41,5 +43,6 @@ public abstract class Worker implements Callable {
      * @return true if there is a match
      */
     public boolean matches(CtElement c) { return filter.matches(c); }
+    // TODO check unchecked method call, probably object should be bounded
 
 }
