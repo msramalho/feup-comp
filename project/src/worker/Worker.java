@@ -4,6 +4,7 @@ import main.Configuration;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.Filter;
 import util.Logger;
+import util.Report;
 
 import java.util.concurrent.Callable;
 
@@ -14,14 +15,17 @@ import java.util.concurrent.Callable;
  * -> Todos os Workers devem ter uma interface comum que reporta resultados dinâmicos e estáticos do nó respetivo,
  * returna num Future de classe resultados.
  * -> Workers da classe devem poder lançar novos workers, e só retornar quando os workers filho retornam,
- * reportanto a soma dos resutlados deles.
+ * reportanto a soma dos resutlados deles.d
  */
-public abstract class Worker implements Callable {
-    Configuration configuration;
+public abstract class Worker<C extends Report> implements Callable<C> { // running call on ExecutorService returns Future<C>
+    // TODO why not extend CtVisitor? or CtAbstractVisitor, or CtScanner
+    // TODO  additionally, all interfaces compatible with CtVisitor would be pretty useful
+    Configuration configuration; // TODO reassess why this is needed here
     Filter filter; // the filter that, upon true, should trigger this worker
     Logger logger;
     CtElement element;
 
+    // TODO should receive pointer to global ThreadPoolExecutor, to be able to spawn new Worker threads
     public Worker(Configuration configuration, CtElement element) {
         this.configuration = configuration;
         this.element = element;
@@ -30,7 +34,7 @@ public abstract class Worker implements Callable {
     }
 
     /**
-     * method called by constructor to set the filter variable, without which Workers do not work
+     * Template method for setting the filter variable, should be called in constructor
      */
     protected abstract void setFilter();
 
@@ -41,5 +45,6 @@ public abstract class Worker implements Callable {
      * @return true if there is a match
      */
     public boolean matches(CtElement c) { return filter.matches(c); }
+    // TODO check unchecked method call, probably object should be bounded
 
 }

@@ -30,9 +30,9 @@ public class Dispatcher implements Runnable {
     SpoonAPI spoon;
     ArrayList<Future<Result>> results = new ArrayList<>();
 
-    public Dispatcher(String args[]) {
+    public Dispatcher(String args[]) throws NonExistentFileException {
         if (! Files.exists(Paths.get(args[0])) )
-            throw new InexistentFileException();
+            throw new NonExistentFileException();
 
         // save the SPOON target Folder
         spoonTarget = args[0];
@@ -88,7 +88,6 @@ public class Dispatcher implements Runnable {
             for (WorkerFactory factory : activeDynamicWorkerFactories) //TODO: is there anyway to use a HashMap here, for speed?
                 if (factory.matches(element))
                     results.add(threadPool.submit(factory.getWorker(element)));
-
 
 
             // Printing the elements being parsed and to better understand the correspondent classes -> COMMENT FOR CLEAN OUTPUT
