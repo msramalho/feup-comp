@@ -7,7 +7,7 @@ public class Main {
         try {
             dispatcher = new Dispatcher(args);
 
-        } catch (InexistentFileException e) {
+        } catch (NonExistentFileException e) {
             System.err.println("Inexistent file / folder passed as argument.");
             return;
         } catch (Exception e) {
