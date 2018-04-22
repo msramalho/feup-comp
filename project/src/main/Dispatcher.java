@@ -91,7 +91,7 @@ public class Dispatcher implements Runnable {
 
 
             // Printing the elements being parsed and to better understand the correspondent classes -> COMMENT FOR CLEAN OUTPUT
-            //logger.print(element.getClass().toString() + " --- " + element.toString());
+            // logger.print(element.getClass().toString() + " --- " + element.toString());
 
             // Get static statistics
             if (element.getClass().equals(CtClassImpl.class)) {

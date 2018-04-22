@@ -24,13 +24,13 @@ public class W_possibleTernary extends Worker {
     }
 
     @Override
-    public Object call() throws Exception {
+    public Object call() {
         SiblingsFunction siblings = new SiblingsFunction();
         Verifier myConsumer = new Verifier((CtLocalVariableImpl) element);
 
         siblings.mode(SiblingsFunction.Mode.NEXT);
         siblings.apply(element, myConsumer);
-
+        
         //return new Result(myConsumer.getGsonResult());
         return new Result(1);
     }
@@ -38,7 +38,24 @@ public class W_possibleTernary extends Worker {
 
     private class Verifier implements CtConsumer {
 
-        CtVariable declaredVar;
+        /**
+         * Class used for returning the resultant json object
+         */
+        public class ReturnGson {
+            public boolean success;
+            public String declaration_pos;
+            public String conditional_pos;
+
+            ReturnGson(boolean success, String declaration_pos, String conditional_pos) {
+                this.success = success;
+                this.declaration_pos = declaration_pos;
+                this.conditional_pos = conditional_pos;
+            }
+        }
+
+        ReturnGson returnGson;
+
+        private CtVariable declaredVar;
 
         public Verifier(CtLocalVariableImpl declaredVar) {
             this.declaredVar = declaredVar;
@@ -51,15 +68,20 @@ public class W_possibleTernary extends Worker {
 
             CtBlockImpl ifTrue = ((CtIfImpl) obj).getThenStatement();
             CtBlockImpl ifFalse = ((CtIfImpl) obj).getElseStatement();
-            List<CtElement> teste = ifTrue.getElements(null);
 
             // In case there isn't one of the statements
             if (ifTrue == null || ifFalse == null)
                 return;
 
-            if (isDeclareStmt(ifTrue) && isDeclareStmt(ifFalse))
-                System.out.println("Got a match sooon");
+            /*if (isDeclareStmt(ifTrue) && isDeclareStmt(ifFalse))
+                result = "{\"success\": true, \"declaration line\": " + element.getPosition() +
+                        ", \"conditional line\": " + ((CtIfImpl) obj).getPosition() + "}";
+            else
+                result = "{\"success\": false}"; */
 
+            returnGson = (isDeclareStmt(ifTrue) && isDeclareStmt(ifFalse)) ?
+                    new ReturnGson(true, declaredVar.getPosition().toString(), ((CtIfImpl) obj).getPosition().toString()) :
+                    new ReturnGson(false, null, null);
         }
 
         /**
@@ -83,8 +105,8 @@ public class W_possibleTernary extends Worker {
             return variable.equals(element);
         }
 
-        public Gson getGsonResult() {
-            return new Gson();
+        public String getGsonResult() {
+            return new Gson().toJson(returnGson);
         }
 
     }
