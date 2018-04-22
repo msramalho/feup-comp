@@ -11,6 +11,7 @@
 		"numberOfThreads": 32
 	},
 	"dynamic": {
-		"innerLoops": true
+		"innerLoops": true,
+		"possibleTernary": true
 	}
 }
