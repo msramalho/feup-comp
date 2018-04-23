@@ -2,7 +2,11 @@ package main;
 
 import spoon.Launcher;
 import spoon.SpoonAPI;
+import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtPackage;
+import spoon.reflect.declaration.CtType;
+import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.reflect.code.CtForEachImpl;
 import spoon.support.reflect.code.CtForImpl;
 import spoon.support.reflect.code.CtIfImpl;
@@ -16,6 +20,7 @@ import util.Logger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -60,9 +65,9 @@ public class Dispatcher implements Runnable {
             spoon.addInputResource(spoonTarget);
             spoon.buildModel();
         } catch (spoon.compiler.ModelBuildingException e) {
-            logger.print("Failed to build spoon model. Possible causes:\n File makes include of non existent classes. Use the parent folder as program argument to fix.");
+            logger.print("Failed to build spoon model. Possible causes:\nFile makes include of non existent classes. Use the parent folder as program argument to fix.");
         } catch (spoon.SpoonException e) {
-            logger.print("Failed to build spoon model. Possible causes:\n The given path (" + spoonTarget + ") does not exist.");
+            logger.print("Failed to build spoon model. Possible causes:\nThe given path (" + spoonTarget + ") does not exist.");
         }
     }
 
@@ -72,55 +77,26 @@ public class Dispatcher implements Runnable {
     @Override
     public void run() {
         // get a list of the features
-        final List<WorkerFactory> activeDynamicWorkerFactories = configuration.getActiveDynamicFeatures();
+        final List<WorkerFactory> workerFactories = configuration.getActiveDynamicFeatures();
 
-        //Simple metrics just to test
-        Integer numClasses = 0;
-        Integer numMethods = 0;
-        Integer numIfs = 0;
-        Integer numCycles = 0; //Either while cycles or for cycles
-
-        // Null filter -> Gets all the model elements -> can obviously be optimized
-        // spoon.getModel().getAllPackages()
-        List<CtElement> modelElements = spoon.getModel().getElements(null);
-//        spoon.getModel().getRootPackage().accept(new NodeManager());
-        NodeManager nodeManager = new NodeManager(threadPool, activeDynamicWorkerFactories, spoon.getModel().getRootPackage());
-
-        nodeManager.run();
-        // for (CtElement element : modelElements) {
-        //     // if there is a Worker for this thread than add it to the results list
-        //     for (WorkerFactory factory : activeDynamicWorkerFactories) //TODO: is there anyway to use a HashMap here, for speed?
-        //         if (factory.matches(element))
-        //             results.add(threadPool.submit(factory.getWorker(element)));
-        //
-        //     // Printing the elements being parsed and to better understand the correspondent classes -> COMMENT FOR CLEAN OUTPUT
-        //     // logger.print(element.getClass().toString() + " --- " + element.toString());
-        //
-        //     // Get static statistics
-        //     if (element.getClass().equals(CtClassImpl.class)) {
-        //         ++numClasses;
-        //     } else if (element.getClass().equals(CtMethodImpl.class)) {
-        //         ++numMethods;
-        //     } else if (element.getClass().equals(CtIfImpl.class)) {
-        //         ++numIfs;
-        //     } else if (element.getClass().equals(CtForImpl.class) || element.getClass().equals(CtForEachImpl.class) || element.getClass().equals(CtWhileImpl.class)) {
-        //         ++numCycles;
-        //     }
-        // }
-
-        // Display of analyzed metrics
-        // logger.print("Analysis result of the files available at path '" + spoonTarget + "':");
-        // logger.print(
-        //         "Found " + numMethods + " classe(s);\n" +
-        //                 "Found " + numClasses + " method(s);\n" +
-        //                 "Found " + numIfs + " IF conditional(s);\n" +
-        //                 "Found " + numCycles + " cycle(s) (e.g. while, for or foreach);"
-        // );
-
-        // parseResults();
+        Collection<CtPackage> packages = spoon.getModel().getAllPackages();
+        for (CtPackage ctPackage : packages) {
+            handlePackage(workerFactories, ctPackage);
+        }
+//        ClassScanner nodeManager = new ClassScanner(threadPool, workerFactories, spoon.getModel().getRootPackage());
+//        nodeManager.run();
     }
 
-    public void parseResults(){
+    private void handlePackage(List<WorkerFactory> workerFactories, CtPackage ctPackage) {
+        System.out.println("Package: " + ctPackage.getQualifiedName());
+
+        for (CtType ctType : ctPackage.getTypes()) {
+            // TODO do something with Future's result
+            threadPool.submit(new ClassScanner(threadPool, workerFactories, ctType));
+        }
+    }
+
+    public void parseResults() {
         for (Future<Report> futureResult: results) {
             if (futureResult.isDone()) {
                 try {

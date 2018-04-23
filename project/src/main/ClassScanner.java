@@ -2,14 +2,12 @@ package main;
 
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.CtScanner;
-import util.Report;
 import worker.WorkerFactory;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
 
-public class NodeManager extends CtScanner implements Runnable {
+public class ClassScanner extends CtScanner implements Runnable {
 
     private ExecutorService executorService;
     private List<WorkerFactory> workerFactories;
@@ -17,7 +15,7 @@ public class NodeManager extends CtScanner implements Runnable {
     private Node root;
     private Node current;
 
-    NodeManager(ExecutorService executorService, List<WorkerFactory> workerFactories, CtElement rootElement) {
+    ClassScanner(ExecutorService executorService, List<WorkerFactory> workerFactories, CtElement rootElement) {
         this.executorService = executorService;
         this.workerFactories = workerFactories;
 
@@ -28,6 +26,7 @@ public class NodeManager extends CtScanner implements Runnable {
     @Override
     protected void enter(CtElement e) {
         super.enter(e);
+        System.out.println(e.getPosition());
 
         // Update current node
         current = current.createChild(e);
