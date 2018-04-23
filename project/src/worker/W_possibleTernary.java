@@ -26,17 +26,21 @@ public class W_possibleTernary extends Worker {
     @Override
     public Object call() {
         SiblingsFunction siblings = new SiblingsFunction();
-        Verifier myConsumer = new Verifier((CtLocalVariableImpl) element);
+        PatternDetector myConsumer = new PatternDetector((CtLocalVariableImpl) element);
 
         siblings.mode(SiblingsFunction.Mode.NEXT);
         siblings.apply(element, myConsumer);
-        
+
         //return new Result(myConsumer.getGsonResult());
+        System.out.println(myConsumer.getGsonResult()); //TODO - delete, just for testing
         return new Result(1);
     }
 
-
-    private class Verifier implements CtConsumer {
+    /**
+     * Class used to consume the CtElement siblings of the declaration element
+     * @see CtConsumer for more information
+     */
+    private class PatternDetector implements CtConsumer {
 
         /**
          * Class used for returning the resultant json object
@@ -53,11 +57,11 @@ public class W_possibleTernary extends Worker {
             }
         }
 
-        ReturnGson returnGson;
+        ReturnGson returnGson = new ReturnGson(false,null, null);
 
         private CtVariable declaredVar;
 
-        public Verifier(CtLocalVariableImpl declaredVar) {
+        public PatternDetector(CtLocalVariableImpl declaredVar) {
             this.declaredVar = declaredVar;
         }
 
@@ -73,15 +77,12 @@ public class W_possibleTernary extends Worker {
             if (ifTrue == null || ifFalse == null)
                 return;
 
-            /*if (isDeclareStmt(ifTrue) && isDeclareStmt(ifFalse))
-                result = "{\"success\": true, \"declaration line\": " + element.getPosition() +
-                        ", \"conditional line\": " + ((CtIfImpl) obj).getPosition() + "}";
-            else
-                result = "{\"success\": false}"; */
-
-            returnGson = (isDeclareStmt(ifTrue) && isDeclareStmt(ifFalse)) ?
-                    new ReturnGson(true, declaredVar.getPosition().toString(), ((CtIfImpl) obj).getPosition().toString()) :
-                    new ReturnGson(false, null, null);
+            if (isDeclareStmt(ifTrue) && isDeclareStmt(ifFalse))
+                    returnGson = new ReturnGson(
+                            true,
+                            declaredVar.getPosition().toString(),
+                            ((CtIfImpl) obj).getPosition().toString()
+                    );
         }
 
         /**
