@@ -1,25 +1,26 @@
 package worker;
 
-import main.Configuration;
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.visitor.Filter;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.reflect.code.CtForEachImpl;
+import util.Report;
 
 public class W_innerLoops extends Worker {
 
-    public W_innerLoops(Configuration configuration, CtElement element) {
-        super(configuration, element);
+    public W_innerLoops(CtElement element) {
+        super(element);
         logger.print("proof of concept constructor");
     }
 
     @Override
-    protected void setFilter() {
-        filter = new TypeFilter(CtForEachImpl.class);
+    protected Filter setFilter() {
+        return new TypeFilter(CtForEachImpl.class);
     }
 
     @Override
     public Object call() throws Exception {
         logger.print("proof of concept run for the ForEachLoops innerLoops Count");
-        return new Result(9000);
+        return new Report(9000);
     }
 }

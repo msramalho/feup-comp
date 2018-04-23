@@ -9,7 +9,7 @@ import spoon.support.reflect.code.CtIfImpl;
 import spoon.support.reflect.code.CtWhileImpl;
 import spoon.support.reflect.declaration.CtClassImpl;
 import spoon.support.reflect.declaration.CtMethodImpl;
-import worker.Result;
+import util.Report;
 import worker.WorkerFactory;
 import util.Logger;
 
@@ -28,10 +28,10 @@ public class Dispatcher implements Runnable {
     Logger logger;
     ExecutorService threadPool;
     SpoonAPI spoon;
-    ArrayList<Future<Result>> results = new ArrayList<>();
+    ArrayList<Future<Report>> results = new ArrayList<>();
 
     public Dispatcher(String args[]) throws NonExistentFileException {
-        if (! Files.exists(Paths.get(args[0])) )
+        if (args.length == 0 || !Files.exists(Paths.get(args[0])) )
             throw new NonExistentFileException();
 
         // save the SPOON target Folder
@@ -72,7 +72,7 @@ public class Dispatcher implements Runnable {
     @Override
     public void run() {
         // get a list of the features
-        final ArrayList<WorkerFactory> activeDynamicWorkerFactories = configuration.getActiveDynamicFeatures();
+        final List<WorkerFactory> activeDynamicWorkerFactories = configuration.getActiveDynamicFeatures();
 
         //Simple metrics just to test
         Integer numClasses = 0;
@@ -82,13 +82,13 @@ public class Dispatcher implements Runnable {
 
         // Null filter -> Gets all the model elements -> can obviously be optimized
         List<CtElement> modelElements = spoon.getModel().getElements(null);
+//        spoon.getModel().getRootPackage().accept(new NodeManager());
 
         for (CtElement element : modelElements) {
-            // if there is a Worker for this thread than add it to thre results list
+            // if there is a Worker for this thread than add it to the results list
             for (WorkerFactory factory : activeDynamicWorkerFactories) //TODO: is there anyway to use a HashMap here, for speed?
                 if (factory.matches(element))
                     results.add(threadPool.submit(factory.getWorker(element)));
-
 
             // Printing the elements being parsed and to better understand the correspondent classes -> COMMENT FOR CLEAN OUTPUT
             // logger.print(element.getClass().toString() + " --- " + element.toString());
@@ -118,10 +118,10 @@ public class Dispatcher implements Runnable {
     }
 
     public void parseResults(){
-        for (Future<Result> futureResult: results) {
+        for (Future<Report> futureResult: results) {
             if (futureResult.isDone()) {
                 try {
-                    Result r = futureResult.get();
+                    Report r = futureResult.get();
                     logger.print(r.toString());
                 } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();

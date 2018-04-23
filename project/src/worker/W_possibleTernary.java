@@ -1,39 +1,42 @@
 package worker;
 
 import com.google.gson.Gson;
-import main.Configuration;
 import spoon.reflect.code.CtExpression;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtVariable;
+import spoon.reflect.visitor.Filter;
 import spoon.reflect.visitor.chain.CtConsumer;
 import spoon.reflect.visitor.filter.SiblingsFunction;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.reflect.code.*;
+import util.Report;
 
 import java.util.List;
 
 public class W_possibleTernary extends Worker {
 
-    public W_possibleTernary(Configuration configuration, CtElement element) {
-        super(configuration, element);
+    public W_possibleTernary(CtElement element) {
+        super(element);
     }
 
     @Override
-    protected void setFilter() {
-        filter = new TypeFilter(CtLocalVariableImpl.class);
+    protected Filter setFilter() {
+        return new TypeFilter(CtLocalVariableImpl.class);
     }
 
     @Override
     public Object call() {
+        CtElement element = getCtElement();
+
         SiblingsFunction siblings = new SiblingsFunction();
         PatternDetector myConsumer = new PatternDetector((CtLocalVariableImpl) element);
 
         siblings.mode(SiblingsFunction.Mode.NEXT);
         siblings.apply(element, myConsumer);
 
-        //return new Result(myConsumer.getGsonResult());
+        //return new Report(myConsumer.getGsonResult());
         System.out.println(myConsumer.getGsonResult()); //TODO - delete, just for testing
-        return new Result(1);
+        return new Report(1);
     }
 
     /**
@@ -103,7 +106,7 @@ public class W_possibleTernary extends Worker {
 
             CtVariable variable = ((CtVariableWriteImpl) stmt).getVariable().getDeclaration();
 
-            return variable.equals(element);
+            return variable.equals(getCtElement());
         }
 
         public String getGsonResult() {

@@ -7,7 +7,7 @@ public class Main {
         try {
             dispatcher = new Dispatcher(args);
         } catch (NonExistentFileException e) {
-            System.err.println("Inexistent file / folder passed as argument.");
+            System.err.println(e.getMessage());
             return;
         } catch (Exception e) {
             System.out.println("Unable to parse command line arguments, usage: " + Dispatcher.getUsage());
@@ -19,8 +19,6 @@ public class Main {
         dispatcher.readSpoon();
 
         dispatcher.run();
-
-
 
     }
 }
