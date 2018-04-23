@@ -4,11 +4,9 @@ import main.Configuration;
 import spoon.reflect.declaration.CtElement;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.concurrent.Callable;
 
 public class WorkerFactory {
     String name;
-    Configuration configuration;
     Class<?> workerClass;
     private Worker filterWorker;
 
@@ -16,19 +14,17 @@ public class WorkerFactory {
      * Receives the name of the feature and the configuration and loads the proper worker, through its super constructor that receives only a Configuration object
      *
      * @param name          of the feature
-     * @param configuration pointer to the program configuration
      * @throws ClassNotFoundException
      * @throws IllegalAccessException
      * @throws InstantiationException
      * @throws NoSuchMethodException
      * @throws InvocationTargetException
      */
-    public WorkerFactory(String name, Configuration configuration) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+    public WorkerFactory(String name) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
         this.name = name;
-        this.configuration = configuration;
         workerClass = Class.forName(getWorkerName(name));
         //test the creation of a new worker, and also keep it for the matches function
-        filterWorker = (Worker) workerClass.getDeclaredConstructor(Configuration.class, CtElement.class).newInstance(configuration, null);
+        filterWorker = (Worker) workerClass.getDeclaredConstructor(CtElement.class).newInstance((Object) null);
     }
 
     /**
@@ -39,8 +35,9 @@ public class WorkerFactory {
     public boolean matches(CtElement c) { return filterWorker.matches(c); }
 
     public Worker getWorker(CtElement c) {
+        // TODO: useful for problem c.getFactory().Package().getRootPackage().getPackage("teste").getTypes(); // direct children, tirar
         try {
-            return (Worker) workerClass.getDeclaredConstructor(Configuration.class, CtElement.class).newInstance(configuration, c);
+            return (Worker) workerClass.getDeclaredConstructor(CtElement.class).newInstance(c);
         } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }

@@ -81,40 +81,43 @@ public class Dispatcher implements Runnable {
         Integer numCycles = 0; //Either while cycles or for cycles
 
         // Null filter -> Gets all the model elements -> can obviously be optimized
+        // spoon.getModel().getAllPackages()
         List<CtElement> modelElements = spoon.getModel().getElements(null);
 //        spoon.getModel().getRootPackage().accept(new NodeManager());
+        NodeManager nodeManager = new NodeManager(threadPool, activeDynamicWorkerFactories, spoon.getModel().getRootPackage());
 
-        for (CtElement element : modelElements) {
-            // if there is a Worker for this thread than add it to the results list
-            for (WorkerFactory factory : activeDynamicWorkerFactories) //TODO: is there anyway to use a HashMap here, for speed?
-                if (factory.matches(element))
-                    results.add(threadPool.submit(factory.getWorker(element)));
-
-            // Printing the elements being parsed and to better understand the correspondent classes -> COMMENT FOR CLEAN OUTPUT
-            // logger.print(element.getClass().toString() + " --- " + element.toString());
-
-            // Get static statistics
-            if (element.getClass().equals(CtClassImpl.class)) {
-                ++numClasses;
-            } else if (element.getClass().equals(CtMethodImpl.class)) {
-                ++numMethods;
-            } else if (element.getClass().equals(CtIfImpl.class)) {
-                ++numIfs;
-            } else if (element.getClass().equals(CtForImpl.class) || element.getClass().equals(CtForEachImpl.class) || element.getClass().equals(CtWhileImpl.class)) {
-                ++numCycles;
-            }
-        }
+        nodeManager.run();
+        // for (CtElement element : modelElements) {
+        //     // if there is a Worker for this thread than add it to the results list
+        //     for (WorkerFactory factory : activeDynamicWorkerFactories) //TODO: is there anyway to use a HashMap here, for speed?
+        //         if (factory.matches(element))
+        //             results.add(threadPool.submit(factory.getWorker(element)));
+        //
+        //     // Printing the elements being parsed and to better understand the correspondent classes -> COMMENT FOR CLEAN OUTPUT
+        //     // logger.print(element.getClass().toString() + " --- " + element.toString());
+        //
+        //     // Get static statistics
+        //     if (element.getClass().equals(CtClassImpl.class)) {
+        //         ++numClasses;
+        //     } else if (element.getClass().equals(CtMethodImpl.class)) {
+        //         ++numMethods;
+        //     } else if (element.getClass().equals(CtIfImpl.class)) {
+        //         ++numIfs;
+        //     } else if (element.getClass().equals(CtForImpl.class) || element.getClass().equals(CtForEachImpl.class) || element.getClass().equals(CtWhileImpl.class)) {
+        //         ++numCycles;
+        //     }
+        // }
 
         // Display of analyzed metrics
-        logger.print("Analysis result of the files available at path '" + spoonTarget + "':");
-        logger.print(
-                "Found " + numMethods + " classe(s);\n" +
-                        "Found " + numClasses + " method(s);\n" +
-                        "Found " + numIfs + " IF conditional(s);\n" +
-                        "Found " + numCycles + " cycle(s) (e.g. while, for or foreach);"
-        );
+        // logger.print("Analysis result of the files available at path '" + spoonTarget + "':");
+        // logger.print(
+        //         "Found " + numMethods + " classe(s);\n" +
+        //                 "Found " + numClasses + " method(s);\n" +
+        //                 "Found " + numIfs + " IF conditional(s);\n" +
+        //                 "Found " + numCycles + " cycle(s) (e.g. while, for or foreach);"
+        // );
 
-        parseResults();
+        // parseResults();
     }
 
     public void parseResults(){

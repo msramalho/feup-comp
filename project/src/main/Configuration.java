@@ -77,7 +77,7 @@ public class Configuration {
             try {
                 Object dynamicField = f.get(dynamic);
                 if (dynamicField != null && (dynamicField instanceof Boolean) && ((Boolean) dynamicField).booleanValue()) // the user wants this feature
-                    workerFactories.add(new WorkerFactory(f.getName(), this));
+                    workerFactories.add(new WorkerFactory(f.getName()));
 
             } catch (IllegalAccessException | ClassNotFoundException | NoSuchMethodException | InstantiationException | InvocationTargetException e) {
                 logger.print(String.format("Unable to find the worker matching %s. Should be: %s", f.getName(), WorkerFactory.getWorkerName(f.getName())));
