@@ -1,6 +1,7 @@
 package util;
 
 public class Logger {
+    // TODO: maybe allow configuration to specify a log file where we should output the logs, code is commented in Logger
     private Object source; // the object that will call Logger methods
 
 

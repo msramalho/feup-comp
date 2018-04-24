@@ -35,7 +35,7 @@ public class W_possibleTernary extends Worker {
         siblings.apply(element, myConsumer);
 
         //return new Report(myConsumer.getGsonResult());
-        System.out.println(myConsumer.getGsonResult()); //TODO - delete, just for testing
+        logger.print(myConsumer.getGsonResult()); //TODO - delete, just for testing
         return new Report(1);
     }
 

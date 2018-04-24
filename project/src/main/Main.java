@@ -10,7 +10,7 @@ public class Main {
             System.err.println(e.getMessage());
             return;
         } catch (Exception e) {
-            System.out.println("Unable to parse command line arguments, usage: " + Dispatcher.getUsage());
+            System.err.println("Unable to parse command line arguments, usage: " + Dispatcher.getUsage());
             e.printStackTrace();
             return;
         }

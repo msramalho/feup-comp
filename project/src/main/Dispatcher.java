@@ -30,13 +30,13 @@ import java.util.concurrent.Future;
 public class Dispatcher implements Runnable {
     String spoonTarget;
     Configuration configuration;
-    Logger logger;
+    Logger logger = new Logger(this);
     ExecutorService threadPool;
     SpoonAPI spoon;
     ArrayList<Future<Report>> results = new ArrayList<>();
 
     public Dispatcher(String args[]) throws NonExistentFileException {
-        if (args.length == 0 || !Files.exists(Paths.get(args[0])) )
+        if (args.length == 0 || !Files.exists(Paths.get(args[0])))
             throw new NonExistentFileException();
 
         // save the SPOON target Folder
@@ -44,10 +44,6 @@ public class Dispatcher implements Runnable {
 
         //if there are 2 arguments load config from JSON file, else use default configuration
         configuration = (args.length >= 2) ? Configuration.loadConfiguration(args[1]) : new Configuration();
-
-        // create a new logger
-        // TODO: maybe allow configuration to specify a log file where we should output the logs, code is commented in Logger
-        logger = new Logger(this);
 
         logger.print(configuration.toString());
 
@@ -83,12 +79,12 @@ public class Dispatcher implements Runnable {
         for (CtPackage ctPackage : packages) {
             handlePackage(workerFactories, ctPackage);
         }
-//        ClassScanner nodeManager = new ClassScanner(threadPool, workerFactories, spoon.getModel().getRootPackage());
-//        nodeManager.run();
+        //        ClassScanner nodeManager = new ClassScanner(threadPool, workerFactories, spoon.getModel().getRootPackage());
+        //        nodeManager.run();
     }
 
     private void handlePackage(List<WorkerFactory> workerFactories, CtPackage ctPackage) {
-        System.out.println("Package: " + ctPackage.getQualifiedName());
+        logger.print("Package: " + ctPackage.getQualifiedName());
 
         for (CtType ctType : ctPackage.getTypes()) {
             // TODO do something with Future's result
@@ -97,7 +93,7 @@ public class Dispatcher implements Runnable {
     }
 
     public void parseResults() {
-        for (Future<Report> futureResult: results) {
+        for (Future<Report> futureResult : results) {
             if (futureResult.isDone()) {
                 try {
                     Report r = futureResult.get();

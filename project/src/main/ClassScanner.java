@@ -2,6 +2,7 @@ package main;
 
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.CtScanner;
+import util.Logger;
 import worker.WorkerFactory;
 
 import java.util.List;
@@ -15,6 +16,8 @@ public class ClassScanner extends CtScanner implements Runnable {
     private Node root;
     private Node current;
 
+    private Logger logger = new Logger(this);
+
     ClassScanner(ExecutorService executorService, List<WorkerFactory> workerFactories, CtElement rootElement) {
         this.executorService = executorService;
         this.workerFactories = workerFactories;
@@ -26,7 +29,7 @@ public class ClassScanner extends CtScanner implements Runnable {
     @Override
     protected void enter(CtElement e) {
         super.enter(e);
-        System.out.println(e.getPosition());
+        logger.print(e.getPosition().toString());
 
         // Update current node
         current = current.createChild(e);
