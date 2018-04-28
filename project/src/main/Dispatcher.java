@@ -1,5 +1,6 @@
 package main;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import spoon.Launcher;
 import spoon.SpoonAPI;
 import spoon.reflect.declaration.CtPackage;
@@ -20,37 +21,35 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class Dispatcher implements Runnable {
-    String spoonTarget;
     Configuration configuration;
-    Logger logger = new Logger(this);
+    Logger logger;
     ExecutorService threadPool;
     SpoonAPI spoon;
-    ArrayList<Future<Report>> results = new ArrayList<>();
+    ArrayList<Future<Report>> results;
 
-    public Dispatcher(String targetFolder) throws FileNotFoundException {
-        this(targetFolder, null);
+    public Dispatcher() {
+        this(new Configuration());
     }
 
-    public Dispatcher(String targetFolder, String configFile) throws FileNotFoundException {
-        if (!Files.exists(Paths.get(targetFolder)))
-            throw new FileNotFoundException(targetFolder + " does not exist.");
+    public Dispatcher(Configuration config) {
+        if (config == null)
+            throw new NullPointerException("Configuration file is NULL.");
+        this.configuration = config;
+        this.logger = new Logger(this);
+        this.results = new ArrayList<>();
 
-        // save the SPOON target Folder
-        spoonTarget = targetFolder;
-
-        //if there are 2 arguments load config from JSON file, else use default configuration
-        configuration = configFile != null ? Configuration.loadConfiguration(configFile) : new Configuration();
+        threadPool = Executors.newFixedThreadPool(configuration.global.numberOfThreads);
 
         logger.print(configuration.toString());
-
-        // initialize the threadpool according to the configuration
-        threadPool = Executors.newFixedThreadPool(configuration.global.numberOfThreads);
     }
 
     /**
      * try to build a SPOON model into spoon, will display errors upon failure
      */
-    public void readSpoon() {
+    public void readSpoonTarget(String spoonTarget) throws FileNotFoundException {
+        if (!Files.exists(Paths.get(spoonTarget)))
+            throw new FileNotFoundException(spoonTarget + " does not exist.");
+
         spoon = new Launcher();
         try {
             spoon.addInputResource(spoonTarget);
