@@ -1,6 +1,5 @@
 package worker;
 
-import main.Configuration;
 import spoon.reflect.declaration.CtElement;
 
 import java.lang.reflect.InvocationTargetException;
@@ -13,7 +12,7 @@ public class WorkerFactory {
     /**
      * Receives the name of the feature and the configuration and loads the proper worker, through its super constructor that receives only a Configuration object
      *
-     * @param name          of the feature
+     * @param name of the feature
      * @throws ClassNotFoundException
      * @throws IllegalAccessException
      * @throws InstantiationException
@@ -29,10 +28,13 @@ public class WorkerFactory {
 
     /**
      * Test if a given CtElement should be handled by the Workers this factory produces
+     *
      * @param c the CtElement to test against the filterWorker
      * @return true if there is a match
      */
-    public boolean matches(CtElement c) { return filterWorker.matches(c); }
+    public boolean matches(CtElement c) {
+        return filterWorker.matches(c);
+    }
 
     public Worker getWorker(CtElement c) {
         // TODO: useful for problem c.getFactory().Package().getRootPackage().getPackage("teste").getTypes(); // direct children, tirar

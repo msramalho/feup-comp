@@ -3,8 +3,8 @@ package main;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
-import worker.WorkerFactory;
 import util.Logger;
+import worker.WorkerFactory;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -21,7 +21,8 @@ public class Configuration {
         public Boolean countFor = false;
         public Boolean countForeach = false;
 
-        Static() { }
+        Static() {
+        }
     }
 
     public class Dynamic {
@@ -29,7 +30,8 @@ public class Configuration {
         public boolean possibleTernary = false;
         public boolean classInheritance = false;
 
-        Dynamic() { }
+        Dynamic() {
+        }
     }
 
 
@@ -37,13 +39,15 @@ public class Configuration {
         public String path = "out/";
         public String format = "json";
 
-        Output() { }
+        Output() {
+        }
     }
 
     public class Global {
         public int numberOfThreads = 16;
 
-        public Global() { }
+        public Global() {
+        }
     }
 
 
@@ -53,7 +57,8 @@ public class Configuration {
     Global global = new Global();
     Dynamic dynamic = new Dynamic();
 
-    Configuration() { }
+    Configuration() {
+    }
 
     /**
      * Read a configurations file into an object of Configuration

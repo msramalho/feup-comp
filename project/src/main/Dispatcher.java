@@ -2,21 +2,13 @@ package main;
 
 import spoon.Launcher;
 import spoon.SpoonAPI;
-import spoon.reflect.declaration.CtClass;
-import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtType;
-import spoon.reflect.visitor.filter.TypeFilter;
-import spoon.support.reflect.code.CtForEachImpl;
-import spoon.support.reflect.code.CtForImpl;
-import spoon.support.reflect.code.CtIfImpl;
-import spoon.support.reflect.code.CtWhileImpl;
-import spoon.support.reflect.declaration.CtClassImpl;
-import spoon.support.reflect.declaration.CtMethodImpl;
+import util.Logger;
 import util.Report;
 import worker.WorkerFactory;
-import util.Logger;
 
+import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -35,21 +27,24 @@ public class Dispatcher implements Runnable {
     SpoonAPI spoon;
     ArrayList<Future<Report>> results = new ArrayList<>();
 
-    public Dispatcher(String args[]) throws NonExistentFileException {
-        if (args.length == 0 || !Files.exists(Paths.get(args[0])))
-            throw new NonExistentFileException();
+    public Dispatcher(String targetFolder) throws FileNotFoundException {
+        this(targetFolder, null);
+    }
+
+    public Dispatcher(String targetFolder, String configFile) throws FileNotFoundException {
+        if (!Files.exists(Paths.get(targetFolder)))
+            throw new FileNotFoundException(targetFolder + " does not exist.");
 
         // save the SPOON target Folder
-        spoonTarget = args[0];
+        spoonTarget = targetFolder;
 
         //if there are 2 arguments load config from JSON file, else use default configuration
-        configuration = (args.length >= 2) ? Configuration.loadConfiguration(args[1]) : new Configuration();
+        configuration = configFile != null ? Configuration.loadConfiguration(configFile) : new Configuration();
 
         logger.print(configuration.toString());
 
         // initialize the threadpool according to the configuration
         threadPool = Executors.newFixedThreadPool(configuration.global.numberOfThreads);
-
     }
 
     /**
@@ -61,9 +56,10 @@ public class Dispatcher implements Runnable {
             spoon.addInputResource(spoonTarget);
             spoon.buildModel();
         } catch (spoon.compiler.ModelBuildingException e) {
-            logger.print("Failed to build spoon model. Possible causes:\nFile makes include of non existent classes. Use the parent folder as program argument to fix.");
+            e.printStackTrace();
+            logger.print("Failed to build spoon model. " + e.getMessage());
         } catch (spoon.SpoonException e) {
-            logger.print("Failed to build spoon model. Possible causes:\nThe given path (" + spoonTarget + ") does not exist.");
+            logger.print("Failed to build spoon model. " + e.getMessage());
         }
     }
 
@@ -72,15 +68,12 @@ public class Dispatcher implements Runnable {
      */
     @Override
     public void run() {
-        // get a list of the features
         final List<WorkerFactory> workerFactories = configuration.getActiveDynamicFeatures();
 
         Collection<CtPackage> packages = spoon.getModel().getAllPackages();
         for (CtPackage ctPackage : packages) {
             handlePackage(workerFactories, ctPackage);
         }
-        //        ClassScanner nodeManager = new ClassScanner(threadPool, workerFactories, spoon.getModel().getRootPackage());
-        //        nodeManager.run();
     }
 
     private void handlePackage(List<WorkerFactory> workerFactories, CtPackage ctPackage) {
@@ -111,7 +104,7 @@ public class Dispatcher implements Runnable {
      *
      * @return the format in which command line arguments should be given
      */
-    public static String getUsage() {
+    static String getUsage() {
         return "<filename|foldername> [<userSettings.json>]";
     }
 }

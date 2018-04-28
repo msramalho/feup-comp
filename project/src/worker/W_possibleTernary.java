@@ -41,6 +41,7 @@ public class W_possibleTernary extends Worker {
 
     /**
      * Class used to consume the CtElement siblings of the declaration element
+     *
      * @see CtConsumer for more information
      */
     private class PatternDetector implements CtConsumer {
@@ -60,7 +61,7 @@ public class W_possibleTernary extends Worker {
             }
         }
 
-        ReturnGson returnGson = new ReturnGson(false,null, null);
+        ReturnGson returnGson = new ReturnGson(false, null, null);
 
         private CtVariable declaredVar;
 
@@ -70,7 +71,7 @@ public class W_possibleTernary extends Worker {
 
         @Override
         public void accept(Object obj) {
-            if (! (obj instanceof CtIfImpl))
+            if (!(obj instanceof CtIfImpl))
                 return;
 
             CtBlockImpl ifTrue = ((CtIfImpl) obj).getThenStatement();
@@ -81,11 +82,11 @@ public class W_possibleTernary extends Worker {
                 return;
 
             if (isDeclareStmt(ifTrue) && isDeclareStmt(ifFalse))
-                    returnGson = new ReturnGson(
-                            true,
-                            declaredVar.getPosition().toString(),
-                            ((CtIfImpl) obj).getPosition().toString()
-                    );
+                returnGson = new ReturnGson(
+                        true,
+                        declaredVar.getPosition().toString(),
+                        ((CtIfImpl) obj).getPosition().toString()
+                );
         }
 
         /**
@@ -101,7 +102,7 @@ public class W_possibleTernary extends Worker {
                 return false;
 
             CtExpression stmt = ((CtAssignmentImpl) statements.get(0)).getAssigned();
-            if (! (stmt instanceof CtVariableWriteImpl))
+            if (!(stmt instanceof CtVariableWriteImpl))
                 return false;
 
             CtVariable variable = ((CtVariableWriteImpl) stmt).getVariable().getDeclaration();

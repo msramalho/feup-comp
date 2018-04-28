@@ -8,7 +8,7 @@ import java.util.concurrent.Callable;
 
 /**
  * Class from which the Workers should inherit
- *
+ * <p>
  * TODO
  * -> Todos os Workers devem ter uma interface comum que reporta resultados dinâmicos e estáticos do nó respetivo,
  * returna num Future de classe resultados.
@@ -44,7 +44,9 @@ public abstract class Worker<C> implements Callable<C> { // running call on Exec
      * @param c the CtElement to test against the Filter
      * @return true if there is a match
      */
-    public boolean matches(CtElement c) { return filter.matches(c); }
+    public boolean matches(CtElement c) {
+        return filter.matches(c);
+    }
     // TODO check unchecked method call, probably object should be bounded
 
 }

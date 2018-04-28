@@ -1,17 +1,17 @@
 {
-	"static": {
-		"countFor": false,
-		"countForeach": false
-	},
-	"output": {
-		"path": "outFolder/out/",
-		"format": "json"
-	},
-	"global": {
-		"numberOfThreads": 32
-	},
-	"dynamic": {
-		"innerLoops": true,
-		"possibleTernary": true
-	}
+  "static": {
+    "countFor": false,
+    "countForeach": false
+  },
+  "output": {
+    "path": "outFolder/out/",
+    "format": "json"
+  },
+  "global": {
+    "numberOfThreads": 32
+  },
+  "dynamic": {
+    "innerLoops": true,
+    "possibleTernary": true
+  }
 }
