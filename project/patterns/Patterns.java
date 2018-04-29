@@ -14,4 +14,8 @@ public class Patterns {
             _any();
         }
     }
+
+    public void testIterator(){
+        if(_any());
+    }
 }

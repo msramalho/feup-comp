@@ -12,6 +12,7 @@
   },
   "dynamic": {
     "innerLoops": true,
-    "possibleTernary": true
+    "possibleTernary": true,
+    "testIterator": true
   }
 }

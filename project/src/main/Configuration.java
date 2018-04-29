@@ -29,6 +29,7 @@ public class Configuration {
         public boolean innerLoops = false;
         public boolean possibleTernary = false;
         public boolean classInheritance = false;
+        public boolean testIterator = false;
 
         Dynamic() {
         }
