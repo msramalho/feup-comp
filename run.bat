@@ -22,4 +22,4 @@ echo "Source code compiled"
 
 :: run Main filename settings
 :: usage: <filename|foldername> [<userSettings.json>]
-java -cp .;gson-2.8.2.jar;./bin/;spoon-core-6.1.0-jar-with-dependencies.jar main.Main "%FILENAME%" "%SETTINGS%"
+java -cp .;gson-2.8.2.jar;./bin/;spoon-core-6.1.0-jar-with-dependencies.jar main.Main %FILENAME% "%SETTINGS%"
