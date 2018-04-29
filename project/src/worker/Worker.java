@@ -16,13 +16,10 @@ import java.util.concurrent.Callable;
  * reportanto a soma dos resutlados deles.d
  */
 public abstract class Worker<C> implements Callable<C> { // running call on ExecutorService returns Future<C>
-    // TODO why not extend CtVisitor? or CtAbstractVisitor, or CtScanner
-    // TODO  additionally, all interfaces compatible with CtVisitor would be pretty useful
     private Filter filter; // the filter that, upon true, should trigger this worker
-    protected Logger logger;
-    private CtElement element;
+    Logger logger;
+    CtElement element;
 
-    // TODO should receive pointer to global ThreadPoolExecutor, to be able to spawn new Worker threads
     public Worker(CtElement element) {
         this.element = element;
         this.logger = new Logger(this);
