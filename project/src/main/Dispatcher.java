@@ -1,6 +1,5 @@
 package main;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import spoon.Launcher;
 import spoon.SpoonAPI;
 import spoon.reflect.declaration.CtPackage;
