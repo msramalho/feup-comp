@@ -32,9 +32,10 @@ public class CtIterator extends CtScanner implements Iterator {
 
     /**
      * CtIterator constructor, prepares the iterator from the @root node
+     *
      * @param root the initial node to expand
      */
-    public CtIterator(CtElement root) { deque.add(root); }
+    public CtIterator(CtElement root) { if (root != null) deque.add(root); }
 
     /**
      * prevent scanner from going down the tree, instead save with other CtElement children of the current node
