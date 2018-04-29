@@ -29,8 +29,6 @@ public class ClassScanner extends CtScanner implements Runnable {
     @Override
     protected void enter(CtElement e) {
         super.enter(e);
-        logger.print(e.getPosition().toString());
-
         // Update current node
         current = current.createChild(e);
 
