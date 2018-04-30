@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FactoryManager {
-    Map<String, WorkerFactory> workerFactories;
+    private Map<String, WorkerFactory> workerFactories;
 
     public FactoryManager() {
         this.workerFactories = new HashMap<>();

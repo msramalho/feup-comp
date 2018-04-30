@@ -33,21 +33,26 @@ public class Main implements Runnable {
         this.configFile = configFile;
         this.patternsFile = patternsFile;
 
-        configuration = configFile != null ? Configuration.loadConfiguration(configFile) : null;
+        configuration = initializeConfiguration(configFile);
         dispatcher = initializeDispatcher(targetFile);
 
         factoryManager = initializeFactoryManager(patternsFile);
         dispatcher.setFactoryManager(factoryManager);
     }
 
-    private Dispatcher initializeDispatcher(String targetFile) {
-        Dispatcher dispatcher;
-        if (configuration != null) {
-            dispatcher = new Dispatcher(configuration);
+    private Configuration initializeConfiguration(String configFile) {
+        Configuration configuration;
+        if (configFile == null) {
+            configuration = new Configuration();
         } else {
-            dispatcher = new Dispatcher();
+            configuration = Configuration.loadConfiguration(configFile);
         }
 
+        return configuration;
+    }
+
+    private Dispatcher initializeDispatcher(String targetFile) {
+        dispatcher = new Dispatcher(configuration);
         processTargetFile(targetFile);
 
         return dispatcher;
@@ -72,6 +77,9 @@ public class Main implements Runnable {
     }
 
     private void addStaticWorkerFactories(FactoryManager manager, Configuration configuration) {
+        if (configuration == null)
+            return;
+
         List<StaticWorkerFactory> factories = configuration.getActiveDynamicFeatures();
         for (WorkerFactory factory : factories) {
             manager.addWorkerFactory(factory);

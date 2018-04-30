@@ -26,12 +26,7 @@ public class StaticWorkerFactory implements WorkerFactory {
         filterWorker = (Worker) workerClass.getDeclaredConstructor(CtElement.class).newInstance((Object) null);
     }
 
-    /**
-     * Test if a given CtElement should be handled by the Workers this factory produces
-     *
-     * @param c the CtElement to test against the filterWorker
-     * @return true if there is a match
-     */
+    @Override
     public boolean matches(CtElement c) {
         return filterWorker.matches(c);
     }
@@ -41,6 +36,7 @@ public class StaticWorkerFactory implements WorkerFactory {
         return filterWorker.getType();
     }
 
+    @Override
     public Worker makeWorker(CtElement c) {
         try {
             return (Worker) workerClass.getDeclaredConstructor(CtElement.class).newInstance(c);

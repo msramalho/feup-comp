@@ -2,6 +2,7 @@ package worker;
 
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.Filter;
+import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.reflect.code.CtForEachImpl;
 import util.Report;
@@ -14,7 +15,7 @@ public class W_innerLoops extends Worker {
     }
 
     @Override
-    protected Filter setFilter() {
+    protected AbstractFilter setFilter() {
         return new TypeFilter(CtForEachImpl.class);
     }
 

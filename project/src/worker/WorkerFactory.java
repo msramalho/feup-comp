@@ -17,12 +17,12 @@ public interface WorkerFactory {
      * @param ctElement the CtElement to test against the filterWorker
      * @return true if there is a match
      */
-    public boolean matches(CtElement ctElement);
+    boolean matches(CtElement ctElement);
 
 
     /**
      * Getter for the Class type of CtElement that triggers this factory's workers.
      * @return The Class that triggers the creation of a Worker.
      */
-    public Class<? extends CtElement> getType();
+    Class<? extends CtElement> getType();
 }

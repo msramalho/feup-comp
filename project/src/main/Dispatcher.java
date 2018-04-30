@@ -27,9 +27,6 @@ public class Dispatcher implements Runnable {
 
     FactoryManager factoryManager;
 
-    public Dispatcher() {
-        this(new Configuration());
-    }
 
     public Dispatcher(Configuration config) {
         if (config == null)
