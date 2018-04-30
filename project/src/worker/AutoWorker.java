@@ -1,6 +1,7 @@
 package worker;
 
 import spoon.reflect.declaration.CtElement;
+import util.CtIterator;
 import util.Report;
 
 public abstract class AutoWorker extends Worker {

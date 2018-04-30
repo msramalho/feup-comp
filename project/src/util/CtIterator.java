@@ -1,4 +1,4 @@
-package worker;
+package util;
 
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.CtScanner;
