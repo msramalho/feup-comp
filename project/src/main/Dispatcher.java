@@ -6,14 +6,13 @@ import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtType;
 import util.Logger;
 import util.Report;
+import worker.StaticWorkerFactory;
 import worker.WorkerFactory;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,6 +24,8 @@ public class Dispatcher implements Runnable {
     ExecutorService threadPool;
     SpoonAPI spoon;
     ArrayList<Future<Report>> results;
+
+    FactoryManager factoryManager;
 
     public Dispatcher() {
         this(new Configuration());
@@ -40,6 +41,10 @@ public class Dispatcher implements Runnable {
         threadPool = Executors.newFixedThreadPool(configuration.global.numberOfThreads);
 
         logger.print(configuration.toString());
+    }
+
+    public void setFactoryManager(FactoryManager factoryManager) {
+        this.factoryManager = factoryManager;
     }
 
     /**
@@ -61,25 +66,25 @@ public class Dispatcher implements Runnable {
         }
     }
 
+
+
     /**
      * Code that performs high level task delegation from the spoon model
      */
     @Override
     public void run() {
-        final List<WorkerFactory> workerFactories = configuration.getActiveDynamicFeatures();
-
         Collection<CtPackage> packages = spoon.getModel().getAllPackages();
         for (CtPackage ctPackage : packages) {
-            handlePackage(workerFactories, ctPackage);
+            handlePackage(ctPackage);
         }
     }
 
-    private void handlePackage(List<WorkerFactory> workerFactories, CtPackage ctPackage) {
+    private void handlePackage(CtPackage ctPackage) {
         logger.print("Package: " + ctPackage.getQualifiedName());
 
         for (CtType ctType : ctPackage.getTypes()) {
             // TODO do something with Future's result
-            threadPool.submit(new ClassScanner(threadPool, workerFactories, ctType));
+            threadPool.submit(new ClassScanner(threadPool, factoryManager, ctType));
         }
     }
 

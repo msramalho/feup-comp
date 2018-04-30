@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 import util.Logger;
-import worker.WorkerFactory;
+import worker.StaticWorkerFactory;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -12,6 +12,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Configuration {
     public transient static Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -73,20 +74,20 @@ public class Configuration {
 
 
     /**
-     * Read the properties of this.dynamic and, for each true property, add a new WorkerFactory(name, worker, filter) to the result
+     * Read the properties of this.dynamic and, for each true property, add a new StaticWorkerFactory(name, worker, filter) to the result
      *
      * @return a list of features to analyze, along with the respective Worker to create (which has the spoon filter)
      */
-    public ArrayList<WorkerFactory> getActiveDynamicFeatures() {
-        ArrayList<WorkerFactory> workerFactories = new ArrayList<>();
+    public List<StaticWorkerFactory> getActiveDynamicFeatures() {
+        ArrayList<StaticWorkerFactory> workerFactories = new ArrayList<>();
         for (Field f : Dynamic.class.getDeclaredFields()) {
             try {
                 Object dynamicField = f.get(dynamic);
                 if (dynamicField != null && (dynamicField instanceof Boolean) && ((Boolean) dynamicField).booleanValue()) // the user wants this feature
-                    workerFactories.add(new WorkerFactory(f.getName()));
+                    workerFactories.add(new StaticWorkerFactory(f.getName()));
 
             } catch (IllegalAccessException | ClassNotFoundException | NoSuchMethodException | InstantiationException | InvocationTargetException e) {
-                logger.print(String.format("Unable to find the worker matching %s. Should be: %s", f.getName(), WorkerFactory.getWorkerName(f.getName())));
+                logger.print(String.format("Unable to find the worker matching %s. Should be: %s", f.getName(), StaticWorkerFactory.getWorkerName(f.getName())));
                 e.printStackTrace();
             }
         }

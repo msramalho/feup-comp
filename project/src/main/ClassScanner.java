@@ -3,24 +3,25 @@ package main;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.CtScanner;
 import util.Logger;
+import worker.StaticWorkerFactory;
+import worker.Worker;
 import worker.WorkerFactory;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
 public class ClassScanner extends CtScanner implements Runnable {
 
     private ExecutorService executorService;
-    private List<WorkerFactory> workerFactories;
+    private FactoryManager factoryManager;
 
     private Node root;
     private Node current;
 
-    private Logger logger = new Logger(this);
-
-    ClassScanner(ExecutorService executorService, List<WorkerFactory> workerFactories, CtElement rootElement) {
+    ClassScanner(ExecutorService executorService, FactoryManager factoryManager, CtElement rootElement) {
         this.executorService = executorService;
-        this.workerFactories = workerFactories;
+        this.factoryManager = factoryManager;
 
         this.root = new Node(rootElement, null);
         this.current = root;
@@ -32,12 +33,8 @@ public class ClassScanner extends CtScanner implements Runnable {
         // Update current node
         current = current.createChild(e);
 
-        // Spawn future tasks
-        for (WorkerFactory factory : workerFactories) {
-            if (factory.matches(e)) {
-                current.addFuture(executorService.submit(factory.getWorker(e)));
-            }
-        }
+        // Spawn new tasks
+        current.addFuture(executorService.submit(factoryManager.makeWorker(e)));
     }
 
     @Override
