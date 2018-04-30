@@ -2,6 +2,7 @@ package worker;
 
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.Filter;
+import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.reflect.code.CtIfImpl;
 
@@ -12,7 +13,7 @@ public class W_testIterator extends AutoWorker {
     }
 
     @Override
-    protected Filter setFilter() {
+    protected AbstractFilter setFilter() {
         return new TypeFilter<>(CtIfImpl.class);
     }
 }

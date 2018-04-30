@@ -1,6 +1,7 @@
 package worker;
 
 import spoon.reflect.declaration.CtElement;
+import util.CtIterator;
 import util.Report;
 
 public abstract class AutoWorker extends Worker {
@@ -17,7 +18,7 @@ public abstract class AutoWorker extends Worker {
     @Override
     public Object call() throws Exception {
         logger.print("called auto worker");
-        CtIterator source = new CtIterator(element);
+        CtIterator source = new CtIterator(rootNode);
         CtIterator pattern = new CtIterator(patternElement);
 
         //TODO: this is an example of how the Tree matching algorithm would work with CtIterators

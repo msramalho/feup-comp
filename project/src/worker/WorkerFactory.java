@@ -2,58 +2,27 @@ package worker;
 
 import spoon.reflect.declaration.CtElement;
 
-import java.lang.reflect.InvocationTargetException;
+public interface WorkerFactory {
 
-public class WorkerFactory {
-    String name;
-    Class<?> workerClass;
-    private Worker filterWorker;
 
     /**
-     * Receives the name of the feature and the configuration and loads the proper worker, through its super constructor that receives only a Configuration object
-     *
-     * @param name of the feature
-     * @throws ClassNotFoundException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
+     * Creates a new instance of a Worker, with the given ctElement as root node.
+     * @return A Worker instance.
      */
-    public WorkerFactory(String name) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
-        this.name = name;
-        workerClass = Class.forName(getWorkerName(name));
-        //test the creation of a new worker, and also keep it for the matches function
-        filterWorker = (Worker) workerClass.getDeclaredConstructor(CtElement.class).newInstance((Object) null);
-    }
+    Worker makeWorker(CtElement ctElement);
 
     /**
      * Test if a given CtElement should be handled by the Workers this factory produces
      *
-     * @param c the CtElement to test against the filterWorker
+     * @param ctElement the CtElement to test against the filterWorker
      * @return true if there is a match
      */
-    public boolean matches(CtElement c) {
-        return filterWorker.matches(c);
-    }
-
-    public Worker getWorker(CtElement c) {
-        // TODO: useful for problem c.getFactory().Package().getRootPackage().getPackage("teste").getTypes(); // direct children, tirar
-        try {
-            return (Worker) workerClass.getDeclaredConstructor(CtElement.class).newInstance(c);
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return null;//TODO: what kind of runnable/callable should be returned so that the submit (that call this) does not crash
-    }
+    public boolean matches(CtElement ctElement);
 
 
     /**
-     * converts the name of a feature into the expected name of the corresponding worker
-     *
-     * @param name name of the feature
-     * @return the package path into the Worker
+     * Getter for the Class type of CtElement that triggers this factory's workers.
+     * @return The Class that triggers the creation of a Worker.
      */
-    public static String getWorkerName(String name) {
-        return "worker.W_" + name;
-    }
+    public Class<? extends CtElement> getType();
 }
