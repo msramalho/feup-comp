@@ -24,5 +24,5 @@ public interface WorkerFactory {
      * Getter for the Class type of CtElement that triggers this factory's workers.
      * @return The Class that triggers the creation of a Worker.
      */
-    Class<? extends CtElement> getType();
+    Class<?> getType();
 }

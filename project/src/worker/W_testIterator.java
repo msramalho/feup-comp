@@ -1,15 +1,14 @@
 package worker;
 
 import spoon.reflect.declaration.CtElement;
-import spoon.reflect.visitor.Filter;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.reflect.code.CtIfImpl;
 
-public class W_testIterator extends AutoWorker {
+public class W_testIterator extends DynamicWorker {
 
     public W_testIterator(CtElement element) {
-        super(element);
+        super(element, element); // just for testing purposes!!
     }
 
     @Override

@@ -23,7 +23,7 @@ public class PatternDefinitions {
     }
 
     private void processPatternDefinitions(String targetDefinitions) {
-//        SnippetCompilationHelper.compileExpression()
+//        SnippetCompilationHelper.compileStatement()
     }
 
     public Map<Class<?>, CtElement> getPatterns() {

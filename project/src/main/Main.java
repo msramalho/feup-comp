@@ -1,19 +1,23 @@
 package main;
 
+import pattern_matcher.PatternDefinitions;
+import spoon.reflect.declaration.CtElement;
+import worker.DynamicWorkerFactory;
 import worker.StaticWorkerFactory;
 import worker.WorkerFactory;
 
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Map;
 
 public class Main implements Runnable {
-    Dispatcher dispatcher;
-    Configuration configuration;
-    FactoryManager factoryManager;
+    private Dispatcher dispatcher;
+    private Configuration configuration;
+    private FactoryManager factoryManager;
 
-    String targetFile;
-    String configFile;
-    String patternsFile;
+    private String targetFile;
+    private String configFile;
+    private String patternsFile;
 
     public static void main(String[] args) {
         if (args.length < 1 || args.length > 2) {
@@ -87,7 +91,17 @@ public class Main implements Runnable {
     }
 
     private void addDynamicWorkerFactories(FactoryManager manager, String patternsFile) {
-        // TODO
+        PatternDefinitions patternDefinitions;
+        try {
+            patternDefinitions = new PatternDefinitions(patternsFile);
+        } catch (FileNotFoundException e) {
+            System.out.println("Patterns file not found: " + e.getMessage());
+            return;
+        }
+
+        for (Map.Entry<Class<?>, CtElement> entry : patternDefinitions.getPatterns().entrySet()) {
+            manager.addWorkerFactory(new DynamicWorkerFactory(entry.getKey(), entry.getValue()));
+        }
     }
 
     @Override

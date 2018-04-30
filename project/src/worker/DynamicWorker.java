@@ -1,18 +1,21 @@
 package worker;
 
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.visitor.filter.AbstractFilter;
 import util.CtIterator;
 import util.Report;
 
-public abstract class AutoWorker extends Worker {
+public class DynamicWorker extends Worker {
     protected CtElement patternElement;
 
-    public AutoWorker(CtElement element) {
-        super(element);
+    public DynamicWorker(CtElement patternElement, CtElement rootNode) {
+        super(rootNode);
+        this.patternElement = patternElement;
     }
 
-    public void setPatternElement(CtElement patternElement) {
-        this.patternElement = patternElement;
+    @Override
+    protected AbstractFilter setFilter() {
+        return null;
     }
 
     @Override

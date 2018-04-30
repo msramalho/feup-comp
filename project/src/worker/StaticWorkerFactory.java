@@ -32,7 +32,7 @@ public class StaticWorkerFactory implements WorkerFactory {
     }
 
     @Override
-    public Class<? extends CtElement> getType() {
+    public Class<?> getType() {
         return filterWorker.getType();
     }
 
