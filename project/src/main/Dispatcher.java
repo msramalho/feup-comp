@@ -81,6 +81,7 @@ public class Dispatcher implements Runnable {
 
         for (CtType ctType : ctPackage.getTypes()) {
             // TODO do something with Future's result
+            logger.print("\tType: " + ctType.getSimpleName());
             threadPool.submit(new ClassScanner(threadPool, factoryManager, ctType));
         }
     }

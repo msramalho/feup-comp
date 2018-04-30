@@ -25,6 +25,8 @@ public class ClassScanner extends CtScanner implements Runnable {
 
         this.root = new Node(rootElement, null);
         this.current = root;
+
+        scan(rootElement);
     }
 
     @Override
@@ -34,7 +36,12 @@ public class ClassScanner extends CtScanner implements Runnable {
         current = current.createChild(e);
 
         // Spawn new tasks
-        current.addFuture(executorService.submit(factoryManager.makeWorker(e)));
+        WorkerFactory factory = factoryManager.getWorkerFactory(e);
+        if (factory != null) {
+            current.addFuture(executorService.submit(factory.makeWorker(e)));
+        }
+
+        System.out.println("entering " + e.getPosition());
     }
 
     @Override
@@ -42,6 +49,7 @@ public class ClassScanner extends CtScanner implements Runnable {
         super.exit(e);
 
         current = current.getParent();
+        System.out.println("exiting " + e.getPosition());
     }
 
     @Override

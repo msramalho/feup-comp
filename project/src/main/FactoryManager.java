@@ -43,7 +43,7 @@ public class FactoryManager {
         return null;
     }
 
-    public Worker makeWorker(CtElement elem) {
+    public Worker makeWorker(CtElement elem) throws NullPointerException {
         return getWorkerFactory(elem).makeWorker(elem);
     }
 
