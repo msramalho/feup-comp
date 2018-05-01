@@ -17,7 +17,8 @@ public class DynamicWorker extends Worker {
     @Override
     protected AbstractFilter setFilter() {
         CtIterator iterator = new CtIterator(patternElement);
-        if (iterator.hasNext()) return new TypeFilter(iterator.next().getClass());
+        //TODO: get the first valid element from the CtBlock -> this approach does not work
+        if (iterator.hasNext() && iterator.next() != null && iterator.hasNext()) return new TypeFilter(iterator.next().getClass());
         return null;
     }
 
