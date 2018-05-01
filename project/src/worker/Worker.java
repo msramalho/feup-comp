@@ -1,5 +1,6 @@
 package worker;
 
+import report.Report;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.Filter;
 import spoon.reflect.visitor.filter.AbstractFilter;
@@ -13,13 +14,14 @@ import java.util.concurrent.Callable;
  */
 public abstract class Worker implements Callable { // running call on ExecutorService returns Future<C>
     private AbstractFilter filter; // filter to match this worker with the CtElement which triggers it
-    Logger logger;
+    Logger logger = new Logger(this); // TODO: delete for production
     CtElement rootNode;
+    String patternName;
 
-    public Worker(CtElement rootNode) {
+    public Worker(CtElement rootNode, String patternName) {
         this.rootNode = rootNode;
+        this.patternName = patternName;
         this.filter = setFilter();
-        this.logger = new Logger(this); // TO DELETE, or guarantee access to Logger file thread safe
     }
 
     protected CtElement getCtElement() {
@@ -31,9 +33,7 @@ public abstract class Worker implements Callable { // running call on ExecutorSe
      */
     protected abstract AbstractFilter setFilter();
 
-    Class<? extends CtElement> getType() {
-        return filter.getType();
-    } // TODO check template parameter bound
+    Class<? extends CtElement> getType() { return filter.getType(); } // TODO check template parameter bound
 
     /**
      * method that uses the filter to test a given CtElement
@@ -41,8 +41,6 @@ public abstract class Worker implements Callable { // running call on ExecutorSe
      * @param c the CtElement to test against the Filter
      * @return true if there is a match
      */
-    boolean matches(CtElement c) {
-        return filter.matches(c);
-    }
+    boolean matches(CtElement c) { return filter.matches(c); }
 
 }

@@ -8,8 +8,8 @@ import spoon.support.reflect.code.CtForEachImpl;
 
 public class W_innerLoops extends Worker {
 
-    public W_innerLoops(CtElement rootNode) {
-        super(rootNode);
+    public W_innerLoops(CtElement rootNode, String patternName) {
+        super(rootNode, patternName);
         logger.print("proof of concept constructor");
     }
 

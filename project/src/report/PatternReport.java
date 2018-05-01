@@ -1,43 +1,26 @@
 package report;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 public class PatternReport {
-    String patternName = "TODO";
-    ArrayList<WorkerReport> reports = null;
-    ArrayList<Future> futures = new ArrayList<>();
+    String patternName;
+    ArrayList<WorkerReport> reports;
 
     public PatternReport(String patternName) { this.patternName = patternName;}
 
-    public void addFuture(Future future) { futures.add(future); }
+    public void addReport(WorkerReport report) { reports.add(report); }
 
-    private void loadReports() {
-        if (reports != null) return; // singleton implementation
+    // Data handling functions for the report
 
-        reports = new ArrayList<>();
-        for (Future f : futures) {
-            try {
-                reports.add((WorkerReport) f.get());
-            } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
+    // TODO: maybe refactor this into a new class
     public Integer sum() {
-        loadReports();
         Integer sum = 0;
         for (WorkerReport wReport : reports)
             sum += wReport.getValue();
         return sum;
     }
 
-    public Integer count() {
-        loadReports();
-        return reports.size();
-    }
+    public Integer count() { return reports.size(); }
 
     //TODO: more statistics methods: Sum, Count, Avg, Std, Mean, ..........
 }

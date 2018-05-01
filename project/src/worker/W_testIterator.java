@@ -7,8 +7,8 @@ import spoon.support.reflect.code.CtIfImpl;
 
 public class W_testIterator extends DynamicWorker {
 
-    public W_testIterator(CtElement element) {
-        super(element, element); // just for testing purposes!!
+    public W_testIterator(CtElement element, String patternName) {
+        super(element, element, patternName); // just for testing purposes!!
     }
 
     @Override

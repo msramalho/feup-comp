@@ -12,12 +12,12 @@ public class DynamicWorkerFactory extends WorkerFactory {
         super("TODO "); // TODO: get pattern name from the method
         this.type = type;
         this.patternElement = patternElement;
-        this.filterWorker = new DynamicWorker(patternElement, null);
+        this.filterWorker = new DynamicWorker(patternElement, null, null);
     }
 
     @Override
     public Worker makeWorker(CtElement ctElement) {
-        return new DynamicWorker(patternElement, ctElement);
+        return new DynamicWorker(patternElement, ctElement, patternName);
     }
 
     @Override

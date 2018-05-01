@@ -8,8 +8,8 @@ import util.CtIterator;
 public class DynamicWorker extends Worker {
     protected CtElement patternElement;
 
-    public DynamicWorker(CtElement patternElement, CtElement rootNode) {
-        super(rootNode);
+    public DynamicWorker(CtElement patternElement, CtElement rootNode, String patternName) {
+        super(rootNode, patternName);
         this.patternElement = patternElement;
     }
 
