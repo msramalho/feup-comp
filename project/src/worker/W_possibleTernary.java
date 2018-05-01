@@ -1,6 +1,7 @@
 package worker;
 
 import com.google.gson.Gson;
+import org.apache.commons.lang3.RandomUtils;
 import report.WorkerReport;
 import spoon.reflect.code.CtExpression;
 import spoon.reflect.declaration.CtElement;
@@ -36,8 +37,8 @@ public class W_possibleTernary extends Worker {
         siblings.apply(element, myConsumer);
 
         //return new report(myConsumer.getGsonResult());
-        logger.print(myConsumer.getGsonResult()); //TODO - delete, just for testing
-        return new WorkerReport(1, element);
+        // logger.print(myConsumer.getGsonResult()); //TODO - delete, just for testing
+        return new WorkerReport(RandomUtils.nextInt(10, 20));
     }
 
     /**

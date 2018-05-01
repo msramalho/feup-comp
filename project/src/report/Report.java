@@ -2,16 +2,18 @@ package report;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import worker.WorkerFactory;
+import util.HashMapMerger;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Report {
-    private ArrayList<PatternReport> reports = new ArrayList<>();
-    private HashMap<String, Integer> results = null; // hashmap of PatternName -> PatternResult
+    private HashMapMerger reports = new HashMapMerger();
+
+    /**
+     * Empty constructor for the Report class
+     */
+    private Report() { }
 
     /**
      * Create a report by passing a list of {@link PatternReport}
@@ -29,30 +31,26 @@ public class Report {
      * @param patternReport the {@link PatternReport} to add
      */
     private void addPatternReport(PatternReport patternReport) {
-        reports.add(patternReport);
-        results = null; // to force restart the singleton
+        reports.put(patternReport.patternName, patternReport);
     }
 
-    private HashMap<String, Integer> getResults() {
-        if (results != null) return results; // singleton implementation
-
-        results = new HashMap<>();
-        //TODO: apply desired operation here: sum, count, avg, ...or list of operations
-        for (PatternReport report : reports)
-            results.put(report.patternName, report.sum());
-
-        return results;
+    public Report merge(Report other) {
+        Report merged = new Report();
+        merged.reports.putAll(this.reports); // this beauty works due to HashMapMerger
+        merged.reports.putAll(other.reports);
+        return merged;
     }
 
     public JsonObject toJson() {
         JsonObject json = new JsonObject();
 
-        for (Map.Entry<String, Integer> res : getResults().entrySet())
-            json.addProperty(res.getKey(), res.getValue());
+        for (Map.Entry<String, PatternReport> entry : reports.entrySet())
+            json.addProperty(entry.getKey(), entry.getValue().getValue());
 
         return json;
     }
 
     @Override
     public String toString() { return new Gson().toJson(toJson()); }
+
 }
