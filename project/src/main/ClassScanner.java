@@ -39,8 +39,10 @@ public class ClassScanner extends CtScanner implements Callable {
 
         // Spawn new tasks
         WorkerFactory factory = factoryManager.getWorkerFactory(e);
-        if (factory != null) {// TODO: decide if Node is needed - this was design to perpetuate node with report
+        if (factory != null) {
+            // TODO: decide if Node is needed - this was designed to perpetuate node with report
             factory.addFuture(current.addFuture(executorService.submit(factory.makeWorker(e))));
+        }
 
         System.out.println("entering " + e.getPosition());
     }
@@ -57,7 +59,7 @@ public class ClassScanner extends CtScanner implements Callable {
     public Object call() throws Exception {
         scan(this.root.getCtElement());
         Report report = new Report();
-        for (WorkerFactory factory : workerFactories)
+        for (WorkerFactory factory : factoryManager.getWorkerFactories().values())
             report.addPatternReport(factory.getPatternReport());
         return report;
     }
