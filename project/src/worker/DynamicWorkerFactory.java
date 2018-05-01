@@ -1,18 +1,29 @@
 package worker;
 
+import spoon.reflect.code.CtBlock;
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtMethod;
 
 public class DynamicWorkerFactory extends WorkerFactory {
 
     private Class<?> type;
-    private CtElement patternElement;
+    private CtBlock patternElement;
     private DynamicWorker filterWorker;
 
-    public DynamicWorkerFactory(Class<?> type, CtElement patternElement) {
-        super("TODO "); // TODO: get pattern name from the method
+    public DynamicWorkerFactory(Class<?> type, CtBlock patternElement) {
+        super(getPatternName(patternElement));
         this.type = type;
         this.patternElement = patternElement;
         this.filterWorker = new DynamicWorker(patternElement, null, null);
+    }
+
+    private static String getPatternName(CtBlock block) {
+        CtElement parent = block.getParent();
+
+        if (parent instanceof CtMethod)
+            return ((CtMethod) parent).getSimpleName();
+        else
+            return "Unknown Method";
     }
 
     @Override

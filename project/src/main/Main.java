@@ -1,12 +1,14 @@
 package main;
 
 import pattern_matcher.PatternDefinitions;
+import spoon.reflect.code.CtBlock;
 import spoon.reflect.declaration.CtElement;
 import worker.DynamicWorkerFactory;
 import worker.StaticWorkerFactory;
 import worker.WorkerFactory;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -93,8 +95,10 @@ public class Main implements Runnable {
             return;
         }
 
-        for (Map.Entry<Class<?>, CtElement> entry : patternDefinitions.getPatterns().entrySet()) {
-            manager.addWorkerFactory(new DynamicWorkerFactory(entry.getKey(), entry.getValue()));
+        for (Map.Entry<Class<?>, ArrayList<CtBlock>> entry : patternDefinitions.getPatterns().entrySet()) {
+            for (CtBlock block : entry.getValue()) {
+                manager.addWorkerFactory(new DynamicWorkerFactory(entry.getKey(), block));
+            }
         }
     }
 
