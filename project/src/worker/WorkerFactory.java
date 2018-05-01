@@ -8,6 +8,10 @@ import java.util.concurrent.Future;
 public abstract class WorkerFactory {
     PatternReport report;
 
+    public WorkerFactory(String patternName) {
+        report = new PatternReport(patternName);
+    }
+
     /**
      * Creates a new instance of a Worker, with the given ctElement as root node.
      *

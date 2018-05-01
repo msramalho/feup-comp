@@ -5,7 +5,6 @@ import spoon.reflect.declaration.CtElement;
 import java.lang.reflect.InvocationTargetException;
 
 public class StaticWorkerFactory extends WorkerFactory {
-    String name;
     Class<?> workerClass;
     private Worker filterWorker;
 
@@ -19,9 +18,9 @@ public class StaticWorkerFactory extends WorkerFactory {
      * @throws NoSuchMethodException
      * @throws InvocationTargetException
      */
-    public StaticWorkerFactory(String name) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
-        this.name = name;
-        workerClass = Class.forName(getWorkerName(name));
+    public StaticWorkerFactory(String patternName) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+        super(patternName);
+        workerClass = Class.forName(getWorkerName(patternName));
         //test the creation of a new worker, and also keep it for the matches function
         filterWorker = (Worker) workerClass.getDeclaredConstructor(CtElement.class).newInstance((Object) null);
     }
