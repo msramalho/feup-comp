@@ -72,9 +72,9 @@ public class Dispatcher implements Runnable {
 
     private void handlePackage(CtPackage ctPackage) {
         logger.print("Package: " + ctPackage.getQualifiedName());
+        // TODO improve what is to be done with the report
         Future report = null;
         for (CtType ctType : ctPackage.getTypes()) {
-            // TODO do something with Future's result
             logger.print("\tType: " + ctType.getSimpleName());
             report = threadPool.submit(new ClassScanner(threadPool, factoryManager, ctType));
         }

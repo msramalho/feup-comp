@@ -5,7 +5,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class PatternReport {
-    //TODO: get pattername from worker factory
     String patternName = "TODO";
     ArrayList<WorkerReport> reports = null;
     ArrayList<Future> futures = new ArrayList<>();
