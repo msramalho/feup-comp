@@ -27,17 +27,11 @@ public class DynamicWorkerFactory extends WorkerFactory {
     }
 
     @Override
-    public Worker makeWorker(CtElement ctElement) {
-        return new DynamicWorker(patternElement, ctElement, patternName);
-    }
+    public Worker makeWorker(CtElement ctElement) { return new DynamicWorker(patternElement, ctElement, patternName); }
 
     @Override
-    public boolean matches(CtElement ctElement) {
-        return filterWorker.matches(ctElement);
-    }
+    public boolean matches(CtElement ctElement) { return filterWorker.matches(ctElement); }
 
     @Override
-    public Class<?> getType() {
-        return type;
-    }
+    public Class<?> getType() { return type; }
 }
