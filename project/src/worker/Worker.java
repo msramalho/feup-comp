@@ -2,30 +2,38 @@ package worker;
 
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.Filter;
+import spoon.reflect.visitor.filter.AbstractFilter;
 import util.Logger;
 
 import java.util.concurrent.Callable;
 
 /**
- * Class from which the Workers should inherit
+ * Class from which the Workers should inherit.
+ * Callable method should return a report of the worker's run.
  */
-public abstract class Worker<C> implements Callable<C> { // running call on ExecutorService returns Future<C>
-    private Filter filter; // the filter that, upon true, should trigger this worker
+public abstract class Worker implements Callable { // running call on ExecutorService returns Future<C>
+    private AbstractFilter filter; // filter to match this worker with the CtElement which triggers it
     Logger logger;
-    CtElement source;
+    CtElement rootNode;
 
-    Worker(CtElement source) {
-        this.source = source;
-        this.logger = new Logger(this);
+    public Worker(CtElement rootNode) {
+        this.rootNode = rootNode;
         this.filter = setFilter();
+        this.logger = new Logger(this); // TO DELETE, or guarantee access to Logger file thread safe
     }
 
-     CtElement getCtElement() { return source; }
+    protected CtElement getCtElement() {
+        return rootNode;
+    }
 
     /**
      * Template method for setting the filter variable, should be called in constructor
      */
-    protected abstract Filter setFilter();
+    protected abstract AbstractFilter setFilter();
+
+    Class<? extends CtElement> getType() {
+        return filter.getType();
+    } // TODO check template parameter bound
 
     /**
      * method that uses the filter to test a given CtElement
@@ -36,6 +44,5 @@ public abstract class Worker<C> implements Callable<C> { // running call on Exec
     boolean matches(CtElement c) {
         return filter.matches(c);
     }
-    // TODO check unchecked method call, probably object should be bounded
 
 }

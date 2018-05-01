@@ -38,7 +38,8 @@ public class CtIterator extends CtScanner implements Iterator {
     public CtIterator(CtElement root) { if (root != null) deque.add(root); }
 
     /**
-     * prevent scanner from going down the tree, instead save with other CtElement children of the current node
+     * Unlike the CtScanner class, scan method of iterator should not expand child nodes,
+     * instead adding them to the current_children deque, to later iterate by command.
      *
      * @param element the next direct child of the current node being expanded
      */

@@ -7,6 +7,7 @@ import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtVariable;
 import spoon.reflect.visitor.Filter;
 import spoon.reflect.visitor.chain.CtConsumer;
+import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.SiblingsFunction;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.reflect.code.*;
@@ -20,7 +21,7 @@ public class W_possibleTernary extends Worker {
     }
 
     @Override
-    protected Filter setFilter() {
+    protected AbstractFilter setFilter() {
         return new TypeFilter(CtLocalVariableImpl.class);
     }
 
@@ -40,7 +41,7 @@ public class W_possibleTernary extends Worker {
     }
 
     /**
-     * Class used to consume the CtElement siblings of the declaration source
+     * Class used to consume the CtElement siblings of the declaration rootNode
      *
      * @see CtConsumer for more information
      */

@@ -21,9 +21,8 @@ public class Dispatcher implements Runnable {
     ExecutorService threadPool;
     SpoonAPI spoon;
 
-    public Dispatcher() {
-        this(new Configuration());
-    }
+    FactoryManager factoryManager;
+
 
     public Dispatcher(Configuration config) {
         if (config == null)
@@ -34,6 +33,10 @@ public class Dispatcher implements Runnable {
         threadPool = Executors.newFixedThreadPool(configuration.global.numberOfThreads);
 
         logger.print(configuration.toString());
+    }
+
+    public void setFactoryManager(FactoryManager factoryManager) {
+        this.factoryManager = factoryManager;
     }
 
     /**
@@ -55,25 +58,26 @@ public class Dispatcher implements Runnable {
         }
     }
 
+
+
     /**
      * Code that performs high level task delegation from the spoon model
      */
     @Override
     public void run() {
-        final List<WorkerFactory> workerFactories = configuration.getActiveDynamicFeatures();
-
         Collection<CtPackage> packages = spoon.getModel().getAllPackages();
         for (CtPackage ctPackage : packages) {
-            handlePackage(workerFactories, ctPackage);
+            handlePackage(ctPackage);
         }
     }
 
-    private void handlePackage(List<WorkerFactory> workerFactories, CtPackage ctPackage) {
+    private void handlePackage(CtPackage ctPackage) {
         logger.print("Package: " + ctPackage.getQualifiedName());
 
         for (CtType ctType : ctPackage.getTypes()) {
             // TODO do something with Future's result
-            threadPool.submit(new ClassScanner(threadPool, workerFactories, ctType));
+            logger.print("\tType: " + ctType.getSimpleName());
+            threadPool.submit(new ClassScanner(threadPool, factoryManager, ctType));
         }
     }
 
