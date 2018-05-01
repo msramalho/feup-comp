@@ -1,13 +1,15 @@
 package pattern_matcher;
 
 
+import spoon.Launcher;
+
 import spoon.reflect.declaration.CtElement;
-import spoon.support.compiler.SnippetCompilationHelper;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PatternDefinitions {
@@ -23,7 +25,16 @@ public class PatternDefinitions {
     }
 
     private void processPatternDefinitions(String targetDefinitions) {
-//        SnippetCompilationHelper.compileStatement()
+
+        Launcher launcher = new Launcher();
+        launcher.addInputResource(targetDefinitions); //Analyze the patterns file
+        launcher.getEnvironment().setNoClasspath(true); // Semantic analysis kinda off
+        launcher.buildModel();
+
+        List<CtElement> modelElements = launcher.getModel().getElements(null);
+        for (CtElement element : modelElements) {
+            System.out.println(element.getClass().toString() + " --- " + element.toString());
+        }
     }
 
     public Map<Class<?>, CtElement> getPatterns() {

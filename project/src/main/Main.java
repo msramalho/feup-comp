@@ -23,7 +23,7 @@ public class Main implements Runnable {
 
         String targetFile = args[0];
         String configFile = args.length >= 2 ? args[1] : null;
-        String patternsFile = args.length >= 3 ? args[2] : "project/patterns/Patterns.java";
+        String patternsFile = args.length >= 3 ? args[2] : "patterns/Patterns.java";
 
         Main obj = new Main(targetFile, configFile, patternsFile);
         obj.run();
