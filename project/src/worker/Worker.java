@@ -22,6 +22,8 @@ public abstract class Worker implements Callable { // running call on ExecutorSe
         this.rootNode = rootNode;
         this.patternName = patternName;
         this.filter = setFilter();
+        logger.print("pattern: " + patternName);
+        logger.print("My filter is: " + filter.getType().getName());
     }
 
     protected CtElement getCtElement() {
