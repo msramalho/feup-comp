@@ -39,15 +39,8 @@ public class ClassScanner extends CtScanner implements Callable {
 
         // Spawn new tasks
         WorkerFactory factory = factoryManager.getWorkerFactory(e);
-        if (factory != null) {
-            current.addFuture(executorService.submit(factory.makeWorker(e)));
-        // Spawn future tasks
-        for (WorkerFactory factory : workerFactories) {
-            if (factory.matches(e)) {
-                // TODO: decide if Node is needed - this was design to perpetuate node with report
-                factory.addFuture(current.addFuture(executorService.submit(factory.getWorker(e))));
-            }
-        }
+        if (factory != null) {// TODO: decide if Node is needed - this was design to perpetuate node with report
+            factory.addFuture(current.addFuture(executorService.submit(factory.makeWorker(e))));
 
         System.out.println("entering " + e.getPosition());
     }

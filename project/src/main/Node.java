@@ -1,7 +1,6 @@
 package main;
 
 import spoon.reflect.declaration.CtElement;
-import util.Report;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -30,8 +29,14 @@ public class Node {
         return ctElement;
     }
 
-    void addFuture(Future future) {
+    /**
+     *
+     * @param future
+     * @return Future so that this Future pointer can be used by other apps
+     */
+    Future addFuture(Future future) {
         nodeFutures.add(future);
+        return future;
     }
 
     Collection<Future> getNodeFutures() {
@@ -52,9 +57,9 @@ public class Node {
         return parent;
     }
 
-    Future<Report> getResult() {
+    /*Future<report> getResult() {
         // TODO recursively call getResults - futures from children -- sum them, and then sum them to our futures
         // TODO return result as future ?
         return null;
-    }
+    }*/
 }
