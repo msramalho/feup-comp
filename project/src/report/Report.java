@@ -37,6 +37,7 @@ public class Report {
     public HashMap<String, Integer> getResults() {
         if (results != null) return results; // singleton implementation
 
+        results = new HashMap<>();
         //TODO: apply desired operation here: sum, count, avg, ...or list of operations
         for (PatternReport report : reports)
             results.put(report.patternName, report.sum());
