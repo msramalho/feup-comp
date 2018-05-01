@@ -1,14 +1,16 @@
 package main;
 
+import report.Report;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.CtScanner;
 import util.Logger;
 import worker.WorkerFactory;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 
-public class ClassScanner extends CtScanner implements Runnable {
+public class ClassScanner extends CtScanner implements Callable {
 
     private ExecutorService executorService;
     private List<WorkerFactory> workerFactories;
@@ -35,7 +37,8 @@ public class ClassScanner extends CtScanner implements Runnable {
         // Spawn future tasks
         for (WorkerFactory factory : workerFactories) {
             if (factory.matches(e)) {
-                current.addFuture(executorService.submit(factory.getWorker(e)));
+                // TODO: decide if Node is needed - this was design to perpetuate node with report
+                factory.addFuture(current.addFuture(executorService.submit(factory.getWorker(e))));
             }
         }
     }
@@ -48,7 +51,11 @@ public class ClassScanner extends CtScanner implements Runnable {
     }
 
     @Override
-    public void run() {
+    public Object call() throws Exception {
         scan(this.root.getCtElement());
+        Report report = new Report();
+        for (WorkerFactory factory : workerFactories)
+            report.addPatternReport(factory.getPatternReport());
+        return report;
     }
 }
