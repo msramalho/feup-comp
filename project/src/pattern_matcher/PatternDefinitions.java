@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class PatternDefinitions {
-    private Map<Class<?>, CtElement> patterns;
+    private Map<Class<?>, ArrayList<CtBlock>> patterns;
 
     public PatternDefinitions(String targetDefinitions) throws FileNotFoundException {
         if (!Files.exists(Paths.get(targetDefinitions)))
@@ -32,27 +32,32 @@ public class PatternDefinitions {
         launcher.getEnvironment().setNoClasspath(true); // Semantic analysis kinda off
         launcher.buildModel();
 
-        //System.out.println(launcher.getModel().);
         List <CtClassImpl> classElement = launcher.getModel().getElements(ctElement -> (ctElement.getClass() == CtClassImpl.class));
-
         if (classElement.size() > 1) {
             System.err.println("There can only be the main class defined in the Patterns file.");
         }
 
-        Set<CtMethod> methods = classElement.get(0).getMethods();
-        // TODO -- Miguel required stuff with methods
+        updatePatternsContainer(classElement.get(0).getMethods());
+    }
+
+    private void updatePatternsContainer(Set<CtMethod> methods) {
 
         for (CtMethod method: methods) {
             CtBlock methodBody = method.getBody();
-            System.out.println(methodBody.getStatement(0).getClass() + " ---- " + methodBody);
-            patterns.put(methodBody.getStatement(0).getClass(), methodBody);
-        }
+            Class node =  methodBody.getStatement(0).getClass();
 
-        System.out.println(patterns.values().toString());
-        patterns.clear();
+            if (patterns.containsKey(node))
+                patterns.get(node).add(methodBody);
+            else {
+                ArrayList<CtBlock> placeholder = new ArrayList<>();
+                placeholder.add(methodBody);
+                patterns.put(node, placeholder);
+            }
+        }
     }
 
     public Map<Class<?>, CtElement> getPatterns() {
-        return patterns;
+        //return patterns;
+        return new HashMap<>();
     }
 }
