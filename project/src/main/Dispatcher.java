@@ -5,25 +5,21 @@ import spoon.SpoonAPI;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtType;
 import util.Logger;
-import util.Report;
-import worker.StaticWorkerFactory;
 import worker.WorkerFactory;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
-import java.util.concurrent.ExecutionException;
+import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 public class Dispatcher implements Runnable {
     Configuration configuration;
     Logger logger;
     ExecutorService threadPool;
     SpoonAPI spoon;
-    ArrayList<Future<Report>> results;
 
     FactoryManager factoryManager;
 
@@ -33,7 +29,6 @@ public class Dispatcher implements Runnable {
             throw new NullPointerException("Configuration file is NULL.");
         this.configuration = config;
         this.logger = new Logger(this);
-        this.results = new ArrayList<>();
 
         threadPool = Executors.newFixedThreadPool(configuration.global.numberOfThreads);
 
@@ -83,19 +78,6 @@ public class Dispatcher implements Runnable {
             // TODO do something with Future's result
             logger.print("\tType: " + ctType.getSimpleName());
             threadPool.submit(new ClassScanner(threadPool, factoryManager, ctType));
-        }
-    }
-
-    public void parseResults() {
-        for (Future<Report> futureResult : results) {
-            if (futureResult.isDone()) {
-                try {
-                    Report r = futureResult.get();
-                    logger.print(r.toString());
-                } catch (InterruptedException | ExecutionException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 

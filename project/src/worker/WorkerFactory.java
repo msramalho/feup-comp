@@ -1,5 +1,6 @@
 package worker;
 
+import report.PatternReport;
 import spoon.reflect.declaration.CtElement;
 
 public interface WorkerFactory {
