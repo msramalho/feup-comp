@@ -15,10 +15,6 @@ public class Main implements Runnable {
     private Configuration configuration;
     private FactoryManager factoryManager;
 
-    private String targetFile;
-    private String configFile;
-    private String patternsFile;
-
     public static void main(String[] args) {
         if (args.length < 1 || args.length > 3) {
             System.out.println("Unable to parse command line arguments, usage: " + Dispatcher.getUsage());
@@ -26,18 +22,14 @@ public class Main implements Runnable {
         }
 
         String targetFile = args[0];
-        String configFile = args.length == 2 ? args[1] : null;
-        String patternsFile = args.length == 3 ? args[2] : "patterns/Patterns.java";
+        String configFile = args.length >= 2 ? args[1] : null;
+        String patternsFile = args.length >= 3 ? args[2] : "project/patterns/Patterns.java";
 
         Main obj = new Main(targetFile, configFile, patternsFile);
         obj.run();
     }
 
     Main(String targetFile, String configFile, String patternsFile) {
-        this.targetFile = targetFile;
-        this.configFile = configFile;
-        this.patternsFile = patternsFile;
-
         configuration = initializeConfiguration(configFile);
         dispatcher = initializeDispatcher(targetFile);
 
@@ -46,6 +38,7 @@ public class Main implements Runnable {
     }
 
     private Configuration initializeConfiguration(String configFile) {
+        System.out.println(configFile);
         Configuration configuration;
         if (configFile == null) {
             configuration = new Configuration();
@@ -72,7 +65,7 @@ public class Main implements Runnable {
         }
     }
 
-    // Currently path is hardcoded, in the future should be received as command line arg
+
     private FactoryManager initializeFactoryManager(String patternsFile) {
         FactoryManager manager = new FactoryManager();
         addStaticWorkerFactories(manager, configuration);
