@@ -14,25 +14,22 @@ public class Node {
     private Node parent;
 
     private CtElement ctElement;
-
     private HashMap<String, Future> nodeFutures;
-    private String depth = "  ";
 
     private Node() {
         this.children = new LinkedList<>();
         this.nodeFutures = new HashMap<>();
     }
 
-    public Node(CtElement elem) {
+    Node(CtElement elem) {
         this();
         this.ctElement = elem;
     }
 
-    Node(CtElement elem, Node parent) {
+    private Node(CtElement elem, Node parent) {
         this();
         this.ctElement = elem;
         this.parent = parent;
-        depth = parent.depth + "  ";
     }
 
     CtElement getCtElement() {
@@ -71,18 +68,8 @@ public class Node {
 
     Report getReport() throws ExecutionException, InterruptedException {
         Report res = getOwnReport();
-        // System.out.println(depth + "Getting report (" + nodeFutures.size() + " futures) for [" + ctElement.getClass() + "] " + ctElement.toString() + "\n     " + res.toString());
-        for (Node child : children) {
-            Report temp = child.getReport();
-            if (temp.getPatternReports().size() > 0) {
-                System.out.println(depth + "child with: " + temp.toString());
-            }
-
-            res = res.merge(temp);
-        }
-        System.out.println(depth + "---");
-        // System.out.println(depth + "Getting report (" + nodeFutures.size() + " futures) for [" + ctElement.getClass() + "] " + ctElement.toString() + "\n     " + res.toString());
-
+        for (Node child : children)
+            res = res.merge(child.getReport());
         return res;
     }
 }

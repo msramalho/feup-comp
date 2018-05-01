@@ -21,7 +21,6 @@ public class PatternReport {
         PatternReport merged = new PatternReport(patternName);
         merged.reports.addAll(this.reports);
         merged.reports.addAll(other.reports);
-        System.out.println("merging (" + this.reports.size() + " + " + other.reports.size() + ") = " + merged.reports.size());
         return merged;
     }
 
