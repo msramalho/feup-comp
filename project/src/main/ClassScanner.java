@@ -33,7 +33,6 @@ public class ClassScanner extends CtScanner implements Callable {
 
     @Override
     protected void enter(CtElement e) {
-        super.enter(e);
         // Update current node
         current = current.createChild(e);
 
@@ -49,8 +48,6 @@ public class ClassScanner extends CtScanner implements Callable {
 
     @Override
     protected void exit(CtElement e) {
-        super.exit(e);
-
         current = current.getParent();
         System.out.println("exiting " + e.getPosition());
     }
@@ -58,9 +55,6 @@ public class ClassScanner extends CtScanner implements Callable {
     @Override
     public Object call() throws Exception {
         scan(this.root.getCtElement());
-        Report report = new Report();
-        for (WorkerFactory factory : factoryManager.getWorkerFactories().values())
-            report.addPatternReport(factory.getPatternReport());
-        return report;
+        return new Report(factoryManager.getWorkerFactories().values());
     }
 }
