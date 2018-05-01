@@ -41,6 +41,6 @@ public abstract class Worker implements Callable { // running call on ExecutorSe
      * @param c the CtElement to test against the Filter
      * @return true if there is a match
      */
-    boolean matches(CtElement c) { return filter.matches(c); }
+    boolean matches(CtElement c) { return filter != null && filter.matches(c); }
 
 }

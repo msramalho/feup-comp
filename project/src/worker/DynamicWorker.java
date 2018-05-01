@@ -3,6 +3,7 @@ package worker;
 import report.WorkerReport;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.filter.AbstractFilter;
+import spoon.reflect.visitor.filter.TypeFilter;
 import util.CtIterator;
 
 public class DynamicWorker extends Worker {
@@ -15,6 +16,8 @@ public class DynamicWorker extends Worker {
 
     @Override
     protected AbstractFilter setFilter() {
+        CtIterator iterator = new CtIterator(patternElement);
+        if (iterator.hasNext()) return new TypeFilter(iterator.next().getClass());
         return null;
     }
 
