@@ -9,6 +9,7 @@ public class DynamicWorkerFactory extends WorkerFactory {
     private DynamicWorker filterWorker;
 
     public DynamicWorkerFactory(Class<?> type, CtElement patternElement) {
+        super("TODO "); // TODO: get pattern name from the method
         this.type = type;
         this.patternElement = patternElement;
         this.filterWorker = new DynamicWorker(patternElement, null);

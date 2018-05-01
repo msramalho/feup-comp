@@ -21,6 +21,8 @@ public class ClassScanner extends CtScanner implements Callable {
     private Node root;
     private Node current;
 
+    private Logger logger = new Logger(this);
+
     ClassScanner(ExecutorService executorService, FactoryManager factoryManager, CtElement rootElement) {
         this.executorService = executorService;
         this.factoryManager = factoryManager;
@@ -40,20 +42,22 @@ public class ClassScanner extends CtScanner implements Callable {
         WorkerFactory factory = factoryManager.getWorkerFactory(e);
         if (factory != null) {
             // TODO: decide if Node is needed - this was designed to perpetuate node with report
+            logger.print("there goes a Worker from factory: " + factory.getClass());
             factory.addFuture(current.addFuture(executorService.submit(factory.makeWorker(e))));
         }
 
-        System.out.println("entering " + e.getPosition());
+        // System.out.println("entering " + e.getPosition());
     }
 
     @Override
     protected void exit(CtElement e) {
         current = current.getParent();
-        System.out.println("exiting " + e.getPosition());
+        // System.out.println("exiting " + e.getPosition());
     }
 
     @Override
     public Object call() throws Exception {
+        logger.print("Number of factories: " + factoryManager.getWorkerFactories().size());
         scan(this.root.getCtElement());
         return new Report(factoryManager.getWorkerFactories().values());
     }

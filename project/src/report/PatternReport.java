@@ -10,9 +10,9 @@ public class PatternReport {
     ArrayList<WorkerReport> reports = null;
     ArrayList<Future> futures = new ArrayList<>();
 
-    public PatternReport(String patternName) {this.patternName = patternName;}
+    public PatternReport(String patternName) { this.patternName = patternName;}
 
-    public void addFuture(Future future) {futures.add(future); }
+    public void addFuture(Future future) { futures.add(future); }
 
     private void loadReports() {
         if (reports != null) return; // singleton implementation
