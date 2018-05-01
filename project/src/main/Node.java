@@ -1,23 +1,25 @@
 package main;
 
+import report.PatternReport;
 import report.Report;
+import report.WorkerReport;
 import spoon.reflect.declaration.CtElement;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class Node {
     private Collection<Node> children;
     private Node parent;
 
-    private Collection<Future> nodeFutures;
     private CtElement ctElement;
+
+    private HashMap<String, Future> nodeFutures;
 
     private Node() {
         this.children = new LinkedList<>();
-        this.nodeFutures = new HashSet<>();
+        this.nodeFutures = new HashMap<>();
     }
 
     Node(CtElement elem, Node parent) {
@@ -31,17 +33,13 @@ public class Node {
     }
 
     /**
-     *
+     * @param patternName
      * @param future
      * @return Future so that this Future pointer can be used by other apps
      */
-    Future addFuture(Future future) {
-        nodeFutures.add(future);
+    Future addFuture(String patternName, Future future) {
+        nodeFutures.put(patternName, future); // the same pattern cannot be triggered twice for the same node
         return future;
-    }
-
-    Collection<Future> getNodeFutures() {
-        return nodeFutures;
     }
 
     Node createChild(CtElement e) {
@@ -50,15 +48,25 @@ public class Node {
         return child;
     }
 
-    Collection<Node> getChildren() {
-        return children;
+    Collection<Node> getChildren() { return children; }
+
+    Node getParent() { return parent; }
+
+    private Report getOwnReport() throws ExecutionException, InterruptedException {
+        HashSet<PatternReport> prs = new HashSet<>();
+        for (Map.Entry<String, Future> entry : nodeFutures.entrySet()) {
+            PatternReport pr = new PatternReport(entry.getKey());
+            pr.addReport((WorkerReport) entry.getValue().get());
+            prs.add(pr);
+        }
+        return new Report(prs);
     }
 
-    Node getParent() {
-        return parent;
-    }
-
-    Report getResult() {
-        return null;
+    Report getReport() throws ExecutionException, InterruptedException {
+        Report res = getOwnReport();
+        System.out.println("Getting report (" + nodeFutures.size() + " futures) for [" + ctElement.getClass() + "] " + ctElement.toString() + "\n     " + res.toString());
+        for (Node child : children)
+            res = res.merge(child.getReport());
+        return res;
     }
 }

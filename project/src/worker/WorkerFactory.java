@@ -3,7 +3,7 @@ package worker;
 import spoon.reflect.declaration.CtElement;
 
 public abstract class WorkerFactory {
-    String patternName;
+    public String patternName;
 
 
     public WorkerFactory(String patternName) {

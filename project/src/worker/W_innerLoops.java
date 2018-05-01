@@ -21,6 +21,6 @@ public class W_innerLoops extends Worker {
     @Override
     public Object call() {
         logger.print("proof of concept run for the ForEachLoops innerLoops Count");
-        return new WorkerReport(1, rootNode);
+        return new WorkerReport(1);
     }
 }

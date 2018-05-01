@@ -30,10 +30,10 @@ public class DynamicWorker extends Worker {
         if (source_it.hasNext() && pattern_it.hasNext()) {
             if (source_it.next() == pattern_it.next()) {
                 logger.print("pattern test iterator found");
-                return new WorkerReport(1, rootNode);
+                return new WorkerReport(1);
             }
         }
 
-        return new WorkerReport(0, rootNode);
+        return new WorkerReport(0);
     }
 }

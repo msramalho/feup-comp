@@ -4,11 +4,26 @@ import java.util.ArrayList;
 
 public class PatternReport {
     String patternName;
-    ArrayList<WorkerReport> reports;
+    // Processor processor; // Processor that properly returns the result of this Pattern
+    ArrayList<WorkerReport> reports = new ArrayList<>();
 
-    public PatternReport(String patternName) { this.patternName = patternName;}
+    public PatternReport(String patternName) {
+        this.patternName = patternName;
+    }
 
     public void addReport(WorkerReport report) { reports.add(report); }
+
+    public Integer getValue() {
+        return sum();
+    }
+
+    public PatternReport merge(PatternReport other) {
+        PatternReport merged = new PatternReport(patternName);
+        merged.reports.addAll(this.reports);
+        merged.reports.addAll(other.reports);
+        System.out.println("merging (" + this.reports.size() + " + " + other.reports.size() + ") = " + merged.reports.size());
+        return merged;
+    }
 
     // Data handling functions for the report
 
@@ -22,5 +37,22 @@ public class PatternReport {
 
     public Integer count() { return reports.size(); }
 
+
     //TODO: more statistics methods: Sum, Count, Avg, Std, Mean, ..........
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PatternReport that = (PatternReport) o;
+
+        return patternName != null ? patternName.equals(that.patternName) : that.patternName == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return patternName != null ? patternName.hashCode() : 0;
+    }
 }

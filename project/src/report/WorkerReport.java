@@ -1,17 +1,12 @@
 package report;
 
-import spoon.reflect.declaration.CtElement;
-
 public class WorkerReport {
+    // TODO: may need to save more information in the future
     Integer value;
-    CtElement source;
 
-    public WorkerReport(Integer value, CtElement source) {
+    public WorkerReport(Integer value) {
         this.value = value;
-        this.source = source;
     }
 
-    public Integer getValue() {
-        return value;
-    }
+    public Integer getValue() { return value; }
 }
