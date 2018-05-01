@@ -1,15 +1,10 @@
 package main;
 
-import report.Report;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.CtScanner;
 import util.Logger;
-import worker.StaticWorkerFactory;
-import worker.Worker;
 import worker.WorkerFactory;
 
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 
