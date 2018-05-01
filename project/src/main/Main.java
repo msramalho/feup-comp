@@ -95,9 +95,9 @@ public class Main implements Runnable {
             return;
         }
 
-        for (Map.Entry<Class<?>, ArrayList<CtBlock>> entry : patternDefinitions.getPatterns().entrySet()) {
-            for (CtBlock block : entry.getValue()) {
-                manager.addWorkerFactory(new DynamicWorkerFactory(entry.getKey(), block));
+        for (Map.Entry<Class<?>, ArrayList<CtElement>> entry : patternDefinitions.getPatterns().entrySet()) {
+            for (CtElement block : entry.getValue()) {
+                manager.addWorkerFactory(new DynamicWorkerFactory(entry.getKey(), (CtBlock) block));
             }
         }
     }
