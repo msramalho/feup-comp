@@ -1,5 +1,6 @@
 package main;
 
+import report.Report;
 import spoon.reflect.declaration.CtElement;
 
 import java.util.Collection;
@@ -57,9 +58,7 @@ public class Node {
         return parent;
     }
 
-    /*Future<report> getResult() {
-        // TODO recursively call getResults - futures from children -- sum them, and then sum them to our futures
-        // TODO return result as future ?
+    Report getResult() {
         return null;
-    }*/
+    }
 }

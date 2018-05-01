@@ -1,15 +1,13 @@
 package worker;
 
-import report.PatternReport;
 import spoon.reflect.declaration.CtElement;
 
-import java.util.concurrent.Future;
-
 public abstract class WorkerFactory {
-    PatternReport report;
+    String patternName;
+
 
     public WorkerFactory(String patternName) {
-        report = new PatternReport(patternName);
+        this.patternName = patternName;
     }
 
     /**
@@ -34,9 +32,5 @@ public abstract class WorkerFactory {
      * @return The Class that triggers the creation of a Worker.
      */
     public abstract Class<?> getType();
-
-    public void addFuture(Future future) { report.addFuture(future); }
-
-    public PatternReport getPatternReport() { return report; }
 
 }

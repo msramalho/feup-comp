@@ -16,8 +16,8 @@ import java.util.List;
 
 public class W_possibleTernary extends Worker {
 
-    public W_possibleTernary(CtElement element) {
-        super(element);
+    public W_possibleTernary(CtElement element, String patternName) {
+        super(element, patternName);
     }
 
     @Override

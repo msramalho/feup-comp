@@ -13,16 +13,14 @@ public class Report {
     private ArrayList<PatternReport> reports = new ArrayList<>();
     private HashMap<String, Integer> results = null; // hashmap of PatternName -> PatternResult
 
-    public Report() {}
-
     /**
-     * Create a report by passing a list of {@link WorkerFactory} that will be queried for their {@link PatternReport}
+     * Create a report by passing a list of {@link PatternReport}
      *
-     * @param factories list of {@link WorkerFactory} to process
+     * @param patterns {@link Collection} of {@link PatternReport}
      */
-    public Report(Collection<WorkerFactory> factories) {
-        for (WorkerFactory factory : factories)
-            addPatternReport(factory.getPatternReport());
+    public Report(Collection<PatternReport> patterns) {
+        for (PatternReport patternReport : patterns)
+            addPatternReport(patternReport);
     }
 
     /**
@@ -32,9 +30,10 @@ public class Report {
      */
     private void addPatternReport(PatternReport patternReport) {
         reports.add(patternReport);
+        results = null; // to force restart the singleton
     }
 
-    public HashMap<String, Integer> getResults() {
+    private HashMap<String, Integer> getResults() {
         if (results != null) return results; // singleton implementation
 
         results = new HashMap<>();
