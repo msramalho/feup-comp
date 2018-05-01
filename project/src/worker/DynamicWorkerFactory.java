@@ -2,7 +2,7 @@ package worker;
 
 import spoon.reflect.declaration.CtElement;
 
-public class DynamicWorkerFactory implements WorkerFactory {
+public class DynamicWorkerFactory extends WorkerFactory {
 
     private Class<?> type;
     private CtElement patternElement;

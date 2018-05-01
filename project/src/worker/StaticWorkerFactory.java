@@ -4,7 +4,7 @@ import spoon.reflect.declaration.CtElement;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class StaticWorkerFactory implements WorkerFactory {
+public class StaticWorkerFactory extends WorkerFactory {
     String name;
     Class<?> workerClass;
     private Worker filterWorker;
