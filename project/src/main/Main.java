@@ -20,13 +20,14 @@ public class Main implements Runnable {
     private String patternsFile;
 
     public static void main(String[] args) {
-        if (args.length < 1 || args.length > 2) {
+        if (args.length < 1 || args.length > 3) {
             System.out.println("Unable to parse command line arguments, usage: " + Dispatcher.getUsage());
             System.exit(0);
         }
+
         String targetFile = args[0];
         String configFile = args.length == 2 ? args[1] : null;
-        String patternsFile = "patterns/Patterns.java";
+        String patternsFile = args.length == 3 ? args[2] : "patterns/Patterns.java";
 
         Main obj = new Main(targetFile, configFile, patternsFile);
         obj.run();
