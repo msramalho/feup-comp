@@ -26,19 +26,18 @@ public class FactoryManager {
     }
 
     // TODO use this in the future, need to test
-//    public WorkerFactory getWorkerFactory(CtElement elem) {
-//        return workerFactories.getOrDefault(
-//                elem.getClass().getName(),
-//                null
-//        );
-//    }
+    //    public WorkerFactory getWorkerFactory(CtElement elem) {
+    //        return workerFactories.getOrDefault(
+    //                elem.getClass().getName(),
+    //                null
+    //        );
+    //    }
 
     public WorkerFactory getWorkerFactory(CtElement elem) {
         for (Map.Entry<String, WorkerFactory> entry : workerFactories.entrySet()) {
             WorkerFactory factory = entry.getValue();
-            if (factory.matches(elem)) {
+            if (factory.matches(elem))
                 return factory;
-            }
         }
         return null;
     }
@@ -47,4 +46,7 @@ public class FactoryManager {
         return getWorkerFactory(elem).makeWorker(elem);
     }
 
+    public Map<String, WorkerFactory> getWorkerFactories() {
+        return workerFactories;
+    }
 }
