@@ -1,13 +1,16 @@
 package worker;
 
+import report.PatternReport;
 import spoon.reflect.declaration.CtElement;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.concurrent.Future;
 
 public class WorkerFactory {
     String name;
     Class<?> workerClass;
     private Worker filterWorker;
+    PatternReport patternReport; /** A Pattern report with all the worker reports from its spawned children */
 
     /**
      * Receives the name of the feature and the configuration and loads the proper worker, through its super constructor that receives only a Configuration object
@@ -21,6 +24,7 @@ public class WorkerFactory {
      */
     public WorkerFactory(String name) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
         this.name = name;
+         patternReport = new PatternReport(name);
         workerClass = Class.forName(getWorkerName(name));
         //test the creation of a new worker, and also keep it for the matches function
         filterWorker = (Worker) workerClass.getDeclaredConstructor(CtElement.class).newInstance((Object) null);
@@ -55,5 +59,13 @@ public class WorkerFactory {
      */
     public static String getWorkerName(String name) {
         return "worker.W_" + name;
+    }
+
+    public void addFuture(Future future) {
+        patternReport.addFuture(future);
+    }
+
+    public PatternReport getPatternReport() {
+        return patternReport;
     }
 }
