@@ -75,14 +75,16 @@ public class Dispatcher implements Runnable {
         // TODO improve what is to be done with the report
         Future rootNode = null;
         for (CtType ctType : ctPackage.getTypes()) {
-            logger.print("\tType: " + ctType.getSimpleName());
+            logger.print("\tType: " + ctType.getSimpleName() + " - " + ctType.getActualClass().getName());
             rootNode = threadPool.submit(new ClassScanner(threadPool, factoryManager, ctType));
-        }
-        if (rootNode != null) {
-            try {
-                logger.print(((Node) rootNode.get()).getReport().toString());
-            } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
+
+            //TODO: obviously remove from here because getReport is blocking
+            if (rootNode != null) {
+                try {
+                    logger.print(((Node) rootNode.get()).getReport().toString());
+                } catch (InterruptedException | ExecutionException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

@@ -27,10 +27,8 @@ public class ClassScanner extends CtScanner implements Callable {
         this.executorService = executorService;
         this.factoryManager = factoryManager;
 
-        this.root = new Node(rootElement, null);
+        this.root = new Node(rootElement);
         this.current = root;
-
-        scan(rootElement);
     }
 
     @Override
