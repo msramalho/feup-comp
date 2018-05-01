@@ -29,7 +29,7 @@ public abstract class WorkerFactory {
      *
      * @return The Class that triggers the creation of a Worker.
      */
-    abstract Class<?> getType();
+    public abstract Class<?> getType();
 
     public void addFuture(Future future) { report.addFuture(future); }
 
