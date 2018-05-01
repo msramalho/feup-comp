@@ -32,9 +32,11 @@ public class Node {
         this.parent = parent;
     }
 
-    CtElement getCtElement() {
-        return ctElement;
-    }
+    CtElement getCtElement() { return ctElement; }
+
+    Node getParent() { return parent; }
+
+    Collection<Node> getChildren() { return children; }
 
     /**
      * @param patternName
@@ -52,9 +54,6 @@ public class Node {
         return child;
     }
 
-    Collection<Node> getChildren() { return children; }
-
-    Node getParent() { return parent; }
 
     private Report getOwnReport() throws ExecutionException, InterruptedException {
         HashSet<PatternReport> prs = new HashSet<>();
