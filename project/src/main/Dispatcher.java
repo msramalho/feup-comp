@@ -5,14 +5,15 @@ import spoon.SpoonAPI;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtType;
 import util.Logger;
-import worker.WorkerFactory;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collection;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Dispatcher implements Runnable {
     Configuration configuration;
@@ -58,7 +59,6 @@ public class Dispatcher implements Runnable {
     }
 
 
-
     /**
      * Code that performs high level task delegation from the spoon model
      */
@@ -66,17 +66,24 @@ public class Dispatcher implements Runnable {
     public void run() {
         Collection<CtPackage> packages = spoon.getModel().getAllPackages();
         for (CtPackage ctPackage : packages) {
-            handlePackage(ctPackage);
+            handlePackage(ctPackage); // TODO: maybe a task per package into the threadpool
         }
     }
 
     private void handlePackage(CtPackage ctPackage) {
         logger.print("Package: " + ctPackage.getQualifiedName());
-
+        Future report = null;
         for (CtType ctType : ctPackage.getTypes()) {
             // TODO do something with Future's result
             logger.print("\tType: " + ctType.getSimpleName());
-            threadPool.submit(new ClassScanner(threadPool, factoryManager, ctType));
+            report = threadPool.submit(new ClassScanner(threadPool, factoryManager, ctType));
+        }
+        if (report != null) {
+            try {
+                logger.print(report.get().toString());
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
         }
     }
 
