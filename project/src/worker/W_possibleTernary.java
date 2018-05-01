@@ -1,6 +1,7 @@
 package worker;
 
 import com.google.gson.Gson;
+import report.WorkerReport;
 import spoon.reflect.code.CtExpression;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtVariable;
@@ -9,7 +10,6 @@ import spoon.reflect.visitor.chain.CtConsumer;
 import spoon.reflect.visitor.filter.SiblingsFunction;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.reflect.code.*;
-import util.Report;
 
 import java.util.List;
 
@@ -34,13 +34,13 @@ public class W_possibleTernary extends Worker {
         siblings.mode(SiblingsFunction.Mode.NEXT);
         siblings.apply(element, myConsumer);
 
-        //return new Report(myConsumer.getGsonResult());
+        //return new report(myConsumer.getGsonResult());
         logger.print(myConsumer.getGsonResult()); //TODO - delete, just for testing
-        return new Report(1);
+        return new WorkerReport(1, element);
     }
 
     /**
-     * Class used to consume the CtElement siblings of the declaration element
+     * Class used to consume the CtElement siblings of the declaration source
      *
      * @see CtConsumer for more information
      */
