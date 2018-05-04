@@ -64,4 +64,15 @@ public class CtIterator extends CtScanner implements Iterator {
         deque.addAll(current_children); // overridden method to add all to first
         return next;
     }
+
+    /**
+     * Modfied version of next() that returns the ith element, consuming the previous ones, so this is not idempotent
+     * @param index the index of the CtElement to get from the current position
+     * @return The element or Null if it does not exist
+     */
+    public Object next(int index) {
+        for (; index > 0 && hasNext(); index--) next();
+        if (index == 0 && hasNext()) return next();
+        return null;
+    }
 }
