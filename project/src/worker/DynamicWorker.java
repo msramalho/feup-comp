@@ -4,7 +4,11 @@ import report.WorkerReport;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
+import spoon.support.reflect.code.CtInvocationImpl;
 import util.CtIterator;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DynamicWorker extends Worker {
     private CtElement patternElement;
@@ -23,20 +27,58 @@ public class DynamicWorker extends Worker {
 
     @Override
     public Object call() throws Exception {
-        logger.print("called auto worker");
-        CtIterator source = new CtIterator(rootNode);
-        CtIterator pattern = new CtIterator(patternElement);
-        CtIterator source_it = new CtIterator(this.rootNode);
-        CtIterator pattern_it = new CtIterator(patternElement);
+        logger.print("comparing: " + rootNode.toString() + "\n with pattern: " + patternElement.toString() + " - filter is " + getType().getName());
 
-        //TODO: this is an example of how the Tree matching algorithm would work with CtIterators
-        if (source_it.hasNext() && pattern_it.hasNext()) {
-            if (source_it.next() == pattern_it.next()) {
-                logger.print("pattern test iterator found");
-                return new WorkerReport(1);
+        /**
+         * State Machine states
+         * 0 means processing elements
+         * 1 means processing "any" until the element matches the one after element
+         */
+        int STATE = 0;
+
+        CtIterator pattern = new CtIterator(patternElement);
+        CtIterator source = new CtIterator(rootNode);
+
+        CtElement token = (CtElement) pattern.next();
+
+        while (token != null) {
+            logger.print("[" + STATE + "] PROCESSING: pattern token: " + token.getClass().toString() + " - " + token.toString());
+
+            switch (STATE) {
+                case 0:
+                    if (isAny(token)) {
+                        logger.print("IS ANY: " + token.toString());
+                        STATE = 1;
+                        token = (CtElement) pattern.next();
+                        continue;//jump to next iteration
+                    }
+
+                    if (!token.getClass().equals(source.next().getClass())) {
+                        logger.print("FAILED PATTERN");
+                        return new WorkerReport(0);
+                    }
+                    token = (CtElement) pattern.next();
+                    break;
+                case 1:
+                    CtElement n = (CtElement) source.next();
+                    logger.print("CURRENT IS: " + n.getClass() + " - " + n.toString());
+                    if (token.getClass().equals(n.getClass())) {
+                        logger.print("STOPED CONSUMING ANY");
+                        STATE = 0;
+                    }
+                    break;
             }
         }
+        return new WorkerReport(1);
+    }
 
-        return new WorkerReport(0);
+    private boolean isAny(CtElement e) {
+        //TODO: improve this if someone knows how to get the method name :'(
+        if (e instanceof CtInvocationImpl) {
+            Pattern p = Pattern.compile("_any_()");
+            Matcher m = p.matcher(e.toString());
+            return m.find();
+        }
+        return false;
     }
 }
