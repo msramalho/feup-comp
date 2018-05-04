@@ -15,7 +15,6 @@ public static class Patterns {
         }
     }
 
-    public void testIterator(){
-        if(_any());
-    }
+    public void testEmptyError() { }
+
 }
