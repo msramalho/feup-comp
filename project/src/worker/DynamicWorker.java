@@ -11,14 +11,14 @@ public class DynamicWorker extends Worker {
 
     public DynamicWorker(CtElement rootNode, String patternName, CtElement patternElement) {
         super(rootNode, patternName);
-        this.patternElement = patternElement;
+        CtIterator iterator = new CtIterator(patternElement);
+        this.patternElement = (CtElement) iterator.next(1);
         loadFilter();
     }
 
     @Override
     protected AbstractFilter setFilter() {
-        CtIterator iterator = new CtIterator(patternElement);
-        return new TypeFilter(iterator.next(1).getClass());
+        return new TypeFilter(patternElement.getClass());
     }
 
     @Override
