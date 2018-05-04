@@ -43,10 +43,13 @@ public class PatternDefinitions {
         for (CtMethod method : methods) {
             CtBlock methodBody = method.getBody();
 
-            if (methodBody.getStatement(0) == null) {
-                System.out.println("Warning: Empty Pattern defined");
+            Class node;
+            try {
+                node = methodBody.getStatement(0).getClass();
+            } catch (IndexOutOfBoundsException e) {
+                System.err.println("Warning: Empty Pattern defined in method: " + method.getSimpleName());
+                continue;
             }
-            Class node = methodBody.getStatement(0).getClass();
 
             if (patterns.containsKey(node))
                 patterns.get(node).add(methodBody);
