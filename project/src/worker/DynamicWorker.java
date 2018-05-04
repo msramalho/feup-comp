@@ -18,7 +18,7 @@ public class DynamicWorker extends Worker {
     @Override
     protected AbstractFilter setFilter() {
         CtIterator iterator = new CtIterator(patternElement);
-        return new TypeFilter(iterator.next(2).getClass());
+        return new TypeFilter(iterator.next(1).getClass());
     }
 
     @Override
