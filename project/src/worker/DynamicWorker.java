@@ -7,19 +7,18 @@ import spoon.reflect.visitor.filter.TypeFilter;
 import util.CtIterator;
 
 public class DynamicWorker extends Worker {
-    protected CtElement patternElement;
+    private CtElement patternElement;
 
-    public DynamicWorker(CtElement patternElement, CtElement rootNode, String patternName) {
+    public DynamicWorker(CtElement rootNode, String patternName, CtElement patternElement) {
         super(rootNode, patternName);
         this.patternElement = patternElement;
+        loadFilter();
     }
 
     @Override
     protected AbstractFilter setFilter() {
         CtIterator iterator = new CtIterator(patternElement);
-        //TODO: get the first valid element from the CtBlock -> this approach does not work
-        if (iterator.hasNext() && iterator.next() != null && iterator.hasNext()) return new TypeFilter(iterator.next().getClass());
-        return null;
+        return new TypeFilter(iterator.next(2).getClass());
     }
 
     @Override
