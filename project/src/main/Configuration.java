@@ -22,18 +22,15 @@ public class Configuration {
         public Boolean countFor = false;
         public Boolean countForeach = false;
 
-        Static() {
-        }
+        Static() { }
     }
 
     public class Dynamic {
         public boolean innerLoops = false;
         public boolean possibleTernary = false;
         public boolean classInheritance = false;
-        public boolean testIterator = false;
 
-        Dynamic() {
-        }
+        Dynamic() { }
     }
 
 
@@ -41,15 +38,13 @@ public class Configuration {
         public String path = "out/";
         public String format = "json";
 
-        Output() {
-        }
+        Output() { }
     }
 
     public class Global {
         public int numberOfThreads = 16;
 
-        public Global() {
-        }
+        public Global() { }
     }
 
 
@@ -59,8 +54,7 @@ public class Configuration {
     Global global = new Global();
     Dynamic dynamic = new Dynamic();
 
-    Configuration() {
-    }
+    Configuration() { }
 
     /**
      * Read a configurations file into an object of Configuration

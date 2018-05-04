@@ -6,7 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class StaticWorkerFactory extends WorkerFactory {
-    private static String WORKERS_LOCATION =  "worker.W_";
+    private static String WORKERS_LOCATION = "worker.W_";
     private Class<?> workerClass;
     private Worker filterWorker;
     private Constructor<?> constructor;
@@ -27,6 +27,7 @@ public class StaticWorkerFactory extends WorkerFactory {
         constructor = workerClass.getDeclaredConstructor(CtElement.class, String.class);
         //test the creation of a new worker, and also keep it for the matches function
         filterWorker = (Worker) constructor.newInstance((Object) null, null);
+        filterWorker.loadFilter();
     }
 
     @Override
@@ -38,7 +39,9 @@ public class StaticWorkerFactory extends WorkerFactory {
     @Override
     public Worker makeWorker(CtElement c) {
         try {
-            return (Worker) constructor.newInstance(c, patternName);
+            Worker newWorker = (Worker) constructor.newInstance(c, patternName);
+            newWorker.loadFilter();
+            return newWorker;
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
@@ -52,7 +55,5 @@ public class StaticWorkerFactory extends WorkerFactory {
      * @param name name of the feature
      * @return the package path into the Worker
      */
-    public static String getWorkerName(String name) {
-        return WORKERS_LOCATION + name;
-    }
+    public static String getWorkerName(String name) { return WORKERS_LOCATION + name; }
 }

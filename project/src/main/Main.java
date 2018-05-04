@@ -1,7 +1,6 @@
 package main;
 
 import pattern_matcher.PatternDefinitions;
-import spoon.reflect.code.CtBlock;
 import spoon.reflect.declaration.CtElement;
 import worker.DynamicWorkerFactory;
 import worker.StaticWorkerFactory;
@@ -97,13 +96,11 @@ public class Main implements Runnable {
 
         for (Map.Entry<Class<?>, ArrayList<CtElement>> entry : patternDefinitions.getPatterns().entrySet()) {
             for (CtElement block : entry.getValue()) {
-                manager.addWorkerFactory(new DynamicWorkerFactory(entry.getKey(), (CtBlock) block));
+                manager.addWorkerFactory(new DynamicWorkerFactory(entry.getKey(), block));
             }
         }
     }
 
     @Override
-    public void run() {
-        dispatcher.run();
-    }
+    public void run() { dispatcher.run(); }
 }
