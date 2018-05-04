@@ -6,7 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class StaticWorkerFactory extends WorkerFactory {
-    private static String WORKERS_LOCATION =  "worker.W_";
+    private static String WORKERS_LOCATION = "worker.W_";
     private Class<?> workerClass;
     private Worker filterWorker;
     private Constructor<?> constructor;
@@ -52,7 +52,5 @@ public class StaticWorkerFactory extends WorkerFactory {
      * @param name name of the feature
      * @return the package path into the Worker
      */
-    public static String getWorkerName(String name) {
-        return WORKERS_LOCATION + name;
-    }
+    public static String getWorkerName(String name) { return WORKERS_LOCATION + name; }
 }

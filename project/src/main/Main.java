@@ -103,7 +103,5 @@ public class Main implements Runnable {
     }
 
     @Override
-    public void run() {
-        dispatcher.run();
-    }
+    public void run() { dispatcher.run(); }
 }
