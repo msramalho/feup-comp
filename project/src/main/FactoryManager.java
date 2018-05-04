@@ -9,11 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FactoryManager {
-    private Map<String, WorkerFactory> workerFactories;
+    private Map<String, WorkerFactory> workerFactories = new HashMap<>();
 
-    public FactoryManager() {
-        this.workerFactories = new HashMap<>();
-    }
+    public FactoryManager() { }
 
     public void addWorkerFactories(Collection<WorkerFactory> factories) {
         for (WorkerFactory factory : factories) {

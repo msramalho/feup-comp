@@ -58,7 +58,5 @@ public class PatternDefinitions {
         }
     }
 
-    public Map<Class<?>, ArrayList<CtElement>> getPatterns() {
-        return patterns;
-    }
+    public Map<Class<?>, ArrayList<CtElement>> getPatterns() { return patterns; }
 }
