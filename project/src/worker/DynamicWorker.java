@@ -11,6 +11,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DynamicWorker extends Worker {
+    private enum State {
+        STANDARD,   // STANDARD means processing elements
+        ANY_STMT    // ANY_STMT means processing "any" until the element matches the one after element
+    };
+
     private CtElement patternElement;
 
     public DynamicWorker(CtElement rootNode, String patternName, CtElement patternElement) {
@@ -29,26 +34,20 @@ public class DynamicWorker extends Worker {
     public WorkerReport call() throws Exception {
         logger.print("comparing: " + rootNode.toString() + "\n with pattern: " + patternElement.toString() + " - filter is " + getType().getName());
 
-        /**
-         * State Machine states
-         * 0 means processing elements
-         * 1 means processing "any" until the element matches the one after element
-         */
-        int STATE = 0;
-
         CtIterator pattern = new CtIterator(patternElement);
         CtIterator source = new CtIterator(rootNode);
 
         CtElement token = (CtElement) pattern.next();
 
+        State state = State.STANDARD;
         while (token != null) {
-            logger.print("[" + STATE + "] PROCESSING: pattern token: " + token.getClass().toString() + " - " + token.toString());
+            logger.print("[" + state + "] PROCESSING: pattern token: " + token.getClass().toString() + " - " + token.toString());
 
-            switch (STATE) {
-                case 0:
+            switch (state) {
+                case STANDARD:
                     if (isAny(token)) {
                         logger.print("IS ANY: " + token.toString());
-                        STATE = 1;
+                        state = State.ANY_STMT;
                         token = (CtElement) pattern.next();
                         continue;//jump to next iteration
                     }
@@ -59,12 +58,12 @@ public class DynamicWorker extends Worker {
                     }
                     token = (CtElement) pattern.next();
                     break;
-                case 1:
+                case ANY_STMT:
                     CtElement n = (CtElement) source.next();
                     logger.print("CURRENT IS: " + n.getClass() + " - " + n.toString());
                     if (token.getClass().equals(n.getClass())) {
                         logger.print("STOPED CONSUMING ANY");
-                        STATE = 0;
+                        state = State.STANDARD;
                     }
                     break;
             }
