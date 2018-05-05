@@ -27,7 +27,7 @@ public class W_possibleTernary extends Worker {
     }
 
     @Override
-    public Object call() {
+    public WorkerReport call() {
         CtElement element = getCtElement();
 
         SiblingsFunction siblings = new SiblingsFunction();

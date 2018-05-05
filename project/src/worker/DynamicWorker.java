@@ -26,7 +26,7 @@ public class DynamicWorker extends Worker {
     }
 
     @Override
-    public Object call() throws Exception {
+    public WorkerReport call() throws Exception {
         logger.print("comparing: " + rootNode.toString() + "\n with pattern: " + patternElement.toString() + " - filter is " + getType().getName());
 
         /**

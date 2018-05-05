@@ -14,7 +14,7 @@ public class Node {
     private Node parent;
 
     private CtElement ctElement;
-    private HashMap<String, Future> nodeFutures;
+    private HashMap<String, Future<WorkerReport>> nodeFutures;
 
     private Node() {
         this.children = new LinkedList<>();
@@ -43,7 +43,7 @@ public class Node {
      * @param future
      * @return Future so that this Future pointer can be used by other apps
      */
-    Future addFuture(String patternName, Future future) {
+    Future addFuture(String patternName, Future<WorkerReport> future) {
         nodeFutures.put(patternName, future); // the same pattern cannot be triggered twice for the same node
         return future;
     }
@@ -57,9 +57,9 @@ public class Node {
 
     private Report getOwnReport() throws ExecutionException, InterruptedException {
         HashSet<PatternReport> prs = new HashSet<>();
-        for (Map.Entry<String, Future> entry : nodeFutures.entrySet()) {
+        for (Map.Entry<String, Future<WorkerReport>> entry : nodeFutures.entrySet()) {
             PatternReport pr = new PatternReport(entry.getKey());
-            pr.addReport((WorkerReport) entry.getValue().get());
+            pr.addReport(entry.getValue().get());
             prs.add(pr);
         }
         return new Report(prs);

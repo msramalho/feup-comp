@@ -1,6 +1,7 @@
 package worker;
 
 import report.Report;
+import report.WorkerReport;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.Filter;
 import spoon.reflect.visitor.filter.AbstractFilter;
@@ -52,4 +53,6 @@ public abstract class Worker implements Callable { // running call on ExecutorSe
         return patternName;
     }
 
+    @Override
+    public abstract WorkerReport call() throws Exception;
 }
