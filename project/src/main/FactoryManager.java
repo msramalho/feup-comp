@@ -1,36 +1,48 @@
 package main;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import spoon.reflect.declaration.CtElement;
+import worker.Worker;
 import worker.WorkerFactory;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class FactoryManager {
-    private Map<String, WorkerFactory> workerFactories = new HashMap<>();
+    private Multimap<String, WorkerFactory> workerFactories;
 
-    FactoryManager() { }
-
+    FactoryManager() {
+        workerFactories = HashMultimap.create();
+    }
 
     void addWorkerFactory(WorkerFactory workerFactory) {
         workerFactories.put(workerFactory.getType().getName(), workerFactory);
     }
 
-    ArrayList<WorkerFactory> getWorkerFactory(CtElement elem) {
-        ArrayList<WorkerFactory> factories = new ArrayList<>();
-        for (Map.Entry<String, WorkerFactory> entry : workerFactories.entrySet()) {
+    // TODO test. Please do not delete. Performance improvement.
+//    Collection<WorkerFactory> getWorkerFactories(CtElement elem) {
+//        return workerFactories.get(elem.getClass().getName());
+//    }
+
+    Collection<WorkerFactory> getWorkerFactories(CtElement elem) {
+        List<WorkerFactory> matchedFactories = new ArrayList<>();
+        for (Map.Entry<String, WorkerFactory> entry : workerFactories.entries()) {
             WorkerFactory factory = entry.getValue();
             if (factory.matches(elem))
-                factories.add(factory);
+                matchedFactories.add(factory);
         }
-        return factories;
+        return matchedFactories;
     }
 
-    // public Worker makeWorker(CtElement elem) throws NullPointerException {
-    //     return getWorkerFactory(elem).makeWorker(elem);
-    // }
+    Collection<Worker> makeWorkers(CtElement elem) {
+        List<Worker> workers = new LinkedList<>();
+        for (WorkerFactory factory : getWorkerFactories(elem)) {
+            workers.add(factory.makeWorker(elem));
+        }
+        return workers;
+    }
 
-    Map<String, WorkerFactory> getWorkerFactories() { return workerFactories; }
+    String report() {
+        return "Total number of factories: " + workerFactories.size();
+    }
 }

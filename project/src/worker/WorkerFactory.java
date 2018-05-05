@@ -3,11 +3,15 @@ package worker;
 import spoon.reflect.declaration.CtElement;
 
 public abstract class WorkerFactory {
-    public String patternName;
+    private String patternName;
 
 
     public WorkerFactory(String patternName) {
         this.patternName = patternName;
+    }
+
+    public String getPatternName() {
+        return patternName;
     }
 
     /**

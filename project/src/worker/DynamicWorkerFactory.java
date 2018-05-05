@@ -26,7 +26,9 @@ public class DynamicWorkerFactory extends WorkerFactory {
     }
 
     @Override
-    public Worker makeWorker(CtElement ctElement) { return new DynamicWorker(ctElement, patternName, patternElement); }
+    public Worker makeWorker(CtElement ctElement) {
+        return new DynamicWorker(ctElement, getPatternName(), patternElement);
+    }
 
     @Override
     public boolean matches(CtElement ctElement) { return filterWorker.matches(ctElement); }

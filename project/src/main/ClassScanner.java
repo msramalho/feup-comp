@@ -3,6 +3,7 @@ package main;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.CtScanner;
 import util.Logger;
+import worker.Worker;
 import worker.WorkerFactory;
 
 import java.util.concurrent.Callable;
@@ -32,10 +33,13 @@ public class ClassScanner extends CtScanner implements Callable {
         current = current.createChild(e);
 
         // Spawn new tasks
-        for (WorkerFactory factory : factoryManager.getWorkerFactory(e)) {
-            logger.print("there goes a Worker from factory: " + factory.patternName + " at " + e.getPosition().getLine());
-            current.addFuture(factory.patternName, executorService.submit(factory.makeWorker(e)));
-        }
+        factoryManager.makeWorkers(e).forEach((Worker worker) -> {
+            logger.print("Worker spawned from factory: " + worker.getPatternName() + " at " + e.getPosition().getLine());
+            current.addFuture(
+                    worker.getPatternName(),
+                    executorService.submit(worker));
+        });
+
     }
 
     @Override
@@ -45,7 +49,7 @@ public class ClassScanner extends CtScanner implements Callable {
 
     @Override
     public Object call() throws Exception {
-        logger.print("Number of factories: " + factoryManager.getWorkerFactories().size());
+        logger.print(factoryManager.report());
         scan(this.root.getCtElement());
         return root;
     }

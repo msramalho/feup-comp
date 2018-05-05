@@ -39,7 +39,7 @@ public class StaticWorkerFactory extends WorkerFactory {
     @Override
     public Worker makeWorker(CtElement c) {
         try {
-            Worker newWorker = (Worker) constructor.newInstance(c, patternName);
+            Worker newWorker = (Worker) constructor.newInstance(c, getPatternName());
             newWorker.loadFilter();
             return newWorker;
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {

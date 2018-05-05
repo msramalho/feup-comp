@@ -14,7 +14,7 @@ import java.util.concurrent.Callable;
  */
 public abstract class Worker implements Callable { // running call on ExecutorService returns Future<C>
     AbstractFilter filter; // filter to match this worker with the CtElement which triggers it
-    Logger logger = new Logger(this); // TODO: delete for production
+    Logger logger = new Logger(this); // TODO: delete for production ?
     CtElement rootNode;
     String patternName;
 
@@ -38,7 +38,7 @@ public abstract class Worker implements Callable { // running call on ExecutorSe
      */
     protected void loadFilter() {this.filter = setFilter(); }
 
-    Class<? extends CtElement> getType() { return filter.getType(); } // TODO check template parameter bound
+    Class<? extends CtElement> getType() { return filter.getType(); }
 
     /**
      * method that uses the filter to test a given CtElement
@@ -47,5 +47,9 @@ public abstract class Worker implements Callable { // running call on ExecutorSe
      * @return true if there is a match
      */
     boolean matches(CtElement c) { return filter != null && filter.matches(c); }
+
+    public String getPatternName() {
+        return patternName;
+    }
 
 }
