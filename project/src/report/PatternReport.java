@@ -1,20 +1,32 @@
 package report;
 
-import java.util.ArrayList;
+import util.Operable;
 
-public class PatternReport {
-    String patternName;
-    // Processor processor; // Processor that properly returns the result of this Pattern
-    ArrayList<WorkerReport> reports = new ArrayList<>();
+import java.util.ArrayList;
+import java.util.function.Function;
+import java.util.stream.Stream;
+
+public class PatternReport extends Operable {
+    private String patternName;
+
+    private ArrayList<WorkerReport> reports = new ArrayList<>();
+
+    private Function<Stream<WorkerReport>, ? extends Number> operation = Stream::count;
 
     public PatternReport(String patternName) {
         this.patternName = patternName;
     }
 
+    public PatternReport(String patternName, Function<Stream<WorkerReport>, Number> operation) {
+        this.patternName = patternName;
+        this.operation = operation;
+    }
+
     public void addWorkerReport(WorkerReport report) { reports.add(report); }
 
-    public Integer getValue() {
-        return sum();
+    public Number getValue() {
+//        return this.accept((Stream<WorkerReport> reportStream) -> reportStream.count());
+        return this.accept(this.operation);
     }
 
     public PatternReport merge(PatternReport other) {
@@ -24,21 +36,11 @@ public class PatternReport {
         return merged;
     }
 
-    // Data handling functions for the report
-
-    // TODO: maybe refactor this into a new class
-    public Integer sum() {
-        Integer sum = 0;
-        for (WorkerReport wReport : reports)
-            sum += wReport.getValue();
-        return sum;
+    public String getPatternName() {
+        return patternName;
     }
 
-    public Integer count() { return reports.size(); }
-
-
-    //TODO: more statistics methods: Sum, Count, Avg, Std, Mean, ..........
-
+    //TODO: more statistics methods: Sum, Count, Avg, etc. --> implemented by Stream methods, Stream::sum, ::avg, etc.
 
     @Override
     public boolean equals(Object o) {
@@ -53,5 +55,10 @@ public class PatternReport {
     @Override
     public int hashCode() {
         return patternName != null ? patternName.hashCode() : 0;
+    }
+
+    @Override
+    protected Stream<WorkerReport> getStream() {
+        return reports.stream();
     }
 }

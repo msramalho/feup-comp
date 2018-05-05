@@ -5,15 +5,18 @@ import com.google.gson.JsonObject;
 import util.HashMapMerger;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Report {
-    private HashMapMerger reports = new HashMapMerger();
+    private HashMap<String, PatternReport> reports;
 
     /**
      * Empty constructor for the Report class
      */
-    private Report() { }
+    private Report() {
+        reports = new HashMapMerger();
+    }
 
     /**
      * Create a report by passing a list of {@link PatternReport}
@@ -34,7 +37,7 @@ public class Report {
      * @param patternReport the {@link PatternReport} to add
      */
     private void addPatternReport(PatternReport patternReport) {
-        reports.put(patternReport.patternName, patternReport);
+        reports.put(patternReport.getPatternName(), patternReport);
     }
 
     public Report merge(Report other) {
@@ -47,13 +50,14 @@ public class Report {
     public JsonObject toJson() {
         JsonObject json = new JsonObject();
 
-        for (Map.Entry<String, PatternReport> entry : reports.entrySet())
+        for (Map.Entry<String, PatternReport> entry : reports.entrySet()) {
             json.addProperty(entry.getKey(), entry.getValue().getValue());
+        }
 
         return json;
     }
 
     @Override
-    public String toString() { return new Gson().toJson(toJson()); }
+    public String toString() { return new Gson().toJson(this.toJson()); }
 
 }
