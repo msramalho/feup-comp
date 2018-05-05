@@ -7,7 +7,11 @@ import spoon.reflect.visitor.Filter;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import util.Logger;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 /**
  * Class from which the Workers should inherit.
@@ -15,7 +19,7 @@ import java.util.concurrent.Callable;
  */
 public abstract class Worker implements Callable { // running call on ExecutorService returns Future<C>
     AbstractFilter filter; // filter to match this worker with the CtElement which triggers it
-    Logger logger = new Logger(this); // TODO: delete for production ?
+    Logger logger = new Logger(this); // TODO: delete for production (?)
     CtElement rootNode;
     String patternName;
 
@@ -55,4 +59,5 @@ public abstract class Worker implements Callable { // running call on ExecutorSe
 
     @Override
     public abstract WorkerReport call() throws Exception;
+
 }

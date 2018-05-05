@@ -7,6 +7,7 @@ import util.HashMapMerger;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class Report {
     private HashMap<String, PatternReport> reports;
@@ -50,8 +51,11 @@ public class Report {
     public JsonObject toJson() {
         JsonObject json = new JsonObject();
 
-        for (Map.Entry<String, PatternReport> entry : reports.entrySet()) {
-            json.addProperty(entry.getKey(), entry.getValue().getValue());
+        for (Map.Entry<String, PatternReport> patternEntry : reports.entrySet()) {
+            for (Map.Entry<String, Number> resultEntry : patternEntry.getValue().getOperationsResults().entrySet()) {
+                String name = patternEntry.getKey() + "_" + resultEntry.getKey();
+                json.addProperty(name, resultEntry.getValue());
+            }
         }
 
         return json;

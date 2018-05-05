@@ -7,7 +7,6 @@ import worker.StaticWorkerFactory;
 import worker.WorkerFactory;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -79,7 +78,7 @@ public class Main implements Runnable {
         if (configuration == null)
             return;
 
-        List<StaticWorkerFactory> factories = configuration.getActiveDynamicFeatures();
+        List<StaticWorkerFactory> factories = configuration.getActiveWorkerFactories();
         for (WorkerFactory factory : factories) {
             manager.addWorkerFactory(factory);
         }

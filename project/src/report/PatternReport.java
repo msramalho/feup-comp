@@ -2,7 +2,7 @@ package report;
 
 import util.Operable;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -11,22 +11,25 @@ public class PatternReport extends Operable {
 
     private ArrayList<WorkerReport> reports = new ArrayList<>();
 
-    private Function<Stream<WorkerReport>, ? extends Number> operation = Stream::count;
+    private Map<String, Function<Stream<WorkerReport>, ? extends Number>> operations = new HashMap<>();
 
     public PatternReport(String patternName) {
         this.patternName = patternName;
-    }
-
-    public PatternReport(String patternName, Function<Stream<WorkerReport>, Number> operation) {
-        this.patternName = patternName;
-        this.operation = operation;
+        addOperation("count", Stream::count);
     }
 
     public void addWorkerReport(WorkerReport report) { reports.add(report); }
 
-    public Number getValue() {
-//        return this.accept((Stream<WorkerReport> reportStream) -> reportStream.count());
-        return this.accept(this.operation);
+    public void addOperation(String name, Function<Stream<WorkerReport>, Number> op) {
+        operations.put(name, op);
+    }
+
+    public Map<String, Number> getOperationsResults() {
+        Map<String, Number> result = new HashMap<>();
+        for (Map.Entry<String, Function<Stream<WorkerReport>, ? extends Number>> entry : operations.entrySet()) {
+            result.put(entry.getKey(), this.accept(entry.getValue()));
+        }
+        return result;
     }
 
     public PatternReport merge(PatternReport other) {

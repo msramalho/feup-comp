@@ -72,7 +72,7 @@ public class Configuration {
      *
      * @return a list of features to analyze, along with the respective Worker to create (which has the spoon filter)
      */
-    public List<StaticWorkerFactory> getActiveDynamicFeatures() {
+    public List<StaticWorkerFactory> getActiveWorkerFactories() {
         ArrayList<StaticWorkerFactory> workerFactories = new ArrayList<>();
         for (Field f : Dynamic.class.getDeclaredFields()) {
             try {
