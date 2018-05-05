@@ -11,7 +11,7 @@ public class PatternReport {
         this.patternName = patternName;
     }
 
-    public void addReport(WorkerReport report) { reports.add(report); }
+    public void addWorkerReport(WorkerReport report) { reports.add(report); }
 
     public Integer getValue() {
         return sum();

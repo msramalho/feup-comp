@@ -48,7 +48,7 @@ public class ClassScanner extends CtScanner implements Callable {
     }
 
     @Override
-    public Object call() throws Exception {
+    public Node call() throws Exception {
         logger.print(factoryManager.report());
         scan(this.root.getCtElement());
         return root;

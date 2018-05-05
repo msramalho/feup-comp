@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class PatternDefinitions {
-    private Map<Class<?>, ArrayList<CtElement>> patterns;
+    private Map<Class<?>, List<CtElement>> patterns;
 
     public PatternDefinitions(String targetDefinitions) throws FileNotFoundException {
         if (!Files.exists(Paths.get(targetDefinitions)))
@@ -61,5 +61,5 @@ public class PatternDefinitions {
         }
     }
 
-    public Map<Class<?>, ArrayList<CtElement>> getPatterns() { return patterns; }
+    public Map<Class<?>, List<CtElement>> getPatterns() { return patterns; }
 }

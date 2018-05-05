@@ -18,11 +18,14 @@ public class Report {
     /**
      * Create a report by passing a list of {@link PatternReport}
      *
-     * @param patterns {@link Collection} of {@link PatternReport}
+     * @param patternReports {@link Collection} of {@link PatternReport}
      */
-    public Report(Collection<PatternReport> patterns) {
-        for (PatternReport patternReport : patterns)
-            addPatternReport(patternReport);
+    public static Report fromPatternReports(Collection<PatternReport> patternReports) {
+        Report report = new Report();
+        for (PatternReport patternReport : patternReports) {
+            report.addPatternReport(patternReport);
+        }
+        return report;
     }
 
     /**

@@ -1,5 +1,6 @@
 package main;
 
+import report.WorkerReport;
 import spoon.Launcher;
 import spoon.SpoonAPI;
 import spoon.reflect.declaration.CtPackage;
@@ -73,18 +74,16 @@ public class Dispatcher implements Runnable {
     private void handlePackage(CtPackage ctPackage) {
         logger.print("Package: " + ctPackage.getQualifiedName());
         // TODO improve what is to be done with the report
-        Future rootNode = null;
+        Future<Node> rootNode;
         for (CtType ctType : ctPackage.getTypes()) {
             logger.print("\tType: " + ctType.getSimpleName() + " - " + ctType.getActualClass().getName());
             rootNode = threadPool.submit(new ClassScanner(threadPool, factoryManager, ctType));
 
             //TODO: obviously remove from here because getReport is blocking
-            if (rootNode != null) {
-                try {
-                    logger.print(((Node) rootNode.get()).getReport().toString());
-                } catch (InterruptedException | ExecutionException e) {
-                    e.printStackTrace();
-                }
+            try {
+                logger.print((rootNode.get()).getReport().toString());
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
             }
         }
     }

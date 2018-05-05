@@ -56,13 +56,18 @@ public class Node {
 
 
     private Report getOwnReport() throws ExecutionException, InterruptedException {
-        HashSet<PatternReport> prs = new HashSet<>();
+        HashSet<PatternReport> reportSet = new HashSet<>();
         for (Map.Entry<String, Future<WorkerReport>> entry : nodeFutures.entrySet()) {
-            PatternReport pr = new PatternReport(entry.getKey());
-            pr.addReport(entry.getValue().get());
-            prs.add(pr);
+            PatternReport patternReport = new PatternReport(entry.getKey());
+            WorkerReport workerReport = entry.getValue().get();
+            if (workerReport == null) {
+                System.err.println("Node's self Worker returned a NULL Report.");
+                continue;
+            }
+            patternReport.addWorkerReport(workerReport);
+            reportSet.add(patternReport);
         }
-        return new Report(prs);
+        return Report.fromPatternReports(reportSet);
     }
 
     Report getReport() throws ExecutionException, InterruptedException {
