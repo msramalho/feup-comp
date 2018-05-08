@@ -1,13 +1,13 @@
 
 public static class Patterns {
 
-    public void possibleTernaryOperator() {
+    /*public void possibleTernaryOperator() {
         if (_any_()) {
             _var_x = _any_();
         } else {
             _var_x = _any_();
         }
-    }
+    }*/
 
     //
     // public void rangeBasedFor() {
@@ -17,5 +17,10 @@ public static class Patterns {
     // }
     //
     // public void testEmptyError() { }
+
+    public void simpleIf() {
+        if (true)
+            x = 2;
+    }
 
 }
