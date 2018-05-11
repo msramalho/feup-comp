@@ -5,7 +5,6 @@ import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.reflect.code.CtInvocationImpl;
-import spoon.template.TemplateMatcher;
 import util.CtIterator;
 
 import java.util.regex.Matcher;
@@ -35,14 +34,7 @@ public class DynamicWorker extends Worker {
     public WorkerReport call() throws Exception {
         logger.print("comparing: " + rootNode.toString() + "\n with pattern: " + patternElement.toString() + " - filter is " + getType().getName());
 
-        TemplateMatcher test = new TemplateMatcher(patternElement);
-
-        if (test.matches(rootNode))
-            System.out.println("Match");
-        else
-            System.out.println("No match");
-
-        /*CtIterator pattern = new CtIterator(patternElement);
+        CtIterator pattern = new CtIterator(patternElement);
         CtIterator source = new CtIterator(rootNode);
 
         CtElement token = (CtElement) pattern.next();
@@ -75,7 +67,7 @@ public class DynamicWorker extends Worker {
                     }
                     break;
             }
-        }*/
+        }
         return new WorkerReport(1);
     }
 

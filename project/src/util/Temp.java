@@ -1,7 +1,7 @@
 package util;
 
 public class Temp {
-    /*void main(){
+    void main(){
         int x = 10;
         int y = 1000000;
         // if (x == y) {
@@ -15,12 +15,5 @@ public class Temp {
         }
 
         System.out.println("The final value of x is" + x);
-    }*/
-
-    void main() {
-        int x = 4;
-
-        if (true)
-            x = 2;
     }
 }
