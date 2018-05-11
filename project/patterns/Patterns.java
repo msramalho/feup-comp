@@ -1,13 +1,19 @@
 
-public static class Patterns {
+import spoon.template.TemplateParameter;
 
-    public void possibleTernaryOperator() {
+import java.util.Collection;
+
+public class Patterns {
+
+    public TemplateParameter<Object> _col_;
+
+    /*public void possibleTernaryOperator() {
         if (_any_()) {
             _var_x = _any_();
         } else {
             _var_x = _any_();
         }
-    }
+    }*/
 
     //
     // public void rangeBasedFor() {
@@ -17,5 +23,10 @@ public static class Patterns {
     // }
     //
     // public void testEmptyError() { }
+
+    public void test() {
+        if (_col_.S() == null)
+            return ;
+    }
 
 }
