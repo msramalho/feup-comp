@@ -37,45 +37,15 @@ public class DynamicWorker extends Worker {
 
         TemplateMatcher matcher = new TemplateMatcher(patternElement);
 
+        /*for (CtElement t : rootNode.getElements(null)) {
+            System.out.println(t.getClass() + " ---- " + t.toString());
+        }*/
+
         if (matcher.matches(rootNode))
-            System.out.println("DEU MATCH BOYSSS");
+            System.out.println("DEU MATCH BOYSSS - " + rootNode.toString());
         else
             System.out.println("ripperinooooooo");
 
-        /*CtIterator pattern = new CtIterator(patternElement);
-        CtIterator source = new CtIterator(rootNode);
-
-        CtElement token = (CtElement) pattern.next();
-
-        State state = State.STANDARD;
-        while (token != null) {
-            logger.print("[" + state + "] PROCESSING: pattern token: " + token.getClass().toString() + " - " + token.toString());
-
-            switch (state) {
-                case STANDARD:
-                    if (isAny(token)) {
-                        logger.print("IS ANY: " + token.toString());
-                        state = State.ANY_STMT;
-                        token = (CtElement) pattern.next();
-                        continue;//jump to next iteration
-                    }
-
-                    if (!token.getClass().equals(source.next().getClass())) {
-                        logger.print("FAILED PATTERN");
-                        return new WorkerReport(0);
-                    }
-                    token = (CtElement) pattern.next();
-                    break;
-                case ANY_STMT:
-                    CtElement n = (CtElement) source.next();
-                    logger.print("CURRENT IS: " + n.getClass() + " - " + n.toString());
-                    if (token.getClass().equals(n.getClass())) {
-                        logger.print("STOPED CONSUMING ANY");
-                        state = State.STANDARD;
-                    }
-                    break;
-            }
-        }*/
         return new WorkerReport(1);
     }
 
