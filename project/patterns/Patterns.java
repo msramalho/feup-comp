@@ -1,22 +1,6 @@
+public class Patterns {
 
-import spoon.template.TemplateParameter;
-import spoon.template.ExtensionTemplate;
-import spoon.template.Parameter;
-import spoon.support.reflect.code.CtAssignmentImpl;
-
-import spoon.reflect.code.CtExpression;
-import spoon.reflect.code.CtVariableAccess;
-import spoon.reflect.code.CtAssignment;
-import java.util.Collection;
-
-public class Patterns extends ExtensionTemplate {
-
-    public TemplateParameter<Object> _col_;
-    public TemplateParameter<CtExpression> _exp1_;
-    public TemplateParameter<CtExpression> _exp2_;
-
-    @Parameter
-    int _var_x_;
+    String _var_x_;
 
     /*public void possibleTernaryOperator() {
 
@@ -37,7 +21,7 @@ public class Patterns extends ExtensionTemplate {
     // public void testEmptyError() { }
 
     public void test() {
-        if (_col_.S() == null)
+        if (_var_x_ == null)
             return ;
     }
 

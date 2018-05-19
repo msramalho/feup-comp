@@ -1,15 +1,23 @@
 package worker;
 
 import report.WorkerReport;
+import spoon.pattern.Match;
+import spoon.pattern.PatternBuilder;
+import spoon.pattern.PatternBuilderHelper;
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtType;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.reflect.code.CtInvocationImpl;
 import spoon.template.TemplateMatcher;
 import util.CtIterator;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import spoon.pattern.Pattern;
+
+import java.util.List;
+
+//import java.util.regex.Matcher;
+//import java.util.regex.Pattern;
 
 public class DynamicWorker extends Worker {
     private enum State {
@@ -35,9 +43,13 @@ public class DynamicWorker extends Worker {
     public WorkerReport call() throws Exception {
         logger.print("comparing: " + rootNode.toString() + "\n with pattern: " + patternElement.toString() + " - filter is " + getType().getName());
 
-        TemplateMatcher matcher = new TemplateMatcher(patternElement);
+        Pattern pattern = PatternBuilder.create(patternElement).build();
+        System.out.println(pattern);
 
-        System.out.println("ROOT NODE");
+        if (pattern.getMatches(rootNode).size() == 1)
+            System.out.println("I got a match!!");
+
+        /*System.out.println("ROOT NODE");
         for (CtElement t : rootNode.getElements(null)) {
             System.out.println(t.getClass() + " ---- " + t.toString());
         }
@@ -50,12 +62,12 @@ public class DynamicWorker extends Worker {
         if (matcher.matches(rootNode))
             System.out.println("DEU MATCH BOYSSS - " + rootNode.toString());
         else
-            System.out.println("ripperinooooooo");
+            System.out.println("ripperinooooooo");*/
 
         return new WorkerReport(1);
     }
 
-    private boolean isAny(CtElement e) {
+    /*private boolean isAny(CtElement e) {
         //TODO: improve this if someone knows how to get the method name :'(
         if (e instanceof CtInvocationImpl) {
             Pattern p = Pattern.compile("_any_()");
@@ -63,5 +75,5 @@ public class DynamicWorker extends Worker {
             return m.find();
         }
         return false;
-    }
+    }*/
 }
