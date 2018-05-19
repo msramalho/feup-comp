@@ -12,28 +12,20 @@ import java.util.Collection;
 public class Patterns extends ExtensionTemplate {
 
     public TemplateParameter<Object> _col_;
-    //public TemplateParameter<CtVariableAccess> _var_x_;
-    public TemplateParameter<CtAssignment> _test_;
-    public TemplateParameter<CtAssignment> _test1_;
+    public TemplateParameter<CtExpression> _exp1_;
+    public TemplateParameter<CtExpression> _exp2_;
 
     @Parameter
     int _var_x_;
 
-    public TemplateParameter<CtExpression> _exp1_;
-    public TemplateParameter<CtExpression> _exp2_;
-
-    public void possibleTernaryOperator() {
+    /*public void possibleTernaryOperator() {
 
         if (true) {
-            _test_.S();
-            //_test_.S().setAssigned(_var_x_.S());
-            //_test_.S().setAssignment(_exp1_.S());
-
+            _var_x_ = 500;
         } else {
-            //_var_x_.S() = 1000;//
             _var_x_ = 1000;
         }
-    }
+    }*/
 
     //
     // public void rangeBasedFor() {

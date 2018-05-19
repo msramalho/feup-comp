@@ -37,9 +37,15 @@ public class DynamicWorker extends Worker {
 
         TemplateMatcher matcher = new TemplateMatcher(patternElement);
 
-        /*for (CtElement t : rootNode.getElements(null)) {
+        System.out.println("ROOT NODE");
+        for (CtElement t : rootNode.getElements(null)) {
             System.out.println(t.getClass() + " ---- " + t.toString());
-        }*/
+        }
+
+        System.out.println("PATTERN NODE");
+        for (CtElement t : patternElement.getElements(null)) {
+            System.out.println(t.getClass() + " ---- " + t.toString());
+        }
 
         if (matcher.matches(rootNode))
             System.out.println("DEU MATCH BOYSSS - " + rootNode.toString());

@@ -12,11 +12,11 @@ public class Temp {
         if (test == null)
             return ;
 
-        if (true) {
+        /*if (true) {
             x = 500;
         } else {
             x = 1000;
-        }
+        }*/
 
         System.out.println("The final value of x is" + x);
     }
