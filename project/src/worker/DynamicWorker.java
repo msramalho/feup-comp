@@ -41,7 +41,7 @@ public class DynamicWorker extends Worker {
 
     @Override
     public WorkerReport call() throws Exception {
-        logger.print("comparing: " + rootNode.toString() + "\n with pattern: " + patternElement.toString() + " - filter is " + getType().getName());
+        //logger.print("comparing: " + rootNode.toString() + "\n with pattern: " + patternElement.toString() + " - filter is " + getType().getName());
 
         Pattern pattern = PatternBuilder.create(patternElement).configureParameters(
                 pb-> {
@@ -51,10 +51,11 @@ public class DynamicWorker extends Worker {
                 })
                 .build();
 
-        if (pattern.getMatches(rootNode).size() == 1)
+        if (pattern.getMatches(rootNode).size() == 1) {
             System.out.println("I got a match on " + pattern + "!!");
-
-        return new WorkerReport(1);
+            return new WorkerReport(1);
+        }
+        return new WorkerReport(0);
     }
 
     /*private boolean isAny(CtElement e) {

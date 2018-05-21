@@ -1,7 +1,10 @@
+import java.util.Collection;
+
 public class Patterns {
 
     Object _var_x_;
-    Object _var_y_;
+    Integer _var_y_;
+    Collection<Object> _var_z_;
 
     public void possibleTernaryOperator() {
         if (true) {
@@ -11,13 +14,13 @@ public class Patterns {
         }
     }
 
-    //
-    // public void rangeBasedFor() {
-    //     for (int i = 0; i < _var_x.length; i++) {
-    //         _any();
-    //     }
-    // }
-    //
+
+    public void rangeBasedFor() {
+        for (int i = 0; i < _var_z_.size(); i++) {
+            //_any();
+        }
+    }
+
     // public void testEmptyError() { }
 
     public void test() {
