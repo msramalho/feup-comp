@@ -6,10 +6,10 @@
 * [GitHub Repo](https://github.com/msramalho/feup-comp) * private for now, but available upon request
 
 # Completed tasks
- 1. 
- 2. 
- 3. 
- 4. 
+ 1. Configurations from JSON file (a [default](project/src/UserSettings.json) exists) uses [GSON](https://github.com/google/gson)
+ 2. Build a [Spoon](https://github.com/INRIA/spoon) model from a given source file or folder
+ 3. Implement concurrent architecture to trigger workers
+ 4. Implement Static and Dynamic
  5. Reverted Task 4 :expressionless:
  6. 
  7. 
