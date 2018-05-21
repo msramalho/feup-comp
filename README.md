@@ -10,6 +10,7 @@
  2. Build a [Spoon](https://github.com/INRIA/spoon) model from a given source file or folder
  3. Implement concurrent architecture to trigger workers
  4. Implement Static and Dynamic
- 5. Reverted Task 4 :expressionless:
- 6. 
+ 5. ...
+ 6. Reverted Task X :expressionless:
  7. 
+ 8. 
