@@ -1,15 +1,15 @@
 public class Patterns {
 
-    String _var_x_;
+    Object _var_x_;
+    Object _var_y_;
 
-    /*public void possibleTernaryOperator() {
-
+    public void possibleTernaryOperator() {
         if (true) {
-            _var_x_ = 500;
+            _var_y_ = 500;
         } else {
-            _var_x_ = 1000;
+            _var_y_ = 1000;
         }
-    }*/
+    }
 
     //
     // public void rangeBasedFor() {

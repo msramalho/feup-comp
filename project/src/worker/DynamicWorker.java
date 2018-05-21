@@ -43,26 +43,16 @@ public class DynamicWorker extends Worker {
     public WorkerReport call() throws Exception {
         logger.print("comparing: " + rootNode.toString() + "\n with pattern: " + patternElement.toString() + " - filter is " + getType().getName());
 
-        Pattern pattern = PatternBuilder.create(patternElement).build();
-        System.out.println(pattern);
+        Pattern pattern = PatternBuilder.create(patternElement).configureParameters(
+                pb-> {
+                    pb.parameter("_var_x_").byVariable("_var_x_");
+                    pb.parameter("_var_y_").byVariable("_var_y_");
+                    pb.parameter("_var_z_").byVariable("_var_z_");
+                })
+                .build();
 
         if (pattern.getMatches(rootNode).size() == 1)
-            System.out.println("I got a match!!");
-
-        /*System.out.println("ROOT NODE");
-        for (CtElement t : rootNode.getElements(null)) {
-            System.out.println(t.getClass() + " ---- " + t.toString());
-        }
-
-        System.out.println("PATTERN NODE");
-        for (CtElement t : patternElement.getElements(null)) {
-            System.out.println(t.getClass() + " ---- " + t.toString());
-        }
-
-        if (matcher.matches(rootNode))
-            System.out.println("DEU MATCH BOYSSS - " + rootNode.toString());
-        else
-            System.out.println("ripperinooooooo");*/
+            System.out.println("I got a match on " + pattern + "!!");
 
         return new WorkerReport(1);
     }
