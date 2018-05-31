@@ -6,17 +6,27 @@ import worker.DynamicWorkerFactory;
 import worker.StaticWorkerFactory;
 import worker.WorkerFactory;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 public class Main implements Runnable {
     private Dispatcher dispatcher;
     private Configuration configuration;
     private FactoryManager factoryManager;
+    private HashMap<String, HashMap<String, Future<Node>>> packageNodes = null;
 
     /**
      * Main function should parse cmd args
+     *
      * @param args to parse
      */
     public static void main(String[] args) {
@@ -103,6 +113,36 @@ public class Main implements Runnable {
         }
     }
 
+    /**
+     * call dispatcher and get the results, then create a report
+     */
     @Override
-    public void run() { dispatcher.run(); }
+    public void run() {
+        try {
+            packageNodes = (HashMap<String, HashMap<String, Future<Node>>>) dispatcher.call();
+            writeReport();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void writeReport() throws ExecutionException {
+        for (Map.Entry<String, HashMap<String, Future<Node>>> p : packageNodes.entrySet()) {//patterns
+            // create a folder for each package
+            String folderName = configuration.output.path + "/" + p.getKey() + "/";
+            new File(folderName).mkdirs(); // create dirs
+
+            for (Map.Entry<String, Future<Node>> t : p.getValue().entrySet()) {//types inside patterns
+                //create a report for each Type inside that folder
+                String filename = folderName + t.getKey() + "." + configuration.output.format;
+                try {
+                    byte data[] = (t.getValue().get()).getReport().toString().getBytes();
+                    Path file = Paths.get(filename);
+                    Files.write(file, data);
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }
