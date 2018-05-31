@@ -1,6 +1,7 @@
 package main;
 
 import pattern_matcher.PatternDefinitions;
+import report.Report;
 import spoon.reflect.declaration.CtElement;
 import worker.DynamicWorkerFactory;
 import worker.StaticWorkerFactory;
@@ -127,6 +128,7 @@ public class Main implements Runnable {
     }
 
     private void writeReport() throws ExecutionException {
+        Report global = new Report();
         for (Map.Entry<String, HashMap<String, Future<Node>>> p : packageNodes.entrySet()) {//patterns
             // create a folder for each package
             String folderName = configuration.output.path + "/" + p.getKey() + "/";
@@ -136,13 +138,26 @@ public class Main implements Runnable {
                 //create a report for each Type inside that folder
                 String filename = folderName + t.getKey() + "." + configuration.output.format;
                 try {
-                    byte data[] = (t.getValue().get()).getReport().toString().getBytes();
-                    Path file = Paths.get(filename);
-                    Files.write(file, data);
-                } catch (IOException | InterruptedException e) {
+                    Report local = (t.getValue().get()).getReport();
+                    global = global.merge(local); //build global report incrementally
+
+                    writeFile(filename, local.toString()); // write individual Type reports
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+        }
+        writeFile(configuration.output.path + "/report." + configuration.output.format, global.toString()); // write individual Type reports
+
+    }
+
+    private void writeFile(String filename, String content) {
+        byte data[] = content.getBytes();
+        Path file = Paths.get(filename);
+        try {
+            Files.write(file, data);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -15,7 +15,7 @@ public class Report {
     /**
      * Empty constructor for the Report class
      */
-    private Report() {
+    public Report() {
         reports = new HashMapMerger();
     }
 

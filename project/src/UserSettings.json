@@ -3,7 +3,7 @@
 		"patternsFile": "project/patterns/Patterns.java"
 	},
 	"output": {
-		"path": "outFolder/out/",
+		"path": "out/",
 		"format": "json"
 	},
 	"global": {
