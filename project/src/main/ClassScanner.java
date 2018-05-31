@@ -35,9 +35,7 @@ public class ClassScanner extends CtScanner implements Callable {
         // Spawn new tasks
         factoryManager.makeWorkers(e).forEach((Worker worker) -> {
             logger.print("Worker spawned from factory: " + worker.getPatternName() + " at " + e.getPosition().getLine());
-            current.addFuture(
-                    worker.getPatternName(),
-                    executorService.submit(worker));
+            current.addFuture(worker.getPatternName(), executorService.submit(worker));
         });
 
     }

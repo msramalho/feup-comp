@@ -11,7 +11,6 @@ public class W_innerLoops extends Worker {
 
     public W_innerLoops(CtElement rootNode, String patternName) {
         super(rootNode, patternName);
-        logger.print("proof of concept constructor");
     }
 
     @Override
@@ -21,7 +20,6 @@ public class W_innerLoops extends Worker {
 
     @Override
     public WorkerReport call() {
-        logger.print("proof of concept run for the ForEachLoops innerLoops Count");
         return new WorkerReport(1);
     }
 }
