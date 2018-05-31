@@ -3,19 +3,19 @@ package util;
 import java.util.ArrayList;
 
 public class Temp {
-    void main(){
+    void main() {
         Integer x = 10;
         Integer y = 1000000;
         String test = "ee";
 
         ArrayList<Integer> z = new ArrayList<>();
 
-         if (x == y) {
-             System.out.println("lol");
-         }
+        if (x == y) {
+            System.out.println("lol");
+        }
 
         if (test == null)
-            return ;
+            return;
 
         if (true) {
             x = 500;
