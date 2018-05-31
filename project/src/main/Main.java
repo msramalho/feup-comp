@@ -15,6 +15,10 @@ public class Main implements Runnable {
     private Configuration configuration;
     private FactoryManager factoryManager;
 
+    /**
+     * Main function should parse cmd args
+     * @param args to parse
+     */
     public static void main(String[] args) {
         if (args.length < 1 || args.length > 3) {
             System.out.println("Unable to parse command line arguments, usage: " + Dispatcher.getUsage());
@@ -23,17 +27,16 @@ public class Main implements Runnable {
 
         String targetFile = args[0];
         String configFile = args.length >= 2 ? args[1] : null;
-        String patternsFile = args.length >= 3 ? args[2] : "patterns/Patterns.java";
 
-        Main obj = new Main(targetFile, configFile, patternsFile);
+        Main obj = new Main(targetFile, configFile);
         obj.run();
     }
 
-    Main(String targetFile, String configFile, String patternsFile) {
+    Main(String targetFile, String configFile) {
         configuration = initializeConfiguration(configFile);
         dispatcher = initializeDispatcher(targetFile);
 
-        factoryManager = initializeFactoryManager(patternsFile);
+        factoryManager = initializeFactoryManager(configuration.fix.patternsFile);
         dispatcher.setFactoryManager(factoryManager);
     }
 

@@ -94,5 +94,5 @@ public class Dispatcher implements Runnable {
      *
      * @return the format in which command line arguments should be given
      */
-    static String getUsage() { return "<filename|foldername> [<userSettings.json>] [<Patterns.java>]"; }
+    static String getUsage() { return "<filename|foldername> [<userSettings.json>]"; }
 }
