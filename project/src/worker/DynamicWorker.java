@@ -1,29 +1,17 @@
 package worker;
 
 import report.WorkerReport;
-import spoon.pattern.Match;
 import spoon.pattern.PatternBuilder;
-import spoon.pattern.PatternBuilderHelper;
 import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtType;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
-import spoon.support.reflect.code.CtInvocationImpl;
-import spoon.template.TemplateMatcher;
 import util.CtIterator;
 
 import spoon.pattern.Pattern;
 
-import java.util.List;
-
-//import java.util.regex.Matcher;
-//import java.util.regex.Pattern;
 
 public class DynamicWorker extends Worker {
-    private enum State {
-        STANDARD,   // STANDARD means processing elements
-        ANY_STMT    // ANY_STMT means processing "any" until the element matches the one after element
-    };
+
 
     private CtElement patternElement;
 
@@ -41,21 +29,21 @@ public class DynamicWorker extends Worker {
 
     @Override
     public WorkerReport call() throws Exception {
-        //logger.print("comparing: " + rootNode.toString() + "\n with pattern: " + patternElement.toString() + " - filter is " + getType().getName());
+        // logger.print("comparing: " + rootNode.toString() + "\n with pattern: " + patternElement.toString() + " - filter is " + getType().getName());
 
         Pattern pattern = PatternBuilder.create(patternElement).configureParameters(
-                pb-> {
+                pb -> {
                     pb.parameter("_var_x_").byVariable("_var_x_");
                     pb.parameter("_var_y_").byVariable("_var_y_");
                     pb.parameter("_var_z_").byVariable("_var_z_");
                 })
                 .build();
 
-        if (pattern.getMatches(rootNode).size() == 1) {
-            System.out.println("I got a match on " + pattern + "!!");
-            return new WorkerReport(1);
+        Integer countMatches = pattern.getMatches(rootNode).size();
+        if (countMatches >= 1) {
+            System.out.println("I got " + countMatches + "match on " + rootNode + "!!");
         }
-        return new WorkerReport(0);
+        return new WorkerReport(countMatches);
     }
 
     /*private boolean isAny(CtElement e) {
