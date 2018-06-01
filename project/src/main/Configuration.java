@@ -19,7 +19,7 @@ public class Configuration {
     public transient Logger logger = new Logger(this);
 
     public class Static {
-        public String patternsFile = "project/patterns/Patterns.java";
+        public String patternsFile = "./patterns/Patterns.java";
 
         Static() { }
     }
