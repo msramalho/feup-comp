@@ -23,10 +23,23 @@ public class Temp {
             x = 1000;
         }
 
+        /**
+         * Exploring ANY behaviour:
+         *  - with greedy finds the biggest match:
+         *              y = 0;
+         *             x = ++y;
+         *             y = 0;
+         *  Finds only the second one.
+         *  - There's only the need for one any, even if several anys used in the same match. Example
+         *      _any_test_.S(); ---  System.out.println("Testar cenas aleatorias");
+         *      _var_y_ = 0; ---  y = 0;
+         *      _any_test_.S(); ----  x = ++y;
+         *  _any_test_ content: System(...), x = ++y;
+         */
         for (int i = 0; i < z.size(); i++) {
             System.out.println("Testar cenas aleatorias");
-            int j = 0;
-            x = ++j;
+            y = 0;
+            x = ++y;
         }
 
         System.out.println("The final value of x is" + x);

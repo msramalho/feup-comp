@@ -7,6 +7,7 @@ public class Patterns {
     Integer _var_y_;
     Collection<Object> _var_z_;
     TemplateParameter<Void> _any_test_;
+    TemplateParameter<Void> _any_cenas_;
 
     public void possibleTernaryOperator() {
         if (true) {
@@ -19,6 +20,8 @@ public class Patterns {
 
     public void rangeBasedFor() {
         for (int i = 0; i < _var_z_.size(); i++) {
+            _any_test_.S();
+            _var_y_ = 0;
             _any_test_.S();
         }
     }
