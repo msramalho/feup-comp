@@ -1,4 +1,4 @@
-package worker;
+package worker.workers;
 
 import report.WorkerReport;
 import spoon.reflect.declaration.CtClass;
@@ -7,12 +7,13 @@ import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.ModifierKind;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
+import worker.Worker;
 
 /**
- * Count the number of direct public methods defined in a given Class (does not include constructors nor methods belonging to sub-classes)
+ * Count the number of private direct methods defined in a given Class (does not include constructors nor methods belonging to sub-classes)
  */
-public class W_countMethodsPublic extends Worker {
-    public W_countMethodsPublic(CtElement rootNode, String patternName) {
+public class W_countMethodsPrivate extends Worker {
+    public W_countMethodsPrivate(CtElement rootNode, String patternName) {
         super(rootNode, patternName);
     }
 
@@ -28,8 +29,8 @@ public class W_countMethodsPublic extends Worker {
                 rootNode.filterChildren(new AbstractFilter<CtMethod>(CtMethod.class) {
                     @Override
                     public boolean matches(CtMethod method) {
-                        // guarantee this is a direct child and that the method is public
-                        return method.getParent() == rootNode && method.getModifiers().contains(ModifierKind.PUBLIC);
+                        // guarantee this is a direct child and that the method is private
+                        return method.getParent() == rootNode && method.getModifiers().contains(ModifierKind.PRIVATE);
                     }
                 }).list().size() // returning the number of methods
         );
