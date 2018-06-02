@@ -32,6 +32,7 @@ public class Configuration {
         public boolean countMethodsPublic = false;
         public boolean countMethodsProtected = false;
         public boolean countMethodsPrivate = false;
+        public boolean linesOfCodeClass = false;
 
         Dynamic() { }
     }

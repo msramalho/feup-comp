@@ -15,6 +15,7 @@
 		"countMethods": true,
 		"countMethodsPrivate": true,
 		"countMethodsPublic": true,
-		"countMethodsProtected": true
+		"countMethodsProtected": true,
+		"linesOfCodeClass": true
 	}
 }

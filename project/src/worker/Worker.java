@@ -19,7 +19,7 @@ import java.util.stream.Stream;
  */
 public abstract class Worker implements Callable { // running call on ExecutorService returns Future<C>
     AbstractFilter filter; // filter to match this worker with the CtElement which triggers it
-    Logger logger = new Logger(this); // TODO: delete for production (?)
+    protected Logger logger = new Logger(this); // TODO: delete for production (?)
     protected CtElement rootNode;
     String patternName;
 
