@@ -29,6 +29,7 @@ public class Configuration {
         public boolean possibleTernary = false;
         public boolean classInheritance = false;
         public boolean countMethods = false;
+        public boolean countMethodsPrivate = false;
 
         Dynamic() { }
     }
