@@ -24,7 +24,9 @@ public class Temp {
         }
 
         for (int i = 0; i < z.size(); i++) {
-            //_any();
+            System.out.println("Testar cenas aleatorias");
+            int j = 0;
+            x = ++j;
         }
 
         System.out.println("The final value of x is" + x);

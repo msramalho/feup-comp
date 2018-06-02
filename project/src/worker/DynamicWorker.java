@@ -2,7 +2,9 @@ package worker;
 
 import report.WorkerReport;
 import spoon.pattern.PatternBuilder;
+import spoon.pattern.Quantifier;
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.meta.ContainerKind;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
 import util.CtIterator;
@@ -32,7 +34,7 @@ public class DynamicWorker extends Worker {
     }
 
     @Override
-    public WorkerReport call() throws Exception {
+    public WorkerReport call() {
         // logger.print("comparing: " + rootNode.toString() + "\n with pattern: " + patternElement.toString() + " - filter is " + getType().getName());
         buildPattern(); // build the pattern from the patternElement
 
@@ -52,6 +54,7 @@ public class DynamicWorker extends Worker {
                 pb -> {
                     for (String v : getPatternVariables(patternElement.toString()))
                         pb.parameter(v).byVariable(v);
+                    pb.parameter("_any_test_").byReferenceName("_any_test_").setMatchingStrategy(Quantifier.GREEDY).setContainerKind(ContainerKind.LIST);
                 }).build();
     }
 

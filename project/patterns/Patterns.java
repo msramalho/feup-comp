@@ -1,10 +1,12 @@
 import java.util.Collection;
+import spoon.template.TemplateParameter;
 
 public class Patterns {
 
     Object _var_x_;
     Integer _var_y_;
     Collection<Object> _var_z_;
+    TemplateParameter<Void> _any_test_;
 
     public void possibleTernaryOperator() {
         if (true) {
@@ -17,7 +19,7 @@ public class Patterns {
 
     public void rangeBasedFor() {
         for (int i = 0; i < _var_z_.size(); i++) {
-            //_any();
+            _any_test_.S();
         }
     }
 
