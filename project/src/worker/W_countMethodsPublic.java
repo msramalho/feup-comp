@@ -8,6 +8,9 @@ import spoon.reflect.declaration.ModifierKind;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
 
+/**
+ * Count the number of direct public methods defined in a given Class (does not include constructors nor methods belonging to sub-classes)
+ */
 public class W_countMethodsPublic extends Worker {
     public W_countMethodsPublic(CtElement rootNode, String patternName) {
         super(rootNode, patternName);

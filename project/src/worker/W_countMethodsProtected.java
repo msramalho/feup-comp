@@ -8,6 +8,9 @@ import spoon.reflect.declaration.ModifierKind;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
 
+/**
+ * Count the number of direct protected methods defined in a given Class (does not include constructors nor methods belonging to sub-classes)
+ */
 public class W_countMethodsProtected extends Worker {
     public W_countMethodsProtected(CtElement rootNode, String patternName) {
         super(rootNode, patternName);
