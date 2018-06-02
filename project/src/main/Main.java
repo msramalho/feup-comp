@@ -1,20 +1,35 @@
 package main;
 
 import pattern_matcher.PatternDefinitions;
+import report.Report;
 import spoon.reflect.declaration.CtElement;
 import worker.DynamicWorkerFactory;
 import worker.StaticWorkerFactory;
 import worker.WorkerFactory;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 public class Main implements Runnable {
     private Dispatcher dispatcher;
     private Configuration configuration;
     private FactoryManager factoryManager;
+    private HashMap<String, HashMap<String, Future<Node>>> packageNodes = null;
 
+    /**
+     * Main function should parse cmd args
+     *
+     * @param args to parse
+     */
     public static void main(String[] args) {
         if (args.length < 1 || args.length > 3) {
             System.out.println("Unable to parse command line arguments, usage: " + Dispatcher.getUsage());
@@ -23,17 +38,16 @@ public class Main implements Runnable {
 
         String targetFile = args[0];
         String configFile = args.length >= 2 ? args[1] : null;
-        String patternsFile = args.length >= 3 ? args[2] : "patterns/Patterns.java";
 
-        Main obj = new Main(targetFile, configFile, patternsFile);
+        Main obj = new Main(targetFile, configFile);
         obj.run();
     }
 
-    Main(String targetFile, String configFile, String patternsFile) {
+    Main(String targetFile, String configFile) {
         configuration = initializeConfiguration(configFile);
         dispatcher = initializeDispatcher(targetFile);
 
-        factoryManager = initializeFactoryManager(patternsFile);
+        factoryManager = initializeFactoryManager(configuration.fix.patternsFile);
         dispatcher.setFactoryManager(factoryManager);
     }
 
@@ -100,6 +114,50 @@ public class Main implements Runnable {
         }
     }
 
+    /**
+     * call dispatcher and get the results, then create a report
+     */
     @Override
-    public void run() { dispatcher.run(); }
+    public void run() {
+        try {
+            packageNodes = (HashMap<String, HashMap<String, Future<Node>>>) dispatcher.call();
+            writeReport();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void writeReport() throws ExecutionException {
+        Report global = new Report();
+        for (Map.Entry<String, HashMap<String, Future<Node>>> p : packageNodes.entrySet()) {//patterns
+            // create a folder for each package
+            String folderName = configuration.output.path + "/" + p.getKey() + "/";
+            new File(folderName).mkdirs(); // create dirs
+
+            for (Map.Entry<String, Future<Node>> t : p.getValue().entrySet()) {//types inside patterns
+                //create a report for each Type inside that folder
+                String filename = folderName + t.getKey() + "." + configuration.output.format;
+                try {
+                    Report local = (t.getValue().get()).getReport();
+                    global = global.merge(local); //build global report incrementally
+
+                    writeFile(filename, local.toString()); // write individual Type reports
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        writeFile(configuration.output.path + "/report." + configuration.output.format, global.toString()); // write individual Type reports
+
+    }
+
+    private void writeFile(String filename, String content) {
+        byte data[] = content.getBytes();
+        Path file = Paths.get(filename);
+        try {
+            Files.write(file, data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -19,8 +19,7 @@ public class Configuration {
     public transient Logger logger = new Logger(this);
 
     public class Static {
-        public Boolean countFor = false;
-        public Boolean countForeach = false;
+        public String patternsFile = "./patterns/Patterns.java";
 
         Static() { }
     }

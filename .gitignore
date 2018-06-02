@@ -2,3 +2,5 @@
 .idea/*
 project/.idea/workspace.xml
 bin/*
+outFolder/*
+out/*

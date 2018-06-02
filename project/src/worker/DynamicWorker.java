@@ -1,22 +1,25 @@
 package worker;
 
 import report.WorkerReport;
+import spoon.pattern.PatternBuilder;
+import spoon.pattern.Quantifier;
 import spoon.reflect.declaration.CtElement;
+import spoon.reflect.meta.ContainerKind;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
-import spoon.support.reflect.code.CtInvocationImpl;
 import util.CtIterator;
 
+import spoon.pattern.Pattern;
+
+import java.util.HashSet;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public class DynamicWorker extends Worker {
-    private enum State {
-        STANDARD,   // STANDARD means processing elements
-        ANY_STMT    // ANY_STMT means processing "any" until the element matches the one after element
-    };
+
 
     private CtElement patternElement;
+    private Pattern pattern;
 
     public DynamicWorker(CtElement rootNode, String patternName, CtElement patternElement) {
         super(rootNode, patternName);
@@ -31,47 +34,45 @@ public class DynamicWorker extends Worker {
     }
 
     @Override
-    public WorkerReport call() throws Exception {
-        logger.print("comparing: " + rootNode.toString() + "\n with pattern: " + patternElement.toString() + " - filter is " + getType().getName());
+    public WorkerReport call() {
+        // logger.print("comparing: " + rootNode.toString() + "\n with pattern: " + patternElement.toString() + " - filter is " + getType().getName());
+        buildPattern(); // build the pattern from the patternElement
 
-        CtIterator pattern = new CtIterator(patternElement);
-        CtIterator source = new CtIterator(rootNode);
-
-        CtElement token = (CtElement) pattern.next();
-
-        State state = State.STANDARD;
-        while (token != null) {
-            logger.print("[" + state + "] PROCESSING: pattern token: " + token.getClass().toString() + " - " + token.toString());
-
-            switch (state) {
-                case STANDARD:
-                    if (isAny(token)) {
-                        logger.print("IS ANY: " + token.toString());
-                        state = State.ANY_STMT;
-                        token = (CtElement) pattern.next();
-                        continue;//jump to next iteration
-                    }
-
-                    if (!token.getClass().equals(source.next().getClass())) {
-                        logger.print("FAILED PATTERN");
-                        return new WorkerReport(0);
-                    }
-                    token = (CtElement) pattern.next();
-                    break;
-                case ANY_STMT:
-                    CtElement n = (CtElement) source.next();
-                    logger.print("CURRENT IS: " + n.getClass() + " - " + n.toString());
-                    if (token.getClass().equals(n.getClass())) {
-                        logger.print("STOPED CONSUMING ANY");
-                        state = State.STANDARD;
-                    }
-                    break;
-            }
+        Integer countMatches = pattern.getMatches(rootNode).size();
+        if (countMatches >= 1) {
+            System.out.println(pattern.getMatches(rootNode).get(0).getParameters().getValue("_any_test_"));
+            System.out.println("I got " + countMatches + " match(es) on " + rootNode + "!!");
         }
-        return new WorkerReport(1);
+        return new WorkerReport(countMatches);
     }
 
-    private boolean isAny(CtElement e) {
+
+    /**
+     * When the Dynamic worker is called, the pattern gets built so that it can be used for matching
+     */
+    private void buildPattern() {
+        pattern = PatternBuilder.create(patternElement).configureParameters(
+                pb -> {
+                    for (String v : getPatternVariables(patternElement.toString()))
+                        pb.parameter(v).byVariable(v);
+                    pb.parameter("_any_test_").byReferenceName("_any_test_").setMatchingStrategy(Quantifier.GREEDY).setContainerKind(ContainerKind.LIST);
+                }).build();
+    }
+
+    /**
+     * Find instances of variables in the Patterns file in the format _var_SOMETHING_
+     *
+     * @param code the pattern code as a string
+     * @return a {@link HashSet} of {@link String} with the unique variable names
+     */
+    private HashSet<String> getPatternVariables(String code) {
+        HashSet<String> variables = new HashSet<>();
+        Matcher m = java.util.regex.Pattern.compile("_var_.*?_").matcher(code);
+        while (m.find()) variables.add(m.group(0));
+        return variables;
+    }
+
+    /*private boolean isAny(CtElement e) {
         //TODO: improve this if someone knows how to get the method name :'(
         if (e instanceof CtInvocationImpl) {
             Pattern p = Pattern.compile("_any_()");
@@ -79,5 +80,5 @@ public class DynamicWorker extends Worker {
             return m.find();
         }
         return false;
-    }
+    }*/
 }
