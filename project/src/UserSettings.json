@@ -13,6 +13,7 @@
 		"innerLoops": true,
 		"possibleTernary": true,
 		"countMethods": true,
-		"countMethodsPrivate": true
+		"countMethodsPrivate": true,
+		"countMethodsPublic": true
 	}
 }

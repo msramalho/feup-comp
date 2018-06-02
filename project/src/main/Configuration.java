@@ -30,6 +30,7 @@ public class Configuration {
         public boolean classInheritance = false;
         public boolean countMethods = false;
         public boolean countMethodsPrivate = false;
+        public boolean countMethodsPublic = false;
 
         Dynamic() { }
     }
