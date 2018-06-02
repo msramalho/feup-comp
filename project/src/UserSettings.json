@@ -11,6 +11,7 @@
 	},
 	"dynamic": {
 		"innerLoops": true,
-		"possibleTernary": true
+		"possibleTernary": true,
+		"countMethods": true
 	}
 }
