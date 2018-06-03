@@ -37,6 +37,7 @@ public class Configuration {
         public boolean countComments = false;
         public boolean countCommentsInline = false;
         public boolean countCommentsBlock = false;
+        public boolean countCommentsJavadoc = false;
 
         Dynamic() { }
     }

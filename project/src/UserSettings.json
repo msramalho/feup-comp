@@ -21,6 +21,7 @@
 		"linesOfCodeMethod": true,
 		"countComments": true,
 		"countCommentsInline": true,
-		"countCommentsBlock": true
+		"countCommentsBlock": true,
+		"countCommentsJavadoc": true
 	}
 }
