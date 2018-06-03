@@ -11,6 +11,7 @@ import util.CtIterator;
 
 import spoon.pattern.Pattern;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -37,17 +38,32 @@ public class DynamicWorker extends Worker {
     @Override
     public WorkerReport call() {
         // logger.print("comparing: " + rootNode.toString() + "\n with pattern: " + patternElement.toString() + " - filter is " + getType().getName());
-        buildPattern(); // build the pattern from the patternElement
+        /*buildPattern(); // build the pattern from the patternElement
 
         Integer countMatches = pattern.getMatches(rootNode).size();
         if (countMatches >= 1) {
             if (pattern.getMatches(rootNode).get(0).getParameters().getValue("_any_test_") != null) {
             System.out.println(pattern.getMatches(rootNode).get(0).getParameters().getValue("_any_test_") );
-            List strings = (List) pattern.getMatches(rootNode).get(0).getParameters().getValue("_any_test_");
             String anyMatch = extractAnyMatch("_any_test_");
             String[] split = rootNode.toString().split(anyMatch);
             System.out.println("I got " + countMatches + " match(es) on " + rootNode + "!!"); }
         }
+        return new WorkerReport(countMatches);*/
+        Integer newMatches;
+        Integer countMatches = 0;
+        do {
+            buildPattern(); // build the pattern from the patternElement
+            newMatches = pattern.getMatches(rootNode).size();
+
+            if (newMatches >= 1) {
+                countMatches += newMatches;
+                System.out.println("I got " + countMatches + " match(es) on " + rootNode + "!!");
+
+                if (!updateRootNode("_any_test_"))
+                    break;
+            }
+        } while (newMatches != 0);
+
         return new WorkerReport(countMatches);
     }
 
@@ -60,7 +76,7 @@ public class DynamicWorker extends Worker {
                 pb -> {
                     for (String v : getPatternVariables(patternElement.toString()))
                         pb.parameter(v).byVariable(v);
-                    pb.parameter("_any_test_").byReferenceName("_any_test_").setMatchingStrategy(Quantifier.GREEDY).setContainerKind(ContainerKind.LIST);
+                    pb.parameter("_any_test_").byReferenceName("_any_test_").setMatchingStrategy(Quantifier.RELUCTANT).setContainerKind(ContainerKind.LIST);
                     pb.parameter("_any_cenas_").byReferenceName("_any_cenas_").setMatchingStrategy(Quantifier.RELUCTANT).setContainerKind(ContainerKind.LIST);
                 }).build();
     }
@@ -96,5 +112,28 @@ public class DynamicWorker extends Worker {
             result.append("\\Q").append(stmt).append(";\\E\\s*");
 
         return result.toString();
+    }
+
+    private boolean updateRootNode(String anyName) {
+        List consumedByAny = (List) pattern.getMatches(rootNode).get(0).getParameters().getValue(anyName);
+        if (consumedByAny == null)
+            return false;
+
+        // Using flag indicating removals to optimize cycle because List is immutable
+        int removals = 0;
+
+        // TODO: any idea how to do this any better? without getElements?
+        for (CtElement element : rootNode.getElements(null)) {
+            for (Object elementConsumed : consumedByAny) {
+                if (element.equals(elementConsumed)) {
+                    element.delete();
+                    removals++;
+                    //consumedByAny.remove(elementConsumed);
+                }
+            }
+            if (removals == consumedByAny.size())
+                break;
+        }
+        return true;
     }
 }

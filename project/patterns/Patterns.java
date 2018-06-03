@@ -9,13 +9,13 @@ public class Patterns {
     TemplateParameter<Void> _any_test_;
     TemplateParameter<Void> _any_cenas_;
 
-    public void possibleTernaryOperator() {
+    /*public void possibleTernaryOperator() {
         if (true) {
             _var_y_ = 500;
         } else {
             _var_y_ = 1000;
         }
-    }
+    }*/
 
 
     public void rangeBasedFor() {
@@ -28,9 +28,9 @@ public class Patterns {
 
     // public void testEmptyError() { }
 
-    public void test() {
+    /*public void test() {
         if (_var_x_ == null)
             return ;
-    }
+    }*/
 
 }
