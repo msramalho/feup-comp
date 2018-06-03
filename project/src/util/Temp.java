@@ -2,7 +2,7 @@ package util;
 
 import java.util.ArrayList;
 
-public class Temp {
+public class Temp extends HashMapMerger {
     void main() {
         Integer x = 10;
         Integer y = 1000000;

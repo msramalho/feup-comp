@@ -19,7 +19,6 @@ public class W_ternary extends Worker {
 
     @Override
     public WorkerReport call() throws Exception {
-        logger.print("found conditional: " + rootNode.toString());
         return new WorkerReport(1);
     }
 }
