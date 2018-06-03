@@ -22,7 +22,7 @@ public class Patterns {
         for (int i = 0; i < _var_z_.size(); i++) {
             _any_test_.S();
             _var_y_ = 0;
-            _any_test_.S();
+            _any_cenas_.S();
         }
     }
 

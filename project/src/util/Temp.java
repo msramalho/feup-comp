@@ -40,7 +40,15 @@ public class Temp {
             System.out.println("Testar cenas aleatorias");
             y = 0;
             x = ++y;
+            y = 0;
+            System.out.println("Middle test");
+            y = 0;
+            x = ++y;
+            System.out.println("Last test");
         }
+
+        if (true)
+            System.out.println("teste de pattern com mais do que um nó");
 
         System.out.println("The final value of x is" + x);
     }

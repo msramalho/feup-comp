@@ -12,6 +12,7 @@ import util.CtIterator;
 import spoon.pattern.Pattern;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.regex.Matcher;
 
 
@@ -40,8 +41,12 @@ public class DynamicWorker extends Worker {
 
         Integer countMatches = pattern.getMatches(rootNode).size();
         if (countMatches >= 1) {
-            System.out.println(pattern.getMatches(rootNode).get(0).getParameters().getValue("_any_test_"));
-            System.out.println("I got " + countMatches + " match(es) on " + rootNode + "!!");
+            if (pattern.getMatches(rootNode).get(0).getParameters().getValue("_any_test_") != null) {
+            System.out.println(pattern.getMatches(rootNode).get(0).getParameters().getValue("_any_test_") );
+            List strings = (List) pattern.getMatches(rootNode).get(0).getParameters().getValue("_any_test_");
+            String anyMatch = extractAnyMatch("_any_test_");
+            String[] split = rootNode.toString().split(anyMatch);
+            System.out.println("I got " + countMatches + " match(es) on " + rootNode + "!!"); }
         }
         return new WorkerReport(countMatches);
     }
@@ -56,6 +61,7 @@ public class DynamicWorker extends Worker {
                     for (String v : getPatternVariables(patternElement.toString()))
                         pb.parameter(v).byVariable(v);
                     pb.parameter("_any_test_").byReferenceName("_any_test_").setMatchingStrategy(Quantifier.GREEDY).setContainerKind(ContainerKind.LIST);
+                    pb.parameter("_any_cenas_").byReferenceName("_any_cenas_").setMatchingStrategy(Quantifier.RELUCTANT).setContainerKind(ContainerKind.LIST);
                 }).build();
     }
 
@@ -81,4 +87,14 @@ public class DynamicWorker extends Worker {
         }
         return false;
     }*/
+
+    private String extractAnyMatch(String anyName) {
+        List tempList = (List) pattern.getMatches(rootNode).get(0).getParameters().getValue(anyName);
+
+        StringBuilder result = new StringBuilder();
+        for (Object stmt: tempList)
+            result.append("\\Q").append(stmt).append(";\\E\\s*");
+
+        return result.toString();
+    }
 }
