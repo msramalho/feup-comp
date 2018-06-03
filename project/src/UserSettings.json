@@ -26,6 +26,7 @@
 		"countClassFields": true,
 		"countClassFieldsPublic": true,
 		"countClassFieldsProtected": true,
-		"countClassFieldsPrivate": true
+		"countClassFieldsPrivate": true,
+		"countClassFieldsStatic": true
 	}
 }
