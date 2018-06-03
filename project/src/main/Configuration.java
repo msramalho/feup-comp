@@ -30,6 +30,7 @@ public class Configuration {
         public boolean classInheritance = false;
         public boolean loopsFor = false;
         public boolean loopsForeach = false;
+        public boolean loopsWhile = false;
         public boolean countMethods = false;
         public boolean countMethodsPublic = false;
         public boolean countMethodsProtected = false;

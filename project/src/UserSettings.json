@@ -15,6 +15,7 @@
 		"possibleTernary": true,
 		"loopsFor": true,
 		"loopsForeach": true,
+		"loopsWhile": true,
 		"countMethods": true,
 		"countMethodsPrivate": true,
 		"countMethodsPublic": true,
