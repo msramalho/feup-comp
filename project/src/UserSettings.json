@@ -14,6 +14,7 @@
 		"innerLoops": true,
 		"possibleTernary": true,
 		"ternary": true,
+		"cyclomaticComplexity": true,
 		"loopsFor": true,
 		"loopsForeach": true,
 		"loopsWhile": true,
