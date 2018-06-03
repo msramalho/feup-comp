@@ -2,10 +2,28 @@ package util;
 
 import report.WorkerReport;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Operations {
+    static Map<String, Function<Stream<WorkerReport>, Number>> availableOperations = createMap();
+
+    private static Map<String, Function<Stream<WorkerReport>, Number>> createMap() {
+        Map<String, Function<Stream<WorkerReport>, Number>> myMap = new HashMap<>();
+        myMap.put("count", Operations::count);
+        myMap.put("sum", Operations::sum);
+        myMap.put("total", Operations::sum);
+        myMap.put("min", Operations::min);
+        myMap.put("max", Operations::max);
+        myMap.put("avg", Operations::average);
+        myMap.put("median", Operations::median);
+        myMap.put("std", Operations::standardDeviation);
+        return myMap;
+    }
+
 
     public static Long count(Stream<WorkerReport> s) {
         return s.count();
@@ -51,4 +69,18 @@ public class Operations {
         return Math.sqrt(squaredDiff / (count(s) - 1));
     }
 
+    /**
+     * Receive an array of Strings and use the availableOperations hashmap to convert it to operations. Since the same operation can have multiple names, we have included checks that warn the user if an operation is duplicate and only insert it once
+     *
+     * @param operations the array
+     * @return the {@link Map} with the operation name and operation
+     */
+    public static Map<String, Function<Stream<WorkerReport>, Number>> parseOperations(String[] operations) {
+        Map<String, Function<Stream<WorkerReport>, Number>> res = new HashMap<>();
+        for (String op : operations) {
+            if (availableOperations.containsKey(op)) res.put(op, availableOperations.get(op));
+            else System.err.println(String.format("Operation %s not found", op));
+        }
+        return res;
+    }
 }

@@ -1,6 +1,6 @@
 {
 	"static": {
-		"patternsFile": "project/patterns/Patterns.java"
+		"patternsFile": "project/patterns/Patterns.java-"
 	},
 	"output": {
 		"path": "out/",
@@ -8,37 +8,38 @@
 	},
 	"global": {
 		"numberOfThreads": 32,
-		"parseComments": false
+		"parseComments": false,
+		"operations": ["sum", "min", "max", "std", "avg"]
 	},
 	"dynamic": {
-		"innerLoops": true,
-		"possibleTernary": true,
-		"ternary": true,
-		"cyclomaticComplexity": true,
-		"loopsFor": true,
-		"loopsForeach": true,
-		"loopsWhile": true,
+		"innerLoops": false,
+		"possibleTernary": false,
+		"ternary": false,
+		"cyclomaticComplexity": false,
+		"loopsFor": false,
+		"loopsForeach": false,
+		"loopsWhile": false,
 		"classMethods": true,
-		"classMethodsPrivate": true,
-		"classMethodsPublic": true,
-		"classMethodsProtected": true,
-		"classMethodsStatic": true,
-		"classMethodsAbstract": true,
-		"linesOfCodeClass": true,
-		"linesOfCodeMethod": true,
-		"classComments": true,
-		"classCommentsInline": true,
-		"classCommentsBlock": true,
-		"classCommentsJavadoc": true,
-		"classFields": true,
-		"classFieldsPublic": true,
-		"classFieldsProtected": true,
-		"classFieldsPrivate": true,
-		"classFieldsStatic": true,
-		"superClasses": true,
-		"superClassesJava": true,
-		"weightedMethodCountLoC": true,
-		"weightedMethodCountCC": true,
-		"weightedMethodCountNoM": true
+		"classMethodsPrivate": false,
+		"classMethodsPublic": false,
+		"classMethodsProtected": false,
+		"classMethodsStatic": false,
+		"classMethodsAbstract": false,
+		"linesOfCodeClass": false,
+		"linesOfCodeMethod": false,
+		"classComments": false,
+		"classCommentsInline": false,
+		"classCommentsBlock": false,
+		"classCommentsJavadoc": false,
+		"classFields": false,
+		"classFieldsPublic": false,
+		"classFieldsProtected": false,
+		"classFieldsPrivate": false,
+		"classFieldsStatic": false,
+		"superClasses": false,
+		"superClassesJava": false,
+		"weightedMethodCountLoC": false,
+		"weightedMethodCountCC": false,
+		"weightedMethodCountNoM": false
 	}
 }
