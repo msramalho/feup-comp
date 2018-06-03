@@ -10,7 +10,7 @@ import spoon.reflect.visitor.filter.TypeFilter;
 import worker.Worker;
 
 /**
- * Count the number of public fields in a given class
+ * Count the number of public fields in a given class (only direct fields of the class, excludes inner classes' fields)
  */
 public class W_countClassFieldsPublic extends Worker {
     public W_countClassFieldsPublic(CtElement rootNode, String patternName) {

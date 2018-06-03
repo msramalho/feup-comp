@@ -40,6 +40,7 @@ public class Configuration {
         public boolean countCommentsJavadoc = false;
         public boolean countClassFields = false;
         public boolean countClassFieldsPublic = false;
+        public boolean countClassFieldsProtected = false;
 
         Dynamic() { }
     }

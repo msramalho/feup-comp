@@ -24,6 +24,7 @@
 		"countCommentsBlock": true,
 		"countCommentsJavadoc": true,
 		"countClassFields": true,
-		"countClassFieldsPublic": true
+		"countClassFieldsPublic": true,
+		"countClassFieldsProtected": true
 	}
 }

@@ -4,15 +4,16 @@ import report.WorkerReport;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtField;
+import spoon.reflect.declaration.ModifierKind;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
 import worker.Worker;
 
 /**
- * Count the number of fields in a given class (only direct fields of the class, excludes inner classes' fields)
+ * Count the number of protected fields in a given class (only direct fields of the class, excludes inner classes' fields)
  */
-public class W_countClassFields extends Worker {
-    public W_countClassFields(CtElement rootNode, String patternName) {
+public class W_countClassFieldsProtected extends Worker {
+    public W_countClassFieldsProtected(CtElement rootNode, String patternName) {
         super(rootNode, patternName);
     }
 
@@ -28,7 +29,7 @@ public class W_countClassFields extends Worker {
                         new AbstractFilter<CtField>(CtField.class) {
                             @Override
                             public boolean matches(CtField field) {
-                                return field.getParent() == rootNode;
+                                return field.getModifiers().contains(ModifierKind.PROTECTED) && field.getParent() == rootNode;
                             }
                         }
                 ).list().size()
