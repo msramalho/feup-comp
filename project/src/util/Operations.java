@@ -11,6 +11,10 @@ public class Operations {
         return s.mapToLong((e) -> 1L).sum();
     }
 
+    public static Long sum(Stream<WorkerReport> s) {
+        return s.mapToLong(WorkerReport::getLongValue).sum();
+    }
+
     public static Integer max(Stream<WorkerReport> s) {
         return s.mapToInt(WorkerReport::getValue).max().orElse(Integer.MIN_VALUE);
     }
@@ -33,6 +37,7 @@ public class Operations {
 
     /**
      * Sample Standard Deviation of objects in the provided stream.
+     *
      * @param s the Stream of WorkerReport objects.
      * @return the sample standard deviation of the given stream of objects.
      * @see <a href="https://en.wikipedia.org/wiki/Standard_deviation">Standard Deviation</a>
