@@ -1,5 +1,6 @@
 package worker;
 
+import main.Configuration;
 import report.WorkerReport;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.filter.AbstractFilter;
@@ -20,7 +21,7 @@ public abstract class Worker implements Callable { // running call on ExecutorSe
     private AbstractFilter filter; // filter to match this worker with the CtElement which triggers it
     private String patternName;
     protected CtElement rootNode;
-    protected Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>();
+    protected Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>(Configuration.operations);
 
     protected Logger logger = new Logger(this); // TODO: delete for production (?)
 
