@@ -18,7 +18,7 @@ public class W_linesOfCodeMethod extends Worker {
 
     @Override
     protected AbstractFilter setFilter() {
-        return new TypeFilter(CtMethod.class);
+        return new TypeFilter<>(CtMethod.class);
     }
 
     @Override

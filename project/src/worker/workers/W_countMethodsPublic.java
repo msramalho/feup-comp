@@ -19,7 +19,7 @@ public class W_countMethodsPublic extends Worker {
 
     @Override
     protected AbstractFilter setFilter() {
-        return new TypeFilter(CtClass.class);
+        return new TypeFilter<>(CtClass.class);
     }
 
     @Override

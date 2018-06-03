@@ -17,7 +17,7 @@ public class W_countCommentsJavadoc extends Worker {
 
     @Override
     protected AbstractFilter setFilter() {
-        return new TypeFilter(CtComment.class);
+        return new TypeFilter<>(CtComment.class);
     }
 
     @Override

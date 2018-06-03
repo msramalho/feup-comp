@@ -24,7 +24,7 @@ public class W_possibleTernary extends Worker {
 
     @Override
     protected AbstractFilter setFilter() {
-        return new TypeFilter(CtLocalVariableImpl.class);
+        return new TypeFilter<>(CtLocalVariableImpl.class);
     }
 
     @Override

@@ -16,7 +16,7 @@ public class W_innerLoops extends Worker {
 
     @Override
     protected AbstractFilter setFilter() {
-        return new TypeFilter(CtLocalVariableImpl.class);
+        return new TypeFilter<>(CtLocalVariableImpl.class);
     }
 
     @Override
