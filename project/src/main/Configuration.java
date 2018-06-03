@@ -53,6 +53,7 @@ public class Configuration {
         public boolean superClasses = false;
         public boolean superClassesJava = false;
         public boolean weightedMethodCountLoC = false; // weighted method count using lines of code
+        public boolean weightedMethodCountCC = false;  // weighted method count using cyclomatic complexity
 
         Dynamic() { }
     }

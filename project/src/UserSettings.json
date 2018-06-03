@@ -38,5 +38,6 @@
 		"superClasses": true,
 		"superClassesJava": true,
 		"weightedMethodCountLoC": true,
+		"weightedMethodCountCC": true,
 	}
 }
