@@ -9,6 +9,9 @@ import spoon.reflect.visitor.filter.TypeFilter;
 import util.CtIterator;
 import worker.Worker;
 
+/**
+ * Calculates the cyclomatic complexity for a given method (includes if, else, ternary, for, foreach, while, switch-case, switch-default)
+ */
 public class W_cyclomaticComplexity extends Worker {
     public W_cyclomaticComplexity(CtElement rootNode, String patternName) {
         super(rootNode, patternName);

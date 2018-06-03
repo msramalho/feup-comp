@@ -8,9 +8,13 @@ public class Temp extends HashMapMerger {
         Integer y = 1000000;
         String test = "ee";
 
-        ArrayList<Integer> ints = new ArrayList<Integer>(){{add(9);add(8);add(4);}};
-        for (Integer i: ints) {
-            System.out.println(i*i==2*i?10:2000);
+        ArrayList<Integer> ints = new ArrayList<Integer>() {{
+            add(9);
+            add(8);
+            add(4);
+        }};
+        for (Integer i : ints) {
+            System.out.println(i * i == 2 * i ? 10 : 2000);
         }
 
         ArrayList<Integer> z = new ArrayList<>();
@@ -28,6 +32,23 @@ public class Temp extends HashMapMerger {
             x = 1000;
         }
 
+        if (true && true) {
+            x = 500;
+        } else if (true || false) {
+            x = 3000;
+        } else {
+            x = 5000;
+        }
+
+        switch (x){
+            case 10:
+                x++;
+                break;
+            case 13:
+                x--;
+            default:
+                x--;
+        }
         /**
          * Exploring ANY behaviour:
          *  - with greedy finds the biggest match:
