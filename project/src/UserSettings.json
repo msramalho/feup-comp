@@ -17,6 +17,7 @@
 		"countMethodsPrivate": true,
 		"countMethodsPublic": true,
 		"countMethodsProtected": true,
+		"countMethodsStatic": true,
 		"linesOfCodeClass": true,
 		"linesOfCodeMethod": true,
 		"countComments": true,

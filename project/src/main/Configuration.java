@@ -32,6 +32,7 @@ public class Configuration {
         public boolean countMethodsPublic = false;
         public boolean countMethodsProtected = false;
         public boolean countMethodsPrivate = false;
+        public boolean countMethodsStatic = false;
         public boolean linesOfCodeClass = false;
         public boolean linesOfCodeMethod = false;
         public boolean countComments = false;
