@@ -4,7 +4,6 @@ import report.WorkerReport;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
-import spoon.support.reflect.code.CtForEachImpl;
 import spoon.support.reflect.code.CtLocalVariableImpl;
 import worker.Worker;
 
