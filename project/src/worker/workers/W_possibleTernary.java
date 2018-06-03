@@ -1,4 +1,4 @@
-package worker;
+package worker.workers;
 
 import com.google.gson.Gson;
 import org.apache.commons.lang3.RandomUtils;
@@ -11,6 +11,7 @@ import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.SiblingsFunction;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.support.reflect.code.*;
+import worker.Worker;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class W_possibleTernary extends Worker {
 
     @Override
     protected AbstractFilter setFilter() {
-        return new TypeFilter(CtLocalVariableImpl.class);
+        return new TypeFilter<>(CtLocalVariableImpl.class);
     }
 
     @Override

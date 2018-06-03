@@ -20,8 +20,8 @@ import java.util.stream.Stream;
  */
 public abstract class Worker implements Callable { // running call on ExecutorService returns Future<C>
     AbstractFilter filter; // filter to match this worker with the CtElement which triggers it
-    Logger logger = new Logger(this); // TODO: delete for production (?)
-    CtElement rootNode;
+    protected Logger logger = new Logger(this); // TODO: delete for production (?)
+    protected CtElement rootNode;
     String patternName;
 
     public Worker(CtElement rootNode, String patternName) {
@@ -32,7 +32,7 @@ public abstract class Worker implements Callable { // running call on ExecutorSe
         // logger.print("My filter is: " + filter.getType().getName());
     }
 
-    CtElement getCtElement() { return rootNode; }
+    protected CtElement getCtElement() { return rootNode; }
 
     /**
      * Template method for getting the filter variable, should be called in constructor
