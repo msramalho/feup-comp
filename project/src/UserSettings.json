@@ -36,6 +36,7 @@
 		"countClassFieldsPrivate": true,
 		"countClassFieldsStatic": true,
 		"superClasses": true,
-		"superClassesJava": true
+		"superClassesJava": true,
+		"weightedMethodCountLoC": true,
 	}
 }

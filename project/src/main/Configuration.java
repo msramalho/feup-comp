@@ -52,6 +52,7 @@ public class Configuration {
         public boolean countClassFieldsStatic = false;
         public boolean superClasses = false;
         public boolean superClassesJava = false;
+        public boolean weightedMethodCountLoC = false; // weighted method count using lines of code
 
         Dynamic() { }
     }
