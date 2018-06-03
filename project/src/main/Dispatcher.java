@@ -49,6 +49,7 @@ public class Dispatcher implements Callable {
         spoon = new Launcher();
         try {
             spoon.addInputResource(spoonTarget);
+            spoon.getEnvironment().setCommentEnabled(configuration.global.parseComments);
             spoon.buildModel();
         } catch (spoon.compiler.ModelBuildingException e) {
             e.printStackTrace();
