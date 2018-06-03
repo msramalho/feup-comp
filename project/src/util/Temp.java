@@ -8,6 +8,11 @@ public class Temp {
         Integer y = 1000000;
         String test = "ee";
 
+        ArrayList<Integer> ints = new ArrayList<Integer>(){{add(9);add(8);add(4);}};
+        for (Integer i: ints) {
+            System.out.println(i*i);
+        }
+
         ArrayList<Integer> z = new ArrayList<>();
 
         if (x == y) {
