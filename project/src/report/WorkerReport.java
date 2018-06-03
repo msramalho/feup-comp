@@ -10,6 +10,8 @@ public class WorkerReport implements Comparable<WorkerReport> {
 
     public Integer getValue() { return value; }
 
+    public Long getLongValue() { return Long.valueOf(getValue()); }
+
     @Override
     public int compareTo(WorkerReport o) {
         if (this.getValue() < o.getValue()) return -1;
