@@ -50,6 +50,7 @@ public class Configuration {
         public boolean countClassFieldsPrivate = false;
         public boolean countClassFieldsStatic = false;
         public boolean superClasses = false;
+        public boolean superClassesJava = false;
 
         Dynamic() { }
     }
