@@ -8,7 +8,7 @@ import worker.WorkerFactory;
 
 import java.util.*;
 
-public class FactoryManager {
+class FactoryManager {
     private Multimap<String, WorkerFactory> workerFactories;
 
     FactoryManager() {
