@@ -12,8 +12,8 @@ import worker.Worker;
 /**
  * Count the number of direct static methods defined in a given Class (does not include constructors nor methods belonging to sub-classes)
  */
-public class W_countMethodsStatic extends Worker {
-    public W_countMethodsStatic(CtElement rootNode, String patternName) {
+public class W_classMethodsStatic extends Worker {
+    public W_classMethodsStatic(CtElement rootNode, String patternName) {
         super(rootNode, patternName);
     }
 

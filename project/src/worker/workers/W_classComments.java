@@ -10,8 +10,8 @@ import worker.Worker;
 /**
  * Counts the number of comments: Inline, Block, File and JavaDoc
  */
-public class W_countComments extends Worker {
-    public W_countComments(CtElement rootNode, String patternName) {
+public class W_classComments extends Worker {
+    public W_classComments(CtElement rootNode, String patternName) {
         super(rootNode, patternName);
     }
 

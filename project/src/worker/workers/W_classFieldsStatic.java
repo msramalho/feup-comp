@@ -12,8 +12,8 @@ import worker.Worker;
 /**
  * Count the number of static fields in a given class (only direct fields of the class, excludes inner classes' fields)
  */
-public class W_countClassFieldsStatic extends Worker {
-    public W_countClassFieldsStatic(CtElement rootNode, String patternName) {
+public class W_classFieldsStatic extends Worker {
+    public W_classFieldsStatic(CtElement rootNode, String patternName) {
         super(rootNode, patternName);
     }
 

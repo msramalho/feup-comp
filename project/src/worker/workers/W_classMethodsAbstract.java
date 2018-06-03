@@ -12,8 +12,8 @@ import worker.Worker;
 /**
  * Count the number of direct abstract methods defined in a given Class (does not include constructors nor methods belonging to sub-classes)
  */
-public class W_countMethodsAbstract extends Worker {
-    public W_countMethodsAbstract(CtElement rootNode, String patternName) {
+public class W_classMethodsAbstract extends Worker {
+    public W_classMethodsAbstract(CtElement rootNode, String patternName) {
         super(rootNode, patternName);
     }
 

@@ -12,8 +12,8 @@ import worker.Worker;
 /**
  * Count the number of direct public methods defined in a given Class (does not include constructors nor methods belonging to sub-classes)
  */
-public class W_countMethodsPublic extends Worker {
-    public W_countMethodsPublic(CtElement rootNode, String patternName) {
+public class W_classMethodsPublic extends Worker {
+    public W_classMethodsPublic(CtElement rootNode, String patternName) {
         super(rootNode, patternName);
     }
 

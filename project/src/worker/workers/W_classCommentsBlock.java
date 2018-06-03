@@ -10,8 +10,8 @@ import worker.Worker;
 /**
  * Counts the number of block comments
  */
-public class W_countCommentsBlock extends Worker {
-    public W_countCommentsBlock(CtElement rootNode, String patternName) {
+public class W_classCommentsBlock extends Worker {
+    public W_classCommentsBlock(CtElement rootNode, String patternName) {
         super(rootNode, patternName);
     }
 

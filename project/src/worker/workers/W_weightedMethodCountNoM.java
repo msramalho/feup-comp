@@ -32,7 +32,7 @@ public class W_weightedMethodCountNoM extends Worker {
                 return method.getParent() == rootNode; // guarantee this is a direct child
             }
         }).forEach(m -> {
-            W_countMethods w = new W_countMethods((CtElement) m, "");
+            W_classMethods w = new W_classMethods((CtElement) m, "");
             try {
                 Integer v = w.call().getValue();
                 wmcRef.getAndAdd(v);

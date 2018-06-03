@@ -12,8 +12,8 @@ import worker.Worker;
 /**
  * Count the number of protected fields in a given class (only direct fields of the class, excludes inner classes' fields)
  */
-public class W_countClassFieldsProtected extends Worker {
-    public W_countClassFieldsProtected(CtElement rootNode, String patternName) {
+public class W_classFieldsProtected extends Worker {
+    public W_classFieldsProtected(CtElement rootNode, String patternName) {
         super(rootNode, patternName);
     }
 

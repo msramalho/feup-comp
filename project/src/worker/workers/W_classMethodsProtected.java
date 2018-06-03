@@ -12,8 +12,8 @@ import worker.Worker;
 /**
  * Count the number of direct protected methods defined in a given Class (does not include constructors nor methods belonging to sub-classes)
  */
-public class W_countMethodsProtected extends Worker {
-    public W_countMethodsProtected(CtElement rootNode, String patternName) {
+public class W_classMethodsProtected extends Worker {
+    public W_classMethodsProtected(CtElement rootNode, String patternName) {
         super(rootNode, patternName);
     }
 

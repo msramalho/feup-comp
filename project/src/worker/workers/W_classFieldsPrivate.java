@@ -12,8 +12,8 @@ import worker.Worker;
 /**
  * Count the number of private fields in a given class (only direct fields of the class, excludes inner classes' fields)
  */
-public class W_countClassFieldsPrivate extends Worker {
-    public W_countClassFieldsPrivate(CtElement rootNode, String patternName) {
+public class W_classFieldsPrivate extends Worker {
+    public W_classFieldsPrivate(CtElement rootNode, String patternName) {
         super(rootNode, patternName);
     }
 

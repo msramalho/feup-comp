@@ -9,8 +9,8 @@ import worker.Worker;
 /**
  * Count the number of direct methods defined in a given Class (does not include constructors nor methods belonging to sub-classes)
  */
-public class W_countMethods extends Worker {
-    public W_countMethods(CtElement rootNode, String patternName) {
+public class W_classMethods extends Worker {
+    public W_classMethods(CtElement rootNode, String patternName) {
         super(rootNode, patternName);
     }
 
