@@ -27,6 +27,7 @@ public class Configuration {
     public class Dynamic {
         public boolean innerLoops = false;
         public boolean possibleTernary = false;
+        public boolean ternary = false;
         public boolean classInheritance = false;
         public boolean loopsFor = false;
         public boolean loopsForeach = false;

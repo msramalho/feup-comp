@@ -13,6 +13,7 @@
 	"dynamic": {
 		"innerLoops": true,
 		"possibleTernary": true,
+		"ternary": true,
 		"loopsFor": true,
 		"loopsForeach": true,
 		"loopsWhile": true,
