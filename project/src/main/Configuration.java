@@ -35,6 +35,7 @@ public class Configuration {
         public boolean linesOfCodeClass = false;
         public boolean linesOfCodeMethod = false;
         public boolean countComments = false;
+        public boolean countCommentsInline = false;
 
         Dynamic() { }
     }

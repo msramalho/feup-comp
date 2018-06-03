@@ -8,10 +8,10 @@ import spoon.reflect.visitor.filter.TypeFilter;
 import worker.Worker;
 
 /**
- * Counts the number of comments: Inline, Multiline, File and JavaDoc
+ * Counts the number of inline comments
  */
-public class W_countComments extends Worker {
-    public W_countComments(CtElement rootNode, String patternName) {
+public class W_countCommentsInline extends Worker {
+    public W_countCommentsInline(CtElement rootNode, String patternName) {
         super(rootNode, patternName);
     }
 
@@ -22,6 +22,7 @@ public class W_countComments extends Worker {
 
     @Override
     public WorkerReport call() throws Exception {
-        return new WorkerReport(1); // return 1 for each comment found
+        // return 1 for each inline comment found
+        return new WorkerReport((((CtComment) rootNode).getCommentType() == CtComment.CommentType.INLINE) ? 1 : 0);
     }
 }
