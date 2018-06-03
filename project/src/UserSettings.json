@@ -8,7 +8,7 @@
 	},
 	"global": {
 		"numberOfThreads": 32,
-		"parseComments": true
+		"parseComments": false
 	},
 	"dynamic": {
 		"innerLoops": true,
@@ -22,6 +22,7 @@
 		"countComments": true,
 		"countCommentsInline": true,
 		"countCommentsBlock": true,
-		"countCommentsJavadoc": true
+		"countCommentsJavadoc": true,
+		"countFieldsPerClass": true
 	}
 }
