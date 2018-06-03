@@ -1,3 +1,5 @@
+package main;
+
 import soot.*;
 import soot.jimple.toolkits.callgraph.CHATransformer;
 import soot.jimple.toolkits.callgraph.CallGraph;
@@ -9,11 +11,12 @@ public class SootTest {
     public static void main(String[] args) {
         List<String> argsList = new ArrayList<String>(Arrays.asList(args));
         argsList.addAll(Arrays.asList(new String[]{
-                "-w",
+                "-cp",      // class path
+                "./src",
+                "-w",       // whole-program
                 "-main-class",
-                "testers.CallGraphs",//main-class
-                "testers.CallGraphs",//argument classes
-                "testers.A"			//
+                "main.Main",    // main-class
+                "main.Main"     // arg-class
         }));
 
 
@@ -22,9 +25,9 @@ public class SootTest {
             @Override
             protected void internalTransform(String phaseName, Map options) {
                 CHATransformer.v().transform();
-                SootClass a = Scene.v().getSootClass("testers.A");
+                SootClass a = Scene.v().getSootClass("main.Main");
 
-                SootMethod src = Scene.v().getMainClass().getMethodByName("doStuff");
+                SootMethod src = Scene.v().getMainClass().getMethodByName("main");
                 CallGraph cg = Scene.v().getCallGraph();
 
                 Iterator<MethodOrMethodContext> targets = new Targets(cg.edgesOutOf(src));
