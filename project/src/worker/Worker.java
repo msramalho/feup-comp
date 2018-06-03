@@ -1,17 +1,13 @@
 package worker;
 
-import report.Report;
 import report.WorkerReport;
 import spoon.reflect.declaration.CtElement;
-import spoon.reflect.visitor.Filter;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import util.Logger;
 import util.Operations;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.function.Function;
 import java.util.stream.Stream;

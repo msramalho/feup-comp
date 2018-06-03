@@ -4,7 +4,6 @@ import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.CtScanner;
 import util.Logger;
 import worker.Worker;
-import worker.WorkerFactory;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;

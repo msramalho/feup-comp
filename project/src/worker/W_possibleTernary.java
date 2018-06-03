@@ -6,7 +6,6 @@ import report.WorkerReport;
 import spoon.reflect.code.CtExpression;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtVariable;
-import spoon.reflect.visitor.Filter;
 import spoon.reflect.visitor.chain.CtConsumer;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.SiblingsFunction;
