@@ -30,6 +30,7 @@ public class Configuration {
         public boolean ternary = false;
         public boolean classInheritance = false; //TODO: is this alive? else remove
         public boolean cyclomaticComplexity = false;
+        public boolean nPathComplexity = false;
         public boolean loopsFor = false;
         public boolean loopsForeach = false;
         public boolean loopsWhile = false;

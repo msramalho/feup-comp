@@ -15,6 +15,7 @@
 		"possibleTernary": true,
 		"ternary": true,
 		"cyclomaticComplexity": true,
+		"nPathComplexity": true,
 		"loopsFor": true,
 		"loopsForeach": true,
 		"loopsWhile": true,
