@@ -49,6 +49,7 @@ public class Configuration {
         public boolean countClassFieldsProtected = false;
         public boolean countClassFieldsPrivate = false;
         public boolean countClassFieldsStatic = false;
+        public boolean superClasses = false;
 
         Dynamic() { }
     }

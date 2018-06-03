@@ -33,6 +33,7 @@
 		"countClassFieldsPublic": true,
 		"countClassFieldsProtected": true,
 		"countClassFieldsPrivate": true,
-		"countClassFieldsStatic": true
+		"countClassFieldsStatic": true,
+		"superClasses": true
 	}
 }
