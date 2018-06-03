@@ -20,6 +20,7 @@
 		"linesOfCodeClass": true,
 		"linesOfCodeMethod": true,
 		"countComments": true,
-		"countCommentsInline": true
+		"countCommentsInline": true,
+		"countCommentsBlock": true
 	}
 }
