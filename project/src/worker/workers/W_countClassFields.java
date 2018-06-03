@@ -10,8 +10,8 @@ import worker.Worker;
 /**
  * Count the number of fields in a given class
  */
-public class W_countFieldsPerClass extends Worker {
-    public W_countFieldsPerClass(CtElement rootNode, String patternName) {
+public class W_countClassFields extends Worker {
+    public W_countClassFields(CtElement rootNode, String patternName) {
         super(rootNode, patternName);
     }
 

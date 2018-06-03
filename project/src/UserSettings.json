@@ -23,6 +23,6 @@
 		"countCommentsInline": true,
 		"countCommentsBlock": true,
 		"countCommentsJavadoc": true,
-		"countFieldsPerClass": true
+		"countClassFields": true
 	}
 }
