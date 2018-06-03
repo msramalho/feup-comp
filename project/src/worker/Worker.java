@@ -7,7 +7,9 @@ import util.Logger;
 import util.Operations;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -59,9 +61,9 @@ public abstract class Worker implements Callable { // running call on ExecutorSe
     @Override
     public abstract WorkerReport call() throws Exception;
 
-    public Collection<Function<Stream<WorkerReport>, Number>> getOperations() {
-        Collection<Function<Stream<WorkerReport>, Number>> operations = new HashSet<>();
-        operations.add(Operations::count);
+    public Map<String, Function<Stream<WorkerReport>, Number>> getOperations() {
+        Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>();
+        operations.put("count", Operations::count);
         return operations;
     };
 
