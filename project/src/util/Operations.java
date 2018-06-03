@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 public class Operations {
 
     public static Long count(Stream<WorkerReport> s) {
-        return s.mapToLong((e) -> 1L).sum();
+        return s.count();
     }
 
     public static Long sum(Stream<WorkerReport> s) {
