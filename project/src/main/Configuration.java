@@ -23,6 +23,7 @@ import java.util.stream.Stream;
 public class Configuration {
     public transient static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     public transient Logger logger = new Logger(this);
+    public transient static Map<String, Function<Stream<WorkerReport>, Number>> operations;
 
     public class Static {
         public String patternsFile = "./patterns/Patterns.java";
@@ -108,14 +109,14 @@ public class Configuration {
      */
     List<StaticWorkerFactory> getActiveWorkerFactories() {
         // parse the user-defined list of String for the operations into the Operations.something equivalent
-        Map<String, Function<Stream<WorkerReport>, Number>> operations = Operations.parseOperations(global.operations);
+        operations = Operations.parseOperations(global.operations);
 
         ArrayList<StaticWorkerFactory> workerFactories = new ArrayList<>();
         for (Field f : Dynamic.class.getDeclaredFields()) {
             try {
                 Object dynamicField = f.get(dynamic);
                 if (dynamicField != null && (dynamicField instanceof Boolean) && (Boolean) dynamicField) // the user wants this feature
-                    workerFactories.add(new StaticWorkerFactory(f.getName(), operations));
+                    workerFactories.add(new StaticWorkerFactory(f.getName()));
 
             } catch (IllegalAccessException | ClassNotFoundException | NoSuchMethodException | InstantiationException | InvocationTargetException e) {
                 System.err.println(String.format("Unable to find the worker matching %s. Should be: %s", f.getName(), StaticWorkerFactory.getWorkerName(f.getName())));
