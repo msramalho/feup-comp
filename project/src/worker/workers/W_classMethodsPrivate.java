@@ -24,7 +24,6 @@ public class W_classMethodsPrivate extends Worker {
 
     @Override
     public WorkerReport call() throws Exception {
-        //TODO: make this pattern use a sum/average
         return new WorkerReport(
                 rootNode.filterChildren(new AbstractFilter<CtMethod>(CtMethod.class) {
                     @Override

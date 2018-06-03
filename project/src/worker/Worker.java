@@ -58,12 +58,12 @@ public abstract class Worker implements Callable { // running call on ExecutorSe
 
     /**
      * By default every Worker is counted, this method can be overridden to use more {@link Operations}
-     * If Operations.count is to be used, the implementing workers can return super.getOperations();
+     * If Operations.sum is to be used, the implementing workers can return super.getOperations();
      *
      * @return the operations to be performed on the Pattern matching the current {@link Worker}
      */
     public Map<String, Function<Stream<WorkerReport>, Number>> getOperations() {
-        operations.put("count", Operations::count);
+        operations.put("sum", Operations::sum);
         return operations;
     }
 
