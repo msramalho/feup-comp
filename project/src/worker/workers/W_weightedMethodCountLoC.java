@@ -9,8 +9,10 @@ import spoon.reflect.visitor.filter.TypeFilter;
 import worker.Worker;
 
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Calculates the Weighted Method Count (WMC) for the Lines Of Code of a Class's methods
+ */
 public class W_weightedMethodCountLoC extends Worker {
     public W_weightedMethodCountLoC(CtElement rootNode, String patternName) {
         super(rootNode, patternName);
