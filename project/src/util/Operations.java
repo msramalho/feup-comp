@@ -3,8 +3,10 @@ package util;
 import report.WorkerReport;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -61,12 +63,13 @@ public class Operations {
      * @see <a href="https://en.wikipedia.org/wiki/Standard_deviation">Standard Deviation</a>
      */
     public static Double standardDeviation(Stream<WorkerReport> s) {
-        Double avg = average(s);
-        Double squaredDiff = s.mapToInt(WorkerReport::getValue)
+        List<WorkerReport> w = s.collect(Collectors.toList());
+        Double avg = average(w.stream());
+        Double squaredDiff = w.stream().mapToInt(WorkerReport::getValue)
                 .mapToDouble((int i) -> Math.pow(i - avg, 2))
                 .sum();
-
-        return Math.sqrt(squaredDiff / (count(s) - 1));
+        Double std = Math.sqrt(squaredDiff / (count(w.stream()) - 1));
+        return Double.isNaN(std)?0:std;
     }
 
     /**
