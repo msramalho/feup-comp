@@ -10,7 +10,7 @@ public class Temp {
 
         ArrayList<Integer> ints = new ArrayList<Integer>(){{add(9);add(8);add(4);}};
         for (Integer i: ints) {
-            System.out.println(i*i);
+            System.out.println(i*i==2*i?10:2000);
         }
 
         ArrayList<Integer> z = new ArrayList<>();
