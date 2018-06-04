@@ -1,5 +1,4 @@
 package util;
-
 import java.util.ArrayList;
 
 public class Temp {
@@ -38,6 +37,7 @@ public class Temp {
          */
         for (int i = 0; i < z.size(); i++) {
             System.out.println("Testar cenas aleatorias");
+            cenas();
             y = 0;
             x = ++y;
             y = 0;
@@ -51,5 +51,9 @@ public class Temp {
             System.out.println("teste de pattern com mais do que um nó");
 
         System.out.println("The final value of x is" + x);
+    }
+
+    public void cenas() {
+
     }
 }

@@ -27,7 +27,7 @@ public class PatternDefinitions {
     private void processPatternDefinitions(String targetDefinitions) {
         Launcher launcher = new Launcher();
         launcher.addInputResource(targetDefinitions); //Analyze the patterns file
-        //launcher.getEnvironment().setNoClasspath(true); // Semantic analysis kinda off
+        launcher.getEnvironment().setNoClasspath(true); // Semantic analysis kinda off
         launcher.buildModel();
 
         List<CtClassImpl> classElement = launcher.getModel().getElements(ctElement -> (ctElement.getClass() == CtClassImpl.class));

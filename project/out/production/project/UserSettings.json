@@ -7,10 +7,38 @@
 		"format": "json"
 	},
 	"global": {
-		"numberOfThreads": 32
+		"numberOfThreads": 32,
+		"parseComments": false
 	},
 	"dynamic": {
 		"innerLoops": true,
-		"possibleTernary": true
+		"possibleTernary": true,
+		"ternary": true,
+		"cyclomaticComplexity": true,
+		"loopsFor": true,
+		"loopsForeach": true,
+		"loopsWhile": true,
+		"classMethods": true,
+		"classMethodsPrivate": true,
+		"classMethodsPublic": true,
+		"classMethodsProtected": true,
+		"classMethodsStatic": true,
+		"classMethodsAbstract": true,
+		"linesOfCodeClass": true,
+		"linesOfCodeMethod": true,
+		"classComments": true,
+		"classCommentsInline": true,
+		"classCommentsBlock": true,
+		"classCommentsJavadoc": true,
+		"classFields": true,
+		"classFieldsPublic": true,
+		"classFieldsProtected": true,
+		"classFieldsPrivate": true,
+		"classFieldsStatic": true,
+		"superClasses": true,
+		"superClassesJava": true,
+		"weightedMethodCountLoC": true,
+		"weightedMethodCountCC": true,
+		"weightedMethodCountNoM": true
 	}
 }
