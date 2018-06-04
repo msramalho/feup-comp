@@ -41,12 +41,8 @@ public class PatternReport extends Operable {
     public PatternReport merge(PatternReport other) {
         PatternReport merged = new PatternReport(patternName);
         merged.operations = this.operations;
-        System.err.println("merging: " + this.reports.get(0).getValue() + " with " + other.reports.get(0).getValue());
         merged.reports.addAll(this.reports);
         merged.reports.addAll(other.reports);
-        for (WorkerReport w : merged.reports) {
-            System.err.println("--->" + w.getValue());
-        }
         return merged;
     }
 

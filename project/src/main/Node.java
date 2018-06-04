@@ -49,9 +49,10 @@ public class Node {
 
     /**
      * Adds a given future WorkerReport to this node's Report.
+     *
      * @param patternName the pattern's name
-     * @param future the future WorkerReport
-     * @param operations this future's operations.
+     * @param future      the future WorkerReport
+     * @param operations  this future's operations.
      * @return Future so that this Future pointer can be used by other apps
      */
     Future addFuture(String patternName, Future<WorkerReport> future,
