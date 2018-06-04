@@ -4,7 +4,9 @@ Our java project is a flexible pattern matching tool for dynamic (compiled at ru
 
 This project uses the open-source [Spoon](https://github.com/INRIA/spoon) library and its AST for pattern matching.
 
-## Usage: Command Line
+## Usage
+
+### On the Command Line
 ```
 java main.Main <filename|foldername> [<userSettings.json>]
 ```
@@ -13,7 +15,13 @@ java main.Main <filename|foldername> [<userSettings.json>]
 * ```userSettings.json``` denotes the pattern settings (which ones should execute, which operations to report on, _etc._);
 
 
-## Arquitecture
+### Configurations: UserSettings.json
+This configurations file contains a set of optionable configurations:
+* report output path;
+* dynamic patterns file path;
+* operations to perform;
+* number of threads to use in execution;
+* which static workers to run (a boolean for each, false by default);
 
 ### Dynamic Pattern Definitions
 
@@ -44,3 +52,8 @@ This class must be placed on the worker.workers package, and must properly exten
 
 Besides the ```call()``` method, this ```W_<pattern_name>``` class can define what operations you would like to have on the pattern's report by overriding the ```getOperations()``` method. This method must return a mapping from the operation's name to the operation's function, ```Map<String, Function<Stream<WorkerReport>, Number>>```.
 Some common operations have already been implemented (sum, avg, min, max, standard deviation, median), but you can define your own as long as they follow the provided interface.
+
+
+### Notes:
+If used from the java sources, a report can be obtained on any node of the code's AST. That is, you can obtain the global report by calling the ```getReport()``` method on the root node, as well as any intermediary reports on any os its descendant nodes.
+(Each node's report includes its descendants' reports)
