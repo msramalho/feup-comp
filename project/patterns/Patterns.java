@@ -24,6 +24,9 @@ public class Patterns {
             _var_y_ = 0;
             _any_cenas_.S();
         }
+
+        if (true)
+            _any_cenas_.S();
     }
 
     // public void testEmptyError() { }

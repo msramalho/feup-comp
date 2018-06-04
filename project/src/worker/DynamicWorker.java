@@ -1,6 +1,7 @@
 package worker;
 
 import report.WorkerReport;
+import spoon.pattern.Match;
 import spoon.pattern.PatternBuilder;
 import spoon.pattern.Quantifier;
 import spoon.reflect.declaration.CtElement;
@@ -11,7 +12,6 @@ import util.CtIterator;
 
 import spoon.pattern.Pattern;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -114,8 +114,14 @@ public class DynamicWorker extends Worker {
         return result.toString();
     }
 
+    /**
+     * Não é possível obter o que parou a match do any porque isso é feito internamente e o resultado na match está só: parameter - lista do que tem de items.
+     * nao existe tb nenhuma configuração quer permita o matching especial
+     * CtElement que é o retornado é também demasiado abrangente sem ter filhos ou pais para que eu posso ir buscar o next sibling
+     */
     private boolean updateRootNode(String anyName) {
         List consumedByAny = (List) pattern.getMatches(rootNode).get(0).getParameters().getValue(anyName);
+        Match why = pattern.getMatches(rootNode).get(0);
         if (consumedByAny == null)
             return false;
 
