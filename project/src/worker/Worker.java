@@ -1,11 +1,10 @@
 package worker;
 
-import report.Report;
 import report.WorkerReport;
 import spoon.reflect.declaration.CtElement;
-import spoon.reflect.visitor.Filter;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import util.Logger;
+import util.Operations;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,20 +17,19 @@ import java.util.stream.Stream;
  * Callable method should return a report of the worker's run.
  */
 public abstract class Worker implements Callable { // running call on ExecutorService returns Future<C>
-    AbstractFilter filter; // filter to match this worker with the CtElement which triggers it
-    Logger logger = new Logger(this); // TODO: delete for production (?)
-    CtElement rootNode;
-    String patternName;
+    private AbstractFilter filter; // filter to match this worker with the CtElement which triggers it
+    private String patternName;
+    protected CtElement rootNode;
+    protected Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>();
+
+    protected Logger logger = new Logger(this); // TODO: delete for production (?)
 
     public Worker(CtElement rootNode, String patternName) {
         this.rootNode = rootNode;
         this.patternName = patternName;
-        // this.filter = setFilter();
-        // logger.print("pattern: " + patternName);
-        // logger.print("My filter is: " + filter.getType().getName());
     }
 
-    CtElement getCtElement() { return rootNode; }
+    protected CtElement getCtElement() { return rootNode; }
 
     /**
      * Template method for getting the filter variable, should be called in constructor
@@ -41,7 +39,7 @@ public abstract class Worker implements Callable { // running call on ExecutorSe
     /**
      * Template method for setting the filter variable, should be called in constructor
      */
-    protected void loadFilter() {this.filter = setFilter(); }
+    void loadFilter() {this.filter = setFilter(); }
 
     Class<? extends CtElement> getType() { return filter.getType(); }
 
@@ -53,11 +51,20 @@ public abstract class Worker implements Callable { // running call on ExecutorSe
      */
     boolean matches(CtElement c) { return filter != null && filter.matches(c); }
 
-    public String getPatternName() {
-        return patternName;
-    }
+    public String getPatternName() { return patternName; }
 
     @Override
     public abstract WorkerReport call() throws Exception;
+
+    /**
+     * By default every Worker is counted, this method can be overridden to use more {@link Operations}
+     * If Operations.sum is to be used, the implementing workers can return super.getOperations();
+     *
+     * @return the operations to be performed on the Pattern matching the current {@link Worker}
+     */
+    public Map<String, Function<Stream<WorkerReport>, Number>> getOperations() {
+        operations.put("sum", Operations::sum);
+        return operations;
+    }
 
 }

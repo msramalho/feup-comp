@@ -1,6 +1,5 @@
 package main;
 
-import report.WorkerReport;
 import spoon.Launcher;
 import spoon.SpoonAPI;
 import spoon.reflect.declaration.CtPackage;
@@ -10,10 +9,12 @@ import util.Logger;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Dispatcher implements Callable {
     Configuration configuration;
@@ -49,6 +50,7 @@ public class Dispatcher implements Callable {
         spoon = new Launcher();
         try {
             spoon.addInputResource(spoonTarget);
+            spoon.getEnvironment().setCommentEnabled(configuration.global.parseComments);
             spoon.buildModel();
         } catch (spoon.compiler.ModelBuildingException e) {
             e.printStackTrace();

@@ -27,7 +27,34 @@ public class Configuration {
     public class Dynamic {
         public boolean innerLoops = false;
         public boolean possibleTernary = false;
-        public boolean classInheritance = false;
+        public boolean ternary = false;
+        public boolean classInheritance = false; //TODO: is this alive? else remove
+        public boolean cyclomaticComplexity = false;
+        public boolean loopsFor = false;
+        public boolean loopsForeach = false;
+        public boolean loopsWhile = false;
+        public boolean classMethods = false;
+        public boolean classMethodsPublic = false;
+        public boolean classMethodsProtected = false;
+        public boolean classMethodsPrivate = false;
+        public boolean classMethodsStatic = false;
+        public boolean classMethodsAbstract = false;
+        public boolean linesOfCodeClass = false;
+        public boolean linesOfCodeMethod = false;
+        public boolean classComments = false;
+        public boolean classCommentsInline = false;
+        public boolean classCommentsBlock = false;
+        public boolean classCommentsJavadoc = false;
+        public boolean classFields = false;
+        public boolean classFieldsPublic = false;
+        public boolean classFieldsProtected = false;
+        public boolean classFieldsPrivate = false;
+        public boolean classFieldsStatic = false;
+        public boolean superClasses = false;
+        public boolean superClassesJava = false;
+        public boolean weightedMethodCountLoC = false; // weighted method count using lines of code
+        public boolean weightedMethodCountCC = false;  // weighted method count using cyclomatic complexity
+        public boolean weightedMethodCountNoM = false; // weighted method count using number of methods
 
         Dynamic() { }
     }
@@ -42,7 +69,7 @@ public class Configuration {
 
     public class Global {
         public int numberOfThreads = 16;
-
+        public boolean parseComments = false; // if true lines of code will include comments, if false no comment pattern will work
         public Global() { }
     }
 
@@ -80,8 +107,7 @@ public class Configuration {
                     workerFactories.add(new StaticWorkerFactory(f.getName()));
 
             } catch (IllegalAccessException | ClassNotFoundException | NoSuchMethodException | InstantiationException | InvocationTargetException e) {
-                logger.print(String.format("Unable to find the worker matching %s. Should be: %s", f.getName(), StaticWorkerFactory.getWorkerName(f.getName())));
-                e.printStackTrace();
+                System.err.println(String.format("Unable to find the worker matching %s. Should be: %s", f.getName(), StaticWorkerFactory.getWorkerName(f.getName())));
             }
         }
         return workerFactories;

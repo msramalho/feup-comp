@@ -4,7 +4,6 @@ import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.CtScanner;
 import util.Logger;
 import worker.Worker;
-import worker.WorkerFactory;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -35,7 +34,7 @@ public class ClassScanner extends CtScanner implements Callable {
         // Spawn new tasks
         factoryManager.makeWorkers(e).forEach((Worker worker) -> {
             logger.print("Worker spawned from factory: " + worker.getPatternName() + " at " + e.getPosition().getLine());
-            current.addFuture(worker.getPatternName(), executorService.submit(worker));
+            current.addFuture(worker.getPatternName(), executorService.submit(worker), worker.getOperations());
         });
 
     }

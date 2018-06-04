@@ -6,7 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class StaticWorkerFactory extends WorkerFactory {
-    private static String WORKERS_LOCATION = "worker.W_";
+    private static String WORKERS_LOCATION = "worker.workers.W_";
     private Class<?> workerClass;
     private Worker filterWorker;
     private Constructor<?> constructor;

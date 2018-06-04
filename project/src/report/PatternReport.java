@@ -2,7 +2,9 @@ package report;
 
 import util.Operable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -15,13 +17,18 @@ public class PatternReport extends Operable {
 
     public PatternReport(String patternName) {
         this.patternName = patternName;
-        addOperation("count", Stream::count);
     }
 
     public void addWorkerReport(WorkerReport report) { reports.add(report); }
 
     public void addOperation(String name, Function<Stream<WorkerReport>, Number> op) {
         operations.put(name, op);
+    }
+
+    public void addOperations(Map<String, Function<Stream<WorkerReport>, Number>> patternOps) {
+        for (Map.Entry<String, Function<Stream<WorkerReport>, Number>> entry : patternOps.entrySet()) {
+            operations.putIfAbsent(entry.getKey(), entry.getValue());
+        }
     }
 
     public Map<String, Number> getOperationsResults() {
@@ -43,8 +50,6 @@ public class PatternReport extends Operable {
         return patternName;
     }
 
-    //TODO: more statistics methods: Sum, Count, Avg, etc. --> implemented by Stream methods, Stream::sum, ::avg, etc.
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,4 +69,5 @@ public class PatternReport extends Operable {
     protected Stream<WorkerReport> getStream() {
         return reports.stream();
     }
+
 }

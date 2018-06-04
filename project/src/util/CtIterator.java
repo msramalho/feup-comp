@@ -3,7 +3,9 @@ package util;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.CtScanner;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Custom CtElement iterator that returns the elements in the tree of a given node, the root, in DFS
