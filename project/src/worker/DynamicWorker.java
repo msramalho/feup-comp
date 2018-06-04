@@ -2,15 +2,14 @@ package worker;
 
 import report.WorkerReport;
 
-import spoon.pattern.ParametersBuilder;
 import spoon.pattern.Pattern;
 
 import spoon.pattern.PatternBuilder;
-import spoon.pattern.Quantifier;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.meta.ContainerKind;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
+import util.AnyStatement;
 import util.CtIterator;
 
 import java.util.*;
@@ -77,6 +76,12 @@ public class DynamicWorker extends Worker {
         return variables;
     }
 
+    /**
+     * Find all instances of any statements in the Patterns file in the format _<strategy>_any_[minXX_][maxXX_]
+     *
+     * @param code the pattern code as a string
+     * @return a {@link HashMap} of {@link String} with the unique any names associated to the any settings
+     */
     private HashMap<String, AnyStatement> getPatternAnys(String code) {
         HashMap<String, AnyStatement> anys = new HashMap<>();
         Matcher m = java.util.regex.Pattern.compile("_(lazy|greedy)_any_(?:(min(\\d+)_)?(max(\\d+)_)?)?").matcher(code);
@@ -89,46 +94,7 @@ public class DynamicWorker extends Worker {
                 any.setMax(m.group(5));
             anys.put(m.group(0), any);
         }
-
         return anys;
-    }
-
-    public class AnyStatement {
-
-        private int min = 0;
-        private Integer max = null;
-        private Quantifier strategy;
-        private String name;
-
-        AnyStatement(String strat, String name) {
-            strategy = strat.equals("lazy") ? Quantifier.RELUCTANT : Quantifier.GREEDY;
-            this.name = name;
-        }
-
-        public void setMin(String value) {
-            min = Integer.parseInt(value);
-        }
-
-        public void setMax(String value) {
-            max = Integer.parseInt(value);
-        }
-
-        public Integer getMax() {
-            return max;
-        }
-
-        public int getMin() {
-            return min;
-        }
-
-        public Quantifier getStrategy() {
-            return strategy;
-        }
-
-        public String getName() {
-            return name;
-        }
-
     }
 
 }
