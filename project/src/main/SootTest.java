@@ -11,12 +11,13 @@ public class SootTest {
     public static void main(String[] args) {
         List<String> argsList = new ArrayList<String>(Arrays.asList(args));
         argsList.addAll(Arrays.asList(new String[]{
-                "-cp",      // class path
-                "./src",
-                "-w",       // whole-program
-                "-main-class",
-                "main.Main",    // main-class
-                "main.Main"     // arg-class
+                "-cp", "../sootclasses-trunk-jar-with-dependencies.jar",
+//                "-cp", "/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/lib/rt.jar",
+                "-java-version", "8",
+                "-process-path", "./out/production/project",
+                "-w",                               // whole-program
+                "-main-class", "main.SootTest",     // main-class
+                "main.SootTest"                     // arg-class
         }));
 
 
@@ -25,7 +26,7 @@ public class SootTest {
             @Override
             protected void internalTransform(String phaseName, Map options) {
                 CHATransformer.v().transform();
-                SootClass a = Scene.v().getSootClass("main.Main");
+                SootClass a = Scene.v().getSootClass("main.SootTest");
 
                 SootMethod src = Scene.v().getMainClass().getMethodByName("main");
                 CallGraph cg = Scene.v().getCallGraph();
