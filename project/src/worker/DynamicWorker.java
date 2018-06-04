@@ -1,21 +1,22 @@
 package worker;
 
 import report.WorkerReport;
+
 import spoon.pattern.Pattern;
+
 import spoon.pattern.PatternBuilder;
-import spoon.pattern.Quantifier;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.meta.ContainerKind;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
+import util.AnyStatement;
 import util.CtIterator;
 
-import java.util.HashSet;
+import java.util.*;
 import java.util.regex.Matcher;
 
 
 public class DynamicWorker extends Worker {
-
 
     private CtElement patternElement;
     private Pattern pattern;
@@ -39,7 +40,6 @@ public class DynamicWorker extends Worker {
 
         Integer countMatches = pattern.getMatches(rootNode).size();
         if (countMatches >= 1) {
-            System.out.println(pattern.getMatches(rootNode).get(0).getParameters().getValue("_any_test_"));
             System.out.println("I got " + countMatches + " match(es) on " + rootNode + "!!");
         }
         return new WorkerReport(countMatches);
@@ -51,11 +51,16 @@ public class DynamicWorker extends Worker {
      */
     private void buildPattern() {
         pattern = PatternBuilder.create(patternElement).configureParameters(
-                pb -> {
-                    for (String v : getPatternVariables(patternElement.toString()))
-                        pb.parameter(v).byVariable(v);
-                    pb.parameter("_any_test_").byReferenceName("_any_test_").setMatchingStrategy(Quantifier.GREEDY).setContainerKind(ContainerKind.LIST);
-                }).build();
+            pb -> {
+                for (String v : getPatternVariables(patternElement.toString()))
+                    pb.parameter(v).byVariable(v);
+
+                for (AnyStatement a : getPatternAnys(patternElement.toString()).values()) {
+                    if (a.getMax() == null)
+                        pb.parameter(a.getName()).byReferenceName(a.getName()).setMatchingStrategy(a.getStrategy()).setContainerKind(ContainerKind.LIST).setMinOccurence(a.getMin());
+                    else pb.parameter(a.getName()).byReferenceName(a.getName()).setMatchingStrategy(a.getStrategy()).setContainerKind(ContainerKind.LIST).setMinOccurence(a.getMin()).setMaxOccurence(a.getMax());
+                }
+            }).build();
     }
 
     /**
@@ -71,13 +76,25 @@ public class DynamicWorker extends Worker {
         return variables;
     }
 
-    /*private boolean isAny(CtElement e) {
-        //TODO: improve this if someone knows how to get the method name :'(
-        if (e instanceof CtInvocationImpl) {
-            Pattern p = Pattern.compile("_any_()");
-            Matcher m = p.matcher(e.toString());
-            return m.find();
+    /**
+     * Find all instances of any statements in the Patterns file in the format _<strategy>_any_[minXX_][maxXX_]
+     *
+     * @param code the pattern code as a string
+     * @return a {@link HashMap} of {@link String} with the unique any names associated to the any settings
+     */
+    private HashMap<String, AnyStatement> getPatternAnys(String code) {
+        HashMap<String, AnyStatement> anys = new HashMap<>();
+        Matcher m = java.util.regex.Pattern.compile("_(lazy|greedy)_any_(?:(min(\\d+)_)?(max(\\d+)_)?)?").matcher(code);
+
+        while (m.find()) {
+            AnyStatement any = new AnyStatement(m.group(1), m.group(0));
+            if (m.group(2) != null)
+                any.setMin(m.group(3));
+            if (m.group(4) != null)
+                any.setMax(m.group(5));
+            anys.put(m.group(0), any);
         }
-        return false;
-    }*/
+        return anys;
+    }
+
 }
