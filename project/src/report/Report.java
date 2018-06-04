@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Report {
-    private HashMap<String, PatternReport> reports;
+    private HashMapMerger reports;
 
     /**
      * Empty constructor for the Report class
@@ -41,9 +41,22 @@ public class Report {
     }
 
     public Report merge(Report other) {
+        boolean display = (!this.toJson().toString().equals("{}") || !other.toJson().toString().equals("{}"));
+
         Report merged = new Report();
+        if(display) System.err.println("RESULT 1: " + merged.toJson());
+
         merged.reports.putAll(this.reports); // this beauty works due to HashMapMerger
+        if(display) System.err.println("RESULT 2: " + merged.toJson());
+
         merged.reports.putAll(other.reports);
+        if(display) System.err.println("RESULT 3: " + merged.toJson());
+        
+        if (display && merged.toJson().toString().equals("{}")) {
+            System.err.println("left: " + this.toJson());
+            System.err.println("right: " + other.toJson());
+            System.err.println("result: " + merged.toJson());
+        }
         return merged;
     }
 

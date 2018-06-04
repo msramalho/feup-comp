@@ -48,8 +48,10 @@ public class Operations {
     }
 
     public static Double median(Stream<WorkerReport> s) {
-        IntStream sortedValues = s.mapToInt(WorkerReport::getValue).sorted();
-        Long size = s.count();
+        List<WorkerReport> reportList = s.collect(Collectors.toList());
+        Long size = count(reportList.parallelStream());
+
+        IntStream sortedValues = reportList.stream().mapToInt(WorkerReport::getValue).sorted();
         return size % 2 == 0 ?
                 sortedValues.skip(size / 2 - 1).limit(2).average().orElse(0) :
                 sortedValues.skip(size / 2).limit(1).average().orElse(0);
@@ -63,13 +65,17 @@ public class Operations {
      * @see <a href="https://en.wikipedia.org/wiki/Standard_deviation">Standard Deviation</a>
      */
     public static Double standardDeviation(Stream<WorkerReport> s) {
-        List<WorkerReport> w = s.collect(Collectors.toList());
-        Double avg = average(w.stream());
-        Double squaredDiff = w.stream().mapToInt(WorkerReport::getValue)
+        List<WorkerReport> reportList = s.collect(Collectors.toList());
+
+        Double avg = average(reportList.parallelStream());
+        Long size = count(reportList.parallelStream());
+
+        Double squaredDiff = reportList.parallelStream()
+                .mapToInt(WorkerReport::getValue)
                 .mapToDouble((int i) -> Math.pow(i - avg, 2))
                 .sum();
-        Double std = Math.sqrt(squaredDiff / (count(w.stream()) - 1));
-        return Double.isNaN(std)?0:std;
+
+        return Math.sqrt(squaredDiff / (size - 1));
     }
 
     /**

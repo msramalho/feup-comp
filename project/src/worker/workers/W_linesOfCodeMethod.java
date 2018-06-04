@@ -23,6 +23,7 @@ public class W_linesOfCodeMethod extends Worker {
 
     @Override
     public WorkerReport call() throws Exception {
+        System.err.println("found " + rootNode.toString().split("\r\n|\r|\n").length + " LOC");
         return new WorkerReport(rootNode.toString().split("\r\n|\r|\n").length);
     }
 }
