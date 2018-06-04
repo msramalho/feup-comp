@@ -74,8 +74,8 @@ public class Operations {
                 .mapToInt(WorkerReport::getValue)
                 .mapToDouble((int i) -> Math.pow(i - avg, 2))
                 .sum();
-
-        return Math.sqrt(squaredDiff / (size - 1));
+        Double std = Math.sqrt(squaredDiff / (size - 1));
+        return Double.isNaN(std) ? 0 : std;
     }
 
     /**
