@@ -9,28 +9,31 @@ public class Patterns {
     TemplateParameter<Void> _any_test_;
     TemplateParameter<Void> _any_cenas_;
 
-    public void possibleTernaryOperator() {
+    /*public void possibleTernaryOperator() {
         if (true) {
             _var_y_ = 500;
         } else {
             _var_y_ = 1000;
         }
-    }
+    }*/
 
 
     public void rangeBasedFor() {
         for (int i = 0; i < _var_z_.size(); i++) {
             _any_test_.S();
             _var_y_ = 0;
-            _any_test_.S();
+            _any_cenas_.S();
         }
+
+        if (true)
+            _any_cenas_.S();
     }
 
     // public void testEmptyError() { }
 
-    public void test() {
+    /*public void test() {
         if (_var_x_ == null)
             return ;
-    }
+    }*/
 
 }
