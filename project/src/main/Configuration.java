@@ -3,7 +3,9 @@ package main;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
+import report.WorkerReport;
 import util.Logger;
+import util.Operations;
 import worker.StaticWorkerFactory;
 
 import java.lang.reflect.Field;
@@ -12,11 +14,16 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 public class Configuration {
     public transient static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     public transient Logger logger = new Logger(this);
+    public transient static Map<String, Function<Stream<WorkerReport>, Number>> operations;
 
     public class Static {
         public String patternsFile = "./patterns/Patterns.java";
@@ -70,6 +77,8 @@ public class Configuration {
     public class Global {
         public int numberOfThreads = 16;
         public boolean parseComments = false; // if true lines of code will include comments, if false no comment pattern will work
+        public String[] operations = {"sum"}; //TODO: check why this is null unless in settings.json
+
         public Global() { }
     }
 
@@ -88,7 +97,7 @@ public class Configuration {
      * @param filename the name of the json file containing the configurations
      * @return Configuration read from the file
      */
-    public static Configuration loadConfiguration(String filename) {
+    static Configuration loadConfiguration(String filename) {
         return gson.fromJson(settingsFileContent(filename), Configuration.class);
     }
 
@@ -98,16 +107,20 @@ public class Configuration {
      *
      * @return a list of features to analyze, along with the respective Worker to create (which has the spoon filter)
      */
-    public List<StaticWorkerFactory> getActiveWorkerFactories() {
+    List<StaticWorkerFactory> getActiveWorkerFactories() {
+        // parse the user-defined list of String for the operations into the Operations.something equivalent
+        operations = Operations.parseOperations(global.operations);
+
         ArrayList<StaticWorkerFactory> workerFactories = new ArrayList<>();
         for (Field f : Dynamic.class.getDeclaredFields()) {
             try {
                 Object dynamicField = f.get(dynamic);
-                if (dynamicField != null && (dynamicField instanceof Boolean) && ((Boolean) dynamicField).booleanValue()) // the user wants this feature
+                if (dynamicField != null && (dynamicField instanceof Boolean) && (Boolean) dynamicField) // the user wants this feature
                     workerFactories.add(new StaticWorkerFactory(f.getName()));
 
             } catch (IllegalAccessException | ClassNotFoundException | NoSuchMethodException | InstantiationException | InvocationTargetException e) {
                 System.err.println(String.format("Unable to find the worker matching %s. Should be: %s", f.getName(), StaticWorkerFactory.getWorkerName(f.getName())));
+                e.printStackTrace();
             }
         }
         return workerFactories;

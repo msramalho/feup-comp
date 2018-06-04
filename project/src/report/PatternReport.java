@@ -10,10 +10,9 @@ import java.util.stream.Stream;
 
 public class PatternReport extends Operable {
     private String patternName;
-
-    private ArrayList<WorkerReport> reports = new ArrayList<>();
-
+    public ArrayList<WorkerReport> reports = new ArrayList<>();
     private Map<String, Function<Stream<WorkerReport>, ? extends Number>> operations = new HashMap<>();
+
 
     public PatternReport(String patternName) {
         this.patternName = patternName;
@@ -41,6 +40,7 @@ public class PatternReport extends Operable {
 
     public PatternReport merge(PatternReport other) {
         PatternReport merged = new PatternReport(patternName);
+        merged.operations = this.operations;
         merged.reports.addAll(this.reports);
         merged.reports.addAll(other.reports);
         return merged;

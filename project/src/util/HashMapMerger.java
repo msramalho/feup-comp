@@ -14,7 +14,8 @@ public class HashMapMerger extends HashMap<String, PatternReport> {
 
     @Override
     public void putAll(Map<? extends String, ? extends PatternReport> m) {
-        for (Entry<? extends String, ? extends PatternReport> entry : m.entrySet())
+        for (Entry<? extends String, ? extends PatternReport> entry : m.entrySet()){
             put(entry.getKey(), entry.getValue());
+        }
     }
 }

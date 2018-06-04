@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Report {
-    private HashMap<String, PatternReport> reports;
+    private HashMapMerger reports;
 
     /**
      * Empty constructor for the Report class
