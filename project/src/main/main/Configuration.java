@@ -34,7 +34,6 @@ public class Configuration {
         public boolean innerLoops = false;
         public boolean possibleTernary = false;
         public boolean ternary = false;
-        public boolean classInheritance = false; //TODO: is this alive? else remove
         public boolean cyclomaticComplexity = false;
         public boolean loopsFor = false;
         public boolean loopsForeach = false;
