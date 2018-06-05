@@ -3,6 +3,7 @@ package main;
 import pattern_matcher.PatternDefinitions;
 import report.Report;
 import spoon.reflect.declaration.CtElement;
+import util.Logger;
 import worker.DynamicWorkerFactory;
 import worker.StaticWorkerFactory;
 import worker.WorkerFactory;
@@ -19,6 +20,8 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+import static java.lang.System.exit;
+
 public class Main implements Runnable {
     private Dispatcher dispatcher;
     private Configuration configuration;
@@ -33,17 +36,24 @@ public class Main implements Runnable {
     public static void main(String[] args) {
         if (args.length < 1 || args.length > 3) {
             System.out.println("Unable to parse command line arguments, usage: " + Dispatcher.getUsage());
-            System.exit(0);
+            exit(0);
         }
 
         String targetFile = args[0];
-        String configFile = args.length >= 2 ? args[1] : null;
+        String arg2 = args.length >= 2 ? args[1] : null; // config file
 
-        Main obj = new Main(targetFile, configFile);
+        if (args.length == 3 && args[2].toUpperCase().equals("DEBUG") ||
+                arg2.toUpperCase().equals("DEBUG")) {
+            Logger.setSilence(false);
+        } else {
+            Logger.setSilence(true);
+        }
+
+        Main obj = new Main(targetFile, arg2);
         obj.run();
     }
 
-    Main(String targetFile, String configFile) {
+    private Main(String targetFile, String configFile) {
         configuration = initializeConfiguration(configFile);
         dispatcher = initializeDispatcher(targetFile);
 
@@ -75,7 +85,7 @@ public class Main implements Runnable {
             dispatcher.readSpoonTarget(targetFile);
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
-            System.exit(0);
+            exit(0);
         }
     }
 
@@ -122,6 +132,7 @@ public class Main implements Runnable {
         try {
             packageNodes = (Map<String, Map<String, Future<Node>>>) dispatcher.call();
             writeReport();
+            exit(1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -132,12 +143,12 @@ public class Main implements Runnable {
         Report global = new Report();
         for (Map.Entry<String, Map<String, Future<Node>>> p : packageNodes.entrySet()) { //patterns
             // create a folder for each package
-            String folderName = configuration.output.path + "/" + p.getKey() + "/";
+            String folderName = configuration.global.outputPath + "/" + p.getKey() + "/";
             new File(folderName).mkdirs(); // create dirs
 
             for (Map.Entry<String, Future<Node>> t : p.getValue().entrySet()) {//types inside patterns
                 //create a report for each Type inside that folder
-                String filename = folderName + t.getKey() + "." + configuration.output.format;
+                String filename = folderName + t.getKey() + ".json";
                 try {
                     Report local = (t.getValue().get()).getReport();
                     global = global.merge(local); //build global report incrementally
@@ -148,8 +159,8 @@ public class Main implements Runnable {
                 }
             }
         }
-        writeFile(configuration.output.path + "/report." + configuration.output.format, global.toString()); // write individual Type reports
-
+        writeFile(configuration.global.outputPath + "/report.json", global.toString()); // write individual Type reports
+        System.out.println("Report exported to " + configuration.global.outputPath + "/report.json");
     }
 
     private void writeFile(String filename, String content) {

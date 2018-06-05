@@ -21,11 +21,11 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class Configuration {
-    public transient static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private transient static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     public transient static Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>();
 
     public class Dynamic {
-        public String patternsFile;
+        String patternsFile;
 
         Dynamic() { }
     }
@@ -66,26 +66,20 @@ public class Configuration {
     }
 
 
-    public class Output {
-        public String path = "out/";
-        public String format = "json";
-
-        Output() { }
-    }
-
     public class Global {
-        public int numberOfThreads = 16;
-        public boolean parseComments = false; // if true lines of code will include comments, if false no comment pattern will work
-        public boolean prettyPrint = false; // true will produce reports in pretty printed JSON
+        int numberOfThreads = 16;
+        boolean parseComments = false; // if true lines of code will include comments, if false no comment pattern will work
+        boolean prettyPrint = false; // true will produce reports in pretty printed JSON
         public String[] operations;
+        String outputPath;
 
-        public Global() { }
+        Global() { }
     }
 
 
     @SerializedName("static")
+    private
     Static fix = new Static();
-    Output output = new Output();
     Global global = new Global();
     Dynamic dynamic = new Dynamic();
 
@@ -101,6 +95,7 @@ public class Configuration {
         Configuration c = gson.fromJson(settingsFileContent(filename), Configuration.class);
         if (c.dynamic.patternsFile == null) c.dynamic.patternsFile = "./patterns/Patterns.java";
         if (c.global.operations == null) c.global.operations = new String[]{"sum"};
+        if (c.global.outputPath == null) c.global.outputPath = "out";
         return c;
     }
 
@@ -118,11 +113,13 @@ public class Configuration {
         for (Field f : Static.class.getDeclaredFields()) {
             try {
                 Object staticField = f.get(fix);
-                if (staticField != null && (staticField instanceof Boolean) && (Boolean) staticField) // the user wants this feature
+                if (staticField instanceof Boolean && (Boolean) staticField) // the user wants this feature
                     workerFactories.add(new StaticWorkerFactory(f.getName()));
 
             } catch (IllegalAccessException | ClassNotFoundException | NoSuchMethodException | InstantiationException | InvocationTargetException e) {
-                System.err.println(String.format("Unable to find the worker matching %s. Should be: %s", f.getName(), StaticWorkerFactory.getWorkerName(f.getName())));
+                System.err.println(
+                        String.format("Unable to find the worker matching %s. Should be: %s",
+                                f.getName(), StaticWorkerFactory.getWorkerName(f.getName())));
                 e.printStackTrace();
             }
         }
