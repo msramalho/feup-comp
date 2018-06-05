@@ -98,6 +98,6 @@ public class Dispatcher implements Callable {
      *
      * @return the format in which command line arguments should be given
      */
-    static String getUsage() { return "<filename|foldername> [<userSettings.json>]"; }
+    static String getUsage() { return "<filename|foldername> [<userSettings.json>] [DEBUG]"; }
 
 }
