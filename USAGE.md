@@ -23,6 +23,27 @@ This configurations file contains a set of optional configurations:
 * number of threads to use in execution;
 * which static workers to run (a boolean for each, false by default);
 
+Here is a sample configurations file:
+```json
+{
+	"dynamic": {
+		"patternsFile": "../project/patterns/Patterns.java"
+	},
+	"output": {
+		"path": "../out/"
+	},
+	"global": {
+		"numberOfThreads": 32,
+		"parseComments": false,
+		"operations": ["sum", "min", "max", "std", "avg"]
+	},
+	"static": {
+		"innerLoops": true,
+		"possibleTernary": true
+	}
+}
+```
+
 ### Dynamic Pattern Definitions
 
 Dynamic pattern definitions are provided in a ```Patterns``` class, written by you, in order to define templates for patterns to be matched.
@@ -93,6 +114,6 @@ For example, here is the overridden _getOperations_ method supplying the average
 ```
 
 
-### Notes:
+### Additional Notes:
 If used from the java sources, a report can be obtained on any node of the code's AST. That is, you can obtain the global report by calling the ```getReport()``` method on the root node, as well as any intermediary reports on any os its descendant nodes.
 (Each node's report includes its descendants' reports)

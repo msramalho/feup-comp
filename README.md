@@ -1,4 +1,7 @@
 # Compilers Project
+This Project is a multiporpose pattern matching tool, enabling you to analyse whole projects for specific code patterns (_e.g._ use of ternary operators instead of if-else constructs). You may use the patterns defined by us or define your own patterns.
+
+Consult the [project's user manual](USAGE.md) for more information.
 
 * [Spoon documentation](http://spoon.gforge.inria.fr/mvnsites/spoon-core/apidocs/)
 * [Project Specification](https://docs.google.com/document/d/1-DK3CyzAkquQKJf0ci8Heed-OskWz9QQfpMw78eJ6BI/edit?usp=sharing)
@@ -6,6 +9,8 @@
 * [GitHub Repo](https://github.com/msramalho/feup-comp)
 
 # Completed tasks
+See the [project's kanban board](https://github.com/msramalho/feup-comp/projects/1) for live updates on the project's completion.
+
  1. Configurations from JSON file (a [default](project/src/UserSettings.json) exists) uses [GSON](https://github.com/google/gson)
  1. Build a [Spoon](https://github.com/INRIA/spoon) model from a given source file or folder
  1. Implement concurrent architecture to trigger workers, with threadpool
