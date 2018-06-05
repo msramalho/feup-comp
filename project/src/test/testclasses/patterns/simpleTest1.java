@@ -7,16 +7,15 @@ public class simpleTest1 {
 
         int i = 0;
 
-        int a = 10;
-        for (int k = 0; k < a; ++k) {
+        for (int k = 0; k < 10; ++k) {
             System.out.println("test4");
         }
     }
 
     void simple2() {
-        String j;
-        if (true)
-            j = "j" ;
+        if (true) {
+            String j = "j";
+        }
     }
 
 }

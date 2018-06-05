@@ -1,6 +1,6 @@
 package testclasses.patterns;
 
-public class SimpleTest2 {
+public class simpleTest2 {
 
     void simple1() {
         System.out.println("test");
@@ -14,21 +14,19 @@ public class SimpleTest2 {
     }
 
     void simple2() {
-        String j;
         if (true) {
-            j = "j";
+            String j = "j";
         }
 
-        int a = 10;
-        for (int k = 0; k < a; ++k) {
-            System.out.println("test4");
+        for (int k = 0; k < 10; ++k) {
+            System.out.println("test3");
 
             if (true) {
-                j = "j";
+                String c = "j";
             }
 
             if (true) {
-                j = "j";
+                String j = "j";
                 int i = 0;
             }
         }

@@ -11,14 +11,13 @@ public class simplePatterns {
     }
 
     public void test3() {
-        String j;
-        if (true)
-            j = "j" ;
+        if (true) {
+            String j = "j";
+        }
     }
 
     public void test4() {
-        int a = 10;
-        for (int k = 0; k < a; ++k) {
+        for (int k = 0; k < 10; ++k) {
             System.out.println("test4");
         }
     }

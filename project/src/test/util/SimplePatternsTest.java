@@ -1,6 +1,5 @@
 package util;
 
-import main.Configuration;
 import org.junit.jupiter.api.Test;
 import pattern_matcher.PatternDefinitions;
 import spoon.Launcher;
@@ -13,7 +12,7 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SimplePatternsTest {
 
@@ -53,10 +52,32 @@ public class SimplePatternsTest {
     }
 
     @Test
-    void test1() {
-        HashMap<String, Integer> macthes = runPatterns(
+    void simplestTest() {
+        HashMap<String, Integer> matches = runPatterns(
                 "./src/test/testclasses/patterns/simplePatterns.java",
                 "./src/test/testclasses/patterns/simpleTest1.java");
+
+        assertEquals(matches.size(), 4);
+        // Every Pattern is matched exactly once
+        assertEquals((int) matches.get("test1"), 1);
+        assertEquals((int) matches.get("test2"), 1);
+        assertEquals((int) matches.get("test3"), 1);
+        assertEquals((int) matches.get("test4"), 1);
+    }
+
+    @Test
+    void combinationOfPatterns() {
+        HashMap<String, Integer> matches = runPatterns(
+                "./src/test/testclasses/patterns/simplePatterns.java",
+                "./src/test/testclasses/patterns/simpleTest2.java");
+
+        // There will be fore 4 matches, because there are the 4 types of nodes that trigger the matching attempts
+        assertEquals(matches.size(), 4);
+        // Frequency of each pattern
+        assertEquals((int) matches.get("test1"), 3);
+        assertEquals((int) matches.get("test2"), 2);
+        assertEquals((int) matches.get("test3"), 1);
+        assertEquals((int) matches.get("test4"), 0);
     }
 
 }
