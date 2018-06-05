@@ -17,7 +17,7 @@ import java.util.regex.Matcher;
 
 public class DynamicWorker extends Worker {
 
-    private CtElement patternElement;
+    private final CtElement patternElement;
     private Pattern pattern;
 
     public DynamicWorker(CtElement rootNode, String patternName, CtElement patternElement) {

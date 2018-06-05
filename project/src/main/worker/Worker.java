@@ -19,13 +19,14 @@ import java.util.stream.Stream;
  */
 public abstract class Worker implements Callable { // running call on ExecutorService returns Future<C>
     public AbstractFilter filter; // filter to match this worker with the CtElement which triggers it
-    private String patternName;
+
     protected CtElement rootNode;
-    protected static Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>(Configuration.operations);
 
-    protected Logger logger = new Logger(this); // TODO: delete for production (?)
+    private final String patternName;
+    private static Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>(Configuration.operations);
 
-    public Worker(CtElement rootNode, String patternName) {
+
+    protected Worker(CtElement rootNode, String patternName) {
         this.rootNode = rootNode;
         this.patternName = patternName;
     }
@@ -55,7 +56,7 @@ public abstract class Worker implements Callable { // running call on ExecutorSe
     public String getPatternName() { return patternName; }
 
     @Override
-    public abstract WorkerReport call() throws Exception;
+    public abstract WorkerReport call();
 
     /**
      * By default every Worker is counted, this method can be overridden to use more {@link Operations}

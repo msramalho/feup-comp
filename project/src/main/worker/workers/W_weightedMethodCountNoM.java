@@ -24,7 +24,7 @@ public class W_weightedMethodCountNoM extends Worker {
     }
 
     @Override
-    public WorkerReport call() throws Exception {
+    public WorkerReport call() {
         return new WorkerReport(rootNode.filterChildren(new AbstractFilter<CtMethod>(CtMethod.class) {
             @Override
             public boolean matches(CtMethod method) {

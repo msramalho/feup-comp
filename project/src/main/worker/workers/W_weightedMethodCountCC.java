@@ -24,7 +24,7 @@ public class W_weightedMethodCountCC extends Worker {
     }
 
     @Override
-    public WorkerReport call() throws Exception {
+    public WorkerReport call() {
         final AtomicInteger wmcRef = new AtomicInteger(); //reference needed for lambda function
         rootNode.filterChildren(new AbstractFilter<CtMethod>(CtMethod.class) {
             @Override

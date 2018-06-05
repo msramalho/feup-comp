@@ -21,7 +21,7 @@ public class W_linesOfCodeMethod extends Worker {
     }
 
     @Override
-    public WorkerReport call() throws Exception {
+    public WorkerReport call() {
         return new WorkerReport(rootNode.toString().split("\r\n|\r|\n").length);
     }
 }

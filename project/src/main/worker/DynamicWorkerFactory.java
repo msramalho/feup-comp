@@ -5,9 +5,9 @@ import spoon.reflect.declaration.CtMethod;
 
 public class DynamicWorkerFactory extends WorkerFactory {
 
-    private Class<?> type;
-    private CtElement patternElement;
-    private DynamicWorker filterWorker;
+    private final Class<?> type;
+    private final CtElement patternElement;
+    private final DynamicWorker filterWorker;
 
     public DynamicWorkerFactory(Class<?> type, CtElement patternElement) {
         super(getPatternName(patternElement));

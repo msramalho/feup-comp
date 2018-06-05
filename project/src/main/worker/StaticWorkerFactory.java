@@ -6,7 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 public class StaticWorkerFactory extends WorkerFactory {
-    private static String WORKERS_LOCATION = "worker.workers.W_";
+    private static final String WORKERS_LOCATION = "worker.workers.W_";
     private Class<?> workerClass;
     private Worker filterWorker;
     private Constructor<?> constructor;
@@ -14,7 +14,7 @@ public class StaticWorkerFactory extends WorkerFactory {
     /**
      * Receives the name of the feature and the configuration and loads the proper worker, through its super constructor that receives only a Configuration object
      *
-     * @param patternName of the feature
+     * @param patternName the feature's pattern name
      * @throws ClassNotFoundException
      * @throws IllegalAccessException
      * @throws InstantiationException

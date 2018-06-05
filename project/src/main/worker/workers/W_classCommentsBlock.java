@@ -21,7 +21,7 @@ public class W_classCommentsBlock extends Worker {
     }
 
     @Override
-    public WorkerReport call() throws Exception {
+    public WorkerReport call() {
         // return 1 for each block comment found
         return new WorkerReport((((CtComment) rootNode).getCommentType() == CtComment.CommentType.BLOCK) ? 1 : 0);
     }

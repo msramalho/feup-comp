@@ -21,7 +21,7 @@ public class W_classComments extends Worker {
     }
 
     @Override
-    public WorkerReport call() throws Exception {
+    public WorkerReport call() {
         return new WorkerReport(1); // return 1 for each comment found
     }
 }

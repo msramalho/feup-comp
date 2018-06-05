@@ -21,7 +21,7 @@ public class W_ternary extends Worker {
     }
 
     @Override
-    public WorkerReport call() throws Exception {
+    public WorkerReport call() {
         return new WorkerReport(1);
     }
 }

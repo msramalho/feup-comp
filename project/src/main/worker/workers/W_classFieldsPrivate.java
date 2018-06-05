@@ -23,7 +23,7 @@ public class W_classFieldsPrivate extends Worker {
     }
 
     @Override
-    public WorkerReport call() throws Exception {
+    public WorkerReport call() {
         return new WorkerReport(
                 rootNode.filterChildren(
                         new AbstractFilter<CtField>(CtField.class) {

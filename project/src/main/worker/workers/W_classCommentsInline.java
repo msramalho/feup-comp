@@ -21,7 +21,7 @@ public class W_classCommentsInline extends Worker {
     }
 
     @Override
-    public WorkerReport call() throws Exception {
+    public WorkerReport call() {
         // return 1 for each inline comment found
         return new WorkerReport((((CtComment) rootNode).getCommentType() == CtComment.CommentType.INLINE) ? 1 : 0);
     }

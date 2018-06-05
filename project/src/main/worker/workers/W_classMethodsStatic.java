@@ -23,7 +23,7 @@ public class W_classMethodsStatic extends Worker {
     }
 
     @Override
-    public WorkerReport call() throws Exception {
+    public WorkerReport call() {
         return new WorkerReport(
                 rootNode.filterChildren(new AbstractFilter<CtMethod>(CtMethod.class) {
                     @Override

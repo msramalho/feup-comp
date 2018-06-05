@@ -26,10 +26,9 @@ public class W_cyclomaticComplexity extends Worker {
      * Iterates the current method in DFS and looks for elements that count toward the cyclomatic complexity metric
      *
      * @return WorkerReport
-     * @throws Exception
      */
     @Override
-    public WorkerReport call() throws Exception {
+    public WorkerReport call() {
         Integer complexity = 0;
 
         CtIterator it = new CtIterator(rootNode);

@@ -3,10 +3,10 @@ package worker;
 import spoon.reflect.declaration.CtElement;
 
 public abstract class WorkerFactory {
-    private String patternName;
+    private final String patternName;
 
 
-    public WorkerFactory(String patternName) {
+    protected WorkerFactory(String patternName) {
         this.patternName = patternName;
     }
 

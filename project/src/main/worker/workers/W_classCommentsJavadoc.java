@@ -21,7 +21,7 @@ public class W_classCommentsJavadoc extends Worker {
     }
 
     @Override
-    public WorkerReport call() throws Exception {
+    public WorkerReport call() {
         // return 1 for each JavaDoc comment found
         return new WorkerReport((((CtComment) rootNode).getCommentType() == CtComment.CommentType.JAVADOC) ? 1 : 0);
     }
