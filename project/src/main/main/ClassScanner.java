@@ -18,8 +18,6 @@ public class ClassScanner extends CtScanner implements Callable {
     private Node root;
     private Node current;
 
-    private Logger logger = new Logger(this);
-
     ClassScanner(ExecutorService executorService, FactoryManager factoryManager, CtElement rootElement) {
         this.executorService = executorService;
         this.factoryManager = factoryManager;
@@ -36,7 +34,7 @@ public class ClassScanner extends CtScanner implements Callable {
 
         // Spawn new tasks
         factoryManager.makeWorkers(e).forEach((Worker worker) -> {
-            logger.print("Worker spawned from factory: " + worker.getPatternName() + " at " + e.getPosition().getLine());
+            Logger.print(this, "Worker spawned from factory: " + worker.getPatternName() + " at " + e.getPosition().getLine());
             current.addFuture(worker.getPatternName(), executorService.submit(worker), worker.getOperations());
         });
 
@@ -49,7 +47,7 @@ public class ClassScanner extends CtScanner implements Callable {
 
     @Override
     public Node call() throws Exception {
-        logger.print(factoryManager.report());
+        Logger.print(this, factoryManager.report());
         scan(this.root.getCtElement());
         return root;
     }

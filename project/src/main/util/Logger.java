@@ -1,20 +1,25 @@
 package util;
 
 public class Logger {
-    private Object source; // the object that will call Logger methods
 
+    private static boolean isSilenced = false;
 
-    public Logger(Object source) { this.source = source; }
+    public static void setSilence(boolean silence) {
+        isSilenced = silence;
+    }
 
-    public void print(String message) { System.out.println(format(message)); }
+    public static void print(Object caller, String message) {
+        if (! isSilenced)
+            System.out.println(format(caller, message));
+    }
 
-    private String format(String message) {
+    private static String format(Object caller, String message) {
         // https://stackoverflow.com/a/421338/6196010
         StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
 
         // the 3 means this is called from 3 -> 2 (print) -> 1 (format) ->  0 (getStackTrace)
         StackTraceElement relevant = stackTraceElements[3];
-        return String.format("[%s->%s:%3d] - %s", source.getClass().getName(), relevant.getMethodName(), relevant.getLineNumber(), message);
+        return String.format("[%s->%s:%3d] - %s", caller.getClass().getName(), relevant.getMethodName(), relevant.getLineNumber(), message);
     }
 
 }

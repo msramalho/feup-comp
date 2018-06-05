@@ -22,7 +22,6 @@ import java.util.stream.Stream;
 
 public class Configuration {
     public transient static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    public transient Logger logger = new Logger(this);
     public transient static Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>();
 
     public class Dynamic {

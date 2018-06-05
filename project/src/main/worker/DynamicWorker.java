@@ -38,7 +38,7 @@ public class DynamicWorker extends Worker {
 
         Integer countMatches = pattern.getMatches(rootNode).size();
         if (countMatches >= 1) {
-            System.out.println("I got " + countMatches + " match(es) on " + rootNode + "!!");
+            System.out.println("I got " + countMatches + " match(es) on snippet:\n" + rootNode + "\n");
         }
         return new WorkerReport(countMatches);
     }
