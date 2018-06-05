@@ -1,7 +1,9 @@
 package report;
 
+/**
+ * Holds the result of a Worker's execution. Can be extended to hold more information.
+ */
 public class WorkerReport implements Comparable<WorkerReport> {
-    // TODO: may need to save more information in the future
     Integer value;
 
     public WorkerReport(Integer value) {
