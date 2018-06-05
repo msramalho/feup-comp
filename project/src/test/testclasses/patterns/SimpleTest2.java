@@ -1,6 +1,6 @@
 package testclasses.patterns;
 
-public class simpleTest2 {
+public class SimpleTest2 {
 
     void simple1() {
         System.out.println("test");
