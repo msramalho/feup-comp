@@ -19,6 +19,8 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+import static java.lang.System.exit;
+
 public class Main implements Runnable {
     private Dispatcher dispatcher;
     private Configuration configuration;
@@ -33,7 +35,7 @@ public class Main implements Runnable {
     public static void main(String[] args) {
         if (args.length < 1 || args.length > 3) {
             System.out.println("Unable to parse command line arguments, usage: " + Dispatcher.getUsage());
-            System.exit(0);
+            exit(0);
         }
 
         String targetFile = args[0];
@@ -75,7 +77,7 @@ public class Main implements Runnable {
             dispatcher.readSpoonTarget(targetFile);
         } catch (FileNotFoundException e) {
             System.err.println(e.getMessage());
-            System.exit(0);
+            exit(0);
         }
     }
 
@@ -122,6 +124,7 @@ public class Main implements Runnable {
         try {
             packageNodes = (Map<String, Map<String, Future<Node>>>) dispatcher.call();
             writeReport();
+            exit(1);
         } catch (Exception e) {
             e.printStackTrace();
         }
