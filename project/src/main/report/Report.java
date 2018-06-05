@@ -8,6 +8,9 @@ import util.HashMapMerger;
 import java.util.Collection;
 import java.util.Map;
 
+/**
+ * The Global report, containing Pattern reports on every pattern, and providing easy export to a json file.
+ */
 public class Report {
     private HashMapMerger reports;
     private static boolean prettyPrint = false;
@@ -45,6 +48,11 @@ public class Report {
         reports.put(patternReport.getPatternName(), patternReport);
     }
 
+    /**
+     * Merge this report with another report, merging each common pattern report.
+     * @param other the other Report instance.
+     * @return the new merged Report.
+     */
     public Report merge(Report other) {
         Report merged = new Report();
         merged.reports.putAll(this.reports); // this beauty works due to HashMapMerger
@@ -52,6 +60,10 @@ public class Report {
         return merged;
     }
 
+    /**
+     * Export this report to JSON.
+     * @return
+     */
     public JsonObject toJson() {
         JsonObject json = new JsonObject();
 

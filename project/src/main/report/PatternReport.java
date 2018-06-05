@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
+/**
+ * Holds the aggregate reports of Workers trying to match a given pattern.
+ */
 public class PatternReport extends Operable {
     private String patternName;
     public ArrayList<WorkerReport> reports = new ArrayList<>();
@@ -30,6 +33,11 @@ public class PatternReport extends Operable {
         }
     }
 
+    /**
+     * Gets the Mapped results of operation_name -> operation_result.
+     * Performs this PatternReport's operations along this pattern report's WorkerReports.
+     * @return the mapped results.
+     */
     public Map<String, Number> getOperationsResults() {
         Map<String, Number> result = new HashMap<>();
         for (Map.Entry<String, Function<Stream<WorkerReport>, ? extends Number>> entry : operations.entrySet()) {
@@ -38,9 +46,17 @@ public class PatternReport extends Operable {
         return result;
     }
 
+    /**
+     * Merges two PatternReports and their corresponding WorkerReports.
+     * @param other the other PatternReport.
+     * @return the merged PatternReport.
+     */
     public PatternReport merge(PatternReport other) {
         PatternReport merged = new PatternReport(patternName);
+
+        // Operations must be common among all workers of a given pattern
         merged.operations = this.operations;
+
         merged.reports.addAll(this.reports);
         merged.reports.addAll(other.reports);
         return merged;
