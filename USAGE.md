@@ -30,7 +30,7 @@ Here is a sample configurations file:
 	"global": {
 		"numberOfThreads": 32,
 		"parseComments": false,
-		"outputPath": "out"
+		"outputPath": "out",
 		"operations": ["sum", "min", "max", "std", "avg"]
 	},
 	"dynamic": {
