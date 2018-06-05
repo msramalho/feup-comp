@@ -27,16 +27,14 @@ This configurations file contains a set of optional configurations:
 Here is a sample configurations file:
 ```json
 {
-	"dynamic": {
-		"patternsFile": "../project/patterns/Patterns.java"
-	},
-	"output": {
-		"path": "../out/"
-	},
 	"global": {
 		"numberOfThreads": 32,
 		"parseComments": false,
+		"outputPath": "out"
 		"operations": ["sum", "min", "max", "std", "avg"]
+	},
+	"dynamic": {
+		"patternsFile": "../project/patterns/Patterns.java"
 	},
 	"static": {
 		"innerLoops": true,
@@ -44,6 +42,8 @@ Here is a sample configurations file:
 	}
 }
 ```
+
+A settings file that activates all configurations can be found [here](https://github.com/msramalho/feup-comp/blob/master/project/UserSettings.json)
 
 ### Dynamic Pattern Definitions
 
