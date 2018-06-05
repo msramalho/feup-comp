@@ -6,6 +6,7 @@ public class VarsPatterns {
 
     Object _var_a_;
     Object _var_b_;
+    String _var_def_;
     int _var_i_;
     Collection<Object> _var_collection_;
 
@@ -27,7 +28,7 @@ public class VarsPatterns {
 
     public void test4() {
         if (_var_a_ != null) {
-            String j = "j";
+            String _var_def_ = "j";
         }
     }
 
@@ -35,5 +36,9 @@ public class VarsPatterns {
         for (_var_i_ = 0; _var_collection_.size() < 10; ++_var_i_) {
             System.out.println("test5");
         }
+    }
+
+    public void test6() {
+        Object _var_a_ = null;
     }
 }

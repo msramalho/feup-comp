@@ -17,7 +17,7 @@ public abstract class MethodsPatterns {
     }
 
     public void test3() {
-        String y = _method_test2_(_var_string_);
+        String _var_y_ = _method_test2_(_var_string_);
     }
 
     public void test4() {

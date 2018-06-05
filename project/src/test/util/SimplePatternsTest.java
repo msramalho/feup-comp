@@ -44,7 +44,7 @@ public class SimplePatternsTest {
                 "./src/test/testclasses/patterns/VarsPatterns.java",
                 "./src/test/testclasses/patterns/VarsTest.java");
 
-        assertEquals(matches.size(), 5);
+        assertEquals(matches.size(), 6);
         // Frequency of each pattern
         // In lines 33
         assertEquals((int) matches.get("test1"), 1);
@@ -56,6 +56,8 @@ public class SimplePatternsTest {
         assertEquals((int) matches.get("test4"), 2);
         // In line 47 and 51
         assertEquals((int) matches.get("test5"), 2);
+        // In line 32
+        assertEquals((int) matches.get("test6"), 1);
     }
 
     @Test

@@ -64,8 +64,10 @@ public class DynamicWorker extends Worker {
     private void buildPattern() {
         pattern = PatternBuilder.create(patternElement).configureParameters(
             pb -> {
-                for (String v : getPatternVariables(patternElement.toString()))
+                for (String v : getPatternVariables(patternElement.toString())) {
                     pb.parameter(v).byVariable(v);
+                    pb.parameter(v).byString(v);
+                }
 
                 for (AnyStatement a : getPatternAnys(patternElement.toString()).values()) {
                     if (a.getMax() == null) {
