@@ -119,20 +119,20 @@ In order to demonstrate the usage and make this project useful as-is, we have im
 
 ### Static Patterns
 The most straightforward patterns include:
- * Comments identification (Any, Inline, Block and Javadoc) [these patterns require the configuration `global.parseComments` to be `true`]
- * Class Fields identification (Any, public, protected, private, static)
- * Class Methods identification (Any, abstract, public, protected, private, static)
- * Lines of Code (Class, Method) [these patterns are done on a standardize format of the code, also the results will vary with the configuration `global.parseComments`]
- * Java Statements identification (For loop, For-each loop, While loop, Do-while loop, If statement, Switch statement, Ternary operator)
+ * Comments identification (Any, Inline, Block and Javadoc) [these patterns require the configuration `global.parseComments` to be `true`]: `classComments`,`classCommentsBlock`,`classCommentsInline`,`classCommentsJavadoc`,`classComments`
+ * Class Fields identification (Any, public, protected, private, static): `classFields`, `classFieldsPublic`, `classFieldsProtected`, `classFieldsPrivate`, `classFieldsStatic`
+ * Class Methods identification (Any, abstract, public, protected, private, static): `classMethods`, `classMethodsAbstract`, `classMethodsPublic`, `classMethodsProtected`, `classMethodsPrivate`, `classMethodsStatic` 
+ * Lines of Code (Class, Method) [these patterns are done on a standardize format of the code, also the results will vary with the configuration `global.parseComments`]: `linesOfCodeClass`, `linesOfCodeMethod`
+ * Java Statements identification (For loop, For-each loop, While loop, Do-while loop, If statement, Switch statement, Ternary operator): `loopsFor`, `loopsForeach`, `loopsWhile`, `loopsDoWhile`, `conditionalId`, `conditionalSwitch`, `ternary`
  
 Some more complex pattern were also implemented in this manner, namely:
- * Cyclomatic Complexity of a method
- * Maximum inner loop depth of a method
- * Super Class count (excluding Classes from `java.*` packages)
- * Super Class count (including Classes from `java.*` packages)
- * Weighted Method Count (WMC) based on Cyclomatic complexity
- * Weighted Method Count (WMC) based on Lines of Code per Method
- * Weighted Method Count (WMC) based on Number of Methods
+ * Cyclomatic Complexity of a method: `cyclomaticComplexity`
+ * Maximum inner loop depth of a method: `innerLoops`
+ * Super Class count (excluding Classes from `java.*` packages): `superClass`
+ * Super Class count (including Classes from `java.*` packages): `superClassJava`
+ * Weighted Method Count (WMC) based on Cyclomatic complexity: `weightedMethodCountCC`
+ * Weighted Method Count (WMC) based on Lines of Code per Method: `weightedMethodCountLoC`
+ * Weighted Method Count (WMC) based on Number of Methods: `weightedMethodCountNoM`
 
 
 ### Dynamic Patterns
