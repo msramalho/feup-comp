@@ -8,6 +8,7 @@
 	"global": {
 		"numberOfThreads": 32,
 		"parseComments": false,
+		"prettyPrint": true,
 		"operations": ["sum", "min", "max", "std", "avg"]
 	},
 	"static": {

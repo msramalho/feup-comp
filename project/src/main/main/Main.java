@@ -128,6 +128,7 @@ public class Main implements Runnable {
     }
 
     private void writeReport() throws ExecutionException {
+        Report.setPrettyPrint(configuration.global.prettyPrint);
         Report global = new Report();
         for (Map.Entry<String, HashMap<String, Future<Node>>> p : packageNodes.entrySet()) {//patterns
             // create a folder for each package

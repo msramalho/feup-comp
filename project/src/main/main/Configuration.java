@@ -77,6 +77,7 @@ public class Configuration {
     public class Global {
         public int numberOfThreads = 16;
         public boolean parseComments = false; // if true lines of code will include comments, if false no comment pattern will work
+        public boolean prettyPrint = false; // true will produce reports in pretty printed JSON
         public String[] operations;
 
         public Global() { }
