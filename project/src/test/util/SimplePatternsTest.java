@@ -1,5 +1,6 @@
 package util;
 
+import main.Configuration;
 import org.junit.jupiter.api.Test;
 import pattern_matcher.PatternDefinitions;
 import spoon.Launcher;
@@ -39,6 +40,8 @@ public class SimplePatternsTest {
         HashMap<String, Integer> matches = new HashMap<>();
         for (CtElement element : spoon.getModel().getElements(null)) {
              List<CtElement> possiblePatterns = patternDefinitions.getPatterns().get(element.getClass());
+             if (possiblePatterns == null)
+                 continue;
 
              for (CtElement pattern : possiblePatterns) {
                  String patternName = DynamicWorkerFactory.getPatternName(pattern);
@@ -51,7 +54,9 @@ public class SimplePatternsTest {
 
     @Test
     void test1() {
-
+        HashMap<String, Integer> macthes = runPatterns(
+                "./src/test/testclasses/patterns/simplePatterns.java",
+                "./src/test/testclasses/patterns/simpleTest1.java");
     }
 
 }

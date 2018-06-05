@@ -13,17 +13,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class Configuration {
     public transient static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     public transient Logger logger = new Logger(this);
-    public transient static Map<String, Function<Stream<WorkerReport>, Number>> operations;
+    public transient static Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>();
 
     public class Static {
         public String patternsFile = "./patterns/Patterns.java";
