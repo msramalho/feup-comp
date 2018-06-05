@@ -67,18 +67,12 @@ public class Configuration {
     }
 
 
-    public class Output {
-        public String path = "out/";
-        public String format = "json";
-
-        Output() { }
-    }
-
     public class Global {
         public int numberOfThreads = 16;
         public boolean parseComments = false; // if true lines of code will include comments, if false no comment pattern will work
         public boolean prettyPrint = false; // true will produce reports in pretty printed JSON
         public String[] operations;
+        public String outputPath;
 
         public Global() { }
     }
@@ -86,7 +80,6 @@ public class Configuration {
 
     @SerializedName("static")
     Static fix = new Static();
-    Output output = new Output();
     Global global = new Global();
     Dynamic dynamic = new Dynamic();
 
@@ -102,6 +95,7 @@ public class Configuration {
         Configuration c = gson.fromJson(settingsFileContent(filename), Configuration.class);
         if (c.dynamic.patternsFile == null) c.dynamic.patternsFile = "./patterns/Patterns.java";
         if (c.global.operations == null) c.global.operations = new String[]{"sum"};
+        if (c.global.outputPath == null) c.global.outputPath = "out";
         return c;
     }
 

@@ -135,12 +135,12 @@ public class Main implements Runnable {
         Report global = new Report();
         for (Map.Entry<String, Map<String, Future<Node>>> p : packageNodes.entrySet()) { //patterns
             // create a folder for each package
-            String folderName = configuration.output.path + "/" + p.getKey() + "/";
+            String folderName = configuration.global.outputPath + "/" + p.getKey() + "/";
             new File(folderName).mkdirs(); // create dirs
 
             for (Map.Entry<String, Future<Node>> t : p.getValue().entrySet()) {//types inside patterns
                 //create a report for each Type inside that folder
-                String filename = folderName + t.getKey() + "." + configuration.output.format;
+                String filename = folderName + t.getKey() + ".json";
                 try {
                     Report local = (t.getValue().get()).getReport();
                     global = global.merge(local); //build global report incrementally
@@ -151,7 +151,7 @@ public class Main implements Runnable {
                 }
             }
         }
-        writeFile(configuration.output.path + "/report." + configuration.output.format, global.toString()); // write individual Type reports
+        writeFile(configuration.global.outputPath + "/report.json", global.toString()); // write individual Type reports
 
     }
 
