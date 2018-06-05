@@ -28,9 +28,9 @@ class W_superClassesTest {
 
     @Test
     void call() throws Exception {
-        assertEquals((new WorkerReport(1)).getValue(), w.call().getValue()); // Cloneable is not detected
+        assertEquals((new WorkerReport(2)).getValue(), w.call().getValue()); // Cloneable is not detected
         w = new W_superClasses(c2, "");
-        assertEquals((new WorkerReport(2)).getValue(), w.call().getValue());
+        assertEquals((new WorkerReport(3)).getValue(), w.call().getValue());
     }
 
 }

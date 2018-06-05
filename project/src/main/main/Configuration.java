@@ -21,12 +21,12 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class Configuration {
-    public transient static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private transient static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     public transient Logger logger = new Logger(this);
     public transient static Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>();
 
     public class Dynamic {
-        public String patternsFile;
+        String patternsFile;
 
         Dynamic() { }
     }
@@ -68,17 +68,18 @@ public class Configuration {
 
 
     public class Global {
-        public int numberOfThreads = 16;
-        public boolean parseComments = false; // if true lines of code will include comments, if false no comment pattern will work
-        public boolean prettyPrint = false; // true will produce reports in pretty printed JSON
+        int numberOfThreads = 16;
+        boolean parseComments = false; // if true lines of code will include comments, if false no comment pattern will work
+        boolean prettyPrint = false; // true will produce reports in pretty printed JSON
         public String[] operations;
-        public String outputPath;
+        String outputPath;
 
-        public Global() { }
+        Global() { }
     }
 
 
     @SerializedName("static")
+    private
     Static fix = new Static();
     Global global = new Global();
     Dynamic dynamic = new Dynamic();

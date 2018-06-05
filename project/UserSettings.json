@@ -8,7 +8,7 @@
 		"numberOfThreads": 32,
 		"parseComments": false,
 		"prettyPrint": true,
-		"operations": ["sum", "min", "max", "std", "avg"],
+		"operations": ["sum", "min", "max", "std", "avg", "count"],
 		"outputPath": "out"
 	},
 	"static": {
