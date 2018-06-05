@@ -1,6 +1,5 @@
 import java.util.Collection;
 import spoon.template.TemplateParameter;
-import java.lang.reflect.Method;
 
 public class Patterns {
 
