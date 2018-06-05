@@ -53,7 +53,6 @@ public class DynamicWorker extends Worker {
         Integer countMatches = pattern.getMatches(rootNode).size();
         if (countMatches >= 1) {
             Match test = pattern.getMatches(rootNode).get(0);
-            Logger.print(this, "I got " + countMatches + " match(es) on snippet:\n" + rootNode + "\n");
         }
         return new WorkerReport(countMatches);
     }

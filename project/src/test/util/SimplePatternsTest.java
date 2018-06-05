@@ -58,4 +58,22 @@ public class SimplePatternsTest {
         assertEquals((int) matches.get("test5"), 2);
     }
 
+    @Test
+    void withMethods() {
+        HashMap<String, Integer> matches = runPatterns(
+                "./src/test/testclasses/patterns/MethodsPatterns.java",
+                "./src/test/testclasses/patterns/MethodsTest.java");
+
+        assertEquals(matches.size(), 4);
+        // Frequency of each pattern
+        // Missing underscore on method definition, not recognized ass a method parameter
+        assertEquals((int) matches.get("test1"), 0);
+        // In lines 23, 25, 30 and 32
+        assertEquals((int) matches.get("test2"), 4);
+        // In line 18
+        assertEquals((int) matches.get("test3"), 1);
+        // In line 21
+        assertEquals((int) matches.get("test4"), 1);
+    }
+
 }
