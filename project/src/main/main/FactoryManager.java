@@ -1,33 +1,25 @@
 package main;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 import spoon.reflect.declaration.CtElement;
 import worker.Worker;
 import worker.WorkerFactory;
 
 import java.util.*;
 
-public class FactoryManager {
-    private Multimap<String, WorkerFactory> workerFactories;
+class FactoryManager {
+    private Set<WorkerFactory> workerFactories;
 
-    public FactoryManager() {
-        workerFactories = HashMultimap.create();
+    FactoryManager() {
+        workerFactories = new HashSet<>();
     }
 
-    public void addWorkerFactory(WorkerFactory workerFactory) {
-        workerFactories.put(workerFactory.getType().getName(), workerFactory);
+    void addWorkerFactory(WorkerFactory workerFactory) {
+        workerFactories.add(workerFactory);
     }
-
-    // TODO test. Please do not delete. Performance improvement.
-//    Collection<WorkerFactory> getWorkerFactories(CtElement elem) {
-//        return workerFactories.get(elem.getClass().getName());
-//    }
 
     Collection<WorkerFactory> getWorkerFactories(CtElement elem) {
         List<WorkerFactory> matchedFactories = new ArrayList<>();
-        for (Map.Entry<String, WorkerFactory> entry : workerFactories.entries()) {
-            WorkerFactory factory = entry.getValue();
+        for (WorkerFactory factory : workerFactories) {
             if (factory.matches(elem))
                 matchedFactories.add(factory);
         }
