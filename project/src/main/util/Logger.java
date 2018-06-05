@@ -1,5 +1,8 @@
 package util;
 
+/**
+ * Logger class, useful for globally disabling logging, and providing runtime details on the log caller.
+ */
 public class Logger {
 
     private static boolean isSilenced = false;
