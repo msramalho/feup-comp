@@ -16,7 +16,7 @@ public class DynamicWorkerFactory extends WorkerFactory {
         this.filterWorker = new DynamicWorker(null, null, patternElement);
     }
 
-    private static String getPatternName(CtElement block) {
+    public static String getPatternName(CtElement block) {
         CtElement parent = block.getParent();
 
         if (parent instanceof CtMethod)

@@ -8,14 +8,14 @@ import worker.WorkerFactory;
 
 import java.util.*;
 
-class FactoryManager {
+public class FactoryManager {
     private Multimap<String, WorkerFactory> workerFactories;
 
-    FactoryManager() {
+    public FactoryManager() {
         workerFactories = HashMultimap.create();
     }
 
-    void addWorkerFactory(WorkerFactory workerFactory) {
+    public void addWorkerFactory(WorkerFactory workerFactory) {
         workerFactories.put(workerFactory.getType().getName(), workerFactory);
     }
 

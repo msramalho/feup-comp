@@ -15,17 +15,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class PatternsExtractor {
+public class PatternsExtractorTest {
 
-    private static PatternDefinitions extractor = null;
+    private static PatternDefinitions extractor;
 
-    @Test
-    void successExtraction() {
+    private void loadPatterns(String patternsFile) {
         try {
-            extractor = new PatternDefinitions("./src/test/testclasses//ExtractorTest1.java");
+            extractor = new PatternDefinitions(patternsFile);
         } catch(FileNotFoundException e) {
             fail("Tried to access file that does not exist.");
         }
+    }
+
+    @Test
+    void successExtraction() {
+        loadPatterns("./src/test/testclasses/extractor/ExtractorTest1.java");
         Map<Class<?>, List<CtElement>> patterns =  extractor.getPatterns();
 
         assertEquals(patterns.size(), 3);
@@ -56,11 +60,7 @@ public class PatternsExtractor {
 
     @Test
     void emptyMethodsExtraction() {
-        try {
-            extractor = new PatternDefinitions("./src/test/testclasses//ExtractorTest2.java");
-        } catch(FileNotFoundException e) {
-            fail("Tried to access file that does not exist.");
-        }
+        loadPatterns("./src/test/testclasses/extractor/ExtractorTest2.java");
         Map<Class<?>, List<CtElement>> patterns =  extractor.getPatterns();
 
         // Since all the methods are empty
@@ -69,11 +69,7 @@ public class PatternsExtractor {
 
     @Test
     void SeveralClassesExtraction() {
-        try {
-            extractor = new PatternDefinitions("./src/test/testclasses//ExtractorTest3.java");
-        } catch(FileNotFoundException e) {
-            fail("Tried to access file that does not exist.");
-        }
+        loadPatterns("./src/test/testclasses/extractor/ExtractorTest3.java");
         Map<Class<?>, List<CtElement>> patterns =  extractor.getPatterns();
 
         // Since all the methods are empty

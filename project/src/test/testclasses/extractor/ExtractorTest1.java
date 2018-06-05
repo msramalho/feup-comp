@@ -1,4 +1,4 @@
-package testclasses;
+package testclasses.extractor;
 
 public class ExtractorTest1 {
 
