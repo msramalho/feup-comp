@@ -22,7 +22,6 @@ import java.util.stream.Stream;
 
 public class Configuration {
     private transient static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    public transient Logger logger = new Logger(this);
     public transient static Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>();
 
     public class Dynamic {
@@ -120,11 +119,13 @@ public class Configuration {
         for (Field f : Static.class.getDeclaredFields()) {
             try {
                 Object staticField = f.get(fix);
-                if (staticField != null && (staticField instanceof Boolean) && (Boolean) staticField) // the user wants this feature
+                if (staticField instanceof Boolean && (Boolean) staticField) // the user wants this feature
                     workerFactories.add(new StaticWorkerFactory(f.getName()));
 
             } catch (IllegalAccessException | ClassNotFoundException | NoSuchMethodException | InstantiationException | InvocationTargetException e) {
-                System.err.println(String.format("Unable to find the worker matching %s. Should be: %s", f.getName(), StaticWorkerFactory.getWorkerName(f.getName())));
+                System.err.println(
+                        String.format("Unable to find the worker matching %s. Should be: %s",
+                                f.getName(), StaticWorkerFactory.getWorkerName(f.getName())));
                 e.printStackTrace();
             }
         }

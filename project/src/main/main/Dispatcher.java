@@ -19,7 +19,6 @@ import java.util.concurrent.Future;
 
 public class Dispatcher implements Callable {
     private Configuration configuration;
-    private Logger logger;
     private ExecutorService threadPool;
     private SpoonAPI spoon;
 
@@ -30,11 +29,10 @@ public class Dispatcher implements Callable {
         if (config == null)
             throw new NullPointerException("Configuration file is NULL.");
         this.configuration = config;
-        this.logger = new Logger(this);
 
         threadPool = Executors.newFixedThreadPool(configuration.global.numberOfThreads);
 
-        logger.print(configuration.toString());
+        Logger.print(this, configuration.toString());
     }
 
     void setFactoryManager(FactoryManager factoryManager) {
@@ -55,9 +53,9 @@ public class Dispatcher implements Callable {
             spoon.buildModel();
         } catch (spoon.compiler.ModelBuildingException e) {
             e.printStackTrace();
-            logger.print("Failed to build spoon model. " + e.getMessage());
+            Logger.print(this, "Failed to build spoon model. " + e.getMessage());
         } catch (spoon.SpoonException e) {
-            logger.print("Failed to build spoon model. " + e.getMessage());
+            Logger.print(this, "Failed to build spoon model. " + e.getMessage());
         }
     }
 
@@ -84,11 +82,11 @@ public class Dispatcher implements Callable {
      * @return a {@link HashMap} of TypeName->{@link Node}
      */
     private Map<String, Future<Node>> handlePackage(CtPackage ctPackage) {
-        logger.print("Package: " + ctPackage.getQualifiedName());
+        Logger.print(this, "Package: " + ctPackage.getQualifiedName());
 
         Map<String, Future<Node>> typeNodes = new HashMap<>();
         for (CtType ctType : ctPackage.getTypes()) {
-            logger.print("\tType: " + ctType.getSimpleName() + " - " + ctType.getActualClass().getName());
+            Logger.print(this, "\tType: " + ctType.getSimpleName() + " - " + ctType.getActualClass().getName());
             typeNodes.put(ctType.getSimpleName(), threadPool.submit(new ClassScanner(threadPool, factoryManager, ctType)));
         }
         return typeNodes;
@@ -100,6 +98,6 @@ public class Dispatcher implements Callable {
      *
      * @return the format in which command line arguments should be given
      */
-    static String getUsage() { return "<filename|foldername> [<userSettings.json>]"; }
+    static String getUsage() { return "<filename|foldername> [<userSettings.json>] [DEBUG]"; }
 
 }

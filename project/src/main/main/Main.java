@@ -3,6 +3,7 @@ package main;
 import pattern_matcher.PatternDefinitions;
 import report.Report;
 import spoon.reflect.declaration.CtElement;
+import util.Logger;
 import worker.DynamicWorkerFactory;
 import worker.StaticWorkerFactory;
 import worker.WorkerFactory;
@@ -39,13 +40,22 @@ public class Main implements Runnable {
         }
 
         String targetFile = args[0];
-        String configFile = args.length >= 2 ? args[1] : null;
+        String configFile = args.length >= 2 ? args[1] : null; // config file
+
+        if (args.length == 3 && args[2].toUpperCase().equals("DEBUG")) {
+            Logger.setSilence(false);
+        } else if (args.length == 2 && args[1].toUpperCase().equals("DEBUG")) {
+            Logger.setSilence(false);
+            configFile = null;
+        } else {
+            Logger.setSilence(true);
+        }
 
         Main obj = new Main(targetFile, configFile);
         obj.run();
     }
 
-    Main(String targetFile, String configFile) {
+    private Main(String targetFile, String configFile) {
         configuration = initializeConfiguration(configFile);
         dispatcher = initializeDispatcher(targetFile);
 
@@ -152,7 +162,7 @@ public class Main implements Runnable {
             }
         }
         writeFile(configuration.global.outputPath + "/report.json", global.toString()); // write individual Type reports
-
+        System.out.println("Report exported to " + configuration.global.outputPath + "/report.json");
     }
 
     private void writeFile(String filename, String content) {

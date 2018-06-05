@@ -9,6 +9,7 @@ import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
 import util.AnyStatement;
 import util.CtIterator;
+import util.Logger;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -38,7 +39,7 @@ public class DynamicWorker extends Worker {
 
         Integer countMatches = pattern.getMatches(rootNode).size();
         if (countMatches >= 1) {
-            System.out.println("I got " + countMatches + " match(es) on " + rootNode + "!!");
+            Logger.print(this, "I got " + countMatches + " match(es) on snippet:\n" + rootNode + "\n");
         }
         return new WorkerReport(countMatches);
     }
