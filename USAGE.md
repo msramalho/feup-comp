@@ -82,7 +82,7 @@ An example of an overridden _setFilter_ method that matches with For-loop nodes:
 ```java
 @Override
 protected AbstractFilter setFilter() {
-return new TypeFilter<>(CtFor.class);
+	return new TypeFilter<>(CtFor.class);
 }
 ```
 
@@ -90,7 +90,7 @@ And the associated _call_ method for counting the number of For-loops:
 ```java
 @Override
 public WorkerReport call() throws Exception {
-return new WorkerReport(1);
+	return new WorkerReport(1);
 }
 ```
 
@@ -104,13 +104,13 @@ For example, here is the overridden _getOperations_ method supplying the average
 ```java
 @Override
 public Map<String, Function<Stream<WorkerReport>, Number>> getOperations() {
-Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>();
+	Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>();
 
-operations.put("average", (Stream<WorkerReport> s) -> 
-	s.mapToInt(WorkerReport::getValue).average().orElse(0)
-);
+	operations.put("average", (Stream<WorkerReport> s) -> 
+		s.mapToInt(WorkerReport::getValue).average().orElse(0)
+	);
 
-return operations;
+	return operations;
 }
 ```
 
