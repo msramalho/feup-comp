@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+/**
+ * Utility class containing a set of common operations over a stream of WorkerReports.
+ */
 public class Operations {
     static Map<String, Function<Stream<WorkerReport>, Number>> availableOperations = createMap();
 

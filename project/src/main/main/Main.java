@@ -127,7 +127,7 @@ public class Main implements Runnable {
     }
 
     /**
-     * call dispatcher and get the results, then create a report
+     * Call dispatcher and get the execution results, then export the report.
      */
     @Override
     public void run() {

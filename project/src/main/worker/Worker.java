@@ -15,7 +15,8 @@ import java.util.stream.Stream;
 
 /**
  * Class from which the Workers should inherit.
- * Callable method should return a report of the worker's run.
+ * Callable method should return a report of the worker's execution.
+ * @see <a href="https://github.com/msramalho/feup-comp/blob/master/USAGE.md">User Manual</a>
  */
 public abstract class Worker implements Callable { // running call on ExecutorService returns Future<C>
     public AbstractFilter filter; // filter to match this worker with the CtElement which triggers it

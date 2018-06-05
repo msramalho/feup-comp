@@ -8,11 +8,12 @@ This project uses the open-source [Spoon](https://github.com/INRIA/spoon) librar
 
 ### On the Command Line
 ```
-java main.Main <filename|foldername> [<userSettings.json>]
+java main.Main <filename|foldername> [<userSettings.json>] [DEBUG]
 ```
 
 * ```filename/foldername``` denotes de target java file or project folder;
-* ```userSettings.json``` denotes the program settings (which patterns should be testes, which operations to report on, number of threads to use, _etc._);
+* ```userSettings.json``` denotes the program settings (which patterns should be testes, which operations to report on, number of threads to use, _etc._) - provided optionally;
+* ```DEBUG``` denotes the debug flag, meaning whether the run should report in execution details - provided optionally.
 
 
 ### Configurations: UserSettings.json
@@ -94,7 +95,7 @@ And the associated _call_ method for counting the number of For-loops:
 ```
 
 #### Defining Operations
-Additionally, you worker class can define what operations you would like to feature on the pattern's report. This operations will be used to aggregate the worker's _WorkerReport_s, which you also have full control over.
+Additionally, you worker class can define what operations you would like to feature on the pattern's report. This operations will be used to aggregate the worker's _WorkerReport_, which you also have full control over.
 
 You define operations by overriding the ```getOperations()``` method. This method must return a mapping from the operation's name to the operation's function, ```Map<String, Function<Stream<WorkerReport>, Number>>```.
 Some common operations have already been implemented (sum, avg, min, max, standard deviation, median), but you can define your own as long as they follow the provided interface.
@@ -112,6 +113,29 @@ For example, here is the overridden _getOperations_ method supplying the average
         return operations;
     }
 ```
+
+## Off-the-shelf Patterns
+In order to demonstrate the usage and make this project useful as-is, we have implemented a number of patterns both using static and dynamic matching. 
+
+### Static Patterns
+The most straightforward patterns include:
+ * Comments identification (Any, Inline, Block and Javadoc) [these patterns require the configuration `global.parseComments` to be `true`]: `classComments`,`classCommentsBlock`,`classCommentsInline`,`classCommentsJavadoc`,`classComments`
+ * Class Fields identification (Any, public, protected, private, static): `classFields`, `classFieldsPublic`, `classFieldsProtected`, `classFieldsPrivate`, `classFieldsStatic`
+ * Class Methods identification (Any, abstract, public, protected, private, static): `classMethods`, `classMethodsAbstract`, `classMethodsPublic`, `classMethodsProtected`, `classMethodsPrivate`, `classMethodsStatic` 
+ * Lines of Code (Class, Method) [these patterns are done on a standardize format of the code, also the results will vary with the configuration `global.parseComments`]: `linesOfCodeClass`, `linesOfCodeMethod`
+ * Java Statements identification (For loop, For-each loop, While loop, Do-while loop, If statement, Switch statement, Ternary operator): `loopsFor`, `loopsForeach`, `loopsWhile`, `loopsDoWhile`, `conditionalId`, `conditionalSwitch`, `ternary`
+ 
+Some more complex pattern were also implemented in this manner, namely:
+ * Cyclomatic Complexity of a method: `cyclomaticComplexity`
+ * Maximum inner loop depth of a method: `innerLoops`
+ * Super Class count (excluding Classes from `java.*` packages): `superClass`
+ * Super Class count (including Classes from `java.*` packages): `superClassJava`
+ * Weighted Method Count (WMC) based on Cyclomatic complexity: `weightedMethodCountCC`
+ * Weighted Method Count (WMC) based on Lines of Code per Method: `weightedMethodCountLoC`
+ * Weighted Method Count (WMC) based on Number of Methods: `weightedMethodCountNoM`
+
+
+### Dynamic Patterns
 
 
 ### Additional Notes:

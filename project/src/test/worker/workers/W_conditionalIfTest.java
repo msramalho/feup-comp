@@ -4,14 +4,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import report.WorkerReport;
 import spoon.support.reflect.code.CtBlockImpl;
-import spoon.support.reflect.code.CtForImpl;
-import spoon.support.reflect.code.CtWhileImpl;
+import spoon.support.reflect.code.CtIfImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class W_loopsWhileTest {
-    private static CtWhileImpl c = new CtWhileImpl();
-    private static W_loopsWhile w = new W_loopsWhile(c, "");
+class W_conditionalIfTest {
+    private static CtIfImpl c = new CtIfImpl();
+    private static W_conditionalIf w = new W_conditionalIf(c, "");
 
     @BeforeEach
     void setUp() {
