@@ -4,14 +4,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import report.WorkerReport;
 import spoon.support.reflect.code.CtBlockImpl;
-import spoon.support.reflect.code.CtForImpl;
-import spoon.support.reflect.code.CtWhileImpl;
+import spoon.support.reflect.code.CtDoImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class W_loopsWhileTest {
-    private static CtWhileImpl c = new CtWhileImpl();
-    private static W_loopsWhile w = new W_loopsWhile(c, "");
+class W_loopsDoWhileTest {
+    private static CtDoImpl c = new CtDoImpl();
+    private static W_loopsDoWhile w = new W_loopsDoWhile(c, "");
 
     @BeforeEach
     void setUp() {
@@ -25,7 +24,7 @@ class W_loopsWhileTest {
     }
 
     @Test
-    void call() throws Exception {
+    void call() {
         assertEquals((new WorkerReport(1)).getValue(), w.call().getValue());
     }
 

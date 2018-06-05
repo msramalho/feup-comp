@@ -19,6 +19,7 @@
 		"loopsFor": true,
 		"loopsForeach": true,
 		"loopsWhile": true,
+		"loopsDoWhile": true,
 		"classMethods": true,
 		"classMethodsPrivate": true,
 		"classMethodsPublic": true,
