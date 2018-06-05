@@ -40,16 +40,18 @@ public class Main implements Runnable {
         }
 
         String targetFile = args[0];
-        String arg2 = args.length >= 2 ? args[1] : null; // config file
+        String configFile = args.length >= 2 ? args[1] : null; // config file
 
-        if (args.length == 3 && args[2].toUpperCase().equals("DEBUG") ||
-                arg2.toUpperCase().equals("DEBUG")) {
+        if (args.length == 3 && args[2].toUpperCase().equals("DEBUG")) {
             Logger.setSilence(false);
+        } else if (args.length == 2 && args[1].toUpperCase().equals("DEBUG")) {
+            Logger.setSilence(false);
+            configFile = null;
         } else {
             Logger.setSilence(true);
         }
 
-        Main obj = new Main(targetFile, arg2);
+        Main obj = new Main(targetFile, configFile);
         obj.run();
     }
 
