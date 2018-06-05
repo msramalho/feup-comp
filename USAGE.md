@@ -43,7 +43,7 @@ Here is a sample configurations file:
 }
 ```
 
-A settings file that activates all configurations can be found [here](https://github.com/msramalho/feup-comp/blob/master/project/UserSettings.json)
+A configuration file that activates all configurations can be found [here](https://github.com/msramalho/feup-comp/blob/master/project/UserSettings.json)
 
 ### Dynamic Pattern Definitions
 
