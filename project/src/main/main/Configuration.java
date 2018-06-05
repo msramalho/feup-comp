@@ -25,13 +25,13 @@ public class Configuration {
     public transient Logger logger = new Logger(this);
     public transient static Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>();
 
-    public class Static {
-        public String patternsFile = "./patterns/Patterns.java";
+    public class Dynamic {
+        public String patternsFile;
 
-        Static() { }
+        Dynamic() { }
     }
 
-    public class Dynamic {
+    public class Static {
         public boolean innerLoops = false;
         public boolean possibleTernary = false;
         public boolean ternary = false;
@@ -63,7 +63,7 @@ public class Configuration {
         public boolean weightedMethodCountCC = false;  // weighted method count using cyclomatic complexity
         public boolean weightedMethodCountNoM = false; // weighted method count using number of methods
 
-        Dynamic() { }
+        Static() { }
     }
 
 
@@ -77,7 +77,8 @@ public class Configuration {
     public class Global {
         public int numberOfThreads = 16;
         public boolean parseComments = false; // if true lines of code will include comments, if false no comment pattern will work
-        public String[] operations = {"sum"}; //TODO: check why this is null unless in settings.json
+        public boolean prettyPrint = false; // true will produce reports in pretty printed JSON
+        public String[] operations;
 
         public Global() { }
     }
@@ -98,12 +99,15 @@ public class Configuration {
      * @return Configuration read from the file
      */
     static Configuration loadConfiguration(String filename) {
-        return gson.fromJson(settingsFileContent(filename), Configuration.class);
+        Configuration c = gson.fromJson(settingsFileContent(filename), Configuration.class);
+        if (c.dynamic.patternsFile == null) c.dynamic.patternsFile = "./patterns/Patterns.java";
+        if (c.global.operations == null) c.global.operations = new String[]{"sum"};
+        return c;
     }
 
 
     /**
-     * Read the properties of this.dynamic and, for each true property, add a new StaticWorkerFactory(name, worker, filter) to the result
+     * Read the properties of this.Static and, for each true property, add a new StaticWorkerFactory(name, worker, filter) to the result
      *
      * @return a list of features to analyze, along with the respective Worker to create (which has the spoon filter)
      */
@@ -112,10 +116,10 @@ public class Configuration {
         operations = Operations.parseOperations(global.operations);
 
         ArrayList<StaticWorkerFactory> workerFactories = new ArrayList<>();
-        for (Field f : Dynamic.class.getDeclaredFields()) {
+        for (Field f : Static.class.getDeclaredFields()) {
             try {
-                Object dynamicField = f.get(dynamic);
-                if (dynamicField != null && (dynamicField instanceof Boolean) && (Boolean) dynamicField) // the user wants this feature
+                Object staticField = f.get(fix);
+                if (staticField != null && (staticField instanceof Boolean) && (Boolean) staticField) // the user wants this feature
                     workerFactories.add(new StaticWorkerFactory(f.getName()));
 
             } catch (IllegalAccessException | ClassNotFoundException | NoSuchMethodException | InstantiationException | InvocationTargetException e) {

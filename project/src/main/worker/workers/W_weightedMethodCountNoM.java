@@ -25,22 +25,11 @@ public class W_weightedMethodCountNoM extends Worker {
 
     @Override
     public WorkerReport call() throws Exception {
-        final AtomicInteger wmcRef = new AtomicInteger(); //reference needed for lambda function
-        rootNode.filterChildren(new AbstractFilter<CtMethod>(CtMethod.class) {
+        return new WorkerReport(rootNode.filterChildren(new AbstractFilter<CtMethod>(CtMethod.class) {
             @Override
             public boolean matches(CtMethod method) {
                 return method.getParent() == rootNode; // guarantee this is a direct child
             }
-        }).forEach(m -> {
-            W_classMethods w = new W_classMethods((CtElement) m, "");
-            try {
-                Integer v = w.call().getValue();
-                wmcRef.getAndAdd(v);
-            } catch (Exception e) {
-                System.err.println("Unable to collect the Number of Methods value from " + m.toString());
-                e.printStackTrace();
-            }
-        });
-        return new WorkerReport(wmcRef.get());
+        }).list().size());
     }
 }

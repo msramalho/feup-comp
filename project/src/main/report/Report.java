@@ -1,6 +1,7 @@
 package report;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import util.HashMapMerger;
 
@@ -9,12 +10,17 @@ import java.util.Map;
 
 public class Report {
     private HashMapMerger reports;
+    private static boolean prettyPrint = false;
 
     /**
      * Empty constructor for the Report class
      */
     public Report() {
         reports = new HashMapMerger();
+    }
+
+    public static void setPrettyPrint(boolean prettyPrint) {
+        Report.prettyPrint = prettyPrint;
     }
 
     /**
@@ -60,6 +66,11 @@ public class Report {
     }
 
     @Override
-    public String toString() { return new Gson().toJson(this.toJson()); }
+    public String toString() {
+        Gson g;
+        if (Report.prettyPrint) g = new GsonBuilder().setPrettyPrinting().create();
+        else g = new Gson();
+        return g.toJson(this.toJson());
+    }
 
 }

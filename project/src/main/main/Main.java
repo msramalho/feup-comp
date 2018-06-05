@@ -47,7 +47,7 @@ public class Main implements Runnable {
         configuration = initializeConfiguration(configFile);
         dispatcher = initializeDispatcher(targetFile);
 
-        factoryManager = initializeFactoryManager(configuration.fix.patternsFile);
+        factoryManager = initializeFactoryManager(configuration.dynamic.patternsFile);
         dispatcher.setFactoryManager(factoryManager);
     }
 
@@ -103,7 +103,7 @@ public class Main implements Runnable {
         try {
             patternDefinitions = new PatternDefinitions(patternsFile);
         } catch (FileNotFoundException e) {
-            System.out.println("Patterns file not found: " + e.getMessage());
+            System.err.println("Patterns file not found: " + e.getMessage());
             return;
         }
 
@@ -128,6 +128,7 @@ public class Main implements Runnable {
     }
 
     private void writeReport() throws ExecutionException {
+        Report.setPrettyPrint(configuration.global.prettyPrint);
         Report global = new Report();
         for (Map.Entry<String, HashMap<String, Future<Node>>> p : packageNodes.entrySet()) {//patterns
             // create a folder for each package

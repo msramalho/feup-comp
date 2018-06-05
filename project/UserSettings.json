@@ -1,5 +1,5 @@
 {
-	"static": {
+	"dynamic": {
 		"patternsFile": "patterns/Patterns.java"
 	},
 	"output": {
@@ -9,9 +9,10 @@
 	"global": {
 		"numberOfThreads": 32,
 		"parseComments": false,
+		"prettyPrint": true,
 		"operations": ["sum", "min", "max", "std", "avg"]
 	},
-	"dynamic": {
+	"static": {
 		"innerLoops": true,
 		"possibleTernary": true,
 		"ternary": true,
