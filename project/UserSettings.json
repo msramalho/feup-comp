@@ -1,6 +1,5 @@
 {
-	"static": {
-		"patternsFile": "project/patterns/Patterns.java-"
+	"dynamic": {
 	},
 	"output": {
 		"path": "out/",
@@ -11,7 +10,7 @@
 		"parseComments": false,
 		"operations": ["sum", "min", "max", "std", "avg"]
 	},
-	"dynamic": {
+	"static": {
 		"innerLoops": true,
 		"possibleTernary": true,
 		"ternary": true,
