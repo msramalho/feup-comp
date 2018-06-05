@@ -34,7 +34,6 @@ public class DynamicWorker extends Worker {
 
     @Override
     public WorkerReport call() {
-        // logger.print("comparing: " + rootNode.toString() + "\n with pattern: " + patternElement.toString() + " - filter is " + getType().getName());
         buildPattern(); // build the pattern from the patternElement
 
         Integer countMatches = pattern.getMatches(rootNode).size();
@@ -55,9 +54,20 @@ public class DynamicWorker extends Worker {
                     pb.parameter(v).byVariable(v);
 
                 for (AnyStatement a : getPatternAnys(patternElement.toString()).values()) {
-                    if (a.getMax() == null)
-                        pb.parameter(a.getName()).byReferenceName(a.getName()).setMatchingStrategy(a.getStrategy()).setContainerKind(ContainerKind.LIST).setMinOccurence(a.getMin());
-                    else pb.parameter(a.getName()).byReferenceName(a.getName()).setMatchingStrategy(a.getStrategy()).setContainerKind(ContainerKind.LIST).setMinOccurence(a.getMin()).setMaxOccurence(a.getMax());
+                    if (a.getMax() == null) {
+                        pb.parameter(a.getName())
+                                .byReferenceName(a.getName())
+                                .setMatchingStrategy(a.getStrategy())
+                                .setContainerKind(ContainerKind.LIST)
+                                .setMinOccurence(a.getMin());
+                    } else {
+                        pb.parameter(a.getName())
+                                .byReferenceName(a.getName())
+                                .setMatchingStrategy(a.getStrategy())
+                                .setContainerKind(ContainerKind.LIST)
+                                .setMinOccurence(a.getMin())
+                                .setMaxOccurence(a.getMax());
+                    }
                 }
             }).build();
     }
@@ -83,7 +93,9 @@ public class DynamicWorker extends Worker {
      */
     private HashMap<String, AnyStatement> getPatternAnys(String code) {
         HashMap<String, AnyStatement> anys = new HashMap<>();
-        Matcher m = java.util.regex.Pattern.compile("_(lazy|greedy)_any_(?:(min(\\d+)_)?(max(\\d+)_)?)?").matcher(code);
+        Matcher m = java.util.regex.Pattern
+                .compile("_(lazy|greedy)_any_(?:(min(\\d+)_)?(max(\\d+)_)?)?")
+                .matcher(code);
 
         while (m.find()) {
             AnyStatement any = new AnyStatement(m.group(1), m.group(0));
