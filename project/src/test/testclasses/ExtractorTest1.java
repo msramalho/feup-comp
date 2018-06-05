@@ -1,6 +1,6 @@
 package testclasses;
 
-public class ExtractorTest {
+public class ExtractorTest1 {
 
     public void test1() {
         System.out.println("test");
