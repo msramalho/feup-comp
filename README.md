@@ -28,3 +28,11 @@ See the [project's kanban board](https://github.com/msramalho/feup-comp/projects
  1. Inclusion of unmerged Spoon [PR](https://github.com/INRIA/spoon/pull/1686) that implements template matching - public discussion on how to use it in this [issue](https://github.com/INRIA/spoon/issues/1989)
  1. Creation of simple Patterns that match variables only
  1. [WIP] trying to apply the "any" template matcher to our project
+
+
+# PR Spin-Offs
+We needed to iterate through the nodes in the AST in depth-first manner, and this functionality was not available in Spoon.
+As such, we decided to implement it and submit a pull request, additionally closing the oldest open Spoon issue at the time.
+* [Spoon#1980](https://github.com/INRIA/spoon/pull/1980): implementation of a CtIterator class, enabling depth-first-search from any node of the AST;
+* [Spoon#1986](https://github.com/INRIA/spoon/pull/1986): interface enabling iteration over a CtElement's descendants, using range-based for loops.
+
