@@ -17,8 +17,6 @@ public class AnyTest2 {
             System.out.println("any");
             System.out.println("any");
             System.out.println("any");
-            System.out.println("any");
-            System.out.println("any");
         }
 
     }
