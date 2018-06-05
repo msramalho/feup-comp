@@ -1,6 +1,6 @@
 {
 	"static": {
-		"patternsFile": "project/patterns/Patterns.java-"
+		"patternsFile": "patterns/Patterns.java"
 	},
 	"output": {
 		"path": "out/",
