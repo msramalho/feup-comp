@@ -23,7 +23,7 @@ public class Main implements Runnable {
     private Dispatcher dispatcher;
     private Configuration configuration;
     private FactoryManager factoryManager;
-    private HashMap<String, HashMap<String, Future<Node>>> packageNodes = null;
+    private Map<String, Map<String, Future<Node>>> packageNodes = null;
 
     /**
      * Main function should parse cmd args
@@ -120,7 +120,7 @@ public class Main implements Runnable {
     @Override
     public void run() {
         try {
-            packageNodes = (HashMap<String, HashMap<String, Future<Node>>>) dispatcher.call();
+            packageNodes = (Map<String, Map<String, Future<Node>>>) dispatcher.call();
             writeReport();
         } catch (Exception e) {
             e.printStackTrace();
@@ -130,7 +130,7 @@ public class Main implements Runnable {
     private void writeReport() throws ExecutionException {
         Report.setPrettyPrint(configuration.global.prettyPrint);
         Report global = new Report();
-        for (Map.Entry<String, HashMap<String, Future<Node>>> p : packageNodes.entrySet()) {//patterns
+        for (Map.Entry<String, Map<String, Future<Node>>> p : packageNodes.entrySet()) { //patterns
             // create a folder for each package
             String folderName = configuration.output.path + "/" + p.getKey() + "/";
             new File(folderName).mkdirs(); // create dirs

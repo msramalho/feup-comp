@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -69,7 +70,7 @@ public class Dispatcher implements Callable {
      */
     @Override
     public Object call() throws Exception {
-        HashMap<String, HashMap<String, Future<Node>>> packageNodes = new HashMap<>();
+        Map<String, Map<String, Future<Node>>> packageNodes = new HashMap<>();
         Collection<CtPackage> packages = spoon.getModel().getAllPackages();
         for (CtPackage ctPackage : packages)
             packageNodes.put(ctPackage.getQualifiedName(), handlePackage(ctPackage));
@@ -82,10 +83,10 @@ public class Dispatcher implements Callable {
      * @param ctPackage the current package
      * @return a {@link HashMap} of TypeName->{@link Node}
      */
-    private HashMap<String, Future<Node>> handlePackage(CtPackage ctPackage) {
+    private Map<String, Future<Node>> handlePackage(CtPackage ctPackage) {
         logger.print("Package: " + ctPackage.getQualifiedName());
-        // TODO improve what is to be done with the report
-        HashMap<String, Future<Node>> typeNodes = new HashMap<>();
+
+        Map<String, Future<Node>> typeNodes = new HashMap<>();
         for (CtType ctType : ctPackage.getTypes()) {
             logger.print("\tType: " + ctType.getSimpleName() + " - " + ctType.getActualClass().getName());
             typeNodes.put(ctType.getSimpleName(), threadPool.submit(new ClassScanner(threadPool, factoryManager, ctType)));

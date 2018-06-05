@@ -1,5 +1,6 @@
 package main;
 
+import report.WorkerReport;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.CtScanner;
 import util.Logger;
@@ -7,6 +8,7 @@ import worker.Worker;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 public class ClassScanner extends CtScanner implements Callable {
 
@@ -26,6 +28,7 @@ public class ClassScanner extends CtScanner implements Callable {
         this.current = root;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     protected void enter(CtElement e) {
         // Update current node
