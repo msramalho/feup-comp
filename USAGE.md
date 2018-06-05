@@ -114,6 +114,29 @@ For example, here is the overridden _getOperations_ method supplying the average
     }
 ```
 
+## Off-the-shelf Patterns
+In order to demonstrate the usage and make this project useful as-is, we have implemented a number of patterns both using static and dynamic matching. 
+
+### Static Patterns
+The most straightforward patterns include:
+ * Comments identification (Any, Inline, Block and Javadoc) [these patterns require the configuration `global.parseComments` to be `true`]
+ * Class Fields identification (Any, public, protected, private, static)
+ * Class Methods identification (Any, abstract, public, protected, private, static)
+ * Lines of Code (Class, Method) [these patterns are done on a standardize format of the code, also the results will vary with the configuration `global.parseComments`]
+ * Java Statements identification (For loops, For-each loops, While loops, Do-while loops, Ternary operator)
+ 
+Some more complex pattern were also implemented in this manner, namely:
+ * Cyclomatic Complexity of a method
+ * Maximum inner loop depth of a method
+ * Super Class count (excluding Classes from `java.*` packages)
+ * Super Class count (including Classes from `java.*` packages)
+ * Weighted Method Count (WMC) based on Cyclomatic complexity
+ * Weighted Method Count (WMC) based on Lines of Code per Method
+ * Weighted Method Count (WMC) based on Number of Methods
+
+
+### Dynamic Patterns
+
 
 ### Additional Notes:
 If used from the java sources, a report can be obtained on any node of the code's AST. That is, you can obtain the global report by calling the ```getReport()``` method on the root node, as well as any intermediary reports on any os its descendant nodes.
