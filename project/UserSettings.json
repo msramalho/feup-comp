@@ -20,6 +20,8 @@
 		"loopsForeach": true,
 		"loopsWhile": true,
 		"loopsDoWhile": true,
+		"conditionalSwitch": true,
+		"conditionalIf": true,
 		"classMethods": true,
 		"classMethodsPrivate": true,
 		"classMethodsPublic": true,

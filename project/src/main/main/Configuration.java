@@ -40,6 +40,8 @@ public class Configuration {
         public boolean loopsForeach = false;
         public boolean loopsWhile = false;
         public boolean loopsDoWhile = false;
+        public boolean conditionalSwitch = false;
+        public boolean conditionalIf = false;
         public boolean classMethods = false;
         public boolean classMethodsPublic = false;
         public boolean classMethodsProtected = false;
