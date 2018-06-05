@@ -81,4 +81,15 @@ public class PatternsWithAnyTest {
         // No match is found since the _any_parameter_ is not correctly written
         assertEquals((int) matches.get("minMax6"), 0);
     }
+
+    @Test
+    void complexAnys() {
+        HashMap<String, Integer> matches = runPatterns(
+                "./src/test/testclasses/patterns/AnyPatterns4.java",
+                "./src/test/testclasses/patterns/AnyTest3.java");
+
+        assertEquals(matches.size(), 1);
+        // Frequency of each pattern
+        // Line 17
+    }
 }

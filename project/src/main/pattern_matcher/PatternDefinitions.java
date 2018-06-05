@@ -44,6 +44,7 @@ public class PatternDefinitions {
 
             Class node;
             try {
+                if (methodBody == null) continue;
                 node = methodBody.getStatement(0).getClass();
             } catch (IndexOutOfBoundsException e) {
                 System.err.println("Warning: Empty Pattern defined in method: " + method.getSimpleName());

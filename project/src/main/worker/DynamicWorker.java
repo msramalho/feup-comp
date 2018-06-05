@@ -1,8 +1,10 @@
 package worker;
 
 import report.WorkerReport;
+import spoon.pattern.Match;
 import spoon.pattern.Pattern;
 import spoon.pattern.PatternBuilder;
+import spoon.reflect.code.CtInvocation;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.meta.ContainerKind;
 import spoon.reflect.visitor.filter.AbstractFilter;
@@ -50,6 +52,7 @@ public class DynamicWorker extends Worker {
 
         Integer countMatches = pattern.getMatches(rootNode).size();
         if (countMatches >= 1) {
+            Match test = pattern.getMatches(rootNode).get(0);
             Logger.print(this, "I got " + countMatches + " match(es) on snippet:\n" + rootNode + "\n");
         }
         return new WorkerReport(countMatches);
@@ -81,6 +84,9 @@ public class DynamicWorker extends Worker {
                                 .setMaxOccurence(a.getMax());
                     }
                 }
+
+                for (String v : getPatternMethods(patternElement.toString()))
+                    pb.parameter(v).byReferenceName(v).setValueType(CtInvocation.class);
             }).build();
     }
 
@@ -91,10 +97,31 @@ public class DynamicWorker extends Worker {
      * @return a {@link HashSet} of {@link String} with the unique variable names
      */
     private HashSet<String> getPatternVariables(String code) {
-        HashSet<String> variables = new HashSet<>();
-        Matcher m = java.util.regex.Pattern.compile("_var_.*?_").matcher(code);
-        while (m.find()) variables.add(m.group(0));
-        return variables;
+        return getPatternElements(code, "_var_.*?_");
+    }
+
+    /**
+     * Find instances of methods in the Patterns file in the format _method_SOMETHING_
+     *
+     * @param code the pattern code as a string
+     * @return a {@link HashSet} of {@link String} with the unique variable names
+     */
+    private HashSet<String> getPatternMethods(String code) {
+        return getPatternElements(code, "_method_.*?_");
+    }
+
+    /**
+     * Find instances of elements in the Patterns file in the format passed by regex
+     *
+     * @param code the pattern code as a string
+     * @param regex the regex to use in the search of the elements
+     * @return a {@link HashSet} of {@link String} with the unique variable names
+     */
+    private HashSet<String> getPatternElements(String code, String regex) {
+        HashSet<String> elements = new HashSet<>();
+        Matcher m = java.util.regex.Pattern.compile(regex).matcher(code);
+        while (m.find()) elements.add(m.group(0));
+        return elements;
     }
 
     /**
