@@ -15,12 +15,23 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.regex.Matcher;
 
-
+/**
+ * This class represents a Worker used for code template matching with Spoon's engine.
+ * Exposes some configuration to the user, as seen in the project's user manual.
+ * @see <a href="https://github.com/msramalho/feup-comp/blob/master/USAGE.md">User Manual</a>
+ */
 public class DynamicWorker extends Worker {
 
     private final CtElement patternElement;
     private Pattern pattern;
 
+    /**
+     * Creates a DynamicWorker to start analyse on the given rootNode.
+     * Will try to match with the provided patternElement, and will report on the provided patternName.
+     * @param rootNode the node to start analyzing on.
+     * @param patternName the pattern template.
+     * @param patternElement the pattern's name.
+     */
     public DynamicWorker(CtElement rootNode, String patternName, CtElement patternElement) {
         super(rootNode, patternName);
         CtIterator iterator = new CtIterator(patternElement);
