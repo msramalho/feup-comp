@@ -39,6 +39,7 @@ public class Configuration {
         public boolean loopsFor = false;
         public boolean loopsForeach = false;
         public boolean loopsWhile = false;
+        public boolean loopsDoWhile = false;
         public boolean classMethods = false;
         public boolean classMethodsPublic = false;
         public boolean classMethodsProtected = false;
@@ -87,7 +88,7 @@ public class Configuration {
         setDefaults();
     }
 
-    void setDefaults(){
+    void setDefaults() {
         if (dynamic.patternsFile == null) dynamic.patternsFile = "./patterns/Patterns.java";
         if (global.operations == null) global.operations = new String[]{"sum"};
         if (global.outputPath == null) global.outputPath = "out";

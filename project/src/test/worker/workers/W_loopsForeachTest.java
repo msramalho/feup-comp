@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class W_loopsForeachTest {
     private static CtForEachImpl c = new CtForEachImpl();
     private static W_loopsForeach w = new W_loopsForeach(c, "");
+
     @BeforeEach
     void setUp() {
         w.filter = w.setFilter();
