@@ -18,7 +18,7 @@ import java.util.stream.Stream;
  * Callable method should return a report of the worker's run.
  */
 public abstract class Worker implements Callable { // running call on ExecutorService returns Future<C>
-    private AbstractFilter filter; // filter to match this worker with the CtElement which triggers it
+    public AbstractFilter filter; // filter to match this worker with the CtElement which triggers it
     private String patternName;
     protected CtElement rootNode;
     protected static Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>(Configuration.operations);

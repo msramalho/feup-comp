@@ -27,6 +27,6 @@ public class W_superClassesJava extends Worker {
     @Override
     public WorkerReport call() throws Exception {
         List<CtTypeReference<?>> typeResult = rootNode.map(new SuperInheritanceHierarchyFunction().includingSelf(false).returnTypeReferences(true)).list();
-        return new WorkerReport(typeResult.size());
+        return new WorkerReport(typeResult.size() - 1);
     }
 }

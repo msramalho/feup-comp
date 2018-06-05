@@ -7,6 +7,9 @@ import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
 import worker.Worker;
 
+/**
+ * Find ternary operators instances
+ */
 public class W_ternary extends Worker {
     public W_ternary(CtElement rootNode, String patternName) {
         super(rootNode, patternName);

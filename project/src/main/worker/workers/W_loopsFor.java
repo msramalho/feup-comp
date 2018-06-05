@@ -8,7 +8,7 @@ import spoon.reflect.visitor.filter.TypeFilter;
 import worker.Worker;
 
 /**
- * Find foreach loops
+ * Find for loops
  */
 public class W_loopsFor extends Worker {
     public W_loopsFor(CtElement rootNode, String patternName) {

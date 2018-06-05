@@ -31,6 +31,6 @@ public class W_superClasses extends Worker {
         for (CtTypeReference<?> a : typeResult)
             if (a.toString().matches("java\\..*")) counter--;
 
-        return new WorkerReport(counter);
+        return new WorkerReport(counter - 1);
     }
 }
