@@ -27,16 +27,14 @@ This configurations file contains a set of optional configurations:
 Here is a sample configurations file:
 ```json
 {
-	"dynamic": {
-		"patternsFile": "../project/patterns/Patterns.java"
-	},
-	"output": {
-		"path": "../out/"
-	},
 	"global": {
 		"numberOfThreads": 32,
 		"parseComments": false,
+		"outputPath": "out",
 		"operations": ["sum", "min", "max", "std", "avg"]
+	},
+	"dynamic": {
+		"patternsFile": "../project/patterns/Patterns.java"
 	},
 	"static": {
 		"innerLoops": true,
@@ -44,6 +42,8 @@ Here is a sample configurations file:
 	}
 }
 ```
+
+A settings file that activates all configurations can be found [here](https://github.com/msramalho/feup-comp/blob/master/project/UserSettings.json)
 
 ### Dynamic Pattern Definitions
 
@@ -80,18 +80,18 @@ Moreover, the _call_ method must return a _WorkerReport_ instance, reporting on 
 
 An example of an overridden _setFilter_ method that matches with For-loop nodes:
 ```java
-    @Override
-    protected AbstractFilter setFilter() {
-        return new TypeFilter<>(CtFor.class);
-    }
+@Override
+protected AbstractFilter setFilter() {
+	return new TypeFilter<>(CtFor.class);
+}
 ```
 
 And the associated _call_ method for counting the number of For-loops:
 ```java
-    @Override
-    public WorkerReport call() throws Exception {
-        return new WorkerReport(1);
-    }
+@Override
+public WorkerReport call() throws Exception {
+	return new WorkerReport(1);
+}
 ```
 
 #### Defining Operations
@@ -102,16 +102,16 @@ Some common operations have already been implemented (sum, avg, min, max, standa
 
 For example, here is the overridden _getOperations_ method supplying the average operation:
 ```java
-    @Override
-    public Map<String, Function<Stream<WorkerReport>, Number>> getOperations() {
-        Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>();
-        
-        operations.put("average", (Stream<WorkerReport> s) -> 
-                s.mapToInt(WorkerReport::getValue).average().orElse(0)
-        );
+@Override
+public Map<String, Function<Stream<WorkerReport>, Number>> getOperations() {
+	Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>();
 
-        return operations;
-    }
+	operations.put("average", (Stream<WorkerReport> s) -> 
+		s.mapToInt(WorkerReport::getValue).average().orElse(0)
+	);
+
+	return operations;
+}
 ```
 
 ## Off-the-shelf Patterns

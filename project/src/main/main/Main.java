@@ -35,7 +35,7 @@ public class Main implements Runnable {
      */
     public static void main(String[] args) {
         if (args.length < 1 || args.length > 3) {
-            System.out.println("Unable to parse command line arguments, usage: " + Dispatcher.getUsage());
+            System.out.println("Usage: " + Dispatcher.getUsage());
             exit(0);
         }
 
