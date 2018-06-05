@@ -84,7 +84,15 @@ public class Configuration {
     Global global = new Global();
     Dynamic dynamic = new Dynamic();
 
-    Configuration() { }
+    Configuration() {
+        setDefaults();
+    }
+
+    void setDefaults(){
+        if (dynamic.patternsFile == null) dynamic.patternsFile = "./patterns/Patterns.java";
+        if (global.operations == null) global.operations = new String[]{"sum"};
+        if (global.outputPath == null) global.outputPath = "out";
+    }
 
     /**
      * Read a configurations file into an object of Configuration
@@ -94,9 +102,7 @@ public class Configuration {
      */
     static Configuration loadConfiguration(String filename) {
         Configuration c = gson.fromJson(settingsFileContent(filename), Configuration.class);
-        if (c.dynamic.patternsFile == null) c.dynamic.patternsFile = "./patterns/Patterns.java";
-        if (c.global.operations == null) c.global.operations = new String[]{"sum"};
-        if (c.global.outputPath == null) c.global.outputPath = "out";
+        c.setDefaults();
         return c;
     }
 
