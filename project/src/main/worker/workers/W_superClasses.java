@@ -1,12 +1,12 @@
 package worker.workers;
 
 import report.WorkerReport;
+import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.SuperInheritanceHierarchyFunction;
 import spoon.reflect.visitor.filter.TypeFilter;
-import spoon.support.reflect.declaration.CtClassImpl;
 import worker.Worker;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class W_superClasses extends Worker {
 
     @Override
     protected AbstractFilter setFilter() {
-        return new TypeFilter<>(CtClassImpl.class);
+        return new TypeFilter<>(CtClass.class);
     }
 
     @Override
