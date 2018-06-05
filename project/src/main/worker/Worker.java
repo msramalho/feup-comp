@@ -21,7 +21,7 @@ public abstract class Worker implements Callable { // running call on ExecutorSe
     private AbstractFilter filter; // filter to match this worker with the CtElement which triggers it
     private String patternName;
     protected CtElement rootNode;
-    protected Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>(Configuration.operations);
+    protected static Map<String, Function<Stream<WorkerReport>, Number>> operations = new HashMap<>(Configuration.operations);
 
     protected Logger logger = new Logger(this); // TODO: delete for production (?)
 
@@ -63,7 +63,7 @@ public abstract class Worker implements Callable { // running call on ExecutorSe
      * @return the operations to be performed on the Pattern matching the current {@link Worker}
      */
     public Map<String, Function<Stream<WorkerReport>, Number>> getOperations() {
-        return operations;
+        return Worker.operations;
     }
 
 }

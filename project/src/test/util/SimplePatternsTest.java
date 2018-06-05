@@ -39,7 +39,7 @@ public class SimplePatternsTest {
     }
 
     @Test
-    void WithVars() {
+    void withVars() {
         HashMap<String, Integer> matches = runPatterns(
                 "./src/test/testclasses/patterns/VarsPatterns.java",
                 "./src/test/testclasses/patterns/VarsTest.java");
