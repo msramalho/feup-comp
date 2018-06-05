@@ -16,10 +16,10 @@
  */
 package spoon.support.compiler;
 
+import spoon.SpoonException;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import spoon.SpoonException;
 
 public class SnippetCompilationError extends SpoonException {
 

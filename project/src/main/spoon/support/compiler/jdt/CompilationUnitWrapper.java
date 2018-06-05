@@ -17,7 +17,6 @@
 package spoon.support.compiler.jdt;
 
 import org.eclipse.jdt.internal.compiler.batch.CompilationUnit;
-
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.visitor.DefaultJavaPrettyPrinter;
 

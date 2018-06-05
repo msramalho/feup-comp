@@ -27,11 +27,7 @@ import spoon.reflect.reference.CtLocalVariableReference;
 import spoon.reflect.reference.CtVariableReference;
 import spoon.reflect.visitor.CtAbstractVisitor;
 import spoon.reflect.visitor.Filter;
-import spoon.reflect.visitor.chain.CtConsumableFunction;
-import spoon.reflect.visitor.chain.CtConsumer;
-import spoon.reflect.visitor.chain.CtQuery;
-import spoon.reflect.visitor.chain.CtScannerListener;
-import spoon.reflect.visitor.chain.ScanningMode;
+import spoon.reflect.visitor.chain.*;
 
 /**
  * This mapping function expects a {@link CtLocalVariable} as input

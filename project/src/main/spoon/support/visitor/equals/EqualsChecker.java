@@ -16,22 +16,10 @@
  */
 package spoon.support.visitor.equals;
 
-import spoon.reflect.code.CtAssignment;
-import spoon.reflect.code.CtBinaryOperator;
-import spoon.reflect.code.CtBreak;
-import spoon.reflect.code.CtContinue;
-import spoon.reflect.code.CtLiteral;
-import spoon.reflect.code.CtOperatorAssignment;
-import spoon.reflect.code.CtStatement;
-import spoon.reflect.code.CtUnaryOperator;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtModifiable;
-import spoon.reflect.declaration.CtNamedElement;
-import spoon.reflect.declaration.CtParameter;
+import spoon.reflect.code.*;
+import spoon.reflect.declaration.*;
 import spoon.reflect.reference.CtArrayTypeReference;
 import spoon.reflect.reference.CtExecutableReference;
-import spoon.reflect.declaration.CtImport;
 import spoon.reflect.reference.CtReference;
 import spoon.reflect.visitor.CtInheritanceScanner;
 

@@ -16,9 +16,6 @@
  */
 package spoon.support.visitor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.declaration.CtTypeInformation;
@@ -26,6 +23,9 @@ import spoon.reflect.declaration.CtTypeParameter;
 import spoon.reflect.reference.CtTypeParameterReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtWildcardReference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Implements common adapting algorithm of {@link ClassTypingContext} and {@link MethodTypingContext}

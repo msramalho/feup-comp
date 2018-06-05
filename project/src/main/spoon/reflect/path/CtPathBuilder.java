@@ -17,11 +17,7 @@
 package spoon.reflect.path;
 
 import spoon.reflect.declaration.CtElement;
-import spoon.reflect.path.impl.CtNamedPathElement;
-import spoon.reflect.path.impl.CtPathElement;
-import spoon.reflect.path.impl.CtPathImpl;
-import spoon.reflect.path.impl.CtRolePathElement;
-import spoon.reflect.path.impl.CtTypedNameElement;
+import spoon.reflect.path.impl.*;
 
 import java.util.LinkedList;
 import java.util.List;

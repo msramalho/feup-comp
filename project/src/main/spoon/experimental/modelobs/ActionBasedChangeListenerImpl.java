@@ -16,11 +16,7 @@
  */
 package spoon.experimental.modelobs;
 
-import spoon.experimental.modelobs.action.Action;
-import spoon.experimental.modelobs.action.AddAction;
-import spoon.experimental.modelobs.action.DeleteAction;
-import spoon.experimental.modelobs.action.DeleteAllAction;
-import spoon.experimental.modelobs.action.UpdateAction;
+import spoon.experimental.modelobs.action.*;
 import spoon.experimental.modelobs.context.ListContext;
 import spoon.experimental.modelobs.context.MapContext;
 import spoon.experimental.modelobs.context.ObjectContext;

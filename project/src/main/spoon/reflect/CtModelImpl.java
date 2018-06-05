@@ -17,11 +17,7 @@
 package spoon.reflect;
 
 import spoon.processing.Processor;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtModule;
-import spoon.reflect.declaration.CtNamedElement;
-import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.declaration.CtType;
+import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.factory.ModuleFactory;
 import spoon.reflect.visitor.Filter;

@@ -16,12 +16,6 @@
  */
 package spoon.pattern.internal.matcher;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import spoon.SpoonException;
 import spoon.pattern.Match;
 import spoon.pattern.internal.node.ModelNode;
@@ -31,6 +25,8 @@ import spoon.reflect.path.CtRole;
 import spoon.reflect.visitor.EarlyTerminatingScanner;
 import spoon.reflect.visitor.chain.CtConsumer;
 import spoon.support.util.ParameterValueProviderFactory;
+
+import java.util.*;
 
 /**
  * Represents a Match of TemplateMatcher

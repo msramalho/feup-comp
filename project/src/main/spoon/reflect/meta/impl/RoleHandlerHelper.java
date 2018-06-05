@@ -16,18 +16,13 @@
  */
 package spoon.reflect.meta.impl;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
-
 import spoon.SpoonException;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.meta.RoleHandler;
 import spoon.reflect.path.CtRole;
+
+import java.util.*;
+import java.util.function.Consumer;
 
 /**
  * Provides a {@link RoleHandler} implementation for the pair of {@link CtElement} implementation and {@link CtRole}

@@ -29,9 +29,7 @@ import java.util.List;
 
 import static spoon.reflect.ModelElementContainerDefaultCapacities.FOR_INIT_STATEMENTS_CONTAINER_DEFAULT_CAPACITY;
 import static spoon.reflect.ModelElementContainerDefaultCapacities.FOR_UPDATE_STATEMENTS_CONTAINER_DEFAULT_CAPACITY;
-import static spoon.reflect.path.CtRole.EXPRESSION;
-import static spoon.reflect.path.CtRole.FOR_INIT;
-import static spoon.reflect.path.CtRole.FOR_UPDATE;
+import static spoon.reflect.path.CtRole.*;
 
 public class CtForImpl extends CtLoopImpl implements CtFor {
 	private static final long serialVersionUID = 1L;

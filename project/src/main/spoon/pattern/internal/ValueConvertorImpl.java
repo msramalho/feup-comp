@@ -16,15 +16,8 @@
  */
 package spoon.pattern.internal;
 
-import java.util.List;
-
 import spoon.SpoonException;
-import spoon.reflect.code.CtBlock;
-import spoon.reflect.code.CtExpression;
-import spoon.reflect.code.CtInvocation;
-import spoon.reflect.code.CtLiteral;
-import spoon.reflect.code.CtNewArray;
-import spoon.reflect.code.CtStatement;
+import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtNamedElement;
@@ -34,6 +27,8 @@ import spoon.reflect.reference.CtExecutableReference;
 import spoon.reflect.reference.CtReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.support.visitor.SignaturePrinter;
+
+import java.util.List;
 
 /**
  * Converts the individual parameter values to required type

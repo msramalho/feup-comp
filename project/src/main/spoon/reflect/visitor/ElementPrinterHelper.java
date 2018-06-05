@@ -17,51 +17,16 @@
 package spoon.reflect.visitor;
 
 import spoon.compiler.Environment;
-import spoon.reflect.code.CtBlock;
-import spoon.reflect.code.CtComment;
-import spoon.reflect.code.CtFor;
-import spoon.reflect.code.CtForEach;
-import spoon.reflect.code.CtIf;
-import spoon.reflect.code.CtStatement;
-import spoon.reflect.code.CtSwitch;
-import spoon.reflect.code.CtSynchronized;
-import spoon.reflect.code.CtTry;
-import spoon.reflect.code.CtTypeAccess;
-import spoon.reflect.code.CtWhile;
+import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
-import spoon.reflect.declaration.CtAnnotation;
-import spoon.reflect.declaration.CtClass;
-import spoon.reflect.declaration.CtConstructor;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtExecutable;
-import spoon.reflect.declaration.CtFormalTypeDeclarer;
-import spoon.reflect.declaration.CtModifiable;
-import spoon.reflect.declaration.CtNamedElement;
-import spoon.reflect.declaration.CtType;
-import spoon.reflect.declaration.CtTypeMember;
-import spoon.reflect.declaration.CtTypeParameter;
-import spoon.reflect.declaration.CtTypedElement;
-import spoon.reflect.declaration.ModifierKind;
+import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
-import spoon.reflect.reference.CtActualTypeContainer;
-import spoon.reflect.reference.CtExecutableReference;
-import spoon.reflect.reference.CtFieldReference;
-import spoon.reflect.declaration.CtImport;
-import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.reference.CtPackageReference;
-import spoon.reflect.reference.CtTypeReference;
-import spoon.reflect.visitor.printer.CommentOffset;
+import spoon.reflect.reference.*;
 import spoon.reflect.visitor.PrintingContext.Writable;
+import spoon.reflect.visitor.printer.CommentOffset;
 import spoon.support.reflect.CtExtendedModifier;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class ElementPrinterHelper {

@@ -16,47 +16,15 @@
  */
 package spoon.support.visitor.java;
 
-import spoon.reflect.declaration.CtAnnotation;
-import spoon.reflect.declaration.CtAnnotationType;
-import spoon.reflect.declaration.CtClass;
-import spoon.reflect.declaration.CtConstructor;
-import spoon.reflect.declaration.CtEnum;
-import spoon.reflect.declaration.CtEnumValue;
-import spoon.reflect.declaration.CtField;
-import spoon.reflect.declaration.CtInterface;
-import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtModifiable;
-import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.declaration.CtParameter;
-import spoon.reflect.declaration.CtType;
-import spoon.reflect.declaration.CtTypeParameter;
-import spoon.reflect.declaration.ModifierKind;
+import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
-import spoon.reflect.reference.CtArrayTypeReference;
-import spoon.reflect.reference.CtExecutableReference;
-import spoon.reflect.reference.CtFieldReference;
-import spoon.reflect.reference.CtTypeParameterReference;
-import spoon.reflect.reference.CtTypeReference;
-import spoon.reflect.reference.CtWildcardReference;
-import spoon.support.visitor.java.internal.AnnotationRuntimeBuilderContext;
-import spoon.support.visitor.java.internal.ExecutableRuntimeBuilderContext;
-import spoon.support.visitor.java.internal.PackageRuntimeBuilderContext;
-import spoon.support.visitor.java.internal.RuntimeBuilderContext;
-import spoon.support.visitor.java.internal.TypeReferenceRuntimeBuilderContext;
-import spoon.support.visitor.java.internal.TypeRuntimeBuilderContext;
-import spoon.support.visitor.java.internal.VariableRuntimeBuilderContext;
+import spoon.reflect.reference.*;
+import spoon.support.visitor.java.internal.*;
 import spoon.support.visitor.java.reflect.RtMethod;
 import spoon.support.visitor.java.reflect.RtParameter;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.GenericDeclaration;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.lang.reflect.TypeVariable;
-import java.lang.reflect.WildcardType;
+import java.lang.reflect.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
 

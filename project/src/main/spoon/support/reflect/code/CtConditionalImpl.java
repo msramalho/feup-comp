@@ -22,9 +22,7 @@ import spoon.reflect.code.CtExpression;
 import spoon.reflect.path.CtRole;
 import spoon.reflect.visitor.CtVisitor;
 
-import static spoon.reflect.path.CtRole.CONDITION;
-import static spoon.reflect.path.CtRole.ELSE;
-import static spoon.reflect.path.CtRole.THEN;
+import static spoon.reflect.path.CtRole.*;
 
 public class CtConditionalImpl<T> extends CtExpressionImpl<T> implements CtConditional<T> {
 	private static final long serialVersionUID = 1L;

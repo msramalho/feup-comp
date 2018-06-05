@@ -17,6 +17,8 @@
 package spoon.reflect.declaration;
 
 import spoon.processing.FactoryAccessor;
+import spoon.reflect.annotations.PropertyGetter;
+import spoon.reflect.annotations.PropertySetter;
 import spoon.reflect.code.CtComment;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.path.CtPath;
@@ -27,18 +29,13 @@ import spoon.reflect.visitor.Filter;
 import spoon.reflect.visitor.Root;
 import spoon.reflect.visitor.chain.CtQueryable;
 import spoon.support.DerivedProperty;
-import spoon.reflect.annotations.PropertyGetter;
-import spoon.reflect.annotations.PropertySetter;
 
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import static spoon.reflect.path.CtRole.ANNOTATION;
-import static spoon.reflect.path.CtRole.COMMENT;
-import static spoon.reflect.path.CtRole.IS_IMPLICIT;
-import static spoon.reflect.path.CtRole.POSITION;
+import static spoon.reflect.path.CtRole.*;
 
 /**
  * This interface is the root interface for the metamodel elements (any program

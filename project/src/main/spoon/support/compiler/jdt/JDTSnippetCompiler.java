@@ -16,9 +16,6 @@
  */
 package spoon.support.compiler.jdt;
 
-import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-
 import org.eclipse.jdt.core.compiler.CategorizedProblem;
 import spoon.SpoonException;
 import spoon.compiler.Environment;
@@ -28,6 +25,9 @@ import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.factory.Factory;
 import spoon.support.compiler.SnippetCompilationError;
 import spoon.support.compiler.VirtualFile;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class JDTSnippetCompiler extends JDTBasedSpoonCompiler {
 

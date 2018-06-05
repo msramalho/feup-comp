@@ -19,9 +19,7 @@ package spoon.reflect.code;
 import spoon.reflect.annotations.PropertyGetter;
 import spoon.reflect.annotations.PropertySetter;
 
-import static spoon.reflect.path.CtRole.CONDITION;
-import static spoon.reflect.path.CtRole.ELSE;
-import static spoon.reflect.path.CtRole.THEN;
+import static spoon.reflect.path.CtRole.*;
 
 
 /**

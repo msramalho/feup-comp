@@ -18,14 +18,7 @@ package spoon.support.reflect.code;
 
 import spoon.SpoonException;
 import spoon.reflect.annotations.MetamodelPropertyField;
-import spoon.reflect.code.CtBlock;
-import spoon.reflect.code.CtCase;
-import spoon.reflect.code.CtIf;
-import spoon.reflect.code.CtInvocation;
-import spoon.reflect.code.CtLoop;
-import spoon.reflect.code.CtStatement;
-import spoon.reflect.code.CtStatementList;
-import spoon.reflect.code.CtSwitch;
+import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;

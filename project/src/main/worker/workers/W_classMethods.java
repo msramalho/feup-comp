@@ -1,15 +1,12 @@
 package worker.workers;
 
 import report.WorkerReport;
-import spoon.reflect.declaration.*;
+import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtElement;
+import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
-import util.Operations;
 import worker.Worker;
-
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Stream;
 
 /**
  * Count the number of direct methods defined in a given Class (does not include constructors nor methods belonging to sub-classes)

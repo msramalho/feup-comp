@@ -17,13 +17,7 @@
 package spoon.support.util;
 
 import java.io.Serializable;
-import java.util.AbstractList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.NoSuchElementException;
-import java.util.RandomAccess;
+import java.util.*;
 
 public final class EmptyClearableList<E> extends AbstractList<E> implements RandomAccess, Serializable {
 	private static final long serialVersionUID = 0L;

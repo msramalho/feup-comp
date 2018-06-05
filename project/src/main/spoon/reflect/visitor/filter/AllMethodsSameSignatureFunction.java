@@ -17,11 +17,6 @@
 package spoon.reflect.visitor.filter;
 
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import spoon.SpoonException;
 import spoon.reflect.code.CtLambda;
 import spoon.reflect.declaration.CtExecutable;
@@ -34,6 +29,11 @@ import spoon.reflect.visitor.chain.CtQuery;
 import spoon.reflect.visitor.chain.CtQueryAware;
 import spoon.support.visitor.ClassTypingContext;
 import spoon.support.visitor.SubInheritanceHierarchyResolver;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Returns all methods/lambdas with same signature in related inheritance hierarchies.

@@ -16,11 +16,11 @@
  */
 package spoon.reflect.visitor.filter;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.Filter;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Filters elements with a regular expression on the element's code. Example:

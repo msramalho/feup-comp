@@ -16,19 +16,8 @@
  */
 package spoon.support.visitor;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.Set;
-
 import spoon.SpoonException;
-import spoon.reflect.declaration.CtClass;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtEnum;
-import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.declaration.CtType;
-import spoon.reflect.declaration.CtTypeInformation;
-import spoon.reflect.declaration.CtTypeParameter;
+import spoon.reflect.declaration.*;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.Filter;
 import spoon.reflect.visitor.chain.CtConsumer;
@@ -38,6 +27,11 @@ import spoon.reflect.visitor.chain.ScanningMode;
 import spoon.reflect.visitor.filter.CtScannerFunction;
 import spoon.reflect.visitor.filter.SuperInheritanceHierarchyFunction;
 import spoon.reflect.visitor.filter.TypeFilter;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.Set;
 
 import static spoon.reflect.visitor.chain.ScanningMode.NORMAL;
 import static spoon.reflect.visitor.chain.ScanningMode.SKIP_ALL;

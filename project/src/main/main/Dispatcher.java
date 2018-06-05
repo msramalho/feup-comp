@@ -17,15 +17,15 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class Dispatcher implements Callable {
-    Configuration configuration;
-    Logger logger;
-    ExecutorService threadPool;
-    SpoonAPI spoon;
+    private Configuration configuration;
+    private Logger logger;
+    private ExecutorService threadPool;
+    private SpoonAPI spoon;
 
-    FactoryManager factoryManager;
+    private FactoryManager factoryManager;
 
 
-    public Dispatcher(Configuration config) {
+    Dispatcher(Configuration config) {
         if (config == null)
             throw new NullPointerException("Configuration file is NULL.");
         this.configuration = config;
@@ -36,14 +36,14 @@ public class Dispatcher implements Callable {
         logger.print(configuration.toString());
     }
 
-    public void setFactoryManager(FactoryManager factoryManager) {
+    void setFactoryManager(FactoryManager factoryManager) {
         this.factoryManager = factoryManager;
     }
 
     /**
      * try to build a SPOON model into spoon, will display errors upon failure
      */
-    public void readSpoonTarget(String spoonTarget) throws FileNotFoundException {
+    void readSpoonTarget(String spoonTarget) throws FileNotFoundException {
         if (!Files.exists(Paths.get(spoonTarget)))
             throw new FileNotFoundException(spoonTarget + " does not exist.");
 

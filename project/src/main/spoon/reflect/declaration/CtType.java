@@ -16,21 +16,15 @@
  */
 package spoon.reflect.declaration;
 
-import spoon.reflect.reference.CtTypeReference;
-import spoon.support.DerivedProperty;
 import spoon.reflect.annotations.PropertyGetter;
 import spoon.reflect.annotations.PropertySetter;
+import spoon.reflect.reference.CtTypeReference;
+import spoon.support.DerivedProperty;
 
 import java.util.List;
 import java.util.Set;
 
-import static spoon.reflect.path.CtRole.METHOD;
-import static spoon.reflect.path.CtRole.FIELD;
-import static spoon.reflect.path.CtRole.INTERFACE;
-import static spoon.reflect.path.CtRole.NAME;
-import static spoon.reflect.path.CtRole.NESTED_TYPE;
-import static spoon.reflect.path.CtRole.SUPER_TYPE;
-import static spoon.reflect.path.CtRole.TYPE_MEMBER;
+import static spoon.reflect.path.CtRole.*;
 
 /**
  * This abstract element defines a super-type for classes and interfaces, which

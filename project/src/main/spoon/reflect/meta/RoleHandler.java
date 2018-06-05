@@ -16,12 +16,12 @@
  */
 package spoon.reflect.meta;
 
+import spoon.reflect.path.CtRole;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import spoon.reflect.path.CtRole;
 
 /**
  * Enables client code to get and set a field based on a role for a CtElement.

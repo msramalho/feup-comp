@@ -16,17 +16,13 @@
  */
 package spoon.reflect.visitor.filter;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.declaration.CtTypeInformation;
 import spoon.reflect.declaration.CtTypeMember;
-import spoon.reflect.visitor.chain.CtConsumableFunction;
-import spoon.reflect.visitor.chain.CtConsumer;
-import spoon.reflect.visitor.chain.CtQuery;
-import spoon.reflect.visitor.chain.CtQueryAware;
-import spoon.reflect.visitor.chain.CtQueryable;
+import spoon.reflect.visitor.chain.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Expects {@link CtType} as input

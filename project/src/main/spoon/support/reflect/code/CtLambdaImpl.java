@@ -18,17 +18,8 @@ package spoon.support.reflect.code;
 
 import spoon.SpoonException;
 import spoon.reflect.annotations.MetamodelPropertyField;
-import spoon.reflect.code.CtBlock;
-import spoon.reflect.code.CtBodyHolder;
-import spoon.reflect.code.CtExpression;
-import spoon.reflect.code.CtLambda;
-import spoon.reflect.code.CtStatement;
-import spoon.reflect.declaration.CtExecutable;
-import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtNamedElement;
-import spoon.reflect.declaration.CtParameter;
-import spoon.reflect.declaration.CtType;
-import spoon.reflect.declaration.ModifierKind;
+import spoon.reflect.code.*;
+import spoon.reflect.declaration.*;
 import spoon.reflect.path.CtRole;
 import spoon.reflect.reference.CtExecutableReference;
 import spoon.reflect.reference.CtTypeReference;
@@ -43,11 +34,7 @@ import java.util.List;
 import java.util.Set;
 
 import static spoon.reflect.ModelElementContainerDefaultCapacities.PARAMETERS_CONTAINER_DEFAULT_CAPACITY;
-import static spoon.reflect.path.CtRole.BODY;
-import static spoon.reflect.path.CtRole.EXPRESSION;
-import static spoon.reflect.path.CtRole.NAME;
-import static spoon.reflect.path.CtRole.PARAMETER;
-import static spoon.reflect.path.CtRole.THROWN;
+import static spoon.reflect.path.CtRole.*;
 
 public class CtLambdaImpl<T> extends CtExpressionImpl<T> implements CtLambda<T> {
 	@MetamodelPropertyField(role = CtRole.NAME)

@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import util.HashMapMerger;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Report {

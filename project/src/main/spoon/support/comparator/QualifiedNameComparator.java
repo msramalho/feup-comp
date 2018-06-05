@@ -16,14 +16,14 @@
  */
 package spoon.support.comparator;
 
-import java.io.Serializable;
-import java.util.Comparator;
-
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtNamedElement;
 import spoon.reflect.declaration.CtPackage;
 import spoon.reflect.declaration.CtTypeInformation;
 import spoon.reflect.reference.CtReference;
+
+import java.io.Serializable;
+import java.util.Comparator;
 
 /** compares based on names (with a preference for qualified names if available) */
 public class QualifiedNameComparator implements Comparator<CtElement>, Serializable {

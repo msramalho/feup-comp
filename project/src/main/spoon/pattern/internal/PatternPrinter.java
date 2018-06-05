@@ -16,19 +16,8 @@
  */
 package spoon.pattern.internal;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.function.Consumer;
-
 import spoon.Metamodel;
-import spoon.pattern.internal.node.ConstantNode;
-import spoon.pattern.internal.node.ElementNode;
-import spoon.pattern.internal.node.InlineNode;
-import spoon.pattern.internal.node.ListOfNodes;
-import spoon.pattern.internal.node.ParameterNode;
-import spoon.pattern.internal.node.RootNode;
+import spoon.pattern.internal.node.*;
 import spoon.pattern.internal.parameter.ParameterInfo;
 import spoon.reflect.code.CtComment.CommentType;
 import spoon.reflect.code.CtInvocation;
@@ -41,6 +30,12 @@ import spoon.reflect.visitor.PrinterHelper;
 import spoon.support.DefaultCoreFactory;
 import spoon.support.StandardEnvironment;
 import spoon.support.util.ParameterValueProvider;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.function.Consumer;
 
 /**
  */

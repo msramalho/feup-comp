@@ -16,9 +16,6 @@
  */
 package spoon.support.compiler.jdt;
 
-import java.io.PrintWriter;
-import java.util.ArrayList;
-
 import org.eclipse.jdt.core.compiler.CompilationProgress;
 import org.eclipse.jdt.internal.compiler.ICompilerRequestor;
 import org.eclipse.jdt.internal.compiler.IErrorHandlingPolicy;
@@ -27,6 +24,9 @@ import org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.eclipse.jdt.internal.compiler.batch.CompilationUnit;
 import org.eclipse.jdt.internal.compiler.env.INameEnvironment;
 import org.eclipse.jdt.internal.compiler.impl.CompilerOptions;
+
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
 class TreeBuilderCompiler extends org.eclipse.jdt.internal.compiler.Compiler {
 

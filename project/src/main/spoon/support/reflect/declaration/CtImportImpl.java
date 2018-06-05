@@ -18,14 +18,10 @@ package spoon.support.reflect.declaration;
 
 import spoon.SpoonException;
 import spoon.reflect.annotations.MetamodelPropertyField;
-import spoon.reflect.path.CtRole;
-import spoon.reflect.reference.CtExecutableReference;
-import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.declaration.CtImport;
-import spoon.reflect.reference.CtPackageReference;
-import spoon.reflect.reference.CtReference;
 import spoon.reflect.declaration.CtImportKind;
-import spoon.reflect.reference.CtTypeReference;
+import spoon.reflect.path.CtRole;
+import spoon.reflect.reference.*;
 import spoon.reflect.visitor.CtVisitor;
 import spoon.support.reflect.reference.CtWildcardStaticTypeMemberReferenceImpl;
 

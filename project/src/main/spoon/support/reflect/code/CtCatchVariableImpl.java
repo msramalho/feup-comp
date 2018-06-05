@@ -19,12 +19,7 @@ package spoon.support.reflect.code;
 import spoon.reflect.annotations.MetamodelPropertyField;
 import spoon.reflect.code.CtCatchVariable;
 import spoon.reflect.code.CtExpression;
-import spoon.reflect.declaration.CtModifiable;
-import spoon.reflect.declaration.CtMultiTypedElement;
-import spoon.reflect.declaration.CtNamedElement;
-import spoon.reflect.declaration.CtTypedElement;
-import spoon.reflect.declaration.CtVariable;
-import spoon.reflect.declaration.ModifierKind;
+import spoon.reflect.declaration.*;
 import spoon.reflect.path.CtRole;
 import spoon.reflect.reference.CtCatchVariableReference;
 import spoon.reflect.reference.CtTypeReference;
@@ -42,8 +37,8 @@ import java.util.List;
 import java.util.Set;
 
 import static spoon.reflect.ModelElementContainerDefaultCapacities.CATCH_VARIABLE_MULTI_TYPES_CONTAINER_DEFAULT_CAPACITY;
-import static spoon.reflect.path.CtRole.NAME;
 import static spoon.reflect.path.CtRole.MULTI_TYPE;
+import static spoon.reflect.path.CtRole.NAME;
 
 public class CtCatchVariableImpl<T> extends CtCodeElementImpl implements CtCatchVariable<T> {
 	private static final long serialVersionUID = 1L;

@@ -16,12 +16,12 @@
  */
 package spoon.reflect.visitor.filter;
 
-import java.lang.reflect.Method;
-
 import spoon.SpoonException;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.visitor.Filter;
 import spoon.support.util.RtHelper;
+
+import java.lang.reflect.Method;
 
 /**
  * Defines an abstract filter based on matching on the element types.

@@ -17,9 +17,6 @@
 package spoon.template;
 
 
-import java.util.List;
-import java.util.Map;
-
 import spoon.SpoonException;
 import spoon.pattern.Pattern;
 import spoon.pattern.PatternBuilder;
@@ -32,6 +29,9 @@ import spoon.reflect.factory.Factory;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.support.template.Parameters;
 import spoon.support.util.UnmodifiableParameterValueProvider;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Internal class used to provide pattern-based implementation of Template and TemplateMatcher

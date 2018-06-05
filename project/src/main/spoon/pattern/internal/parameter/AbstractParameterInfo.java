@@ -16,14 +16,6 @@
  */
 package spoon.pattern.internal.parameter;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-
 import spoon.Launcher;
 import spoon.SpoonException;
 import spoon.pattern.Quantifier;
@@ -35,6 +27,14 @@ import spoon.reflect.factory.Factory;
 import spoon.reflect.meta.ContainerKind;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.support.util.ParameterValueProvider;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  */

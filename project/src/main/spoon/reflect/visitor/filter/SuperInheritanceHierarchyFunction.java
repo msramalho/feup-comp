@@ -16,8 +16,6 @@
  */
 package spoon.reflect.visitor.filter;
 
-import java.util.Set;
-
 import spoon.Launcher;
 import spoon.SpoonException;
 import spoon.reflect.declaration.CtClass;
@@ -25,17 +23,12 @@ import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.declaration.CtTypeInformation;
 import spoon.reflect.reference.CtTypeReference;
-import spoon.reflect.visitor.chain.CtConsumableFunction;
-import spoon.reflect.visitor.chain.CtConsumer;
-import spoon.reflect.visitor.chain.CtQuery;
-import spoon.reflect.visitor.chain.CtQueryAware;
-import spoon.reflect.visitor.chain.CtScannerListener;
-import spoon.reflect.visitor.chain.ScanningMode;
+import spoon.reflect.visitor.chain.*;
 import spoon.support.SpoonClassNotFoundException;
 
-import static spoon.reflect.visitor.chain.ScanningMode.NORMAL;
-import static spoon.reflect.visitor.chain.ScanningMode.SKIP_ALL;
-import static spoon.reflect.visitor.chain.ScanningMode.SKIP_CHILDREN;
+import java.util.Set;
+
+import static spoon.reflect.visitor.chain.ScanningMode.*;
 
 /**
  * Expects a {@link CtTypeInformation} as input

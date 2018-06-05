@@ -16,10 +16,10 @@
  */
 package spoon.refactoring;
 
-import java.util.regex.Pattern;
-
 import spoon.SpoonException;
 import spoon.reflect.declaration.CtNamedElement;
+
+import java.util.regex.Pattern;
 
 /**
  * abstract implementation of rename element refactoring

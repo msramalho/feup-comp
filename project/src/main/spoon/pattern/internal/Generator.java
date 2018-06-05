@@ -16,13 +16,13 @@
  */
 package spoon.pattern.internal;
 
-import java.util.List;
-
 import spoon.pattern.internal.node.RootNode;
 import spoon.pattern.internal.parameter.ParameterInfo;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.factory.Factory;
 import spoon.support.util.ParameterValueProvider;
+
+import java.util.List;
 
 /**
  * Drives generation process

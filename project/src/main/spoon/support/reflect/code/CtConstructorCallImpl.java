@@ -17,11 +17,7 @@
 package spoon.support.reflect.code;
 
 import spoon.reflect.annotations.MetamodelPropertyField;
-import spoon.reflect.code.CtAbstractInvocation;
-import spoon.reflect.code.CtConstructorCall;
-import spoon.reflect.code.CtExpression;
-import spoon.reflect.code.CtStatement;
-import spoon.reflect.code.CtStatementList;
+import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtTypedElement;
 import spoon.reflect.path.CtRole;
 import spoon.reflect.reference.CtActualTypeContainer;
@@ -35,9 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static spoon.reflect.ModelElementContainerDefaultCapacities.PARAMETERS_CONTAINER_DEFAULT_CAPACITY;
-import static spoon.reflect.path.CtRole.ARGUMENT;
-import static spoon.reflect.path.CtRole.EXECUTABLE_REF;
-import static spoon.reflect.path.CtRole.LABEL;
+import static spoon.reflect.path.CtRole.*;
 
 public class CtConstructorCallImpl<T> extends CtTargetedExpressionImpl<T, CtExpression<?>> implements CtConstructorCall<T> {
 	private static final long serialVersionUID = 1L;

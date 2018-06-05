@@ -16,9 +16,9 @@
  */
 package spoon.reflect.declaration;
 
-import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.annotations.PropertyGetter;
 import spoon.reflect.annotations.PropertySetter;
+import spoon.reflect.reference.CtTypeReference;
 import spoon.support.UnsettableProperty;
 
 import java.util.List;

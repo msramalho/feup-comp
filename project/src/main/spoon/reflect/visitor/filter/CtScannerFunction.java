@@ -19,12 +19,7 @@ package spoon.reflect.visitor.filter;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.path.CtRole;
 import spoon.reflect.visitor.EarlyTerminatingScanner;
-import spoon.reflect.visitor.chain.CtConsumableFunction;
-import spoon.reflect.visitor.chain.CtConsumer;
-import spoon.reflect.visitor.chain.CtQuery;
-import spoon.reflect.visitor.chain.CtQueryAware;
-import spoon.reflect.visitor.chain.CtScannerListener;
-import spoon.reflect.visitor.chain.ScanningMode;
+import spoon.reflect.visitor.chain.*;
 
 /**
  * Returns all children of an element.

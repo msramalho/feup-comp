@@ -21,9 +21,7 @@ import spoon.reflect.code.CtJavaDocTag;
 import spoon.reflect.visitor.CtVisitor;
 import spoon.support.reflect.declaration.CtElementImpl;
 
-import static spoon.reflect.path.CtRole.COMMENT_CONTENT;
-import static spoon.reflect.path.CtRole.JAVADOC_TAG_VALUE;
-import static spoon.reflect.path.CtRole.DOCUMENTATION_TYPE;
+import static spoon.reflect.path.CtRole.*;
 
 public class CtJavaDocTagImpl extends CtElementImpl implements CtJavaDocTag {
 

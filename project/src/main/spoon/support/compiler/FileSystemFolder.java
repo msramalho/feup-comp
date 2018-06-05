@@ -16,16 +16,16 @@
  */
 package spoon.support.compiler;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-
 import spoon.Launcher;
 import spoon.SpoonException;
 import spoon.compiler.SpoonFile;
 import spoon.compiler.SpoonFolder;
 import spoon.compiler.SpoonResourceHelper;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileSystemFolder implements SpoonFolder {
 

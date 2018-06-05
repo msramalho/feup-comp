@@ -19,9 +19,7 @@ package spoon.reflect.code;
 import spoon.reflect.annotations.PropertyGetter;
 import spoon.reflect.annotations.PropertySetter;
 
-import static spoon.reflect.path.CtRole.OPERATOR_KIND;
-import static spoon.reflect.path.CtRole.LEFT_OPERAND;
-import static spoon.reflect.path.CtRole.RIGHT_OPERAND;
+import static spoon.reflect.path.CtRole.*;
 
 /**
  * This interface defines a binary operator.

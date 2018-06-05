@@ -16,15 +16,11 @@
  */
 package spoon.reflect.meta.impl;
 
-import java.util.AbstractMap;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
-
 import spoon.reflect.meta.ContainerKind;
 import spoon.reflect.meta.RoleHandler;
 import spoon.reflect.path.CtRole;
+
+import java.util.*;
 
 /**
  * implementation of {@link RoleHandler}, which handles attributes of type Map&lt;String, V&gt;

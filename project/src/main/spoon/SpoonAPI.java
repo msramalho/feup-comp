@@ -16,8 +16,6 @@
  */
 package spoon;
 
-import java.io.File;
-
 import spoon.compiler.Environment;
 import spoon.processing.Processor;
 import spoon.reflect.CtModel;
@@ -25,6 +23,8 @@ import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.visitor.Filter;
+
+import java.io.File;
 
 /**
  * Is the core entry point of Spoon. Implemented by Launcher.

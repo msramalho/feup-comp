@@ -7,12 +7,7 @@ import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.ModifierKind;
 import spoon.reflect.visitor.filter.AbstractFilter;
 import spoon.reflect.visitor.filter.TypeFilter;
-import util.Operations;
 import worker.Worker;
-
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Stream;
 
 /**
  * Count the number of direct static methods defined in a given Class (does not include constructors nor methods belonging to sub-classes)

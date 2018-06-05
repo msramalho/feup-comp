@@ -16,18 +16,6 @@
  */
 package spoon.pattern;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.IdentityHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Consumer;
-import java.util.function.Function;
-
 import spoon.SpoonException;
 import spoon.pattern.internal.ValueConvertor;
 import spoon.pattern.internal.ValueConvertorImpl;
@@ -41,11 +29,7 @@ import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtInvocation;
 import spoon.reflect.code.CtLiteral;
 import spoon.reflect.code.CtStatement;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtField;
-import spoon.reflect.declaration.CtType;
-import spoon.reflect.declaration.CtTypeMember;
-import spoon.reflect.declaration.CtVariable;
+import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.factory.QueryFactory;
 import spoon.reflect.meta.ContainerKind;
@@ -62,6 +46,10 @@ import spoon.reflect.visitor.filter.AllTypeMembersFunction;
 import spoon.reflect.visitor.filter.TypeFilter;
 import spoon.template.Parameter;
 import spoon.template.TemplateParameter;
+
+import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * The master class to create a {@link Pattern} instance.

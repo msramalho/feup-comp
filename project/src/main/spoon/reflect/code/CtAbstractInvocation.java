@@ -16,10 +16,10 @@
  */
 package spoon.reflect.code;
 
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.reference.CtExecutableReference;
 import spoon.reflect.annotations.PropertyGetter;
 import spoon.reflect.annotations.PropertySetter;
+import spoon.reflect.declaration.CtElement;
+import spoon.reflect.reference.CtExecutableReference;
 
 import java.util.List;
 

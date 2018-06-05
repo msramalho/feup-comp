@@ -16,12 +16,7 @@
  */
 package spoon.support.visitor.java.internal;
 
-import spoon.reflect.declaration.CtAnnotation;
-import spoon.reflect.declaration.CtField;
-import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.declaration.CtType;
-import spoon.reflect.declaration.CtTypeParameter;
+import spoon.reflect.declaration.*;
 import spoon.reflect.reference.CtTypeReference;
 
 import java.lang.annotation.Annotation;

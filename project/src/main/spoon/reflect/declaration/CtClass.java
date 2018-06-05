@@ -16,17 +16,17 @@
  */
 package spoon.reflect.declaration;
 
+import spoon.reflect.annotations.PropertyGetter;
+import spoon.reflect.annotations.PropertySetter;
 import spoon.reflect.code.CtStatement;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.support.DerivedProperty;
-import spoon.reflect.annotations.PropertyGetter;
-import spoon.reflect.annotations.PropertySetter;
 
 import java.util.List;
 import java.util.Set;
 
-import static spoon.reflect.path.CtRole.CONSTRUCTOR;
 import static spoon.reflect.path.CtRole.ANNONYMOUS_EXECUTABLE;
+import static spoon.reflect.path.CtRole.CONSTRUCTOR;
 
 /**
  * This element represents a class declaration.

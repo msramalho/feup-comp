@@ -19,13 +19,7 @@ package spoon.support.reflect.declaration;
 import spoon.reflect.annotations.MetamodelPropertyField;
 import spoon.reflect.code.CtExpression;
 import spoon.reflect.code.CtRHSReceiver;
-import spoon.reflect.declaration.CtField;
-import spoon.reflect.declaration.CtModifiable;
-import spoon.reflect.declaration.CtShadowable;
-import spoon.reflect.declaration.CtType;
-import spoon.reflect.declaration.CtTypedElement;
-import spoon.reflect.declaration.CtVariable;
-import spoon.reflect.declaration.ModifierKind;
+import spoon.reflect.declaration.*;
 import spoon.reflect.path.CtRole;
 import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.reference.CtTypeReference;
@@ -37,9 +31,7 @@ import spoon.support.reflect.CtModifierHandler;
 
 import java.util.Set;
 
-import static spoon.reflect.path.CtRole.DEFAULT_EXPRESSION;
-import static spoon.reflect.path.CtRole.IS_SHADOW;
-import static spoon.reflect.path.CtRole.TYPE;
+import static spoon.reflect.path.CtRole.*;
 
 /**
  * The implementation for {@link spoon.reflect.declaration.CtField}.

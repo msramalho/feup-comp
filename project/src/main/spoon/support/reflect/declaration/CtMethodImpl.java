@@ -18,13 +18,7 @@ package spoon.support.reflect.declaration;
 
 import spoon.refactoring.Refactoring;
 import spoon.reflect.annotations.MetamodelPropertyField;
-import spoon.reflect.declaration.CtFormalTypeDeclarer;
-import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtModifiable;
-import spoon.reflect.declaration.CtShadowable;
-import spoon.reflect.declaration.CtTypeParameter;
-import spoon.reflect.declaration.CtTypedElement;
-import spoon.reflect.declaration.ModifierKind;
+import spoon.reflect.declaration.*;
 import spoon.reflect.path.CtRole;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.CtVisitor;
@@ -39,10 +33,7 @@ import java.util.List;
 import java.util.Set;
 
 import static spoon.reflect.ModelElementContainerDefaultCapacities.TYPE_TYPE_PARAMETERS_CONTAINER_DEFAULT_CAPACITY;
-import static spoon.reflect.path.CtRole.IS_DEFAULT;
-import static spoon.reflect.path.CtRole.IS_SHADOW;
-import static spoon.reflect.path.CtRole.TYPE;
-import static spoon.reflect.path.CtRole.TYPE_PARAMETER;
+import static spoon.reflect.path.CtRole.*;
 
 /**
  * The implementation for {@link spoon.reflect.declaration.CtMethod}.

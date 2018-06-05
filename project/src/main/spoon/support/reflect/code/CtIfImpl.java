@@ -25,9 +25,7 @@ import spoon.reflect.declaration.CtType;
 import spoon.reflect.path.CtRole;
 import spoon.reflect.visitor.CtVisitor;
 
-import static spoon.reflect.path.CtRole.CONDITION;
-import static spoon.reflect.path.CtRole.ELSE;
-import static spoon.reflect.path.CtRole.THEN;
+import static spoon.reflect.path.CtRole.*;
 
 public class CtIfImpl extends CtStatementImpl implements CtIf {
 	private static final long serialVersionUID = 1L;

@@ -20,16 +20,11 @@ import spoon.reflect.code.CtComment;
 import spoon.reflect.code.CtJavaDoc;
 import spoon.reflect.code.CtJavaDocTag;
 
-import static spoon.reflect.visitor.DefaultJavaPrettyPrinter.JAVADOC_START;
-import static spoon.reflect.visitor.DefaultJavaPrettyPrinter.INLINE_COMMENT_START;
-import static spoon.reflect.visitor.DefaultJavaPrettyPrinter.BLOCK_COMMENT_START;
-import static spoon.reflect.visitor.DefaultJavaPrettyPrinter.BLOCK_COMMENT_END;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static spoon.reflect.visitor.DefaultJavaPrettyPrinter.COMMENT_STAR;
+import static spoon.reflect.visitor.DefaultJavaPrettyPrinter.*;
 
 /**
  * Computes source code representation of the Comment literal

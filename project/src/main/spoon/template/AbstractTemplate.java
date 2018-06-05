@@ -16,12 +16,12 @@
  */
 package spoon.template;
 
-import java.lang.reflect.Field;
-
 import spoon.SpoonException;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.factory.Factory;
 import spoon.support.template.Parameters;
+
+import java.lang.reflect.Field;
 
 /**
  * handles the well-formedness and helper methods of templates

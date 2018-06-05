@@ -17,11 +17,7 @@
 package spoon.support.reflect.declaration;
 
 import spoon.reflect.annotations.MetamodelPropertyField;
-import spoon.reflect.declaration.CtModule;
-import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.declaration.CtShadowable;
-import spoon.reflect.declaration.CtType;
-import spoon.reflect.declaration.ParentNotInitializedException;
+import spoon.reflect.declaration.*;
 import spoon.reflect.reference.CtPackageReference;
 import spoon.reflect.visitor.CtVisitor;
 import spoon.support.util.QualifiedNameBasedSortedSet;
@@ -29,9 +25,7 @@ import spoon.support.util.QualifiedNameBasedSortedSet;
 import java.util.HashSet;
 import java.util.Set;
 
-import static spoon.reflect.path.CtRole.IS_SHADOW;
-import static spoon.reflect.path.CtRole.SUB_PACKAGE;
-import static spoon.reflect.path.CtRole.CONTAINED_TYPE;
+import static spoon.reflect.path.CtRole.*;
 
 /**
  * The implementation for {@link spoon.reflect.declaration.CtPackage}.

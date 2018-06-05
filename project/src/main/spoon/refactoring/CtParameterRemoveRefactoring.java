@@ -16,20 +16,8 @@
  */
 package spoon.refactoring;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import spoon.SpoonException;
-import spoon.reflect.code.CtAnnotationFieldAccess;
-import spoon.reflect.code.CtArrayRead;
-import spoon.reflect.code.CtExpression;
-import spoon.reflect.code.CtFieldRead;
-import spoon.reflect.code.CtInvocation;
-import spoon.reflect.code.CtLiteral;
-import spoon.reflect.code.CtNewArray;
-import spoon.reflect.code.CtThisAccess;
-import spoon.reflect.code.CtVariableRead;
+import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtParameter;
@@ -40,6 +28,10 @@ import spoon.reflect.visitor.chain.CtConsumer;
 import spoon.reflect.visitor.filter.AllMethodsSameSignatureFunction;
 import spoon.reflect.visitor.filter.ExecutableReferenceFilter;
 import spoon.reflect.visitor.filter.ParameterReferenceFunction;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Removes target {@link CtParameter} from the parent target {@link CtExecutable}

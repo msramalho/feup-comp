@@ -16,26 +16,20 @@
  */
 package spoon.support.visitor;
 
-import static spoon.support.visitor.ClassTypingContext.getTypeReferences;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import spoon.SpoonException;
 import spoon.reflect.code.CtExpression;
 import spoon.reflect.code.CtInvocation;
-import spoon.reflect.declaration.CtConstructor;
-import spoon.reflect.declaration.CtExecutable;
-import spoon.reflect.declaration.CtFormalTypeDeclarer;
-import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtParameter;
-import spoon.reflect.declaration.CtType;
-import spoon.reflect.declaration.CtTypeParameter;
+import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.reference.CtExecutableReference;
 import spoon.reflect.reference.CtTypeParameterReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.reference.CtWildcardReference;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static spoon.support.visitor.ClassTypingContext.getTypeReferences;
 
 /**
  * For the scope method or constructor and super type hierarchy of it's declaring type,

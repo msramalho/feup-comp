@@ -16,9 +16,9 @@
  */
 package spoon.pattern.internal.node;
 
-import java.util.List;
-
 import spoon.pattern.PatternBuilder;
+
+import java.util.List;
 
 /**
  * The AST model based parameterized model, which can generate or match other AST models.

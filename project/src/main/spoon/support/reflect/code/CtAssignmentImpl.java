@@ -30,10 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static spoon.reflect.ModelElementContainerDefaultCapacities.CASTS_CONTAINER_DEFAULT_CAPACITY;
-import static spoon.reflect.path.CtRole.ASSIGNED;
-import static spoon.reflect.path.CtRole.ASSIGNMENT;
-import static spoon.reflect.path.CtRole.CAST;
-import static spoon.reflect.path.CtRole.TYPE;
+import static spoon.reflect.path.CtRole.*;
 
 public class CtAssignmentImpl<T, A extends T> extends CtStatementImpl implements CtAssignment<T, A> {
 	private static final long serialVersionUID = 1L;

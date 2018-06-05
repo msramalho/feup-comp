@@ -19,22 +19,8 @@ package spoon.support.reflect.declaration;
 import spoon.Launcher;
 import spoon.SpoonException;
 import spoon.reflect.annotations.MetamodelPropertyField;
-import spoon.reflect.code.CtCodeElement;
-import spoon.reflect.code.CtExpression;
-import spoon.reflect.code.CtFieldAccess;
-import spoon.reflect.code.CtFieldRead;
-import spoon.reflect.code.CtLiteral;
-import spoon.reflect.code.CtNewArray;
-import spoon.reflect.code.CtTypeAccess;
-import spoon.reflect.declaration.CtAnnotatedElementType;
-import spoon.reflect.declaration.CtAnnotation;
-import spoon.reflect.declaration.CtAnnotationMethod;
-import spoon.reflect.declaration.CtAnnotationType;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtField;
-import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtShadowable;
-import spoon.reflect.declaration.CtType;
+import spoon.reflect.code.*;
+import spoon.reflect.declaration.*;
 import spoon.reflect.eval.PartialEvaluator;
 import spoon.reflect.path.CtRole;
 import spoon.reflect.reference.CtArrayTypeReference;
@@ -47,25 +33,11 @@ import spoon.support.comparator.CtLineElementComparator;
 import spoon.support.reflect.code.CtExpressionImpl;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.*;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
-import static spoon.reflect.path.CtRole.IS_SHADOW;
-import static spoon.reflect.path.CtRole.TYPE;
-import static spoon.reflect.path.CtRole.VALUE;
+import static spoon.reflect.path.CtRole.*;
 
 /**
  * The implementation for {@link spoon.reflect.declaration.CtAnnotation}.

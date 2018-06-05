@@ -16,8 +16,8 @@
  */
 package spoon.reflect.code;
 
-import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.annotations.PropertyGetter;
+import spoon.reflect.reference.CtFieldReference;
 
 import static spoon.reflect.path.CtRole.VARIABLE;
 

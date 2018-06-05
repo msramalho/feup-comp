@@ -16,18 +16,14 @@
  */
 package spoon.support.compiler;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-
 import spoon.Launcher;
 import spoon.SpoonException;
 import spoon.compiler.SpoonFile;
 import spoon.compiler.SpoonFolder;
 import spoon.compiler.SpoonResource;
 import spoon.compiler.SpoonResourceHelper;
+
+import java.io.*;
 
 public class FileSystemFile implements SpoonFile {
 

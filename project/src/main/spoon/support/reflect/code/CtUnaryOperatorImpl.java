@@ -17,17 +17,11 @@
 package spoon.support.reflect.code;
 
 import spoon.reflect.annotations.MetamodelPropertyField;
-import spoon.reflect.code.CtExpression;
-import spoon.reflect.code.CtStatement;
-import spoon.reflect.code.CtStatementList;
-import spoon.reflect.code.CtUnaryOperator;
-import spoon.reflect.code.UnaryOperatorKind;
+import spoon.reflect.code.*;
 import spoon.reflect.path.CtRole;
 import spoon.reflect.visitor.CtVisitor;
 
-import static spoon.reflect.path.CtRole.EXPRESSION;
-import static spoon.reflect.path.CtRole.LABEL;
-import static spoon.reflect.path.CtRole.OPERATOR_KIND;
+import static spoon.reflect.path.CtRole.*;
 
 public class CtUnaryOperatorImpl<T> extends CtExpressionImpl<T> implements CtUnaryOperator<T> {
 	private static final long serialVersionUID = 1L;

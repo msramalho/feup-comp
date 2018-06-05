@@ -16,13 +16,13 @@
  */
 package spoon.reflect.meta.impl;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import spoon.SpoonException;
 import spoon.reflect.meta.RoleHandler;
 import spoon.reflect.path.CtRole;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * common implementation of {@link RoleHandler}

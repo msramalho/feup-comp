@@ -20,11 +20,7 @@ import spoon.reflect.annotations.MetamodelPropertyField;
 import spoon.reflect.code.CtExpression;
 import spoon.reflect.code.CtLocalVariable;
 import spoon.reflect.code.CtRHSReceiver;
-import spoon.reflect.declaration.CtModifiable;
-import spoon.reflect.declaration.CtNamedElement;
-import spoon.reflect.declaration.CtTypedElement;
-import spoon.reflect.declaration.CtVariable;
-import spoon.reflect.declaration.ModifierKind;
+import spoon.reflect.declaration.*;
 import spoon.reflect.path.CtRole;
 import spoon.reflect.reference.CtLocalVariableReference;
 import spoon.reflect.reference.CtTypeReference;
@@ -36,9 +32,7 @@ import spoon.support.reflect.CtModifierHandler;
 
 import java.util.Set;
 
-import static spoon.reflect.path.CtRole.DEFAULT_EXPRESSION;
-import static spoon.reflect.path.CtRole.NAME;
-import static spoon.reflect.path.CtRole.TYPE;
+import static spoon.reflect.path.CtRole.*;
 
 public class CtLocalVariableImpl<T> extends CtStatementImpl implements CtLocalVariable<T> {
 	private static final long serialVersionUID = 1L;

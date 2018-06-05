@@ -17,11 +17,7 @@
 package spoon.support.reflect.code;
 
 import spoon.reflect.annotations.MetamodelPropertyField;
-import spoon.reflect.code.CtBlock;
-import spoon.reflect.code.CtBodyHolder;
-import spoon.reflect.code.CtCatch;
-import spoon.reflect.code.CtCatchVariable;
-import spoon.reflect.code.CtStatement;
+import spoon.reflect.code.*;
 import spoon.reflect.path.CtRole;
 import spoon.reflect.visitor.CtVisitor;
 

@@ -23,9 +23,7 @@ import spoon.reflect.code.CtExpression;
 import spoon.reflect.path.CtRole;
 import spoon.reflect.visitor.CtVisitor;
 
-import static spoon.reflect.path.CtRole.LEFT_OPERAND;
-import static spoon.reflect.path.CtRole.OPERATOR_KIND;
-import static spoon.reflect.path.CtRole.RIGHT_OPERAND;
+import static spoon.reflect.path.CtRole.*;
 
 public class CtBinaryOperatorImpl<T> extends CtExpressionImpl<T> implements CtBinaryOperator<T> {
 	private static final long serialVersionUID = 1L;

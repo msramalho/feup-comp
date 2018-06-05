@@ -16,14 +16,6 @@
  */
 package spoon.pattern;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import spoon.SpoonException;
 import spoon.pattern.internal.DefaultGenerator;
 import spoon.pattern.internal.matcher.MatchingScanner;
@@ -39,6 +31,8 @@ import spoon.reflect.visitor.chain.CtConsumer;
 import spoon.support.util.ParameterValueProvider;
 import spoon.support.util.ParameterValueProviderFactory;
 import spoon.support.util.UnmodifiableParameterValueProvider;
+
+import java.util.*;
 
 /**
  * Represents a pattern for matching code. A pattern is composed of a list of AST models, where a model is an AST with some nodes being "pattern parameters".

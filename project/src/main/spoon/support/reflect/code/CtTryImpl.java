@@ -17,12 +17,7 @@
 package spoon.support.reflect.code;
 
 import spoon.reflect.annotations.MetamodelPropertyField;
-import spoon.reflect.code.CtBlock;
-import spoon.reflect.code.CtBodyHolder;
-import spoon.reflect.code.CtCatch;
-import spoon.reflect.code.CtCodeElement;
-import spoon.reflect.code.CtStatement;
-import spoon.reflect.code.CtTry;
+import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.path.CtRole;
 import spoon.reflect.visitor.CtVisitor;
@@ -32,9 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static spoon.reflect.ModelElementContainerDefaultCapacities.CATCH_CASES_CONTAINER_DEFAULT_CAPACITY;
-import static spoon.reflect.path.CtRole.BODY;
-import static spoon.reflect.path.CtRole.CATCH;
-import static spoon.reflect.path.CtRole.FINALIZER;
+import static spoon.reflect.path.CtRole.*;
 
 public class CtTryImpl extends CtStatementImpl implements CtTry {
 	private static final long serialVersionUID = 1L;

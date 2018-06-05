@@ -16,10 +16,10 @@
  */
 package spoon.pattern.internal.matcher;
 
-import java.util.List;
-
 import spoon.SpoonException;
 import spoon.pattern.internal.node.RootNode;
+
+import java.util.List;
 
 /**
  * Chain of {@link RootNode}s. {@link RootNode}s are processed in the same order as they were added into chain

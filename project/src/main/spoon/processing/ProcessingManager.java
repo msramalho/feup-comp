@@ -16,9 +16,9 @@
  */
 package spoon.processing;
 
-import java.util.Collection;
-
 import spoon.reflect.declaration.CtElement;
+
+import java.util.Collection;
 
 /**
  * The processing manager defines the API to process a program model of a given

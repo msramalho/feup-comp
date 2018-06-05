@@ -16,13 +16,13 @@
  */
 package spoon.pattern.internal;
 
+import spoon.SpoonException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.function.Function;
-
-import spoon.SpoonException;
 
 /**
  * Container for single or multiple values of required type

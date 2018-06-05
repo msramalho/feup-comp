@@ -16,17 +16,12 @@
  */
 package spoon.pattern.internal.matcher;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.BiFunction;
-
 import spoon.SpoonException;
 import spoon.reflect.meta.ContainerKind;
 import spoon.support.util.ParameterValueProvider;
+
+import java.util.*;
+import java.util.function.BiFunction;
 
 /**
  * Describes what next has to be matched.

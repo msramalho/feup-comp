@@ -16,12 +16,12 @@
  */
 package spoon.support.compiler;
 
+import spoon.compiler.SpoonFile;
+import spoon.compiler.SpoonFolder;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
-
-import spoon.compiler.SpoonFile;
-import spoon.compiler.SpoonFolder;
 
 public class ZipFile implements SpoonFile {
 

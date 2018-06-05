@@ -16,15 +16,7 @@
  */
 package spoon.support.visitor.java.internal;
 
-import spoon.reflect.declaration.CtAnnotation;
-import spoon.reflect.declaration.CtConstructor;
-import spoon.reflect.declaration.CtEnumValue;
-import spoon.reflect.declaration.CtField;
-import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtPackage;
-import spoon.reflect.declaration.CtParameter;
-import spoon.reflect.declaration.CtType;
-import spoon.reflect.declaration.CtTypeParameter;
+import spoon.reflect.declaration.*;
 import spoon.reflect.reference.CtArrayTypeReference;
 import spoon.reflect.reference.CtTypeReference;
 

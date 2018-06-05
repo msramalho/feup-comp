@@ -16,10 +16,6 @@
  */
 package spoon.pattern.internal.node;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.BiConsumer;
-
 import spoon.SpoonException;
 import spoon.pattern.internal.Generator;
 import spoon.pattern.internal.ResultHolder;
@@ -33,6 +29,10 @@ import spoon.reflect.code.CtStatement;
 import spoon.reflect.factory.CoreFactory;
 import spoon.reflect.factory.Factory;
 import spoon.support.util.ParameterValueProvider;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.BiConsumer;
 
 /**
  * List of conditional cases

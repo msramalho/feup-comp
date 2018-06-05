@@ -22,9 +22,7 @@ import spoon.template.TemplateParameter;
 
 import java.util.List;
 
-import static spoon.reflect.path.CtRole.BODY;
-import static spoon.reflect.path.CtRole.CATCH;
-import static spoon.reflect.path.CtRole.FINALIZER;
+import static spoon.reflect.path.CtRole.*;
 
 /**
  * This code element defines a <code>try</code> statement.

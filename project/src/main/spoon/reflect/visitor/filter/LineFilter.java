@@ -16,11 +16,7 @@
  */
 package spoon.reflect.visitor.filter;
 
-import spoon.reflect.code.CtBlock;
-import spoon.reflect.code.CtIf;
-import spoon.reflect.code.CtLoop;
-import spoon.reflect.code.CtStatement;
-import spoon.reflect.code.CtStatementList;
+import spoon.reflect.code.*;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.ParentNotInitializedException;
 

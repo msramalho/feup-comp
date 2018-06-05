@@ -16,14 +16,14 @@
  */
 package spoon.pattern.internal.node;
 
-import java.util.function.BiConsumer;
-
 import spoon.pattern.internal.Generator;
 import spoon.pattern.internal.ResultHolder;
 import spoon.pattern.internal.matcher.Matchers;
 import spoon.pattern.internal.matcher.TobeMatched;
 import spoon.pattern.internal.parameter.ParameterInfo;
 import spoon.support.util.ParameterValueProvider;
+
+import java.util.function.BiConsumer;
 
 /**
  * Represents a parameterized Pattern ValueResolver, which can be used

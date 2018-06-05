@@ -16,10 +16,10 @@
  */
 package spoon.processing;
 
+import spoon.reflect.declaration.CtElement;
+
 import java.io.File;
 import java.util.List;
-
-import spoon.reflect.declaration.CtElement;
 
 /**
  * This interface should be implemented by processing tasks that generate new

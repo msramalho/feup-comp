@@ -16,16 +16,16 @@
  */
 package spoon.reflect.declaration;
 
-import spoon.reflect.reference.CtPackageReference;
-import spoon.support.DerivedProperty;
 import spoon.reflect.annotations.PropertyGetter;
 import spoon.reflect.annotations.PropertySetter;
 import spoon.reflect.path.CtRole;
+import spoon.reflect.reference.CtPackageReference;
+import spoon.support.DerivedProperty;
 
 import java.util.Set;
 
-import static spoon.reflect.path.CtRole.SUB_PACKAGE;
 import static spoon.reflect.path.CtRole.CONTAINED_TYPE;
+import static spoon.reflect.path.CtRole.SUB_PACKAGE;
 
 /**
  * This element defines a package declaration. The packages are represented by a

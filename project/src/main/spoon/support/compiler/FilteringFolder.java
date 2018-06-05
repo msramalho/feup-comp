@@ -16,9 +16,9 @@
  */
 package spoon.support.compiler;
 
-import java.util.ArrayList;
-
 import spoon.compiler.SpoonResource;
+
+import java.util.ArrayList;
 
 /**
  * A filtering resource, see https://github.com/INRIA/spoon/issues/877

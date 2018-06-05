@@ -16,13 +16,11 @@
  */
 package spoon.reflect.code;
 
-import spoon.reflect.declaration.CtElement;
 import spoon.reflect.annotations.PropertyGetter;
 import spoon.reflect.annotations.PropertySetter;
+import spoon.reflect.declaration.CtElement;
 
-import static spoon.reflect.path.CtRole.COMMENT_CONTENT;
-import static spoon.reflect.path.CtRole.JAVADOC_TAG_VALUE;
-import static spoon.reflect.path.CtRole.DOCUMENTATION_TYPE;
+import static spoon.reflect.path.CtRole.*;
 
 /**
  * This code element defines a javadoc tag

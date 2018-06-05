@@ -27,11 +27,7 @@ import spoon.compiler.SpoonFile;
 import spoon.compiler.SpoonFolder;
 import spoon.experimental.modelobs.EmptyModelChangeListener;
 import spoon.experimental.modelobs.FineModelChangeListener;
-import spoon.processing.FileGenerator;
-import spoon.processing.ProblemFixer;
-import spoon.processing.ProcessingManager;
-import spoon.processing.Processor;
-import spoon.processing.ProcessorProperties;
+import spoon.processing.*;
 import spoon.reflect.cu.SourcePosition;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.declaration.CtExecutable;
@@ -46,11 +42,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * This class implements a simple Spoon environment that reports messages in the

@@ -16,15 +16,11 @@
  */
 package spoon.support.compiler;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import spoon.compiler.SpoonFile;
 import spoon.compiler.SpoonFolder;
+
+import java.io.File;
+import java.util.*;
 
 public class VirtualFolder implements SpoonFolder {
 	protected final Set<SpoonFile> files = new HashSet<>();

@@ -16,16 +16,15 @@
  */
 package spoon.support.compiler.jdt;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
+import org.apache.commons.io.IOUtils;
+import org.eclipse.jdt.internal.compiler.batch.CompilationUnit;
 import spoon.SpoonException;
 import spoon.SpoonModelBuilder;
 import spoon.compiler.SpoonFile;
 
-import org.apache.commons.io.IOUtils;
-import org.eclipse.jdt.internal.compiler.batch.CompilationUnit;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileCompilerConfig implements SpoonModelBuilder.InputType {
 

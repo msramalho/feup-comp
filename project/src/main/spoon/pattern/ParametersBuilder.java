@@ -16,38 +16,15 @@
  */
 package spoon.pattern;
 
-import static spoon.pattern.PatternBuilder.getLocalTypeRefBySimpleName;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Predicate;
-
 import spoon.SpoonException;
 import spoon.pattern.internal.ValueConvertor;
-import spoon.pattern.internal.node.ListOfNodes;
-import spoon.pattern.internal.node.MapEntryNode;
-import spoon.pattern.internal.node.ModelNode;
-import spoon.pattern.internal.node.ParameterNode;
-import spoon.pattern.internal.node.RootNode;
-import spoon.pattern.internal.node.StringNode;
+import spoon.pattern.internal.node.*;
 import spoon.pattern.internal.parameter.AbstractParameterInfo;
 import spoon.pattern.internal.parameter.ListParameterInfo;
 import spoon.pattern.internal.parameter.MapParameterInfo;
 import spoon.pattern.internal.parameter.ParameterInfo;
-import spoon.reflect.code.CtArrayAccess;
-import spoon.reflect.code.CtBlock;
-import spoon.reflect.code.CtExpression;
-import spoon.reflect.code.CtFieldRead;
-import spoon.reflect.code.CtInvocation;
-import spoon.reflect.code.CtLiteral;
-import spoon.reflect.code.CtReturn;
-import spoon.reflect.code.CtVariableAccess;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtNamedElement;
-import spoon.reflect.declaration.CtType;
-import spoon.reflect.declaration.CtVariable;
+import spoon.reflect.code.*;
+import spoon.reflect.declaration.*;
 import spoon.reflect.meta.ContainerKind;
 import spoon.reflect.meta.RoleHandler;
 import spoon.reflect.meta.impl.RoleHandlerHelper;
@@ -64,6 +41,13 @@ import spoon.reflect.visitor.filter.NamedElementFilter;
 import spoon.reflect.visitor.filter.PotentialVariableDeclarationFunction;
 import spoon.reflect.visitor.filter.VariableReferenceFunction;
 import spoon.template.TemplateParameter;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+
+import static spoon.pattern.PatternBuilder.getLocalTypeRefBySimpleName;
 
 /**
  * Used to define Pattern parameters and their mapping to Pattern model

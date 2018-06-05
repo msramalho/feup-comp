@@ -18,17 +18,9 @@ package spoon.support.reflect.reference;
 
 import spoon.SpoonException;
 import spoon.reflect.annotations.MetamodelPropertyField;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtFormalTypeDeclarer;
-import spoon.reflect.declaration.CtMethod;
-import spoon.reflect.declaration.CtType;
-import spoon.reflect.declaration.CtTypeParameter;
+import spoon.reflect.declaration.*;
 import spoon.reflect.path.CtRole;
-import spoon.reflect.reference.CtActualTypeContainer;
-import spoon.reflect.reference.CtExecutableReference;
-import spoon.reflect.reference.CtIntersectionTypeReference;
-import spoon.reflect.reference.CtTypeParameterReference;
-import spoon.reflect.reference.CtTypeReference;
+import spoon.reflect.reference.*;
 import spoon.reflect.visitor.CtVisitor;
 import spoon.support.DerivedProperty;
 import spoon.support.UnsettableProperty;
@@ -37,8 +29,8 @@ import java.lang.reflect.AnnotatedElement;
 import java.util.ArrayList;
 import java.util.List;
 
-import static spoon.reflect.path.CtRole.IS_UPPER;
 import static spoon.reflect.path.CtRole.BOUNDING_TYPE;
+import static spoon.reflect.path.CtRole.IS_UPPER;
 
 public class CtTypeParameterReferenceImpl extends CtTypeReferenceImpl<Object> implements CtTypeParameterReference {
 	private static final long serialVersionUID = 1L;

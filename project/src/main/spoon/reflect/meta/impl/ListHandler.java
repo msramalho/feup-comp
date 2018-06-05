@@ -16,14 +16,14 @@
  */
 package spoon.reflect.meta.impl;
 
+import spoon.reflect.meta.ContainerKind;
+import spoon.reflect.meta.RoleHandler;
+import spoon.reflect.path.CtRole;
+
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import spoon.reflect.meta.ContainerKind;
-import spoon.reflect.meta.RoleHandler;
-import spoon.reflect.path.CtRole;
 
 /**
  * implementation of {@link RoleHandler}, which handles attributes of type List&lt;V&gt;

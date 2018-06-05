@@ -16,14 +16,14 @@
  */
 package spoon.reflect.visitor;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.reference.CtPackageReference;
 import spoon.reflect.reference.CtTypeReference;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TypeContext {
 	CtType<?> type;

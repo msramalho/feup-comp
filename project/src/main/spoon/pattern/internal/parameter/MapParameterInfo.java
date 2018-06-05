@@ -16,11 +16,11 @@
  */
 package spoon.pattern.internal.parameter;
 
-import java.util.Map;
-import java.util.function.Function;
-
 import spoon.support.util.ParameterValueProvider;
 import spoon.support.util.UnmodifiableParameterValueProvider;
+
+import java.util.Map;
+import java.util.function.Function;
 
 /**
  * A kind of {@link ParameterInfo} which returns value by the named parameter

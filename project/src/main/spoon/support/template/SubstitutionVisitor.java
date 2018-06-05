@@ -16,35 +16,11 @@
  */
 package spoon.support.template;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.IdentityHashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 import spoon.SpoonException;
-import spoon.reflect.code.CtArrayAccess;
-import spoon.reflect.code.CtBlock;
-import spoon.reflect.code.CtCodeElement;
-import spoon.reflect.code.CtComment;
-import spoon.reflect.code.CtExpression;
-import spoon.reflect.code.CtFieldAccess;
-import spoon.reflect.code.CtFieldRead;
-import spoon.reflect.code.CtFieldWrite;
-import spoon.reflect.code.CtForEach;
-import spoon.reflect.code.CtInvocation;
-import spoon.reflect.code.CtLiteral;
-import spoon.reflect.code.CtReturn;
-import spoon.reflect.code.CtStatement;
-import spoon.reflect.code.CtThisAccess;
+import spoon.reflect.code.*;
 import spoon.reflect.cu.CompilationUnit;
 import spoon.reflect.cu.SourcePosition;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtExecutable;
-import spoon.reflect.declaration.CtNamedElement;
-import spoon.reflect.declaration.CtType;
-import spoon.reflect.declaration.CtTypeMember;
+import spoon.reflect.declaration.*;
 import spoon.reflect.factory.Factory;
 import spoon.reflect.reference.CtExecutableReference;
 import spoon.reflect.reference.CtFieldReference;
@@ -57,6 +33,8 @@ import spoon.template.AbstractTemplate;
 import spoon.template.Parameter;
 import spoon.template.Template;
 import spoon.template.TemplateParameter;
+
+import java.util.*;
 
 class DoNotFurtherTemplateThisElement extends SpoonException {
 	private static final long serialVersionUID = 1L;

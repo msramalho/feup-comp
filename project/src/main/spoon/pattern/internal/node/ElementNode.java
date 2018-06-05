@@ -16,19 +16,6 @@
  */
 package spoon.pattern.internal.node;
 
-import static spoon.pattern.internal.matcher.TobeMatched.getMatchedParameters;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.BiConsumer;
-import java.util.stream.Collectors;
-
 import spoon.Metamodel;
 import spoon.SpoonException;
 import spoon.pattern.Quantifier;
@@ -42,6 +29,12 @@ import spoon.reflect.meta.ContainerKind;
 import spoon.reflect.path.CtRole;
 import spoon.reflect.reference.CtExecutableReference;
 import spoon.support.util.ParameterValueProvider;
+
+import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
+
+import static spoon.pattern.internal.matcher.TobeMatched.getMatchedParameters;
 
 /**
  * Generates/Matches a copy of a single CtElement AST node with all it's children (whole AST tree of the root CtElement)

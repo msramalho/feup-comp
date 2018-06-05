@@ -21,9 +21,7 @@ import spoon.reflect.annotations.PropertySetter;
 
 import java.util.List;
 
-import static spoon.reflect.path.CtRole.EXPRESSION;
-import static spoon.reflect.path.CtRole.FOR_INIT;
-import static spoon.reflect.path.CtRole.FOR_UPDATE;
+import static spoon.reflect.path.CtRole.*;
 
 /**
  * This code element defines a for loop.

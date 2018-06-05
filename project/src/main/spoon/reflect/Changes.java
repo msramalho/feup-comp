@@ -16,10 +16,10 @@
  */
 package spoon.reflect;
 
+import spoon.reflect.declaration.CtElement;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import spoon.reflect.declaration.CtElement;
 
 /**
  * This class is a container for a list changes that may have occurred on a model

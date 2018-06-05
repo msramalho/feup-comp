@@ -17,15 +17,8 @@
 package spoon.reflect.factory;
 
 import spoon.reflect.CtModelImpl;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtModule;
-import spoon.reflect.declaration.CtPackageExport;
-import spoon.reflect.declaration.CtProvidedService;
-import spoon.reflect.declaration.CtNamedElement;
-import spoon.reflect.declaration.CtUsedService;
-import spoon.reflect.declaration.ParentNotInitializedException;
+import spoon.reflect.declaration.*;
 import spoon.reflect.reference.CtModuleReference;
-import spoon.reflect.declaration.CtModuleRequirement;
 import spoon.reflect.reference.CtPackageReference;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.CtVisitor;

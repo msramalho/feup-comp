@@ -18,12 +18,7 @@ package spoon.support.visitor;
 
 import spoon.reflect.code.CtFieldRead;
 import spoon.reflect.code.CtFieldWrite;
-import spoon.reflect.declaration.CtAnnotationType;
-import spoon.reflect.declaration.CtClass;
-import spoon.reflect.declaration.CtEnum;
-import spoon.reflect.declaration.CtInterface;
-import spoon.reflect.declaration.CtType;
-import spoon.reflect.declaration.CtTypeMember;
+import spoon.reflect.declaration.*;
 import spoon.reflect.reference.CtArrayTypeReference;
 import spoon.reflect.reference.CtExecutableReference;
 import spoon.reflect.reference.CtFieldReference;

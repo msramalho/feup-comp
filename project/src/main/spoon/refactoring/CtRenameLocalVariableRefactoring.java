@@ -16,17 +16,10 @@
  */
 package spoon.refactoring;
 
-import java.util.Collection;
-import java.util.regex.Pattern;
-
 import spoon.SpoonException;
 import spoon.reflect.code.CtCatchVariable;
 import spoon.reflect.code.CtLocalVariable;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtField;
-import spoon.reflect.declaration.CtParameter;
-import spoon.reflect.declaration.CtType;
-import spoon.reflect.declaration.CtVariable;
+import spoon.reflect.declaration.*;
 import spoon.reflect.reference.CtFieldReference;
 import spoon.reflect.reference.CtLocalVariableReference;
 import spoon.reflect.reference.CtReference;
@@ -36,12 +29,11 @@ import spoon.reflect.visitor.chain.CtConsumer;
 import spoon.reflect.visitor.chain.CtQueryable;
 import spoon.reflect.visitor.chain.CtScannerListener;
 import spoon.reflect.visitor.chain.ScanningMode;
-import spoon.reflect.visitor.filter.LocalVariableReferenceFunction;
-import spoon.reflect.visitor.filter.LocalVariableScopeFunction;
-import spoon.reflect.visitor.filter.PotentialVariableDeclarationFunction;
-import spoon.reflect.visitor.filter.SiblingsFunction;
+import spoon.reflect.visitor.filter.*;
 import spoon.reflect.visitor.filter.SiblingsFunction.Mode;
-import spoon.reflect.visitor.filter.VariableReferenceFunction;
+
+import java.util.Collection;
+import java.util.regex.Pattern;
 
 /**
  * Spoon model refactoring function which renames `target` local variable to `newName`<br>

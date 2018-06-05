@@ -16,11 +16,11 @@
  */
 package spoon.support.util;
 
-import java.util.Collection;
-import java.util.TreeSet;
-
 import spoon.reflect.declaration.CtElement;
 import spoon.support.comparator.QualifiedNameComparator;
+
+import java.util.Collection;
+import java.util.TreeSet;
 
 public class QualifiedNameBasedSortedSet<E extends CtElement> extends
 		TreeSet<E> {

@@ -1,9 +1,7 @@
 package worker;
 
 import report.WorkerReport;
-
 import spoon.pattern.Pattern;
-
 import spoon.pattern.PatternBuilder;
 import spoon.reflect.declaration.CtElement;
 import spoon.reflect.meta.ContainerKind;
@@ -12,7 +10,8 @@ import spoon.reflect.visitor.filter.TypeFilter;
 import util.AnyStatement;
 import util.CtIterator;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.regex.Matcher;
 
 

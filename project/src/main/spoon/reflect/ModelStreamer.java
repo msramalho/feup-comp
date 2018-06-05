@@ -16,11 +16,11 @@
  */
 package spoon.reflect;
 
+import spoon.reflect.factory.Factory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import spoon.reflect.factory.Factory;
 
 /**
  * This interface defines the protocol to save and load a factory and it's

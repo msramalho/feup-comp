@@ -21,21 +21,17 @@ import spoon.reflect.code.CtBlock;
 import spoon.reflect.code.CtBodyHolder;
 import spoon.reflect.code.CtExpression;
 import spoon.reflect.code.CtStatement;
-import spoon.reflect.declaration.CtAnnotationMethod;
-import spoon.reflect.declaration.CtExecutable;
-import spoon.reflect.declaration.CtFormalTypeDeclarer;
-import spoon.reflect.declaration.CtParameter;
-import spoon.reflect.declaration.CtTypeParameter;
+import spoon.reflect.declaration.*;
 import spoon.reflect.path.CtRole;
 import spoon.reflect.reference.CtTypeReference;
 import spoon.reflect.visitor.CtVisitor;
 import spoon.support.DerivedProperty;
 import spoon.support.UnsettableProperty;
 
-import static spoon.reflect.path.CtRole.DEFAULT_EXPRESSION;
-
 import java.util.List;
 import java.util.Set;
+
+import static spoon.reflect.path.CtRole.DEFAULT_EXPRESSION;
 
 /**
  * The implementation for {@link spoon.reflect.declaration.CtAnnotationMethod}.
