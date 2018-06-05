@@ -17,8 +17,12 @@ public abstract class AnyPatterns4 {
 
     public void complex1() {
         while (_var_x_ == 1) {
-            _greedy_any_min2_max2_.S();
-            _var_x_ = _method_test_();
+            if (_var_x_ == 0) {
+                _greedy_any_min2_max2_.S();
+            } else {
+                int _var_y_ = _method_test_();
+            }
+            String a = "b";
         }
     }
 

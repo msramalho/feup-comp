@@ -10,13 +10,21 @@ public class AnyTest3 {
         int x = 0;
 
         while (x == 1) {
-            while(x == 1) {
-                System.out.println("any1");
-                System.out.println("any1");
-                x = helper();
+            if (x == 0) {
+                int i = 0;
+                while (x == 1) {
+                    if (x == 0) {
+                        System.out.println("secondTry");
+                        System.out.println("secondTry");
+                    } else {
+                        int z = helper();
+                    }
+                    String a = "b";
+                }
+            } else {
+                int y = helper();
             }
-            System.out.println("any1");
-            x = helper();
+            String a = "b";
         }
     }
 }
