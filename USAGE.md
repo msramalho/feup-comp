@@ -123,7 +123,7 @@ The most straightforward patterns include:
  * Class Fields identification (Any, public, protected, private, static)
  * Class Methods identification (Any, abstract, public, protected, private, static)
  * Lines of Code (Class, Method) [these patterns are done on a standardize format of the code, also the results will vary with the configuration `global.parseComments`]
- * Java Statements identification (For loops, For-each loops, While loops, Do-while loops, Ternary operator)
+ * Java Statements identification (For loop, For-each loop, While loop, Do-while loop, If statement, Switch statement, Ternary operator)
  
 Some more complex pattern were also implemented in this manner, namely:
  * Cyclomatic Complexity of a method
