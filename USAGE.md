@@ -71,14 +71,14 @@ To define a new pattern you need to start by declaring a new method in your ```P
 
 Exemplifying by creating a new pattern named "simpleDeclaration":
 ```java
-public void simpleDeclaration()
+public void simpleDeclaration() {}
 ```
 
 Usually, when writing a Pattern you do not know what the name of the variables used in the code nor their content. If you do, and want to write a pattern only for those variables you can write something as:
 ```java
 int i = 3;
 ```
-In this example, only fragments of code that declare a variable named "i" and assign it the value "3" get matched with the pattern. However, this is rarely what you want and, therefore, we introduce you to the concept of pattern variables.
+In this example, only fragments of code that declare a variable named "i" and assign it the value "3" get matched with the pattern. However, this is rarely what you want and, therefore, we introduce you to the concept of __pattern variables__.
 
 ##### Pattern Variables
 
@@ -88,15 +88,71 @@ public class Patterns {
     int _var_x_;
     ...
  ```
- In the example above, we are declaring a new pattern variable with the type ```int```. Notice how the variable is defined: for a variable to be interpreted as a pattern variable it needs to be written in the format: ```_var_SOMETHING_```. 
+In the example above, we are declaring a new pattern variable with the type ```int```. Notice how the variable is defined: for a variable to be interpreted as a pattern variable it needs to be written in the format: ```_var_SOMETHING_```. 
  
- We can then use the pattern variable inside our pattern by referencing it as a normal variable
+We can then use the pattern variable inside our pattern by referencing it as a normal variable
 ```java
 int _var_x_ = 3;
 ```
-When trying to match patterns the matcher will try to associate a real value to the pattern variable. Using the previous example ```_var_x_``` would be associated to ```i```.
+When trying to match patterns the matcher will try to associate a real value to the pattern variable. Using the previous example ```_var_x_``` would be associated to ```i```. Naturally, fragments of code such as:
+```java
+Integer j = 3;
+```
+or
+```java
+int k;
+k = 3;
+```
+would not be matched since they: in the first case, do not refer the same type; in the second case, represent different implementations, as a declaration (```int _var_x_ = ...```) is different from a write (```k = ...```) .
+
 
 ##### Pattern Methods
+
+As a User, you may also want to reference generic methods in your patterns definitions. For that, you use __pattern methods__.
+
+To use a patterns method you will have to declare a new abstract method with the name following the format ```_method_SOMETHING_```. Do not forget to make the Patterns class abstract too. For example, if you wanted a Pattern that would match all the assignments of the content of a function returning a _String_ to variables, you would have to write a Pattern similar to:
+```java
+public abstract class Patterns {
+    String _var_x_;
+    int _var_y_;
+    public abstract String _method_example_(int exampleArgument);
+    
+    public void example() {
+        _var_x_ = _method_example_(_var_y_);
+    }
+}
+
+```
+
+##### Pattern Consumers
+
+
+
+##### Limitation
+Dynamic Pattern matching has the limitation of only evaluating the first element on the root of each Pattern.
+Therefore, Patterns with more than one element on their root will not be correctly matched.
+To better understand this limitation, let us use an example:
+```java
+    public void example1() {
+        while(true) {
+	     System.out.println("example");
+	     System.out.println("yey");
+	}
+	
+        if (true) {_var_x_ = 2;} 
+    }
+    
+    public void example2() {
+        while(true) {
+	     System.out.println("example");
+	     System.out.println("yey");
+	}
+    }
+```
+In the example above, the matches of both patterns will be equal. They will both only match declarations of `while` cycles with the condition being `true` and the body equal to `System.out.println("example"); System.out.println("yey");`.
+
+To overcome this limitation, you can define __Static Patterns__.
+
 
 ### Static Pattern Definitions
 
