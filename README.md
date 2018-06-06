@@ -47,8 +47,19 @@ The group member Edgar Carneiro worked more closely with the code pattern matchi
 The group members André Cruz and Miguel Ramalho worked more closely with the _ClassScanner_-_WorkerFactory_-_Worker_ architecture, and the _Report_ collection innerworks.
 
 ## Pros
+* Felxible architecture that can be extended, in any of the following ways:
+    * Inclusion of more static Patterns
+    * Use of more information from each Pattern Worker
+    * Implementation of new operations on the results of a Pattern, i.e. quartiles, skewness, kurtosis, ...
+* Off-the-shelf implementation of many patterns, that serve as examples for expansion to other patterns
+* Pattern Report is fetcheable from any node in the AST, as it is done recursively
+* Ability to use template matching patterns, that is generaly more accessible for users
+* Ability yo use Spoon-based pattern matching functionality for users that want more flexibility
+* Configurations file is both expandable and shareable, it can also be shared between users so as to guarantee the same execution environment
+
 
 ## Cons
+* 
 
 
 ## Completed tasks
