@@ -251,7 +251,7 @@ Some more complex pattern were also implemented in this manner, namely:
 
 ### Dynamic Patterns
 
-The default content of the default Patterns file declared in the [_UserSettings.json_ file](https://github.com/msramalho/feup-comp/blob/master/project/UserSettings.json) contains some example patterns. Its content is:
+The default [_Patterns.java_ file](https://github.com/msramalho/feup-comp/blob/master/project/patterns/Patterns.java) mentioned  in the [_UserSettings.json_ file](https://github.com/msramalho/feup-comp/blob/master/project/UserSettings.json) contains some example patterns. The content of the _Patterns.java_ file is:
 ```java
 import java.util.Collection;
 import spoon.template.TemplateParameter;
