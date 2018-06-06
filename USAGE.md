@@ -146,7 +146,13 @@ if (true) {
 ```
 In the example above, we defined a pattern named "example" that would match any `if` conditional statement with the condition being `true` and the body of the `Then Condition` containing a variable assignment of the value 0. Since we first use a lazy consumer, the first variable being assigned the value 0 will be associated with `_var_x_`. If we used a greedy consumer, the last variable being assigned the value 0 would be associated with `_var_x_`.
 
-You can also configure your consumers by declaring the minimum and/or the maximum of statements it can consume.
+You can also configure your consumers by declaring the minimum and/or the maximum of statements it can consume. In order for you to do that, you must strictly follow the format below, where V and T represent positive integers, when declaring a consumer:
+```java
+_lazy_any_minV_;
+_lazy_any_maxV_;
+_lazy_any_minV_maxT_;
+```
+In this example we are always using a lazy consumer but, naturally, you can also use a greedy one. In the first sentence, we are defining a consumer that must consume a minimum of V statements. In the second statement, a consumer that cannot consume more than V statements. In the third one, a consumer that must consume at least V statements and no more than T statements.
 
 ##### Limitation
 Dynamic Pattern matching has the limitation of only evaluating the first element on the root of each Pattern.
@@ -245,7 +251,13 @@ Some more complex pattern were also implemented in this manner, namely:
 
 ### Dynamic Patterns
 
+The default content of the default Patterns file declared int the [_UserSettings.json_ file](https://github.com/msramalho/feup-comp/blob/master/project/UserSettings.json) contains som example patterns. Its content is:
+```java
+TODO
+```
+
+There are also more examples of patterns in the test section. To visualize those patterns, visit the files present [here](https://github.com/msramalho/feup-comp/blob/master/project/src/test/testclasses/patterns/) that terminate in _Patterns.java_ or _PatternsX.java_, with X being a number.
 
 ### Additional Notes:
-If used from the java sources, a report can be obtained on any node of the code's AST. That is, you can obtain the global report by calling the ```getReport()``` method on the root node, as well as any intermediary reports on any os its descendant nodes.
+If used from the java sources, a report can be obtained on any node of the code's AST. That is, you can obtain the global report by calling the ```getReport()``` method on the root node, as well as any intermediary reports on any of its descendant nodes.
 (Each node's report includes its descendants' reports)
