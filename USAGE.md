@@ -65,6 +65,38 @@ public class Patterns {
 
 ```
 
+#### How to define a new Pattern
+
+To define a new pattern you need to start by declaring a new method in your ```Patterns``` class. The name you give to the method is the name of the Pattern. This new method should not take any arguments. 
+
+Exemplifying by creating a new pattern named "simpleDeclaration":
+```java
+public void simpleDeclaration()
+```
+
+Usually, when writing a Pattern you do not know what the name of the variables used in the code nor their content. If you do, and want to write a pattern only for those variables you can write something as:
+```java
+int i = 3;
+```
+In this example, only fragments of code that declare a variable named "i" and assign it the value "3" get matched with the pattern. However, this is rarely what you want and, therefore, we introduce you to the concept of pattern variables.
+
+##### Pattern Variables
+
+Pattern variables are variables that can take any value that satisfies its declaration. You can use them to represent any declaration, read, write or usage of a generic variable. To use a pattern variable you must first declare it outside of your methods, as an attribute of the Patterns class, such as:
+```java
+public class Patterns {
+    int _var_x_;
+    ...
+ ```
+ In the example above, we are declaring a new pattern variable with the type ```int```. Notice how the variable is defined: for a variable to be interpreted as a pattern variable it needs to be written in the format: ```_var_SOMETHING_```. 
+ 
+ We can then use the pattern variable inside our pattern by referencing it as a normal variable
+```java
+int _var_x_ = 3;
+```
+When trying to match patterns the matcher will try to associate a real value to the pattern variable. Using the previous example ```_var_x_``` would be associated to ```i```.
+
+##### Pattern Methods
 
 ### Static Pattern Definitions
 
