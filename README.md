@@ -1,15 +1,39 @@
-# Compilers Project
-This Project is a multiporpose pattern matching tool, enabling you to analyse whole projects for specific code patterns (_e.g._ use of ternary operators instead of if-else constructs). You may use the patterns defined by us or define your own patterns.
+# Project Title: Multipurpose Pattern Matcher
+
+## Group: G41
+
+NAME1: André Miguel Ferreira da Cruz, NR1: 201503776, GRADE1: 19, CONTRIBUTION1: 33,33%
+NAME2: Edgar Filipe Gomes Carneiro, NR2: 201503776, GRADE2: 19, CONTRIBUTION2: 33,33%
+NAME3: Miguel Sozinho Ramalho, NR3: 201403027, GRADE3: 19, CONTRIBUTION3: 33,33%
+
+### GLOBAL Grade of the project: 19
+
+## Summary
+
+This Project is a multipurpose pattern matching tool, enabling you to analyse whole projects for specific code patterns (_e.g._ use of ternary operators instead of if-else constructs). You may use the patterns defined by us or define your own patterns. User defined patterns may describe a code template to be matched, or an operation over the [Spoon](https://github.com/INRIA/spoon) AST.
 
 Consult the [project's user manual](USAGE.md) for more information.
 
-Also...
-* [Spoon documentation](http://spoon.gforge.inria.fr/mvnsites/spoon-core/apidocs/)
-* [Project Specification](https://docs.google.com/document/d/1-DK3CyzAkquQKJf0ci8Heed-OskWz9QQfpMw78eJ6BI/edit?usp=sharing)
-* [BitBucket Repo](https://bitbucket.org/FEUP_COMP1718/g41)
-* [GitHub Repo](https://github.com/msramalho/feup-comp)
+## Usage
+```
+java -jar pattern_matcher.jar <filename|foldername> [<userSettings.json>] [DEBUG]
+```
 
-# Completed tasks
+* ```filename/foldername``` denotes de target java file or project folder;
+* ```userSettings.json``` denotes the program settings (which patterns should be tested, which operations to report on, number of threads to use, _etc._) - provided optionally;
+* ```DEBUG``` denotes the debug flag, meaning whether the run should report execution details - provided optionally.
+
+## Overview
+
+## Testsuite
+We used the jUnit testing framework for quality assurance. We strove for 100% method coverage on all types of Workers (pattern definitions), as well as the pattern matching engine itself.
+
+The testsuite can be run simply by setting up the project in IntelliJ, mark the src/test folder as containing test files, and clicking "Run all tests".
+
+![Tests Coverage](https://i.imgur.com/gpauNM1.png)
+
+
+## Completed tasks
 See the [project's kanban board](https://github.com/msramalho/feup-comp/projects/1) for live updates on the project's completion.
 
  1. Configurations from JSON file (a [default](project/src/UserSettings.json) exists) uses [GSON](https://github.com/google/gson)
@@ -32,9 +56,14 @@ See the [project's kanban board](https://github.com/msramalho/feup-comp/projects
  1. [WIP] trying to apply the "any" template matcher to our project
 
 
-# PR Spin-Offs
+## PR Spin-Offs
 We needed to iterate through the nodes in the AST in depth-first manner, and this functionality was not available in Spoon.
 As such, we decided to implement it and submit a pull request, additionally closing the oldest open Spoon issue at the time.
 * [Spoon#1980](https://github.com/INRIA/spoon/pull/1980): implementation of a CtIterator class, enabling depth-first-search from any node of the AST;
 * [Spoon#1986](https://github.com/INRIA/spoon/pull/1986): interface enabling iteration over a CtElement's descendants, using range-based for loops.
 
+## Additional Links
+* [Spoon documentation](http://spoon.gforge.inria.fr/mvnsites/spoon-core/apidocs/)
+* [Project Specification](https://docs.google.com/document/d/1-DK3CyzAkquQKJf0ci8Heed-OskWz9QQfpMw78eJ6BI/edit?usp=sharing)
+* [BitBucket Repo](https://bitbucket.org/FEUP_COMP1718/g41)
+* [GitHub Repo](https://github.com/msramalho/feup-comp)

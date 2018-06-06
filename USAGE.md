@@ -8,12 +8,12 @@ This project uses the open-source [Spoon](https://github.com/INRIA/spoon) librar
 
 ### On the Command Line
 ```
-java main.Main <filename|foldername> [<userSettings.json>] [DEBUG]
+java -jar pattern_matcher.jar <filename|foldername> [<userSettings.json>] [DEBUG]
 ```
 
 * ```filename/foldername``` denotes de target java file or project folder;
 * ```userSettings.json``` denotes the program settings (which patterns should be tested, which operations to report on, number of threads to use, _etc._) - provided optionally;
-* ```DEBUG``` denotes the debug flag, meaning whether the run should report in execution details - provided optionally.
+* ```DEBUG``` denotes the debug flag, meaning whether the run should report execution details - provided optionally.
 
 
 ### Configurations: UserSettings.json
