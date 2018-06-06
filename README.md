@@ -24,6 +24,12 @@ java -jar pattern_matcher.jar <filename|foldername> [<userSettings.json>] [DEBUG
 * ```DEBUG``` denotes the debug flag, meaning whether the run should report execution details - provided optionally.
 
 ## Overview
+Our tool receives a source code file/folder for analyzing, and, optionally, a _settings.json_ file indicating which patterns to run, which operations to perform on the results, input/output paths, and number of threads to use. After parsing command line arguments, setting up configurations, and creating _WorkerFactories_ for each type of _Worker_ (pattern analyzer) to be run, we execute a _ClassScanner_ for each class set to be analyzed, in parallel.
+
+A _ClassScanner_ extends Spoon's _CtScanner_, and, thus, iteratively searches the class file's AST in a depth-first manner. For each node traversed, it triggers the appropriate _Worker_ instances (found by a request to the _FactoryManager_ class, and matched by a _TypeFilter_). Each worker is run in parallel, and _Futures_ of the task's execution are kept in order to later retrieve the execution report. By traversing the AST, we also construct an equally shaped tree of _Nodes_, to keep tabs on execution reports, and to be able to retrieve these reports from every part of the program (be it a single method, an inner class, or the global file).
+
+Information regarding how to define patterns and how they work can be found in the [project's user manual](USAGE.md).
+
 
 ## Testsuite
 We used the jUnit testing framework for quality assurance. We strove for 100% method coverage on all types of Workers (pattern definitions), as well as the pattern matching engine itself.
@@ -31,6 +37,16 @@ We used the jUnit testing framework for quality assurance. We strove for 100% me
 The testsuite can be run simply by setting up the project in IntelliJ, mark the src/test folder as containing test files, and clicking "Run all tests".
 
 ![Tests Coverage](https://i.imgur.com/gpauNM1.png)
+
+
+## Task Distribution
+In general, each group member participated in every aspect of the project's development.
+The group member Edgar Carneiro worked more closely with the code pattern matching engine, integrating it on the existing project architecture, and providing several configuration options.
+The group members André Cruz and Miguel Ramalho worked more closely with the _ClassScanner_-_WorkerFactory_-_Worker_ architecture, and the _Report_ collection innerworks.
+
+## Pros
+
+## Cons
 
 
 ## Completed tasks
