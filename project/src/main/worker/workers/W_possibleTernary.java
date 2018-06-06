@@ -36,7 +36,7 @@ public class W_possibleTernary extends Worker {
         siblings.mode(SiblingsFunction.Mode.NEXT);
         siblings.apply(element, myConsumer);
 
-        return new WorkerReport(RandomUtils.nextInt(10, 20));
+        return new WorkerReport(myConsumer.getMatchValue());
     }
 
     /**
@@ -112,6 +112,10 @@ public class W_possibleTernary extends Worker {
 
         public String getGsonResult() {
             return new Gson().toJson(returnGson);
+        }
+
+        public int getMatchValue() {
+            return returnGson.success ? 1 : 0;
         }
 
     }
