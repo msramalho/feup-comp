@@ -251,7 +251,7 @@ Some more complex pattern were also implemented in this manner, namely:
 
 ### Dynamic Patterns
 
-The default content of the default Patterns file declared int the [_UserSettings.json_ file](https://github.com/msramalho/feup-comp/blob/master/project/UserSettings.json) contains som example patterns. Its content is:
+The default content of the default Patterns file declared in the [_UserSettings.json_ file](https://github.com/msramalho/feup-comp/blob/master/project/UserSettings.json) contains some example patterns. Its content is:
 ```java
 TODO
 ```
