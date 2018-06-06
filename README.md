@@ -2,9 +2,11 @@
 
 ## Group: G41
 
-NAME1: André Miguel Ferreira da Cruz, NR1: 201503776, GRADE1: 19, CONTRIBUTION1: 33,33%
-NAME2: Edgar Filipe Gomes Carneiro, NR2: 201503776, GRADE2: 19, CONTRIBUTION2: 33,33%
-NAME3: Miguel Sozinho Ramalho, NR3: 201403027, GRADE3: 19, CONTRIBUTION3: 33,33%
+NAME1: André Miguel Ferreira da Cruz, NR1: 201503776, GRADE1: 19, CONTRIBUTION1: 33,(3)%
+
+NAME2: Edgar Filipe Gomes Carneiro, NR2: 201503776, GRADE2: 19, CONTRIBUTION2: 33,(3)%
+
+NAME3: Miguel Sozinho Ramalho, NR3: 201403027, GRADE3: 19, CONTRIBUTION3: 33,(3)%
 
 ### GLOBAL Grade of the project: 19
 
