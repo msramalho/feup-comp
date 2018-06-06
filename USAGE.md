@@ -137,7 +137,7 @@ public class Patterns {
 ```
 To then use it, inside the pattern u must call the attribute defined followed by the suffix `.S()`. Examplifying:
 ```java
-public void èxample() {
+public void example() {
 if (true) {
     _lazy_any_.S();
     _var_x_ = 0;
