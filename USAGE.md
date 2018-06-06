@@ -56,9 +56,9 @@ public class Patterns {
 
     public void possibleTernaryOperator() {
         if (true) {
-            _var_y_ = 500;
+            _var_y_ = 1;
         } else {
-            _var_y_ = 1000;
+            _var_y_ = 2;
         }
     }
 }
@@ -253,7 +253,51 @@ Some more complex pattern were also implemented in this manner, namely:
 
 The default content of the default Patterns file declared in the [_UserSettings.json_ file](https://github.com/msramalho/feup-comp/blob/master/project/UserSettings.json) contains some example patterns. Its content is:
 ```java
-TODO
+import java.util.Collection;
+import spoon.template.TemplateParameter;
+
+public abstract class Patterns {
+
+    Object _var_x_;
+    Integer _var_y_;
+    Boolean _var_bool_;
+    Collection<Object> _var_z_;
+    TemplateParameter<Void> _lazy_any_;
+    TemplateParameter<Void> _greedy_any_;
+    TemplateParameter<Void> _greedy_any_min1_;
+    abstract Object _method_assign_();
+
+    public void methodAssignment() {
+        _var_x_ = _method_assign_();
+    }
+
+    public void possibleTernaryOperator() {
+        if (true) {
+            _var_y_ = 1;
+        } else {
+            _var_y_ = 2;
+        }
+    }
+
+    public void nestedIfs() {
+        if (_var_bool_) {
+            _lazy_any_.S();
+            if (_var_bool_) {
+                _greedy_any_.S();
+            }
+            _greedy_any_.S();
+        }
+    }
+
+    public void rangeBasedFor() {
+        for (int i = 0; i < _var_z_.size(); i++) {
+            _lazy_any_.S();
+            _var_y_ = 0;
+            _greedy_any_min1_.S();
+        }
+    }
+
+}
 ```
 
 There are also more examples of patterns in the test section. To visualize those patterns, visit the files present [here](https://github.com/msramalho/feup-comp/blob/master/project/src/test/testclasses/patterns/) that terminate in _Patterns.java_ or _PatternsX.java_, with X being a number.
