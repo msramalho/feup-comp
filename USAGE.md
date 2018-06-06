@@ -115,7 +115,7 @@ To use a patterns method you will have to declare a new abstract method with the
 public abstract class Patterns {
     String _var_x_;
     int _var_y_;
-    public abstract String _method_example_(int exampleArgument);
+    abstract String _method_example_(int exampleArgument);
     
     public void example() {
         _var_x_ = _method_example_(_var_y_);
@@ -126,7 +126,27 @@ public abstract class Patterns {
 
 ##### Pattern Consumers
 
+In addition to pattern methods and pattern variables, there are also __pattern consumers__. Pattern consumers are used to consume statements until they find the statement they are trying to match next. They are useful when there are statements with no value for the matching in between two valuable statements. For example, for when there are calls to methods between a variable declaration and its usage. If consumers did not exist, the User would not be able to match the variable declaration and its usage unless he knew exactly what was in between and defined it in the pattern.
 
+There are two types of consumer that defer in consuming strategy: the lazy one and the greedy one. You can choose which to use by the way you declare the consumer. To use a consumer you must first declare an attribute `TemplateParameter<Void>` named either _lazy_any_ or _greedy_any_, such as:
+```java
+public class Patterns {
+    TemplateParameter<Void> _lazy_any_;
+    TemplateParameter<Void> _greedy_any_;
+    ...
+```
+To then use it, inside the pattern u must call the attribute defined followed by the suffix `.S()`. Examplifying:
+```java
+public void èxample() {
+if (true) {
+    _lazy_any_.S();
+    _var_x_ = 0;
+    _greedy_any_.S();
+}
+```
+In the example above, we defined a pattern named "example" that would match any `if` conditional statement with the condition being `true` and the body of the `Then Condition` containing a variable assignment of the value 0. Since we first use a lazy consumer, the first variable being assigned the value 0 will be associated with `_var_x_`. If we used a greedy consumer, the last variable being assigned the value 0 would be associated with `_var_x_`.
+
+You can also configure your consumers by declaring the minimum and/or the maximum of statements it can consume.
 
 ##### Limitation
 Dynamic Pattern matching has the limitation of only evaluating the first element on the root of each Pattern.
