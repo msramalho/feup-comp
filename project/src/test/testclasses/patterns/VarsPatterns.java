@@ -6,7 +6,6 @@ public class VarsPatterns {
 
     Object _var_a_;
     Object _var_b_;
-    String _var_def_;
     int _var_i_;
     Collection<Object> _var_collection_;
 
