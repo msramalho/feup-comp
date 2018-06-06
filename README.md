@@ -48,18 +48,20 @@ The group members André Cruz and Miguel Ramalho worked more closely with the _C
 
 ## Pros
 * Felxible architecture that can be extended, in any of the following ways:
-    * Inclusion of more static Patterns
-    * Use of more information from each Pattern Worker
+    * Inclusion of more _static patterns_
+    * Use of more information from each _pattern worker_
     * Implementation of new operations on the results of a Pattern, i.e. quartiles, skewness, kurtosis, ...
 * Off-the-shelf implementation of many patterns, that serve as examples for expansion to other patterns
 * Pattern Report is fetcheable from any node in the AST, as it is done recursively
 * Ability to use template matching patterns, that is generaly more accessible for users
 * Ability yo use Spoon-based pattern matching functionality for users that want more flexibility
 * Configurations file is both expandable and shareable, it can also be shared between users so as to guarantee the same execution environment
+* Debug mode for simple troubleshooting
 
 
 ## Cons
-* 
+* The dynamic patterns have some limitations, namely 
+* The use of a parallel Spoon fork implies we are using a stale version (at least until it is merged) and ought to update our dependencies once it integrates Spoon
 
 
 ## Completed tasks
@@ -82,7 +84,10 @@ See the [project's kanban board](https://github.com/msramalho/feup-comp/projects
  1. Creation of simple Patterns that match variables only
  1. Implementation of many static Patterns, such as cyclomatic complexity, inner loop max depth, ...
  1. Creation of tests for static and dynamic patterns
- 1. [WIP] trying to apply the "any" template matcher to our project
+ 1. Implementation of the "any" template matcher to our project
+ 1. Insertion of Debug modes
+ 1. Code cleanup and configuration standardization
+ 1. Project Delivery :)
 
 
 ## PR Spin-Offs
