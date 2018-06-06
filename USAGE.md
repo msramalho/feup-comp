@@ -43,7 +43,7 @@ Here is a sample configurations file:
 }
 ```
 
-A configuration file that activates all configurations can be found [here](project/UserSettings.json)
+A configuration file that activates all configurations can be found [here](project/UserSettings.json).
 
 ### Dynamic Pattern Definitions
 
@@ -251,7 +251,7 @@ Some more complex pattern were also implemented in this manner, namely:
 
 ### Dynamic Patterns
 
-The default [_Patterns.java_ file](https://github.com/msramalho/feup-comp/blob/master/project/patterns/Patterns.java) mentioned  in the [_UserSettings.json_ file](https://github.com/msramalho/feup-comp/blob/master/project/UserSettings.json) contains some example patterns. The content of the _Patterns.java_ file is:
+The default [_Patterns.java_ file](project/patterns/Patterns.java) mentioned  in the [_UserSettings.json_ file](project/UserSettings.json) contains some example patterns. The content of the _Patterns.java_ file is:
 ```java
 import java.util.Collection;
 import spoon.template.TemplateParameter;
@@ -300,7 +300,7 @@ public abstract class Patterns {
 }
 ```
 
-There are also more examples of patterns in the test section. To visualize those patterns, visit the files present [here](https://github.com/msramalho/feup-comp/blob/master/project/src/test/testclasses/patterns/) that terminate in _Patterns.java_ or _PatternsX.java_, with X being a number.
+There are also more examples of patterns in the test section. To visualize those patterns, visit the files present [here](project/src/test/testclasses/patterns/) that terminate in _Patterns.java_ or _PatternsX.java_, with X being a number.
 
 ### Additional Notes:
 If used from the java sources, a report can be obtained on any node of the code's AST. That is, you can obtain the global report by calling the ```getReport()``` method on the root node, as well as any intermediary reports on any of its descendant nodes.
