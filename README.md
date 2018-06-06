@@ -60,7 +60,7 @@ The group members André Cruz and Miguel Ramalho worked more closely with the _C
 
 
 ## Cons
-* The dynamic patterns have some limitations, namely 
+* The dynamic patterns have some limitations, namely only supporting patterns with one root element in its definition and forcing the Users to know the type of variables to be matched, as they need to be declared with that type (for more detailed information see [project's user manual](USAGE.md))
 * The use of a parallel Spoon fork implies we are using a stale version (at least until it is merged) and ought to update our dependencies once it integrates Spoon
 
 
@@ -82,6 +82,7 @@ See the [project's kanban board](https://github.com/msramalho/feup-comp/projects
  1. Implementation of Streams to merge WorkerReports with custom functions, for instance: sum, count, avg, ... Using [guava](https://github.com/google/guava)
  1. Inclusion of unmerged Spoon [PR](https://github.com/INRIA/spoon/pull/1686) that implements template matching - public discussion on how to use it in this [issue](https://github.com/INRIA/spoon/issues/1989)
  1. Creation of simple Patterns that match variables only
+ 1. Addition of template methods in pattern matching
  1. Implementation of many static Patterns, such as cyclomatic complexity, inner loop max depth, ...
  1. Creation of tests for static and dynamic patterns
  1. Implementation of the "any" template matcher to our project
