@@ -45,7 +45,7 @@ class W_cyclomaticComplexityTest {
 
     @Test
     void call() throws Exception {
-        int[] results = {0, 1, 2, 3, 4, 10};
+        int[] results = {1, 2, 3, 4, 5, 11};
         int j = 0;
         while (i.hasNext()) {
             CtElement ct = (CtElement) i.next();

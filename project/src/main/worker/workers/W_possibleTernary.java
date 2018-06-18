@@ -1,7 +1,6 @@
 package worker.workers;
 
 import com.google.gson.Gson;
-import org.apache.commons.lang3.RandomUtils;
 import report.WorkerReport;
 import spoon.reflect.code.CtExpression;
 import spoon.reflect.declaration.CtElement;

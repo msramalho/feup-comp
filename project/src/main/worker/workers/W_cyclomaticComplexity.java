@@ -29,7 +29,7 @@ public class W_cyclomaticComplexity extends Worker {
      */
     @Override
     public WorkerReport call() {
-        Integer complexity = 0;
+        Integer complexity = 1;
 
         CtIterator it = new CtIterator(rootNode);
         while (it.hasNext()) {

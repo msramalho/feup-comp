@@ -38,7 +38,7 @@ class W_weightedMethodCountCCTest {
 
     @Test
     void call() throws Exception {
-        assertEquals((new WorkerReport(20)).getValue(), w.call().getValue());
+        assertEquals((new WorkerReport(26)).getValue(), w.call().getValue());
     }
 
 }
